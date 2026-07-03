@@ -1,0 +1,477 @@
+{
+  "role": {
+    "id": "qa_tester",
+    "name": "QA Tester",
+    "description": "Find edge cases before real users find them in production.",
+    "iconKey": "bug",
+    "pluginId": "qa_tester_core",
+    "contentPackId": "core_roles_v23",
+    "contentVersion": "23.0.0",
+    "contentTier": "free"
+  },
+  "chapters": [
+    {
+      "id": "qa_tester_works_on_my_machine",
+      "title": "It Works on My Machine",
+      "difficulty": "Beginner to Medium",
+      "theme": "Edge cases and real-user behavior",
+      "story": "Developer proudly says, \u201cMere system pe chal raha hai.\u201d QA enters the room like a horror movie background score.",
+      "task": "Test the payment form before release.",
+      "choices": [
+        {
+          "text": "Test only correct payment data",
+          "outcome": {
+            "title": "Happy Path Trap",
+            "description": "Live user taps Pay 10 times. System creates 10 invoices, 10 SMS alerts, and one finance team meltdown.",
+            "moralLesson": "Happy path is not enough.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Happy path is not enough."
+            },
+            "analyticsTags": [
+              "qa_tester",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 1,
+            "discipline": -2,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Test empty data, invalid card, duplicate click, slow network",
+          "outcome": {
+            "title": "Bug Hunter Ending",
+            "description": "You catch duplicate payment risk before release. Developer cries softly but respects you.",
+            "moralLesson": "QA protects the product from real users.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "QA protects the product from real users."
+            },
+            "analyticsTags": [
+              "qa_tester",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "communication": 2,
+            "chaos": -1
+          }
+        },
+        {
+          "text": "Approve because developer sent screenshot",
+          "outcome": {
+            "title": "Screenshot Certified Disaster",
+            "description": "The screenshot was from localhost. Production behaves like it drank five energy drinks.",
+            "moralLesson": "Evidence must be tested, not blindly trusted.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Evidence must be tested, not blindly trusted."
+            },
+            "analyticsTags": [
+              "qa_tester",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "discipline": -3,
+            "chaos": 5
+          }
+        }
+      ],
+      "miniGame": {
+        "id": "qa_payment_test_multiple_select",
+        "type": "multiple_select",
+        "title": "Choose the Real Payment Test Cases",
+        "instructions": "Select every test case that must be checked before release.",
+        "prompt": "The payment form is going live. Which cases are necessary for responsible QA?",
+        "hint": "Think happy path, validation, failure, and boundary cases.",
+        "options": [
+          {
+            "id": "valid_card",
+            "text": "Successful payment with valid card details",
+            "helperText": "Basic happy path."
+          },
+          {
+            "id": "expired_card",
+            "text": "Payment attempt with expired card",
+            "helperText": "Failure path must be handled."
+          },
+          {
+            "id": "empty_required_fields",
+            "text": "Submit with required fields empty",
+            "helperText": "Validation should block this."
+          },
+          {
+            "id": "only_test_my_name",
+            "text": "Test only with your own name because it feels lucky",
+            "helperText": "Lucky is not a QA strategy."
+          }
+        ],
+        "correctOptionIds": [
+          "valid_card",
+          "expired_card",
+          "empty_required_fields"
+        ],
+        "successScoreImpact": {
+          "skill": 4,
+          "discipline": 3,
+          "ethics": 1,
+          "communication": 1,
+          "chaos": 0
+        },
+        "failureScoreImpact": {
+          "skill": 0,
+          "discipline": -1,
+          "ethics": 0,
+          "communication": 0,
+          "chaos": 3
+        },
+        "successMessage": "Bug hunter mode activated. The payment form is now scared to misbehave.",
+        "failureMessage": "QA missed a case. The payment form now accepts payment only when Mercury is in retrograde.",
+        "skillTags": [
+          "severity_classification",
+          "bug_reporting"
+        ],
+        "skillLevel": "beginner",
+        "workflowId": "bug_reporting",
+        "skillNodeIds": [
+          "qa_foundations"
+        ]
+      },
+      "learningObjective": "Practice bug reporting workflow for a QA Tester situation involving edge cases and real-user behavior.",
+      "skillLevel": "beginner",
+      "workflowId": "bug_reporting",
+      "skillTags": [
+        "severity_classification",
+        "bug_reporting"
+      ],
+      "realWorldConstraints": [
+        "documentation",
+        "time"
+      ],
+      "safetyGuardrails": [
+        "Report evidence, not assumptions.",
+        "Do not hide critical bugs to meet deadlines.",
+        "Protect test data and user privacy."
+      ],
+      "practicalTakeaway": "Use the bug reporting workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "QA simulation: report evidence honestly and do not hide critical defects to meet timelines. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "QA Lead says: At beginner level, show your evidence, explain the trade-off, and follow the bug reporting workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "qa_tester_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.qa_tester.chapter.1.title",
+      "analyticsTags": [
+        "qa_tester",
+        "beginner to medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Report evidence, not assumptions.",
+          "Do not hide critical bugs to meet deadlines.",
+          "Protect test data and user privacy."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "qa_foundations"
+      ]
+    },
+    {
+      "id": "qa_tester_otp_loop",
+      "title": "OTP Loop Mystery",
+      "difficulty": "Medium",
+      "theme": "Authentication edge cases",
+      "story": "Login OTP works once, then fails after app restart. Developer says, \u201cMaybe user typed emotion instead of OTP.\u201d",
+      "task": "Test the OTP flow properly.",
+      "choices": [
+        {
+          "text": "Test only one successful OTP login",
+          "outcome": {
+            "title": "One-Time Tester Ending",
+            "description": "Release goes live. Users restart app and enter OTP more times than a TV serial flashback.",
+            "moralLesson": "Login testing needs session, retry, expiry, and restart cases.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Login testing needs session, retry, expiry, and restart cases."
+            },
+            "analyticsTags": [
+              "qa_tester",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "discipline": -2,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Test wrong OTP, resend, expiry, app restart, and session timeout",
+          "outcome": {
+            "title": "Auth Guardian Ending",
+            "description": "You catch the broken token refresh flow before users start uninstalling with passion.",
+            "moralLesson": "Authentication quality depends on negative and lifecycle testing.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Authentication quality depends on negative and lifecycle testing."
+            },
+            "analyticsTags": [
+              "qa_tester",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "communication": 2,
+            "chaos": -1
+          }
+        },
+        {
+          "text": "Tell users to not close the app",
+          "outcome": {
+            "title": "Never Sleep App Ending",
+            "description": "Users are advised to keep the app open forever. Battery percentage files a complaint.",
+            "moralLesson": "QA should verify real behavior, not ask users to behave perfectly.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "QA should verify real behavior, not ask users to behave perfectly."
+            },
+            "analyticsTags": [
+              "qa_tester",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "ethics": -1,
+            "communication": -2,
+            "chaos": 3
+          }
+        }
+      ],
+      "learningObjective": "Practice regression planning workflow for a QA Tester situation involving authentication edge cases.",
+      "skillLevel": "intermediate",
+      "workflowId": "regression_planning",
+      "skillTags": [
+        "regression_scope",
+        "regression_planning"
+      ],
+      "realWorldConstraints": [
+        "time",
+        "client_pressure",
+        "documentation"
+      ],
+      "safetyGuardrails": [
+        "Report evidence, not assumptions.",
+        "Do not hide critical bugs to meet deadlines.",
+        "Protect test data and user privacy."
+      ],
+      "practicalTakeaway": "Use the regression planning workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "QA simulation: report evidence honestly and do not hide critical defects to meet timelines. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "QA Lead says: At intermediate level, show your evidence, explain the trade-off, and follow the regression planning workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "qa_tester_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.qa_tester.chapter.2.title",
+      "analyticsTags": [
+        "qa_tester",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Report evidence, not assumptions.",
+          "Do not hide critical bugs to meet deadlines.",
+          "Protect test data and user privacy."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "qa_evidence"
+      ]
+    },
+    {
+      "id": "qa_tester_release_notes_ghost",
+      "title": "Release Notes Ghost",
+      "difficulty": "Hard",
+      "theme": "Regression testing and communication",
+      "story": "A build arrives with release notes: \u201cMinor fixes.\u201d The APK size increased by 30 MB and three new screens are hiding inside.",
+      "task": "Plan your test approach.",
+      "choices": [
+        {
+          "text": "Trust release notes and test only one bug",
+          "outcome": {
+            "title": "Ghost Bug Ending",
+            "description": "A hidden screen breaks checkout. Everyone discovers it during the demo, because demos love drama.",
+            "moralLesson": "Regression risk must be checked when scope is unclear.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Regression risk must be checked when scope is unclear."
+            },
+            "analyticsTags": [
+              "qa_tester",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -3,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Ask for change list, compare build, and run targeted regression",
+          "outcome": {
+            "title": "Regression Shield Ending",
+            "description": "You identify hidden changes, test impacted flows, and save the demo from becoming a meme.",
+            "moralLesson": "Clear change information improves testing quality.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Clear change information improves testing quality."
+            },
+            "analyticsTags": [
+              "qa_tester",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "communication": 4,
+            "chaos": -1
+          }
+        },
+        {
+          "text": "Reject build because release notes are boring",
+          "outcome": {
+            "title": "Drama Review Ending",
+            "description": "You are partly right but communicate badly. The team starts naming builds after your mood.",
+            "moralLesson": "Good QA escalates with evidence, not irritation.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Good QA escalates with evidence, not irritation."
+            },
+            "analyticsTags": [
+              "qa_tester",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "communication": -2,
+            "discipline": 1,
+            "chaos": 2
+          }
+        }
+      ],
+      "learningObjective": "Practice release sign-off workflow for a QA Tester situation involving regression testing and communication.",
+      "skillLevel": "advanced",
+      "workflowId": "release_signoff",
+      "skillTags": [
+        "evidence_collection",
+        "release_signoff"
+      ],
+      "realWorldConstraints": [
+        "ethics",
+        "client_pressure",
+        "safety"
+      ],
+      "safetyGuardrails": [
+        "Report evidence, not assumptions.",
+        "Do not hide critical bugs to meet deadlines.",
+        "Protect test data and user privacy."
+      ],
+      "practicalTakeaway": "Use the release sign-off workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "QA simulation: report evidence honestly and do not hide critical defects to meet timelines. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "QA Lead says: At advanced level, show your evidence, explain the trade-off, and follow the release sign-off workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "qa_tester_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.qa_tester.chapter.3.title",
+      "analyticsTags": [
+        "qa_tester",
+        "hard"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Report evidence, not assumptions.",
+          "Do not hide critical bugs to meet deadlines.",
+          "Protect test data and user privacy."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "qa_regression"
+      ]
+    }
+  ],
+  "contentPackId": "core_roles_v23",
+  "contentVersion": "23.0.0",
+  "assetPackId": "base_visuals_v23",
+  "assetVersion": "23.0.0",
+  "localizationKey": "role.qa_tester.title",
+  "rolePluginId": "qa_tester_core",
+  "contentTier": "free",
+  "supportsOfflineCache": true
+}

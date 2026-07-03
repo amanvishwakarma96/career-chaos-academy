@@ -1,0 +1,1197 @@
+{
+  "role": {
+    "id": "developer",
+    "name": "Developer",
+    "description": "Fix bugs, manage code safely, and survive production pressure.",
+    "iconKey": "code",
+    "pluginId": "developer_core",
+    "contentPackId": "core_roles_v23",
+    "contentVersion": "23.0.0",
+    "contentTier": "free"
+  },
+  "chapters": [
+    {
+      "id": "developer_login_button_disaster",
+      "title": "The Login Button Disaster",
+      "difficulty": "Beginner",
+      "theme": "Debugging, Git discipline, testing",
+      "story": "Monday morning. A tiny login bug arrives. The senior says, \u201cBas ek small fix hai.\u201d Famous last words. The last user cannot login, and production is watching you like a strict school principal.",
+      "task": "Choose the safest way to fix the login bug.",
+      "choices": [
+        {
+          "text": "Directly change production code",
+          "outcome": {
+            "title": "Production Samosa Attack",
+            "description": "The login button starts ordering samosas for every user. Client logs in and receives chutney instead of dashboard.",
+            "moralLesson": "Never touch production without branch, testing, and review.",
+            "setFlags": [
+              "skipped_testing",
+              "production_regression_risk"
+            ],
+            "unlockCleanupMissionIds": [
+              "developer_rollback_cleanup"
+            ],
+            "reputationImpact": {
+              "trust": -2,
+              "safety": -1,
+              "professionalism": -2,
+              "reliability": -3,
+              "stakeholderConfidence": -2
+            },
+            "consequenceSummary": "Because you changed production directly, a regression risk is now active and a rollback cleanup mission is unlocked.",
+            "debrief": {
+              "whatWentWell": "You reacted quickly to a visible bug.",
+              "whatWasMissed": "You skipped branch discipline, test evidence, and review.",
+              "realWorldPrinciple": "Production fixes need controlled rollout, verification, and rollback readiness."
+            },
+            "setStoryFlags": [
+              "mentor_warned_after_shortcut",
+              "client_trust_shaken"
+            ],
+            "relationshipImpact": {
+              "mentorTrust": -2,
+              "clientTrust": -3,
+              "teamTrust": -1,
+              "publicReputation": 0
+            },
+            "delayedConsequenceMessages": [
+              "Senior Dev will challenge your next fix plan because you skipped testing."
+            ],
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Never touch production without branch, testing, and review."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "discipline": -3,
+            "ethics": -1,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Debug locally, test edge cases, then raise PR",
+          "outcome": {
+            "title": "Responsible Developer Ending",
+            "description": "You fix the loop condition, test first and last user, create a clean commit, and raise PR. Senior says, \u201cGood. Aaj tumne meeting bachayi.\u201d",
+            "moralLesson": "Process saves projects.",
+            "clearFlags": [
+              "skipped_testing",
+              "production_regression_risk"
+            ],
+            "reputationImpact": {
+              "trust": 2,
+              "safety": 1,
+              "professionalism": 2,
+              "reliability": 3,
+              "stakeholderConfidence": 2
+            },
+            "consequenceSummary": "Your disciplined PR lowers regression risk and improves stakeholder confidence.",
+            "debrief": {
+              "whatWentWell": "You reproduced, fixed, tested, and communicated through a PR.",
+              "whatWasMissed": "Nothing major. Keep documenting edge cases.",
+              "realWorldPrinciple": "Good engineering reduces invisible future work."
+            },
+            "setStoryFlags": [
+              "documented_before_fix",
+              "mentor_confidence_growing"
+            ],
+            "relationshipImpact": {
+              "mentorTrust": 3,
+              "clientTrust": 1,
+              "teamTrust": 2,
+              "publicReputation": 0
+            },
+            "delayedConsequenceMessages": [
+              "Your documented fix gives the team evidence for the next production incident."
+            ],
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Process saves projects."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "communication": 2,
+            "chaos": -1
+          }
+        },
+        {
+          "text": "Ignore the ticket and pretend you are in focus mode",
+          "outcome": {
+            "title": "Silent Ninja Ending",
+            "description": "Client escalates. Manager asks for update. You say, \u201cI was analyzing.\u201d Everyone hears: \u201cI forgot.\u201d",
+            "moralLesson": "Silence is not ownership.",
+            "setFlags": [
+              "missing_ownership"
+            ],
+            "reputationImpact": {
+              "trust": -2,
+              "safety": 0,
+              "professionalism": -2,
+              "reliability": -2,
+              "stakeholderConfidence": -1
+            },
+            "consequenceSummary": "The issue remains unresolved and your ownership reputation drops.",
+            "debrief": {
+              "whatWentWell": "You avoided making the bug worse directly.",
+              "whatWasMissed": "No update, no evidence, and no ownership.",
+              "realWorldPrinciple": "Silence creates escalation faster than a bug does."
+            },
+            "setStoryFlags": [
+              "avoided_ownership",
+              "team_trust_damaged"
+            ],
+            "relationshipImpact": {
+              "mentorTrust": -2,
+              "clientTrust": 0,
+              "teamTrust": -4,
+              "publicReputation": 0
+            },
+            "delayedConsequenceMessages": [
+              "The team will remember that you went silent during the login incident."
+            ],
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Silence is not ownership."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "discipline": -2,
+            "communication": -3,
+            "chaos": 3
+          }
+        }
+      ],
+      "miniGame": {
+        "id": "developer_login_button_code_fix",
+        "type": "code_fix",
+        "title": "Patch the Login Button",
+        "instructions": "Pick the safest code fix for the login button without creating a second disaster.",
+        "prompt": "The login API succeeds, but the UI still shows loading forever. What code change fixes the state update properly?",
+        "hint": "The UI needs to know that loading has finished after the async call returns.",
+        "options": [
+          {
+            "id": "set_loading_false",
+            "text": "Set isLoading = false inside setState after the API response is handled.",
+            "helperText": "Updates UI state after the async operation."
+          },
+          {
+            "id": "restart_app",
+            "text": "Tell users to restart the app after every login.",
+            "helperText": "Technically funny, professionally dangerous."
+          },
+          {
+            "id": "hide_spinner",
+            "text": "Delete the loading spinner widget from the screen.",
+            "helperText": "The bug disappears visually, but the app is still confused."
+          }
+        ],
+        "correctOptionIds": [
+          "set_loading_false"
+        ],
+        "successScoreImpact": {
+          "skill": 5,
+          "discipline": 2,
+          "ethics": 1,
+          "communication": 1,
+          "chaos": 0
+        },
+        "failureScoreImpact": {
+          "skill": -1,
+          "discipline": 0,
+          "ethics": 0,
+          "communication": 0,
+          "chaos": 4
+        },
+        "successMessage": "Clean fix! The login button stopped spinning like a ceiling fan during a power cut.",
+        "failureMessage": "Oops. The spinner has applied for permanent residency on the login screen. QA has named it Ramesh.",
+        "failureConsequence": {
+          "setFlags": [
+            "mini_game_patch_failed"
+          ],
+          "unlockCleanupMissionIds": [
+            "developer_rollback_cleanup"
+          ],
+          "reputationImpact": {
+            "trust": -1,
+            "safety": 0,
+            "professionalism": -1,
+            "reliability": -2,
+            "stakeholderConfidence": -1
+          },
+          "consequenceSummary": "The wrong patch choice increases cleanup pressure before the story continues.",
+          "debrief": {
+            "whatWentWell": "You attempted the technical challenge.",
+            "whatWasMissed": "The UI state bug still needs a controlled fix.",
+            "realWorldPrinciple": "A hidden state bug is still a bug."
+          }
+        },
+        "successConsequence": {
+          "clearFlags": [
+            "mini_game_patch_failed"
+          ],
+          "reputationImpact": {
+            "trust": 1,
+            "safety": 0,
+            "professionalism": 1,
+            "reliability": 1,
+            "stakeholderConfidence": 1
+          },
+          "consequenceSummary": "The patch challenge improves technical confidence before the decision."
+        },
+        "skillTags": [
+          "debugging",
+          "bug_triage"
+        ],
+        "skillLevel": "beginner",
+        "workflowId": "bug_triage",
+        "skillNodeIds": [
+          "dev_foundations"
+        ]
+      },
+      "roleMechanicType": "bug_triage",
+      "scenes": [
+        {
+          "id": "dev_login_opening",
+          "title": "Monday Morning Stand-up Disaster",
+          "backgroundImage": "bg_office_morning",
+          "characterImage": "char_developer_worried",
+          "soundEffect": "notification_ping",
+          "transitionType": "fade",
+          "dialogues": [
+            {
+              "speaker": "Narrator",
+              "emotion": "tense",
+              "text": "Monday morning. The login button is spinning forever, and the client has already typed \u201curgent\u201d with three extra exclamation marks.",
+              "characterImage": "char_developer_worried",
+              "soundEffect": "notification_ping",
+              "characterId": "narrator",
+              "audio": {
+                "subtitle": "Monday morning. The login button is spinning forever, and the client has already typed \u201curgent\u201d "
+              }
+            },
+            {
+              "speaker": "Senior Dev",
+              "emotion": "serious",
+              "text": "Small fix hai. But remember: small fixes are where production disasters wear tiny shoes.",
+              "characterImage": "char_senior_serious",
+              "characterId": "senior_dev_mentor",
+              "audio": {
+                "subtitle": "Small fix hai. But remember: small fixes are where production disasters wear tiny shoes.",
+                "voiceClip": "voice_placeholder"
+              }
+            }
+          ],
+          "characterId": "developer_player",
+          "audio": {
+            "backgroundMusic": "bgm_office_light",
+            "soundEffect": "notification_ping",
+            "loopBackgroundMusic": true
+          }
+        },
+        {
+          "id": "dev_login_war_room",
+          "title": "Production War Room",
+          "backgroundImage": "bg_production_war_room",
+          "characterImage": "char_manager_panic",
+          "soundEffect": "alert_buzz",
+          "transitionType": "zoom",
+          "dialogues": [
+            {
+              "speaker": "Project Manager",
+              "emotion": "panic",
+              "text": "Client is waiting. Do we patch directly, raise a PR, or pretend the spinner is a meditation feature?",
+              "characterImage": "char_manager_panic",
+              "soundEffect": "alert_buzz",
+              "characterId": "panic_pm_pressure",
+              "audio": {
+                "subtitle": "Client is waiting. Do we patch directly, raise a PR, or pretend the spinner is a meditation feat",
+                "voiceClip": "voice_placeholder"
+              }
+            },
+            {
+              "speaker": "You",
+              "emotion": "focused",
+              "text": "This choice will affect trust, chaos, and whether a rollback cleanup mission appears later.",
+              "characterImage": "char_developer_worried",
+              "characterId": "developer_player",
+              "audio": {
+                "subtitle": "This choice will affect trust, chaos, and whether a rollback cleanup mission appears later.",
+                "voiceClip": "voice_placeholder"
+              }
+            }
+          ],
+          "characterId": "panic_pm_pressure",
+          "audio": {
+            "backgroundMusic": "bgm_cinematic_tension",
+            "soundEffect": "notification_ping",
+            "loopBackgroundMusic": true
+          }
+        }
+      ],
+      "storyFlags": [
+        {
+          "id": "mentor_warned_after_shortcut",
+          "label": "Mentor warned about shortcuts",
+          "description": "Senior developer remembers that testing was skipped under pressure.",
+          "category": "mentor",
+          "isPositive": false
+        },
+        {
+          "id": "documented_before_fix",
+          "label": "Evidence-based fix",
+          "description": "The player documented findings before changing production behavior.",
+          "category": "professionalism",
+          "isPositive": true
+        },
+        {
+          "id": "avoided_ownership",
+          "label": "Avoided ownership",
+          "description": "The player tried to disappear instead of owning the incident.",
+          "category": "accountability",
+          "isPositive": false
+        }
+      ],
+      "learningObjective": "Practice bug triage workflow for a Developer situation involving debugging, git discipline, testing.",
+      "skillLevel": "beginner",
+      "workflowId": "bug_triage",
+      "skillTags": [
+        "debugging",
+        "bug_triage"
+      ],
+      "realWorldConstraints": [
+        "time",
+        "documentation",
+        "client_pressure"
+      ],
+      "safetyGuardrails": [
+        "Do not hotfix production without review, test evidence, and rollback plan.",
+        "Protect user data and secrets.",
+        "Escalate risky release decisions early."
+      ],
+      "practicalTakeaway": "Use the bug triage workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Software simulation: protect users by using test evidence, review, rollback planning, and secure handling of data. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Senior Dev Mentor says: At beginner level, show your evidence, explain the trade-off, and follow the bug triage workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "developer_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.developer.chapter.1.title",
+      "analyticsTags": [
+        "developer",
+        "beginner"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Do not hotfix production without review, test evidence, and rollback plan.",
+          "Protect user data and secrets.",
+          "Escalate risky release decisions early."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "adaptiveDialogueInjections": [
+        {
+          "id": "mentor_warning_shortcut_pattern",
+          "speaker": "Senior Dev",
+          "characterId": "senior_dev_mentor",
+          "emotion": "serious",
+          "text": "Before you touch production again, remember your shortcut pattern: evidence first, drama later.",
+          "requiredBehaviorPatterns": [
+            "shortcut_prone"
+          ],
+          "priority": 100
+        },
+        {
+          "id": "mentor_high_performer_push",
+          "speaker": "Senior Dev",
+          "characterId": "senior_dev_mentor",
+          "emotion": "focused",
+          "text": "You have been handling discipline well, so this time I expect a rollback plan, not just a fix.",
+          "requiredBehaviorPatterns": [
+            "high_performer"
+          ],
+          "priority": 50
+        }
+      ],
+      "adaptiveDifficulty": {
+        "baseLevel": "normal",
+        "easierLevel": "guided",
+        "harderLevel": "advanced",
+        "increaseWhenPatterns": [
+          "high_performer"
+        ],
+        "decreaseWhenPatterns": [
+          "shortcut_prone",
+          "repeated_failures"
+        ]
+      },
+      "allowsAdaptiveSideMissions": true,
+      "skillNodeIds": [
+        "dev_foundations"
+      ]
+    },
+    {
+      "id": "developer_api_timeout_panic",
+      "title": "The API Timeout Panic",
+      "difficulty": "Medium",
+      "theme": "API handling, logs, retries",
+      "story": "The app works in office Wi-Fi, but users on mobile data see a spinner longer than a family wedding video. The manager says, \u201cJust increase timeout to unlimited.\u201d",
+      "task": "Fix the unstable API experience safely.",
+      "choices": [
+        {
+          "text": "Set timeout to 10 minutes and call it solved",
+          "outcome": {
+            "title": "Infinite Spinner Ending",
+            "description": "Users wait so long they finish lunch, tea, and existential thinking before the request fails.",
+            "moralLesson": "Long timeout hides a problem; it does not solve the experience.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Long timeout hides a problem; it does not solve the experience."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "discipline": -2,
+            "communication": -1,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Check logs, add proper timeout, retry, loading state, and user message",
+          "outcome": {
+            "title": "Stable Network Ending",
+            "description": "Failures become understandable, retries are controlled, and users stop blaming the phone company.",
+            "moralLesson": "Reliable apps handle failure as carefully as success.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Reliable apps handle failure as carefully as success."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "communication": 2,
+            "chaos": -1
+          }
+        },
+        {
+          "text": "Blame backend without checking request payload",
+          "outcome": {
+            "title": "Backend War Ending",
+            "description": "Backend sends proof, QA sends screen recording, and your payload contains customerId: null.",
+            "moralLesson": "Debug with evidence before blaming another team.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Debug with evidence before blaming another team."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "communication": -3,
+            "chaos": 3
+          }
+        }
+      ],
+      "scenes": [
+        {
+          "id": "api_war_room_default",
+          "title": "API Timeout Panic",
+          "backgroundImage": "bg_production_war_room",
+          "transitionType": "fade",
+          "characterId": "senior_dev_mentor",
+          "dialogues": [
+            {
+              "speaker": "Senior Dev",
+              "characterId": "senior_dev_mentor",
+              "emotion": "focused",
+              "text": "The API timeout is not just a spinner problem. It is a trust problem wearing a loading indicator.",
+              "audio": {
+                "subtitle": "The API timeout is not just a spinner problem. It is a trust problem wearing a loading indicator",
+                "voiceClip": "voice_placeholder"
+              }
+            },
+            {
+              "speaker": "Manager",
+              "characterId": "panic_pm_pressure",
+              "emotion": "panic",
+              "text": "Client is asking whether the app is down or just practicing meditation.",
+              "audio": {
+                "subtitle": "Client is asking whether the app is down or just practicing meditation.",
+                "voiceClip": "voice_placeholder"
+              }
+            }
+          ],
+          "audio": {
+            "backgroundMusic": "bgm_cinematic_tension",
+            "soundEffect": "notification_ping",
+            "loopBackgroundMusic": true
+          }
+        },
+        {
+          "id": "api_war_room_branch",
+          "title": "Mentor Memory",
+          "backgroundImage": "bg_production_war_room",
+          "transitionType": "slide",
+          "characterId": "senior_dev_mentor",
+          "dialogues": [
+            {
+              "speaker": "Senior Dev",
+              "characterId": "senior_dev_mentor",
+              "emotion": "serious",
+              "text": "Last time you touched production before proving the fix. This time, I want evidence before action.",
+              "requiredStoryFlags": [
+                "mentor_warned_after_shortcut"
+              ],
+              "audio": {
+                "subtitle": "Last time you touched production before proving the fix. This time, I want evidence before actio",
+                "voiceClip": "voice_placeholder"
+              }
+            },
+            {
+              "speaker": "Senior Dev",
+              "characterId": "senior_dev_mentor",
+              "emotion": "calm",
+              "text": "Your notes from the login incident helped. Bring that same discipline to this timeout.",
+              "requiredStoryFlags": [
+                "documented_before_fix"
+              ],
+              "audio": {
+                "subtitle": "Your notes from the login incident helped. Bring that same discipline to this timeout.",
+                "voiceClip": "voice_placeholder"
+              }
+            },
+            {
+              "speaker": "Senior Dev",
+              "characterId": "senior_dev_mentor",
+              "emotion": "tense",
+              "text": "The team noticed you vanished last time. Today is your chance to rebuild trust.",
+              "requiredStoryFlags": [
+                "avoided_ownership"
+              ],
+              "audio": {
+                "subtitle": "The team noticed you vanished last time. Today is your chance to rebuild trust.",
+                "voiceClip": "voice_placeholder"
+              }
+            }
+          ],
+          "audio": {
+            "backgroundMusic": "bgm_cinematic_tension",
+            "soundEffect": "notification_ping",
+            "loopBackgroundMusic": true
+          }
+        }
+      ],
+      "learningObjective": "Practice code review workflow for a Developer situation involving api handling, logs, retries.",
+      "skillLevel": "intermediate",
+      "workflowId": "code_review",
+      "skillTags": [
+        "code_review",
+        "code_review"
+      ],
+      "realWorldConstraints": [
+        "ethics",
+        "documentation",
+        "team_trust"
+      ],
+      "safetyGuardrails": [
+        "Do not hotfix production without review, test evidence, and rollback plan.",
+        "Protect user data and secrets.",
+        "Escalate risky release decisions early."
+      ],
+      "practicalTakeaway": "Use the code review workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Software simulation: protect users by using test evidence, review, rollback planning, and secure handling of data. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Senior Dev Mentor says: At intermediate level, show your evidence, explain the trade-off, and follow the code review workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "developer_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.developer.chapter.2.title",
+      "analyticsTags": [
+        "developer",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Do not hotfix production without review, test evidence, and rollback plan.",
+          "Protect user data and secrets.",
+          "Escalate risky release decisions early."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "dev_testing_discipline"
+      ]
+    },
+    {
+      "id": "developer_hotfix_friday",
+      "title": "Friday Hotfix Circus",
+      "difficulty": "Hard",
+      "theme": "Release discipline and rollback planning",
+      "story": "Friday 6:45 PM. A production issue appears. Everyone wants a quick release before dinner. The build machine looks nervous.",
+      "task": "Choose the safest hotfix approach.",
+      "choices": [
+        {
+          "text": "Push directly from your laptop",
+          "outcome": {
+            "title": "Laptop Legend Disaster",
+            "description": "Your local config points to staging, release notes say \u201cminor changes,\u201d and production starts speaking test data.",
+            "moralLesson": "A hotfix still needs controlled release steps.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "A hotfix still needs controlled release steps."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -4,
+            "ethics": -1,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Create hotfix branch, test fix, prepare rollback, and release with approval",
+          "outcome": {
+            "title": "Calm Release Ending",
+            "description": "The issue is fixed, rollback is ready, and your weekend survives with dignity.",
+            "moralLesson": "Urgency increases the need for process.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Urgency increases the need for process."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 5,
+            "communication": 3,
+            "chaos": -2
+          }
+        },
+        {
+          "text": "Disable the feature without telling anyone",
+          "outcome": {
+            "title": "Invisible Feature Ending",
+            "description": "The bug is gone because the feature is gone. Client asks if the app has entered meditation mode.",
+            "moralLesson": "Temporary mitigation must be communicated.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Temporary mitigation must be communicated."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "ethics": -2,
+            "communication": -3,
+            "chaos": 3
+          }
+        }
+      ],
+      "learningObjective": "Practice rollback planning workflow for a Developer situation involving release discipline and rollback planning.",
+      "skillLevel": "advanced",
+      "workflowId": "rollback_planning",
+      "skillTags": [
+        "release_safety",
+        "rollback_planning"
+      ],
+      "realWorldConstraints": [
+        "time",
+        "safety",
+        "client_pressure"
+      ],
+      "safetyGuardrails": [
+        "Do not hotfix production without review, test evidence, and rollback plan.",
+        "Protect user data and secrets.",
+        "Escalate risky release decisions early."
+      ],
+      "practicalTakeaway": "Use the rollback planning workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Software simulation: protect users by using test evidence, review, rollback planning, and secure handling of data. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Senior Dev Mentor says: At advanced level, show your evidence, explain the trade-off, and follow the rollback planning workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "developer_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.developer.chapter.3.title",
+      "analyticsTags": [
+        "developer",
+        "hard"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Do not hotfix production without review, test evidence, and rollback plan.",
+          "Protect user data and secrets.",
+          "Escalate risky release decisions early."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "dev_release_safety"
+      ]
+    },
+    {
+      "id": "developer_rollback_cleanup",
+      "title": "Rollback the Samosa Release",
+      "difficulty": "Medium",
+      "theme": "Rollback planning, ownership, production recovery",
+      "story": "The skipped-testing ghost returns. Production users are still seeing weird login behavior, and the client has started using the phrase \u201cbusiness impact\u201d with dangerous calmness.",
+      "task": "Choose the safest cleanup action to recover trust.",
+      "professionalLearningPoint": "Cleanup work should reduce risk, preserve evidence, and communicate clearly with stakeholders.",
+      "isCleanupMission": true,
+      "consequenceFlags": [
+        "skipped_testing",
+        "production_regression_risk"
+      ],
+      "roleMechanicType": "rollback_planning",
+      "choices": [
+        {
+          "text": "Rollback to last stable build, document impact, add regression test, and communicate ETA.",
+          "outcome": {
+            "title": "Controlled Recovery",
+            "description": "The app returns to stable behavior. QA gets a regression test, the PM gets a clear ETA, and the client stops typing in ALL CAPS.",
+            "moralLesson": "Good cleanup repairs both the system and trust.",
+            "clearFlags": [
+              "skipped_testing",
+              "production_regression_risk",
+              "mini_game_patch_failed"
+            ],
+            "reputationImpact": {
+              "trust": 3,
+              "safety": 2,
+              "professionalism": 3,
+              "reliability": 3,
+              "stakeholderConfidence": 3
+            },
+            "consequenceSummary": "The production regression risk is cleared and stakeholder trust starts recovering.",
+            "debrief": {
+              "whatWentWell": "You stabilized first, then fixed with evidence.",
+              "whatWasMissed": "The original shortcut still cost time.",
+              "realWorldPrinciple": "Rollback is not defeat; it is risk control."
+            },
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Good cleanup repairs both the system and trust."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "ethics": 2,
+            "communication": 3,
+            "chaos": -3
+          }
+        },
+        {
+          "text": "Patch again directly because two wrongs might become a framework.",
+          "outcome": {
+            "title": "Patch Tornado",
+            "description": "The login bug now has cousins. One cousin lives in logout, another in forgot password.",
+            "moralLesson": "Panic patches multiply incidents.",
+            "setFlags": [
+              "repeat_shortcut",
+              "production_regression_risk"
+            ],
+            "reputationImpact": {
+              "trust": -2,
+              "safety": -2,
+              "professionalism": -2,
+              "reliability": -3,
+              "stakeholderConfidence": -2
+            },
+            "consequenceSummary": "Cleanup remains unresolved and your reliability drops further.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Panic patches multiply incidents."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -3,
+            "ethics": -1,
+            "communication": -1,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Blame cache and close laptop slowly.",
+          "outcome": {
+            "title": "Cache Baba Excuse",
+            "description": "The client clears cache. The bug waves hello again.",
+            "moralLesson": "Excuses are not incident management.",
+            "setFlags": [
+              "missing_ownership"
+            ],
+            "reputationImpact": {
+              "trust": -3,
+              "safety": 0,
+              "professionalism": -3,
+              "reliability": -2,
+              "stakeholderConfidence": -2
+            },
+            "consequenceSummary": "Trust drops because the root cause was not addressed.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Excuses are not incident management."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "discipline": -2,
+            "ethics": -2,
+            "communication": -3,
+            "chaos": 4
+          }
+        }
+      ],
+      "learningObjective": "Practice bug triage workflow for a Developer situation involving rollback planning, ownership, production recovery.",
+      "skillLevel": "intermediate",
+      "workflowId": "bug_triage",
+      "skillTags": [
+        "debugging",
+        "bug_triage"
+      ],
+      "realWorldConstraints": [
+        "time",
+        "documentation",
+        "client_pressure"
+      ],
+      "safetyGuardrails": [
+        "Do not hotfix production without review, test evidence, and rollback plan.",
+        "Protect user data and secrets.",
+        "Escalate risky release decisions early."
+      ],
+      "practicalTakeaway": "Use the bug triage workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Software simulation: protect users by using test evidence, review, rollback planning, and secure handling of data. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Senior Dev Mentor says: At intermediate level, show your evidence, explain the trade-off, and follow the bug triage workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "developer_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.developer.chapter.4.title",
+      "analyticsTags": [
+        "developer",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Do not hotfix production without review, test evidence, and rollback plan.",
+          "Protect user data and secrets.",
+          "Escalate risky release decisions early."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "dev_release_safety"
+      ]
+    },
+    {
+      "id": "developer_role_finale",
+      "title": "Release Readiness Finale",
+      "difficulty": "Hard",
+      "theme": "Mastery check, risk control, stakeholder trust",
+      "story": "Final release day arrives. QA, PM, and client are all watching the build pipeline like it is a cricket final.",
+      "task": "Choose your release readiness approach.",
+      "professionalLearningPoint": "A reliable developer balances speed, evidence, rollback readiness, and communication.",
+      "isFinale": true,
+      "prerequisites": [
+        "developer_login_button_disaster",
+        "developer_api_timeout_panic",
+        "developer_hotfix_friday"
+      ],
+      "blockedByFlags": [
+        "production_regression_risk",
+        "skipped_testing"
+      ],
+      "roleMechanicType": "release_readiness",
+      "choices": [
+        {
+          "text": "Check test evidence, rollback plan, release notes, and stakeholder sign-off.",
+          "outcome": {
+            "title": "Release Captain Ending",
+            "description": "The release is boring, which is secretly the highest compliment in software.",
+            "moralLesson": "Professional releases are calm because preparation absorbs chaos.",
+            "reputationImpact": {
+              "trust": 4,
+              "safety": 3,
+              "professionalism": 4,
+              "reliability": 4,
+              "stakeholderConfidence": 4
+            },
+            "consequenceSummary": "Finale completed with a strong professional profile.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Professional releases are calm because preparation absorbs chaos."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 5,
+            "discipline": 5,
+            "ethics": 2,
+            "communication": 4,
+            "chaos": -3
+          }
+        },
+        {
+          "text": "Release now and promise to monitor WhatsApp carefully.",
+          "outcome": {
+            "title": "Notification Anxiety Ending",
+            "description": "Every phone vibration now sounds like production crying.",
+            "moralLesson": "Monitoring is not a replacement for readiness.",
+            "setFlags": [
+              "release_readiness_gap"
+            ],
+            "reputationImpact": {
+              "trust": -1,
+              "safety": -1,
+              "professionalism": -1,
+              "reliability": -2,
+              "stakeholderConfidence": -1
+            },
+            "consequenceSummary": "You finish, but your readiness gap affects the final ending.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Monitoring is not a replacement for readiness."
+            },
+            "analyticsTags": [
+              "developer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 1,
+            "discipline": -2,
+            "ethics": 0,
+            "communication": 1,
+            "chaos": 3
+          }
+        }
+      ],
+      "endingRules": [
+        {
+          "id": "developer_expert_ending",
+          "title": "Production-Safe Developer",
+          "description": "You protected users and earned mentor trust.",
+          "requiredStoryFlags": [
+            "documented_before_fix"
+          ],
+          "blockedByStoryFlags": [
+            "avoided_ownership"
+          ],
+          "blockedByConsequenceFlags": [
+            "skipped_testing",
+            "production_regression_risk"
+          ],
+          "requiredRelationshipMinimums": {
+            "mentorTrust": 2,
+            "clientTrust": 0,
+            "teamTrust": 1,
+            "publicReputation": 0
+          },
+          "priority": 100
+        },
+        {
+          "id": "developer_repair_ending",
+          "title": "Relationship Repair Developer",
+          "description": "You learned, but trust still needs rebuilding.",
+          "requiredStoryFlags": [
+            "mentor_warned_after_shortcut"
+          ],
+          "requiredRelationshipMinimums": {
+            "mentorTrust": -5,
+            "clientTrust": -5,
+            "teamTrust": -5,
+            "publicReputation": 0
+          },
+          "priority": 50
+        }
+      ],
+      "learningObjective": "Practice code review workflow for a Developer situation involving mastery check, risk control, stakeholder trust.",
+      "skillLevel": "advanced",
+      "workflowId": "code_review",
+      "skillTags": [
+        "code_review",
+        "code_review"
+      ],
+      "realWorldConstraints": [
+        "ethics",
+        "documentation",
+        "team_trust"
+      ],
+      "safetyGuardrails": [
+        "Do not hotfix production without review, test evidence, and rollback plan.",
+        "Protect user data and secrets.",
+        "Escalate risky release decisions early."
+      ],
+      "practicalTakeaway": "Use the code review workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Software simulation: protect users by using test evidence, review, rollback planning, and secure handling of data. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Senior Dev Mentor says: At advanced level, show your evidence, explain the trade-off, and follow the code review workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "developer_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.developer.chapter.5.title",
+      "analyticsTags": [
+        "developer",
+        "hard"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Do not hotfix production without review, test evidence, and rollback plan.",
+          "Protect user data and secrets.",
+          "Escalate risky release decisions early."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "dev_mastery"
+      ]
+    }
+  ],
+  "contentPackId": "core_roles_v23",
+  "contentVersion": "23.0.0",
+  "assetPackId": "base_visuals_v23",
+  "assetVersion": "23.0.0",
+  "localizationKey": "role.developer.title",
+  "rolePluginId": "developer_core",
+  "contentTier": "free",
+  "supportsOfflineCache": true
+}

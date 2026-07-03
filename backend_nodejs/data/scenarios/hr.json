@@ -1,0 +1,420 @@
+{
+  "role": {
+    "id": "hr_executive",
+    "name": "HR Executive",
+    "description": "Evaluate people fairly through structured hiring decisions.",
+    "iconKey": "people",
+    "pluginId": "hr_executive_core",
+    "contentPackId": "core_roles_v23",
+    "contentVersion": "23.0.0",
+    "contentTier": "free"
+  },
+  "chapters": [
+    {
+      "id": "hr_executive_interview_gone_wild",
+      "title": "Interview Gone Wild",
+      "difficulty": "Beginner",
+      "theme": "Hiring and role fit",
+      "story": "Candidate says, \u201cI know Excel, Word, AI, Blockchain, Cloud, and little bit cooking.\u201d Resume has 8 pages and 13 fonts.",
+      "task": "Evaluate the candidate properly.",
+      "choices": [
+        {
+          "text": "Hire immediately because resume looks heavy",
+          "outcome": {
+            "title": "Font-Based Hiring Ending",
+            "description": "Candidate joins as accountant but starts making office posters in PowerPoint.",
+            "moralLesson": "Fancy words do not prove real capability.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use structured, role-related evidence and avoid bias or legally risky personal feedback.",
+              "practicalTakeaway": "Fancy words do not prove real capability."
+            },
+            "analyticsTags": [
+              "hr_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "discipline": -2,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Ask role-specific questions and verify real experience",
+          "outcome": {
+            "title": "Fair Hiring Ending",
+            "description": "You identify strengths, gaps, salary fit, and role match. Candidate respects the process.",
+            "moralLesson": "Good hiring is structured and fair.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Use structured, role-related evidence and avoid bias or legally risky personal feedback.",
+              "practicalTakeaway": "Good hiring is structured and fair."
+            },
+            "analyticsTags": [
+              "hr_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 3,
+            "discipline": 3,
+            "ethics": 3,
+            "communication": 4
+          }
+        },
+        {
+          "text": "Ask only salary expectation",
+          "outcome": {
+            "title": "Budget Interview Ending",
+            "description": "You know the salary but still have no idea what the candidate can actually do.",
+            "moralLesson": "Hiring needs skill fit, not only budget fit.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use structured, role-related evidence and avoid bias or legally risky personal feedback.",
+              "practicalTakeaway": "Hiring needs skill fit, not only budget fit."
+            },
+            "analyticsTags": [
+              "hr_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "communication": -1,
+            "chaos": 2
+          }
+        }
+      ],
+      "learningObjective": "Practice interview scorecard workflow for a HR Executive situation involving hiring and role fit.",
+      "skillLevel": "beginner",
+      "workflowId": "interview_scorecard",
+      "skillTags": [
+        "structured_interview",
+        "interview_scorecard"
+      ],
+      "realWorldConstraints": [
+        "ethics",
+        "documentation",
+        "time"
+      ],
+      "safetyGuardrails": [
+        "Avoid discriminatory or biased hiring decisions.",
+        "Use structured criteria and job-related evidence.",
+        "Give respectful, legal-safe feedback without unsupported claims."
+      ],
+      "practicalTakeaway": "Use the interview scorecard workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "People-safety simulation: avoid bias, discrimination, or personal claims; use role-related evidence and legal-safe communication. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "People Ops Mentor says: At beginner level, show your evidence, explain the trade-off, and follow the interview scorecard workflow before choosing speed.",
+      "safetyDisclaimer": "People-safety simulation: avoid bias, discrimination, or personal claims; use role-related evidence and legal-safe communication.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "hr_executive_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.hr_executive.chapter.1.title",
+      "analyticsTags": [
+        "hr_executive",
+        "beginner"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Avoid discriminatory or biased hiring decisions.",
+          "Use structured criteria and job-related evidence.",
+          "Give respectful, legal-safe feedback without unsupported claims."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "hr_structure"
+      ]
+    },
+    {
+      "id": "hr_executive_notice_period_negotiation",
+      "title": "Notice Period Negotiation",
+      "difficulty": "Medium",
+      "theme": "Offer handling and expectation management",
+      "story": "Candidate is good but has 60 days notice. Manager wants joining yesterday. Candidate wants remote, hike, and emotional stability.",
+      "task": "Handle the hiring conversation professionally.",
+      "choices": [
+        {
+          "text": "Promise immediate joining without confirmation",
+          "outcome": {
+            "title": "Joining Mirage Ending",
+            "description": "Manager prepares laptop. Candidate says current company has not released him. Laptop feels abandoned.",
+            "moralLesson": "Hiring commitments must be realistic and confirmed.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use structured, role-related evidence and avoid bias or legally risky personal feedback.",
+              "practicalTakeaway": "Hiring commitments must be realistic and confirmed."
+            },
+            "analyticsTags": [
+              "hr_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "discipline": -2,
+            "communication": -3,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Clarify notice, buyout options, availability, expectations, and manager priority",
+          "outcome": {
+            "title": "Clear Offer Ending",
+            "description": "Everyone understands timeline and constraints. The offer process stays calm and professional.",
+            "moralLesson": "Clear expectation setting prevents hiring friction.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Use structured, role-related evidence and avoid bias or legally risky personal feedback.",
+              "practicalTakeaway": "Clear expectation setting prevents hiring friction."
+            },
+            "analyticsTags": [
+              "hr_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 3,
+            "discipline": 3,
+            "communication": 4,
+            "ethics": 3
+          }
+        },
+        {
+          "text": "Pressure candidate emotionally",
+          "outcome": {
+            "title": "Candidate Escape Ending",
+            "description": "Candidate accepts another offer where HR did not sound like a deadline alarm.",
+            "moralLesson": "Respectful communication improves hiring trust.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use structured, role-related evidence and avoid bias or legally risky personal feedback.",
+              "practicalTakeaway": "Respectful communication improves hiring trust."
+            },
+            "analyticsTags": [
+              "hr_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "ethics": -3,
+            "communication": -3,
+            "chaos": 3
+          }
+        }
+      ],
+      "learningObjective": "Practice bias check workflow for a HR Executive situation involving offer handling and expectation management.",
+      "skillLevel": "intermediate",
+      "workflowId": "bias_check",
+      "skillTags": [
+        "bias_detection",
+        "bias_check"
+      ],
+      "realWorldConstraints": [
+        "ethics",
+        "documentation"
+      ],
+      "safetyGuardrails": [
+        "Avoid discriminatory or biased hiring decisions.",
+        "Use structured criteria and job-related evidence.",
+        "Give respectful, legal-safe feedback without unsupported claims."
+      ],
+      "practicalTakeaway": "Use the bias check workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "People-safety simulation: avoid bias, discrimination, or personal claims; use role-related evidence and legal-safe communication. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "People Ops Mentor says: At intermediate level, show your evidence, explain the trade-off, and follow the bias check workflow before choosing speed.",
+      "safetyDisclaimer": "People-safety simulation: avoid bias, discrimination, or personal claims; use role-related evidence and legal-safe communication.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "hr_executive_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.hr_executive.chapter.2.title",
+      "analyticsTags": [
+        "hr_executive",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Avoid discriminatory or biased hiring decisions.",
+          "Use structured criteria and job-related evidence.",
+          "Give respectful, legal-safe feedback without unsupported claims."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "hr_bias"
+      ]
+    },
+    {
+      "id": "hr_executive_feedback_fireworks",
+      "title": "Feedback Fireworks",
+      "difficulty": "Hard",
+      "theme": "Fair feedback and documentation",
+      "story": "A rejected candidate asks for feedback. Interview panel notes say \u201cnot fit\u201d and one comment says \u201cvibes unclear.\u201d",
+      "task": "Respond fairly and safely.",
+      "choices": [
+        {
+          "text": "Send raw panel notes as-is",
+          "outcome": {
+            "title": "Vibes Unclear Ending",
+            "description": "Candidate forwards the mail. HR group chat becomes a legal awareness session.",
+            "moralLesson": "Feedback must be professional, factual, and respectful.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use structured, role-related evidence and avoid bias or legally risky personal feedback.",
+              "practicalTakeaway": "Feedback must be professional, factual, and respectful."
+            },
+            "analyticsTags": [
+              "hr_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "ethics": -3,
+            "communication": -3,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Share concise role-related feedback based on documented criteria",
+          "outcome": {
+            "title": "Professional Closure Ending",
+            "description": "Candidate gets useful closure without confidential or careless comments being exposed.",
+            "moralLesson": "Fair process needs structured documentation.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Use structured, role-related evidence and avoid bias or legally risky personal feedback.",
+              "practicalTakeaway": "Fair process needs structured documentation."
+            },
+            "analyticsTags": [
+              "hr_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 3,
+            "discipline": 4,
+            "communication": 4,
+            "ethics": 4
+          }
+        },
+        {
+          "text": "Ignore the candidate completely",
+          "outcome": {
+            "title": "Ghost HR Ending",
+            "description": "Candidate posts \u201cno response from HR.\u201d Employer brand takes a tiny punch.",
+            "moralLesson": "Candidate experience matters even after rejection.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use structured, role-related evidence and avoid bias or legally risky personal feedback.",
+              "practicalTakeaway": "Candidate experience matters even after rejection."
+            },
+            "analyticsTags": [
+              "hr_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "communication": -2,
+            "ethics": -1,
+            "chaos": 2
+          }
+        }
+      ],
+      "learningObjective": "Practice candidate feedback workflow for a HR Executive situation involving fair feedback and documentation.",
+      "skillLevel": "advanced",
+      "workflowId": "candidate_feedback",
+      "skillTags": [
+        "feedback_safety",
+        "candidate_feedback"
+      ],
+      "realWorldConstraints": [
+        "ethics",
+        "client_pressure",
+        "documentation"
+      ],
+      "safetyGuardrails": [
+        "Avoid discriminatory or biased hiring decisions.",
+        "Use structured criteria and job-related evidence.",
+        "Give respectful, legal-safe feedback without unsupported claims."
+      ],
+      "practicalTakeaway": "Use the candidate feedback workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "People-safety simulation: avoid bias, discrimination, or personal claims; use role-related evidence and legal-safe communication. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "People Ops Mentor says: At advanced level, show your evidence, explain the trade-off, and follow the candidate feedback workflow before choosing speed.",
+      "safetyDisclaimer": "People-safety simulation: avoid bias, discrimination, or personal claims; use role-related evidence and legal-safe communication.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "hr_executive_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.hr_executive.chapter.3.title",
+      "analyticsTags": [
+        "hr_executive",
+        "hard"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Avoid discriminatory or biased hiring decisions.",
+          "Use structured criteria and job-related evidence.",
+          "Give respectful, legal-safe feedback without unsupported claims."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "hr_feedback"
+      ]
+    }
+  ],
+  "contentPackId": "core_roles_v23",
+  "contentVersion": "23.0.0",
+  "assetPackId": "base_visuals_v23",
+  "assetVersion": "23.0.0",
+  "localizationKey": "role.hr_executive.title",
+  "rolePluginId": "hr_executive_core",
+  "contentTier": "free",
+  "supportsOfflineCache": true
+}

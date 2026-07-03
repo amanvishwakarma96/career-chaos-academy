@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "roadmaps": [
+    {
+      "roleId": "developer",
+      "title": "Production-Safe Developer Roadmap",
+      "steps": [
+        "Practice bug triage before choosing a fix.",
+        "Use tests and logs as evidence before release.",
+        "Learn rollback planning and post-incident documentation."
+      ],
+      "recommendedActivities": ["bug_hunt_login_safari", "daily_chaos_triage", "flame_bug_hunt_room"]
+    },
+    {
+      "roleId": "qa_tester",
+      "title": "Evidence-Based QA Roadmap",
+      "steps": [
+        "Classify severity using user impact and reproducibility.",
+        "Prioritize regression scope around risky changes.",
+        "Write clear evidence that helps teams act quickly."
+      ],
+      "recommendedActivities": ["bug_hunt_login_safari", "role_quiz_feedback_fireworks"]
+    },
+    {
+      "roleId": "doctor",
+      "title": "Safe Triage Communicator Roadmap",
+      "steps": [
+        "Identify red flags and escalate safely.",
+        "Communicate uncertainty without diagnosing inside the game.",
+        "Document observations and handoff clearly."
+      ],
+      "recommendedActivities": ["ethical_dilemma_red_flag_rush"]
+    },
+    {
+      "roleId": "civil_engineer",
+      "title": "Safety-First Site Lead Roadmap",
+      "steps": [
+        "Use inspection order and material checks before approval.",
+        "Document unsafe findings instead of absorbing pressure.",
+        "Escalate structural or material risk immediately."
+      ],
+      "recommendedActivities": ["flame_blueprint_safety_puzzle"]
+    },
+    {
+      "roleId": "architect",
+      "title": "Constraint-Aware Architect Roadmap",
+      "steps": [
+        "Clarify client needs before design excitement takes over.",
+        "Balance space, accessibility, safety, and budget.",
+        "Explain trade-offs visually and professionally."
+      ],
+      "recommendedActivities": ["client_negotiation_one_small_change"]
+    },
+    {
+      "roleId": "back_office",
+      "title": "Audit-Safe Back Office Roadmap",
+      "steps": [
+        "Validate duplicates before bulk updates.",
+        "Protect private data and keep an audit trail.",
+        "Clean data with repeatable checks, not guesswork."
+      ],
+      "recommendedActivities": ["data_cleanup_race", "flame_data_cleanup_race"]
+    },
+    {
+      "roleId": "project_manager",
+      "title": "Scope-Control Project Manager Roadmap",
+      "steps": [
+        "Separate urgency from priority.",
+        "Protect scope with documented trade-offs.",
+        "Escalate risks early without creating panic."
+      ],
+      "recommendedActivities": ["client_negotiation_one_small_change", "daily_chaos_triage"]
+    },
+    {
+      "roleId": "hr",
+      "title": "Ethical HR Decision Roadmap",
+      "steps": [
+        "Use structured evidence for interviews and feedback.",
+        "Detect bias before it becomes a decision.",
+        "Keep candidate communication respectful and legal-safe."
+      ],
+      "recommendedActivities": ["role_quiz_feedback_fireworks"]
+    }
+  ]
+}

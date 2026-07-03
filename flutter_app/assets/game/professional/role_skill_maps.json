@@ -1,0 +1,754 @@
+{
+  "version": 1,
+  "roles": [
+    {
+      "roleId": "developer",
+      "roleName": "Developer",
+      "mentorName": "Senior Dev Mentor",
+      "skills": [
+        {
+          "id": "debugging",
+          "name": "Debugging",
+          "level": "beginner",
+          "description": "Reproduce, isolate, and verify defects before changing code."
+        },
+        {
+          "id": "code_review",
+          "name": "Code Review",
+          "level": "intermediate",
+          "description": "Spot risky diffs, missing tests, and maintainability concerns."
+        },
+        {
+          "id": "release_safety",
+          "name": "Release Safety",
+          "level": "advanced",
+          "description": "Plan rollback, monitor impact, and communicate production risk."
+        }
+      ],
+      "workflows": [
+        {
+          "id": "bug_triage",
+          "title": "Bug triage workflow",
+          "level": "beginner",
+          "steps": [
+            "Reproduce issue",
+            "Check logs and inputs",
+            "Identify likely root cause",
+            "Document evidence"
+          ],
+          "constraints": [
+            "time",
+            "documentation",
+            "client_pressure"
+          ]
+        },
+        {
+          "id": "code_review",
+          "title": "Code review workflow",
+          "level": "intermediate",
+          "steps": [
+            "Read diff context",
+            "Check tests",
+            "Review edge cases",
+            "Approve or request changes with reason"
+          ],
+          "constraints": [
+            "ethics",
+            "documentation",
+            "team_trust"
+          ]
+        },
+        {
+          "id": "rollback_planning",
+          "title": "Rollback planning workflow",
+          "level": "advanced",
+          "steps": [
+            "Identify last safe version",
+            "Prepare rollback steps",
+            "Notify stakeholders",
+            "Monitor recovery"
+          ],
+          "constraints": [
+            "time",
+            "safety",
+            "client_pressure"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "regression",
+          "definition": "A new bug created by a change that previously worked."
+        },
+        {
+          "term": "rollback",
+          "definition": "Returning software to a known safe version."
+        },
+        {
+          "term": "pull_request",
+          "definition": "A reviewable code change before merge."
+        }
+      ],
+      "safetyGuardrails": [
+        "Do not hotfix production without review, test evidence, and rollback plan.",
+        "Protect user data and secrets.",
+        "Escalate risky release decisions early."
+      ]
+    },
+    {
+      "roleId": "qa_tester",
+      "roleName": "QA Tester",
+      "mentorName": "QA Lead",
+      "skills": [
+        {
+          "id": "severity_classification",
+          "name": "Severity Classification",
+          "level": "beginner",
+          "description": "Classify bugs by user impact and business risk."
+        },
+        {
+          "id": "regression_scope",
+          "name": "Regression Scope",
+          "level": "intermediate",
+          "description": "Choose tests that protect affected flows without wasting time."
+        },
+        {
+          "id": "evidence_collection",
+          "name": "Evidence Collection",
+          "level": "advanced",
+          "description": "Capture clear repro steps, logs, screenshots, and expected/actual results."
+        }
+      ],
+      "workflows": [
+        {
+          "id": "bug_reporting",
+          "title": "Bug reporting workflow",
+          "level": "beginner",
+          "steps": [
+            "Reproduce issue",
+            "Capture expected vs actual",
+            "Attach evidence",
+            "Assign severity"
+          ],
+          "constraints": [
+            "documentation",
+            "time"
+          ]
+        },
+        {
+          "id": "regression_planning",
+          "title": "Regression planning workflow",
+          "level": "intermediate",
+          "steps": [
+            "Map impacted areas",
+            "Prioritize critical paths",
+            "Run targeted regression",
+            "Share risks"
+          ],
+          "constraints": [
+            "time",
+            "client_pressure",
+            "documentation"
+          ]
+        },
+        {
+          "id": "release_signoff",
+          "title": "Release sign-off workflow",
+          "level": "advanced",
+          "steps": [
+            "Review open defects",
+            "Assess risk",
+            "Document known issues",
+            "Recommend go/no-go"
+          ],
+          "constraints": [
+            "ethics",
+            "client_pressure",
+            "safety"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "severity",
+          "definition": "How serious the bug impact is."
+        },
+        {
+          "term": "repro steps",
+          "definition": "Steps that reliably recreate a bug."
+        },
+        {
+          "term": "regression testing",
+          "definition": "Testing old flows after new changes."
+        }
+      ],
+      "safetyGuardrails": [
+        "Report evidence, not assumptions.",
+        "Do not hide critical bugs to meet deadlines.",
+        "Protect test data and user privacy."
+      ]
+    },
+    {
+      "roleId": "doctor",
+      "roleName": "Doctor",
+      "mentorName": "Clinical Mentor",
+      "skills": [
+        {
+          "id": "red_flag_triage",
+          "name": "Red-flag Triage",
+          "level": "beginner",
+          "description": "Recognize urgency indicators and escalate safely."
+        },
+        {
+          "id": "patient_communication",
+          "name": "Patient Communication",
+          "level": "intermediate",
+          "description": "Ask clear questions and explain safe next steps without panic."
+        },
+        {
+          "id": "clinical_documentation",
+          "name": "Clinical Documentation",
+          "level": "advanced",
+          "description": "Record symptoms, timeline, risks, and escalation decisions."
+        }
+      ],
+      "workflows": [
+        {
+          "id": "initial_triage",
+          "title": "Initial triage workflow",
+          "level": "beginner",
+          "steps": [
+            "Listen to complaint",
+            "Ask red-flag questions",
+            "Check urgency",
+            "Escalate if needed"
+          ],
+          "constraints": [
+            "safety",
+            "time",
+            "ethics"
+          ]
+        },
+        {
+          "id": "safe_communication",
+          "title": "Safe communication workflow",
+          "level": "intermediate",
+          "steps": [
+            "Use plain language",
+            "Avoid unsupported certainty",
+            "Give safe limits",
+            "Encourage qualified care"
+          ],
+          "constraints": [
+            "ethics",
+            "documentation"
+          ]
+        },
+        {
+          "id": "escalation_handoff",
+          "title": "Escalation handoff workflow",
+          "level": "advanced",
+          "steps": [
+            "Summarize red flags",
+            "Share observations",
+            "Contact senior/emergency pathway",
+            "Document handoff"
+          ],
+          "constraints": [
+            "safety",
+            "time",
+            "documentation"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "red flag",
+          "definition": "A warning sign that may need urgent qualified care."
+        },
+        {
+          "term": "triage",
+          "definition": "Sorting urgency and next safe action."
+        },
+        {
+          "term": "handoff",
+          "definition": "Passing important information to another professional."
+        }
+      ],
+      "safetyGuardrails": [
+        "Educational simulation only; do not diagnose, prescribe, or provide dosage.",
+        "Escalate red flags to qualified medical professionals/emergency care.",
+        "Communicate clearly and document observations."
+      ]
+    },
+    {
+      "roleId": "civil_engineer",
+      "roleName": "Civil Engineer",
+      "mentorName": "Site Safety Lead",
+      "skills": [
+        {
+          "id": "site_inspection",
+          "name": "Site Inspection",
+          "level": "beginner",
+          "description": "Check site conditions against safety and quality checklist."
+        },
+        {
+          "id": "material_validation",
+          "name": "Material Validation",
+          "level": "intermediate",
+          "description": "Verify material quality, certificates, and suitability."
+        },
+        {
+          "id": "risk_escalation",
+          "name": "Risk Escalation",
+          "level": "advanced",
+          "description": "Stop/flag unsafe work and communicate risk clearly."
+        }
+      ],
+      "workflows": [
+        {
+          "id": "safety_walkthrough",
+          "title": "Safety walkthrough workflow",
+          "level": "beginner",
+          "steps": [
+            "Check PPE and access",
+            "Inspect obvious hazards",
+            "Document observations",
+            "Escalate unsafe condition"
+          ],
+          "constraints": [
+            "safety",
+            "documentation",
+            "time"
+          ]
+        },
+        {
+          "id": "material_check",
+          "title": "Material quality workflow",
+          "level": "intermediate",
+          "steps": [
+            "Review delivery note",
+            "Verify certificate",
+            "Check sample quality",
+            "Approve/reject with record"
+          ],
+          "constraints": [
+            "budget",
+            "safety",
+            "documentation"
+          ]
+        },
+        {
+          "id": "inspection_signoff",
+          "title": "Inspection sign-off workflow",
+          "level": "advanced",
+          "steps": [
+            "Compare against drawings",
+            "Record deviations",
+            "Confirm corrective actions",
+            "Sign only when safe"
+          ],
+          "constraints": [
+            "ethics",
+            "client_pressure",
+            "safety"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "PPE",
+          "definition": "Personal protective equipment."
+        },
+        {
+          "term": "sign-off",
+          "definition": "Formal approval after checks."
+        },
+        {
+          "term": "non-conformance",
+          "definition": "Work/material that does not meet requirements."
+        }
+      ],
+      "safetyGuardrails": [
+        "Safety overrides schedule pressure.",
+        "Do not approve unsafe work without inspection and documentation.",
+        "Escalate structural/material risks immediately."
+      ]
+    },
+    {
+      "roleId": "architect",
+      "roleName": "Architect",
+      "mentorName": "Design Mentor",
+      "skills": [
+        {
+          "id": "space_planning",
+          "name": "Space Planning",
+          "level": "beginner",
+          "description": "Organize spaces around use, circulation, and constraints."
+        },
+        {
+          "id": "client_negotiation",
+          "name": "Client Negotiation",
+          "level": "intermediate",
+          "description": "Convert unrealistic asks into feasible options."
+        },
+        {
+          "id": "compliance_awareness",
+          "name": "Compliance Awareness",
+          "level": "advanced",
+          "description": "Respect accessibility, safety, and technical constraints."
+        }
+      ],
+      "workflows": [
+        {
+          "id": "requirement_filter",
+          "title": "Requirement filter workflow",
+          "level": "beginner",
+          "steps": [
+            "Collect needs",
+            "Separate wants from constraints",
+            "Identify conflicts",
+            "Confirm priorities"
+          ],
+          "constraints": [
+            "budget",
+            "client_pressure",
+            "documentation"
+          ]
+        },
+        {
+          "id": "layout_iteration",
+          "title": "Layout iteration workflow",
+          "level": "intermediate",
+          "steps": [
+            "Sketch options",
+            "Check circulation",
+            "Review constraints",
+            "Present trade-offs"
+          ],
+          "constraints": [
+            "time",
+            "budget",
+            "safety"
+          ]
+        },
+        {
+          "id": "design_signoff",
+          "title": "Design sign-off workflow",
+          "level": "advanced",
+          "steps": [
+            "Summarize approved scope",
+            "Document exclusions",
+            "Confirm compliance risks",
+            "Get written approval"
+          ],
+          "constraints": [
+            "ethics",
+            "documentation",
+            "client_pressure"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "circulation",
+          "definition": "How people move through a space."
+        },
+        {
+          "term": "accessibility",
+          "definition": "Design usable by people with different abilities."
+        },
+        {
+          "term": "scope",
+          "definition": "The agreed design work and limits."
+        }
+      ],
+      "safetyGuardrails": [
+        "Do not ignore accessibility, fire safety, or structural constraints.",
+        "Document client changes and budget trade-offs.",
+        "Balance creativity with usability and compliance."
+      ]
+    },
+    {
+      "roleId": "back_office_executive",
+      "roleName": "Back Office Executive",
+      "mentorName": "Operations Mentor",
+      "skills": [
+        {
+          "id": "data_validation",
+          "name": "Data Validation",
+          "level": "beginner",
+          "description": "Check completeness, format, and duplicate records."
+        },
+        {
+          "id": "privacy_safe_communication",
+          "name": "Privacy-safe Communication",
+          "level": "intermediate",
+          "description": "Share only required data with the right recipient."
+        },
+        {
+          "id": "audit_trail",
+          "name": "Audit Trail Discipline",
+          "level": "advanced",
+          "description": "Record what changed, why, and who approved it."
+        }
+      ],
+      "workflows": [
+        {
+          "id": "duplicate_check",
+          "title": "Duplicate check workflow",
+          "level": "beginner",
+          "steps": [
+            "Sort identifiers",
+            "Find near matches",
+            "Verify source",
+            "Mark duplicate/unique"
+          ],
+          "constraints": [
+            "time",
+            "documentation",
+            "ethics"
+          ]
+        },
+        {
+          "id": "privacy_filter",
+          "title": "Privacy filter workflow",
+          "level": "intermediate",
+          "steps": [
+            "Identify sensitive fields",
+            "Confirm recipient need",
+            "Mask unnecessary data",
+            "Log sharing"
+          ],
+          "constraints": [
+            "ethics",
+            "documentation",
+            "client_pressure"
+          ]
+        },
+        {
+          "id": "audit_correction",
+          "title": "Audit correction workflow",
+          "level": "advanced",
+          "steps": [
+            "Find source error",
+            "Request approval",
+            "Apply correction",
+            "Record trail"
+          ],
+          "constraints": [
+            "documentation",
+            "time",
+            "ethics"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "audit trail",
+          "definition": "A record of changes and approvals."
+        },
+        {
+          "term": "PII",
+          "definition": "Personally identifiable information."
+        },
+        {
+          "term": "duplicate record",
+          "definition": "Two or more entries for the same item/person."
+        }
+      ],
+      "safetyGuardrails": [
+        "Protect personal data and confidential documents.",
+        "Do not process duplicate/unclear records without verification.",
+        "Keep audit trail for every correction."
+      ]
+    },
+    {
+      "roleId": "project_manager",
+      "roleName": "Project Manager",
+      "mentorName": "Delivery Mentor",
+      "skills": [
+        {
+          "id": "scope_control",
+          "name": "Scope Control",
+          "level": "beginner",
+          "description": "Clarify what is included and prevent uncontrolled expansion."
+        },
+        {
+          "id": "risk_management",
+          "name": "Risk Management",
+          "level": "intermediate",
+          "description": "Identify, track, and mitigate delivery risks."
+        },
+        {
+          "id": "stakeholder_alignment",
+          "name": "Stakeholder Alignment",
+          "level": "advanced",
+          "description": "Communicate trade-offs and secure decisions."
+        }
+      ],
+      "workflows": [
+        {
+          "id": "scope_triage",
+          "title": "Scope triage workflow",
+          "level": "beginner",
+          "steps": [
+            "Capture request",
+            "Compare with agreed scope",
+            "Estimate impact",
+            "Ask for decision"
+          ],
+          "constraints": [
+            "client_pressure",
+            "budget",
+            "time"
+          ]
+        },
+        {
+          "id": "risk_register",
+          "title": "Risk register workflow",
+          "level": "intermediate",
+          "steps": [
+            "Identify risk",
+            "Assess impact",
+            "Assign owner",
+            "Review mitigation"
+          ],
+          "constraints": [
+            "documentation",
+            "time",
+            "client_pressure"
+          ]
+        },
+        {
+          "id": "delivery_replan",
+          "title": "Delivery replan workflow",
+          "level": "advanced",
+          "steps": [
+            "Check constraints",
+            "Rebalance resources",
+            "Communicate trade-offs",
+            "Confirm new baseline"
+          ],
+          "constraints": [
+            "budget",
+            "team_trust",
+            "client_pressure"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "scope creep",
+          "definition": "Uncontrolled growth of work without agreed trade-off."
+        },
+        {
+          "term": "risk register",
+          "definition": "A tracked list of risks, owners, and mitigations."
+        },
+        {
+          "term": "baseline",
+          "definition": "The agreed plan for delivery."
+        }
+      ],
+      "safetyGuardrails": [
+        "Do not hide risk to protect status color.",
+        "Escalate blockers early with options.",
+        "Balance scope, time, cost, quality, and people."
+      ]
+    },
+    {
+      "roleId": "hr_executive",
+      "roleName": "HR Executive",
+      "mentorName": "People Ops Mentor",
+      "skills": [
+        {
+          "id": "structured_interview",
+          "name": "Structured Interviewing",
+          "level": "beginner",
+          "description": "Ask role-relevant questions consistently."
+        },
+        {
+          "id": "bias_detection",
+          "name": "Bias Detection",
+          "level": "intermediate",
+          "description": "Identify and reduce unfair assumptions."
+        },
+        {
+          "id": "feedback_safety",
+          "name": "Legal-safe Feedback",
+          "level": "advanced",
+          "description": "Give respectful feedback based on role criteria and evidence."
+        }
+      ],
+      "workflows": [
+        {
+          "id": "interview_scorecard",
+          "title": "Interview scorecard workflow",
+          "level": "beginner",
+          "steps": [
+            "Define criteria",
+            "Ask consistent questions",
+            "Score evidence",
+            "Document decision"
+          ],
+          "constraints": [
+            "ethics",
+            "documentation",
+            "time"
+          ]
+        },
+        {
+          "id": "bias_check",
+          "title": "Bias check workflow",
+          "level": "intermediate",
+          "steps": [
+            "Spot assumption",
+            "Compare job criteria",
+            "Seek evidence",
+            "Correct language"
+          ],
+          "constraints": [
+            "ethics",
+            "documentation"
+          ]
+        },
+        {
+          "id": "candidate_feedback",
+          "title": "Candidate feedback workflow",
+          "level": "advanced",
+          "steps": [
+            "Be respectful",
+            "Use role criteria",
+            "Avoid personal labels",
+            "Offer safe next steps"
+          ],
+          "constraints": [
+            "ethics",
+            "client_pressure",
+            "documentation"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "structured interview",
+          "definition": "A consistent evidence-based interview process."
+        },
+        {
+          "term": "bias",
+          "definition": "An unfair assumption affecting judgment."
+        },
+        {
+          "term": "scorecard",
+          "definition": "A rubric for evaluating role-relevant evidence."
+        }
+      ],
+      "safetyGuardrails": [
+        "Avoid discriminatory or biased hiring decisions.",
+        "Use structured criteria and job-related evidence.",
+        "Give respectful, legal-safe feedback without unsupported claims."
+      ]
+    }
+  ]
+}

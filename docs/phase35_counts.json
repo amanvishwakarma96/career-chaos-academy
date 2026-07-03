@@ -1,0 +1,20 @@
+{
+  "phase": 35,
+  "flutter_dart_files": 174,
+  "flutter_test_files": 33,
+  "backend_js_files": 6,
+  "backend_data_json_files": 45,
+  "docs_files": 51,
+  "admin_panel_files": 1,
+  "new_phase35_files": [
+    "backend_nodejs/src/security.js",
+    "flutter_app/lib/services/secure_token_storage_service.dart",
+    "flutter_app/lib/services/production_security_service.dart",
+    "flutter_app/lib/models/production_security_model.dart",
+    "flutter_app/lib/screens/production_security_screen.dart",
+    "docs/phase35_production_security_scale_validation_report.md",
+    "docs/phase35_production_deployment_checklist.md",
+    "docs/phase35_privacy_data_retention_rules.md",
+    "flutter_app/test/phase35_production_security_scale_model_test.dart"
+  ]
+}

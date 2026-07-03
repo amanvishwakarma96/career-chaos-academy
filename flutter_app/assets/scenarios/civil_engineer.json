@@ -1,0 +1,488 @@
+{
+  "role": {
+    "id": "civil_engineer",
+    "name": "Civil Engineer",
+    "description": "Balance deadlines, materials, safety, and real-world load.",
+    "iconKey": "engineering",
+    "pluginId": "civil_engineer_core",
+    "contentPackId": "core_roles_v23",
+    "contentVersion": "23.0.0",
+    "contentTier": "free"
+  },
+  "chapters": [
+    {
+      "id": "civil_engineer_bridge_of_overconfidence",
+      "title": "Bridge of Overconfidence",
+      "difficulty": "Medium",
+      "theme": "Safety, load, materials",
+      "story": "Mayor wants a bridge before the public event. Budget is low, deadline is close, and expectations are higher than the bridge itself.",
+      "task": "Decide how to proceed with bridge planning.",
+      "choices": [
+        {
+          "text": "Reduce material to save cost",
+          "outcome": {
+            "title": "Trampoline Bridge Ending",
+            "description": "Bridge starts bouncing. Public loves it, safety department does not.",
+            "moralLesson": "Safety cannot be sacrificed for speed or cost.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Unsafe site decisions are never just comedy; inspection, documentation, and escalation come before sign-off.",
+              "practicalTakeaway": "Safety cannot be sacrificed for speed or cost."
+            },
+            "analyticsTags": [
+              "civil_engineer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -3,
+            "ethics": -3,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Check load capacity, soil, material, and safety standards",
+          "outcome": {
+            "title": "Safe Structure Ending",
+            "description": "You ask for proper calculations and review. The bridge stands. The mayor gets ribbon-cutting photos, not FIR papers.",
+            "moralLesson": "Engineering must be calculation-driven.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Unsafe site decisions are never just comedy; inspection, documentation, and escalation come before sign-off.",
+              "practicalTakeaway": "Engineering must be calculation-driven."
+            },
+            "analyticsTags": [
+              "civil_engineer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "ethics": 3,
+            "communication": 2
+          }
+        },
+        {
+          "text": "Make it rainbow colored and hope for the best",
+          "outcome": {
+            "title": "Instagram Disaster Ending",
+            "description": "Bridge looks viral, but the safety report says \u201cbro, seriously?\u201d",
+            "moralLesson": "Design appeal cannot replace structural safety.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Unsafe site decisions are never just comedy; inspection, documentation, and escalation come before sign-off.",
+              "practicalTakeaway": "Design appeal cannot replace structural safety."
+            },
+            "analyticsTags": [
+              "civil_engineer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "discipline": -2,
+            "chaos": 4
+          }
+        }
+      ],
+      "miniGame": {
+        "id": "civil_bridge_safety_arrange_order",
+        "type": "arrange_order",
+        "title": "Arrange the Safe Bridge Workflow",
+        "instructions": "Put the bridge planning steps in the safest order.",
+        "prompt": "The client wants speed, but gravity has not approved shortcuts.",
+        "hint": "Survey first, then design checks, then approval, then execution.",
+        "orderItems": [
+          {
+            "id": "start_work",
+            "text": "Start work because everyone is excited",
+            "helperText": "Tempting, but unsafe."
+          },
+          {
+            "id": "site_survey",
+            "text": "Complete site survey and soil checks",
+            "helperText": "Know the ground first."
+          },
+          {
+            "id": "structural_review",
+            "text": "Review structural design and load calculations",
+            "helperText": "Math before machinery."
+          },
+          {
+            "id": "safety_approval",
+            "text": "Get safety approval and execution plan sign-off",
+            "helperText": "Approval before action."
+          }
+        ],
+        "correctOrderIds": [
+          "site_survey",
+          "structural_review",
+          "safety_approval",
+          "start_work"
+        ],
+        "successScoreImpact": {
+          "skill": 4,
+          "discipline": 4,
+          "ethics": 2,
+          "communication": 1,
+          "chaos": 0
+        },
+        "failureScoreImpact": {
+          "skill": 0,
+          "discipline": -2,
+          "ethics": 0,
+          "communication": 0,
+          "chaos": 5
+        },
+        "successMessage": "Solid workflow. The bridge is already standing confidently in the spreadsheet.",
+        "failureMessage": "The workflow skipped safety. The bridge drawing quietly turned into a trampoline design.",
+        "skillTags": [
+          "site_inspection",
+          "safety_walkthrough"
+        ],
+        "skillLevel": "intermediate",
+        "workflowId": "safety_walkthrough",
+        "skillNodeIds": [
+          "civil_safety"
+        ]
+      },
+      "learningObjective": "Practice safety walkthrough workflow for a Civil Engineer situation involving safety, load, materials.",
+      "skillLevel": "intermediate",
+      "workflowId": "safety_walkthrough",
+      "skillTags": [
+        "site_inspection",
+        "safety_walkthrough"
+      ],
+      "realWorldConstraints": [
+        "safety",
+        "documentation",
+        "time"
+      ],
+      "safetyGuardrails": [
+        "Safety overrides schedule pressure.",
+        "Do not approve unsafe work without inspection and documentation.",
+        "Escalate structural/material risks immediately."
+      ],
+      "practicalTakeaway": "Use the safety walkthrough workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Safety-first simulation: unsafe site/material risks must be inspected, documented, and escalated before sign-off. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Site Safety Lead says: At intermediate level, show your evidence, explain the trade-off, and follow the safety walkthrough workflow before choosing speed.",
+      "safetyDisclaimer": "Safety-first simulation: unsafe site/material risks must be inspected, documented, and escalated before sign-off.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "civil_engineer_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.civil_engineer.chapter.1.title",
+      "analyticsTags": [
+        "civil_engineer",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "safety",
+          "engineering"
+        ],
+        "guardrails": [
+          "Safety overrides schedule pressure.",
+          "Do not approve unsafe work without inspection and documentation.",
+          "Escalate structural/material risks immediately."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "civil_safety"
+      ]
+    },
+    {
+      "id": "civil_engineer_rainy_site_visit",
+      "title": "Rainy Site Visit",
+      "difficulty": "Medium",
+      "theme": "Site inspection and risk control",
+      "story": "Heavy rain hits the site. Waterlogging appears, workers are rushing, and the contractor says, \u201cSir, kaam chalne do.\u201d",
+      "task": "Decide how to manage site safety.",
+      "choices": [
+        {
+          "text": "Continue work without inspection",
+          "outcome": {
+            "title": "Mud Slide Ending",
+            "description": "Materials float, boots disappear, and the site starts behaving like a water park.",
+            "moralLesson": "Weather changes site risk immediately.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Unsafe site decisions are never just comedy; inspection, documentation, and escalation come before sign-off.",
+              "practicalTakeaway": "Weather changes site risk immediately."
+            },
+            "analyticsTags": [
+              "civil_engineer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -3,
+            "ethics": -2,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Inspect drainage, electrical risk, material storage, and worker safety",
+          "outcome": {
+            "title": "Safe Site Ending",
+            "description": "You pause risky work, secure materials, and prevent a dangerous incident.",
+            "moralLesson": "Site progress is useless without safety.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Unsafe site decisions are never just comedy; inspection, documentation, and escalation come before sign-off.",
+              "practicalTakeaway": "Site progress is useless without safety."
+            },
+            "analyticsTags": [
+              "civil_engineer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "ethics": 4,
+            "communication": 2
+          }
+        },
+        {
+          "text": "Only take photos for WhatsApp update",
+          "outcome": {
+            "title": "Photo Engineer Ending",
+            "description": "The group gets 17 photos and zero risk control. The site remains wet and sarcastic.",
+            "moralLesson": "Reporting must support action.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Unsafe site decisions are never just comedy; inspection, documentation, and escalation come before sign-off.",
+              "practicalTakeaway": "Reporting must support action."
+            },
+            "analyticsTags": [
+              "civil_engineer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "discipline": -1,
+            "communication": -1,
+            "chaos": 3
+          }
+        }
+      ],
+      "learningObjective": "Practice material quality workflow for a Civil Engineer situation involving site inspection and risk control.",
+      "skillLevel": "intermediate",
+      "workflowId": "material_check",
+      "skillTags": [
+        "material_validation",
+        "material_check"
+      ],
+      "realWorldConstraints": [
+        "budget",
+        "safety",
+        "documentation"
+      ],
+      "safetyGuardrails": [
+        "Safety overrides schedule pressure.",
+        "Do not approve unsafe work without inspection and documentation.",
+        "Escalate structural/material risks immediately."
+      ],
+      "practicalTakeaway": "Use the material quality workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Safety-first simulation: unsafe site/material risks must be inspected, documented, and escalated before sign-off. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Site Safety Lead says: At intermediate level, show your evidence, explain the trade-off, and follow the material quality workflow before choosing speed.",
+      "safetyDisclaimer": "Safety-first simulation: unsafe site/material risks must be inspected, documented, and escalated before sign-off.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "civil_engineer_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.civil_engineer.chapter.2.title",
+      "analyticsTags": [
+        "civil_engineer",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "safety",
+          "engineering"
+        ],
+        "guardrails": [
+          "Safety overrides schedule pressure.",
+          "Do not approve unsafe work without inspection and documentation.",
+          "Escalate structural/material risks immediately."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "civil_inspection"
+      ]
+    },
+    {
+      "id": "civil_engineer_concrete_countdown",
+      "title": "Concrete Countdown",
+      "difficulty": "Hard",
+      "theme": "Quality checks and curing",
+      "story": "Concrete pour is scheduled. Everyone wants speed, but testing and curing look like \u201cextra formality\u201d to the contractor.",
+      "task": "Protect quality during concrete work.",
+      "choices": [
+        {
+          "text": "Skip checks to save time",
+          "outcome": {
+            "title": "Crack Festival Ending",
+            "description": "Cracks arrive earlier than project payment. Contractor says it is \u201cdesign texture.\u201d",
+            "moralLesson": "Quality shortcuts become structural problems.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Unsafe site decisions are never just comedy; inspection, documentation, and escalation come before sign-off.",
+              "practicalTakeaway": "Quality shortcuts become structural problems."
+            },
+            "analyticsTags": [
+              "civil_engineer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -3,
+            "discipline": -3,
+            "ethics": -3,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Verify mix, slump, placement, compaction, samples, and curing plan",
+          "outcome": {
+            "title": "Quality Pour Ending",
+            "description": "The pour is controlled, records are clear, and the structure gets strength instead of excuses.",
+            "moralLesson": "Concrete quality depends on process from start to curing.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Unsafe site decisions are never just comedy; inspection, documentation, and escalation come before sign-off.",
+              "practicalTakeaway": "Concrete quality depends on process from start to curing."
+            },
+            "analyticsTags": [
+              "civil_engineer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 5,
+            "discipline": 4,
+            "ethics": 3,
+            "communication": 2
+          }
+        },
+        {
+          "text": "Let contractor decide everything",
+          "outcome": {
+            "title": "Remote Control Ending",
+            "description": "You are present but not supervising. The site starts calling the contractor \u201cboss.\u201d",
+            "moralLesson": "Engineer responsibility cannot be outsourced.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Unsafe site decisions are never just comedy; inspection, documentation, and escalation come before sign-off.",
+              "practicalTakeaway": "Engineer responsibility cannot be outsourced."
+            },
+            "analyticsTags": [
+              "civil_engineer",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -2,
+            "chaos": 3
+          }
+        }
+      ],
+      "learningObjective": "Practice inspection sign-off workflow for a Civil Engineer situation involving quality checks and curing.",
+      "skillLevel": "advanced",
+      "workflowId": "inspection_signoff",
+      "skillTags": [
+        "risk_escalation",
+        "inspection_signoff"
+      ],
+      "realWorldConstraints": [
+        "ethics",
+        "client_pressure",
+        "safety"
+      ],
+      "safetyGuardrails": [
+        "Safety overrides schedule pressure.",
+        "Do not approve unsafe work without inspection and documentation.",
+        "Escalate structural/material risks immediately."
+      ],
+      "practicalTakeaway": "Use the inspection sign-off workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Safety-first simulation: unsafe site/material risks must be inspected, documented, and escalated before sign-off. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Site Safety Lead says: At advanced level, show your evidence, explain the trade-off, and follow the inspection sign-off workflow before choosing speed.",
+      "safetyDisclaimer": "Safety-first simulation: unsafe site/material risks must be inspected, documented, and escalated before sign-off.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "civil_engineer_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.civil_engineer.chapter.3.title",
+      "analyticsTags": [
+        "civil_engineer",
+        "hard"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "safety",
+          "engineering"
+        ],
+        "guardrails": [
+          "Safety overrides schedule pressure.",
+          "Do not approve unsafe work without inspection and documentation.",
+          "Escalate structural/material risks immediately."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "civil_materials"
+      ]
+    }
+  ],
+  "contentPackId": "core_roles_v23",
+  "contentVersion": "23.0.0",
+  "assetPackId": "base_visuals_v23",
+  "assetVersion": "23.0.0",
+  "localizationKey": "role.civil_engineer.title",
+  "rolePluginId": "civil_engineer_core",
+  "contentTier": "free",
+  "supportsOfflineCache": true
+}

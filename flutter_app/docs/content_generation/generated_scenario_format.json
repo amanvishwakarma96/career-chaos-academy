@@ -1,0 +1,66 @@
+{
+  "role": {
+    "id": "snake_case_role_id",
+    "name": "Human Readable Role Name",
+    "description": "One sentence role description.",
+    "iconKey": "code"
+  },
+  "chapters": [
+    {
+      "id": "role_unique_chapter_id",
+      "title": "Funny scenario title",
+      "difficulty": "Beginner",
+      "theme": "Skills/theme covered",
+      "story": "Dialogue-style scenario with humor and realistic workplace chaos.",
+      "scenario": "Same meaning as story, included for AI review compatibility.",
+      "task": "What the player must decide or solve.",
+      "professionalLearningPoint": "Safe practical learning point for this role.",
+      "safetyDisclaimer": "Required for medical/legal/financial/safety-critical content.",
+      "choices": [
+        {
+          "text": "Player choice text",
+          "outcome": {
+            "title": "Outcome title",
+            "description": "Funny consequence or positive result.",
+            "moralLesson": "Clear moral lesson."
+          },
+          "scoreImpact": {
+            "skill": 1,
+            "discipline": 1,
+            "ethics": 1,
+            "communication": 1,
+            "chaos": -1
+          }
+        }
+      ],
+      "miniGame": {
+        "id": "optional_unique_minigame_id",
+        "type": "multiple_select",
+        "title": "Mini-game title",
+        "instructions": "How to play safely.",
+        "prompt": "Mini-game prompt.",
+        "hint": "Helpful hint.",
+        "options": [
+          {"id": "a", "text": "Option text", "helperText": "Optional helper"}
+        ],
+        "correctOptionIds": ["a"],
+        "successScoreImpact": {
+          "skill": 2,
+          "discipline": 1,
+          "ethics": 0,
+          "communication": 0,
+          "chaos": -1
+        },
+        "failureScoreImpact": {
+          "skill": 0,
+          "discipline": -1,
+          "ethics": 0,
+          "communication": 0,
+          "chaos": 2
+        },
+        "successMessage": "Funny success message.",
+        "failureMessage": "Funny failure consequence."
+      }
+    }
+  ]
+}

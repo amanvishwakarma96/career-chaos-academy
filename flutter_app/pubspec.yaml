@@ -1,0 +1,93 @@
+name: career_chaos_academy
+description: A funny, role-based interactive learning game for career decision-making, role scenarios, mini-games, and professional lessons.
+publish_to: 'none'
+version: 1.0.0+13
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.41.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.2.3
+  http: ^1.2.2
+  flutter_secure_storage: ^9.2.4
+  sentry_flutter: ^8.14.2
+  firebase_core: ^3.6.0
+  firebase_analytics: ^11.3.3
+  lottie: ^3.1.3
+  flame: ^1.37.0
+  audioplayers: ^6.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/scenarios/
+    - assets/branding/
+    - assets/cinematic/backgrounds/
+    - assets/cinematic/characters/
+    - assets/game/backgrounds/
+    - assets/game/characters/
+    - assets/game/props/
+    - assets/game/badges/
+    - assets/game/lottie/
+    - assets/game/rive/
+    - assets/game/audio/
+    - assets/game/professional/
+    - assets/game/activities/
+    - assets/game/mentors/
+    - assets/game/career_coach/
+    - assets/game/skill_trees/
+    - assets/game/scenario_packs/
+    - assets/game/interview/
+    - assets/game/assessments/
+    - assets/game/voice/
+    - assets/game/monetization/
+    - assets/config/
+    - assets/i18n/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/branding/app_icon.png
+  adaptive_icon_background: "#982F61"
+  adaptive_icon_foreground: assets/branding/app_icon_foreground.png
+  min_sdk_android: 23
+  remove_alpha_ios: true
+  web:
+    generate: true
+    image_path: assets/branding/app_icon.png
+    background_color: "#982F61"
+    theme_color: "#982F61"
+  windows:
+    generate: true
+    image_path: assets/branding/app_icon.png
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: assets/branding/app_icon.png
+
+flutter_native_splash:
+  color: "#FFF7FB"
+  color_dark: "#171116"
+  image: assets/branding/splash_logo.png
+  image_dark: assets/branding/splash_logo.png
+  android: true
+  ios: true
+  web: true
+  android_12:
+    image: assets/branding/splash_logo_android12.png
+    icon_background_color: "#982F61"
+    image_dark: assets/branding/splash_logo_android12.png
+    icon_background_color_dark: "#171116"
+    color: "#FFF7FB"
+    color_dark: "#171116"

@@ -1,0 +1,421 @@
+{
+  "role": {
+    "id": "architect",
+    "name": "Architect",
+    "description": "Turn unrealistic client dreams into usable, practical designs.",
+    "iconKey": "architecture",
+    "pluginId": "architect_core",
+    "contentPackId": "core_roles_v23",
+    "contentVersion": "23.0.0",
+    "contentTier": "free"
+  },
+  "chapters": [
+    {
+      "id": "architect_seven_swimming_pools",
+      "title": "Seven Swimming Pools, One Small House",
+      "difficulty": "Medium",
+      "theme": "Space planning and client handling",
+      "story": "Client has 600 sq ft plot and wants four bedrooms, gym, temple, office, garden, parking, and seven swimming pools. Confidence level: unlimited.",
+      "task": "Create a practical design approach.",
+      "choices": [
+        {
+          "text": "Say yes to everything",
+          "outcome": {
+            "title": "Kitchen Pool Ending",
+            "description": "Bathroom opens into kitchen, parking is imaginary, and bedroom has a pool ladder.",
+            "moralLesson": "Good design requires honest constraints.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Good design requires honest constraints."
+            },
+            "analyticsTags": [
+              "architect",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -2,
+            "communication": -1,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Explain space limits and suggest multipurpose smart design",
+          "outcome": {
+            "title": "Practical Design Ending",
+            "description": "Client understands trade-offs. You design a compact, ventilated, usable home instead of a water park with walls.",
+            "moralLesson": "Good design chooses what matters.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Good design chooses what matters."
+            },
+            "analyticsTags": [
+              "architect",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 3,
+            "communication": 4,
+            "ethics": 2
+          }
+        },
+        {
+          "text": "Remove kitchen to add pool",
+          "outcome": {
+            "title": "Hungry Luxury Ending",
+            "description": "Client gets pool but no food. Family starts cooking on poolside tiles.",
+            "moralLesson": "Luxury without usability is bad design.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Luxury without usability is bad design."
+            },
+            "analyticsTags": [
+              "architect",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "chaos": 4
+          }
+        }
+      ],
+      "learningObjective": "Practice requirement filter workflow for a Architect situation involving space planning and client handling.",
+      "skillLevel": "intermediate",
+      "workflowId": "requirement_filter",
+      "skillTags": [
+        "space_planning",
+        "requirement_filter"
+      ],
+      "realWorldConstraints": [
+        "budget",
+        "client_pressure",
+        "documentation"
+      ],
+      "safetyGuardrails": [
+        "Do not ignore accessibility, fire safety, or structural constraints.",
+        "Document client changes and budget trade-offs.",
+        "Balance creativity with usability and compliance."
+      ],
+      "practicalTakeaway": "Use the requirement filter workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Design simulation: accessibility, fire safety, usability, and compliance constraints must not be ignored. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Design Mentor says: At intermediate level, show your evidence, explain the trade-off, and follow the requirement filter workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "architect_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.architect.chapter.1.title",
+      "analyticsTags": [
+        "architect",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "safety",
+          "engineering"
+        ],
+        "guardrails": [
+          "Do not ignore accessibility, fire safety, or structural constraints.",
+          "Document client changes and budget trade-offs.",
+          "Balance creativity with usability and compliance."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "architect_constraints"
+      ]
+    },
+    {
+      "id": "architect_vastu_vs_ventilation",
+      "title": "Vastu vs Ventilation",
+      "difficulty": "Medium",
+      "theme": "Balancing beliefs and usability",
+      "story": "Client wants every room placed according to five family opinions. Cross-ventilation has quietly left the meeting.",
+      "task": "Create a respectful and usable plan.",
+      "choices": [
+        {
+          "text": "Follow every instruction without checking usability",
+          "outcome": {
+            "title": "Maze House Ending",
+            "description": "The house technically satisfies everyone, but nobody can find the bathroom without GPS.",
+            "moralLesson": "Design should respect preferences without losing function.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Design should respect preferences without losing function."
+            },
+            "analyticsTags": [
+              "architect",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -2,
+            "communication": -1,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Explain options with trade-offs and preserve light, air, and movement",
+          "outcome": {
+            "title": "Balanced Plan Ending",
+            "description": "The client sees why some compromises improve daily life. The house breathes again.",
+            "moralLesson": "Good architecture turns conflict into informed choices.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Good architecture turns conflict into informed choices."
+            },
+            "analyticsTags": [
+              "architect",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 3,
+            "communication": 4,
+            "ethics": 2
+          }
+        },
+        {
+          "text": "Reject all client preferences as nonsense",
+          "outcome": {
+            "title": "Ego Blueprint Ending",
+            "description": "Your plan may be efficient, but the client starts interviewing another architect.",
+            "moralLesson": "Expertise needs empathy to be accepted.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Expertise needs empathy to be accepted."
+            },
+            "analyticsTags": [
+              "architect",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "communication": -3,
+            "ethics": -1,
+            "chaos": 3
+          }
+        }
+      ],
+      "learningObjective": "Practice layout iteration workflow for a Architect situation involving balancing beliefs and usability.",
+      "skillLevel": "intermediate",
+      "workflowId": "layout_iteration",
+      "skillTags": [
+        "client_negotiation",
+        "layout_iteration"
+      ],
+      "realWorldConstraints": [
+        "time",
+        "budget",
+        "safety"
+      ],
+      "safetyGuardrails": [
+        "Do not ignore accessibility, fire safety, or structural constraints.",
+        "Document client changes and budget trade-offs.",
+        "Balance creativity with usability and compliance."
+      ],
+      "practicalTakeaway": "Use the layout iteration workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Design simulation: accessibility, fire safety, usability, and compliance constraints must not be ignored. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Design Mentor says: At intermediate level, show your evidence, explain the trade-off, and follow the layout iteration workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "architect_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.architect.chapter.2.title",
+      "analyticsTags": [
+        "architect",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "safety",
+          "engineering"
+        ],
+        "guardrails": [
+          "Do not ignore accessibility, fire safety, or structural constraints.",
+          "Document client changes and budget trade-offs.",
+          "Balance creativity with usability and compliance."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "architect_space"
+      ]
+    },
+    {
+      "id": "architect_budget_balcony_battle",
+      "title": "Budget Balcony Battle",
+      "difficulty": "Hard",
+      "theme": "Budget control and material selection",
+      "story": "Client wants premium marble, imported lights, huge balcony, and low budget. Calculator starts crying silently.",
+      "task": "Guide the client toward realistic design choices.",
+      "choices": [
+        {
+          "text": "Promise premium design within impossible budget",
+          "outcome": {
+            "title": "Quotation Explosion Ending",
+            "description": "The estimate arrives like a plot twist. Client asks whether the balcony includes an airport.",
+            "moralLesson": "Budget honesty prevents painful surprises.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Budget honesty prevents painful surprises."
+            },
+            "analyticsTags": [
+              "architect",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "discipline": -3,
+            "communication": -2,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Prioritize must-haves, suggest alternates, and phase optional upgrades",
+          "outcome": {
+            "title": "Smart Budget Ending",
+            "description": "The design remains beautiful, realistic, and buildable without selling the family scooter.",
+            "moralLesson": "Constraints can improve design clarity.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Constraints can improve design clarity."
+            },
+            "analyticsTags": [
+              "architect",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "communication": 4,
+            "ethics": 2
+          }
+        },
+        {
+          "text": "Remove balcony without discussion",
+          "outcome": {
+            "title": "Window Regret Ending",
+            "description": "Client asks where morning tea should happen. You point to a window. Silence follows.",
+            "moralLesson": "Design decisions need client alignment.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Design decisions need client alignment."
+            },
+            "analyticsTags": [
+              "architect",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "communication": -2,
+            "chaos": 2
+          }
+        }
+      ],
+      "learningObjective": "Practice design sign-off workflow for a Architect situation involving budget control and material selection.",
+      "skillLevel": "advanced",
+      "workflowId": "design_signoff",
+      "skillTags": [
+        "compliance_awareness",
+        "design_signoff"
+      ],
+      "realWorldConstraints": [
+        "ethics",
+        "documentation",
+        "client_pressure"
+      ],
+      "safetyGuardrails": [
+        "Do not ignore accessibility, fire safety, or structural constraints.",
+        "Document client changes and budget trade-offs.",
+        "Balance creativity with usability and compliance."
+      ],
+      "practicalTakeaway": "Use the design sign-off workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Design simulation: accessibility, fire safety, usability, and compliance constraints must not be ignored. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Design Mentor says: At advanced level, show your evidence, explain the trade-off, and follow the design sign-off workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "architect_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.architect.chapter.3.title",
+      "analyticsTags": [
+        "architect",
+        "hard"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "safety",
+          "engineering"
+        ],
+        "guardrails": [
+          "Do not ignore accessibility, fire safety, or structural constraints.",
+          "Document client changes and budget trade-offs.",
+          "Balance creativity with usability and compliance."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "architect_budget"
+      ]
+    }
+  ],
+  "contentPackId": "core_roles_v23",
+  "contentVersion": "23.0.0",
+  "assetPackId": "base_visuals_v23",
+  "assetVersion": "23.0.0",
+  "localizationKey": "role.architect.title",
+  "rolePluginId": "architect_core",
+  "contentTier": "free",
+  "supportsOfflineCache": true
+}

@@ -1,0 +1,9 @@
+phase: 34
+backend_js_files: 5
+backend_json_files: 41
+flutter_dart_files: 170
+flutter_test_files: 32
+docs_files: 48
+monetization_product_count: 5
+phase34_backend_endpoints: 11
+phase34_feature_flags: ['monetization_system']

@@ -1,0 +1,477 @@
+{
+  "role": {
+    "id": "project_manager",
+    "name": "Project Manager",
+    "description": "Control scope, communication, expectations, and team pressure.",
+    "iconKey": "project",
+    "pluginId": "project_manager_core",
+    "contentPackId": "core_roles_v23",
+    "contentVersion": "23.0.0",
+    "contentTier": "free"
+  },
+  "chapters": [
+    {
+      "id": "project_manager_small_change_sir",
+      "title": "Small Change Sir",
+      "difficulty": "Medium to Hard",
+      "theme": "Scope creep and communication",
+      "story": "Client says, \u201cSmall change hai.\u201d Actual change: new login, new dashboard, reports, payment gateway, WhatsApp, AI chatbot, and probably moon landing.",
+      "task": "Manage the change request.",
+      "choices": [
+        {
+          "text": "Say yes immediately",
+          "outcome": {
+            "title": "Infinite Sprint Ending",
+            "description": "Developer starts living under desk. QA creates a bug called \u201cProject has no ending.\u201d",
+            "moralLesson": "Uncontrolled scope destroys delivery.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Uncontrolled scope destroys delivery."
+            },
+            "analyticsTags": [
+              "project_manager",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "discipline": -3,
+            "communication": -2,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Prepare impact analysis, timeline, cost, and approval note",
+          "outcome": {
+            "title": "Scope Shield Ending",
+            "description": "Client understands impact. Team gets realistic timeline. Nobody needs emotional support samosa today.",
+            "moralLesson": "A PM protects both client expectations and team capacity.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "A PM protects both client expectations and team capacity."
+            },
+            "analyticsTags": [
+              "project_manager",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 3,
+            "discipline": 4,
+            "communication": 4,
+            "ethics": 2
+          }
+        },
+        {
+          "text": "Blame developer for delay",
+          "outcome": {
+            "title": "Trust Broken Ending",
+            "description": "Team morale drops. Developer updates resume during standup.",
+            "moralLesson": "Leadership means ownership, not blame shifting.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Leadership means ownership, not blame shifting."
+            },
+            "analyticsTags": [
+              "project_manager",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "ethics": -3,
+            "communication": -3,
+            "chaos": 3
+          }
+        }
+      ],
+      "miniGame": {
+        "id": "pm_scope_decision_matrix",
+        "type": "decision_matrix",
+        "title": "Scope Change Decision Matrix",
+        "instructions": "Select the responsible decisions for handling a surprise scope change.",
+        "prompt": "Client says 'small change sir' but the change touches budget, timeline, and three teams.",
+        "hint": "Good PM decisions protect scope, budget, timeline, and communication.",
+        "options": [
+          {
+            "id": "impact_analysis",
+            "text": "Prepare impact analysis for timeline and cost",
+            "helperText": "Know the effect before committing."
+          },
+          {
+            "id": "change_request",
+            "text": "Raise a formal change request for approval",
+            "helperText": "Keeps scope controlled."
+          },
+          {
+            "id": "silent_yes",
+            "text": "Say yes silently and hope the team forgives you",
+            "helperText": "Team morale has left the chat."
+          },
+          {
+            "id": "stakeholder_update",
+            "text": "Communicate revised plan to stakeholders",
+            "helperText": "Avoid surprise chaos later."
+          }
+        ],
+        "correctOptionIds": [
+          "impact_analysis",
+          "change_request",
+          "stakeholder_update"
+        ],
+        "successScoreImpact": {
+          "skill": 3,
+          "discipline": 3,
+          "ethics": 2,
+          "communication": 3,
+          "chaos": 0
+        },
+        "failureScoreImpact": {
+          "skill": 0,
+          "discipline": -1,
+          "ethics": 0,
+          "communication": -1,
+          "chaos": 5
+        },
+        "successMessage": "Scope controlled. The project plan smiled for the first time this sprint.",
+        "failureMessage": "Scope exploded. The Gantt chart has started writing its resignation letter.",
+        "skillTags": [
+          "scope_control",
+          "scope_triage"
+        ],
+        "skillLevel": "beginner",
+        "workflowId": "scope_triage",
+        "skillNodeIds": [
+          "pm_scope"
+        ]
+      },
+      "learningObjective": "Practice scope triage workflow for a Project Manager situation involving scope creep and communication.",
+      "skillLevel": "beginner",
+      "workflowId": "scope_triage",
+      "skillTags": [
+        "scope_control",
+        "scope_triage"
+      ],
+      "realWorldConstraints": [
+        "client_pressure",
+        "budget",
+        "time"
+      ],
+      "safetyGuardrails": [
+        "Do not hide risk to protect status color.",
+        "Escalate blockers early with options.",
+        "Balance scope, time, cost, quality, and people."
+      ],
+      "practicalTakeaway": "Use the scope triage workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Delivery simulation: do not hide risk; document scope/time/budget trade-offs and escalate blockers early. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Delivery Mentor says: At beginner level, show your evidence, explain the trade-off, and follow the scope triage workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "project_manager_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.project_manager.chapter.1.title",
+      "analyticsTags": [
+        "project_manager",
+        "medium to hard"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Do not hide risk to protect status color.",
+          "Escalate blockers early with options.",
+          "Balance scope, time, cost, quality, and people."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "pm_scope"
+      ]
+    },
+    {
+      "id": "project_manager_standup_storm",
+      "title": "Standup Storm",
+      "difficulty": "Medium",
+      "theme": "Team communication and blockers",
+      "story": "Daily standup begins. Developer says \u201calmost done,\u201d QA says \u201cblocked,\u201d client says \u201curgent,\u201d and the meeting is already 45 minutes old.",
+      "task": "Run the standup effectively.",
+      "choices": [
+        {
+          "text": "Let everyone discuss every detail live",
+          "outcome": {
+            "title": "Meeting Marathon Ending",
+            "description": "Standup becomes sit-down. Team productivity leaves quietly through the back door.",
+            "moralLesson": "Standups should surface blockers, not solve every problem live.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Standups should surface blockers, not solve every problem live."
+            },
+            "analyticsTags": [
+              "project_manager",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "discipline": -2,
+            "communication": -1,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Capture blockers, assign owners, park deep discussions, and confirm next steps",
+          "outcome": {
+            "title": "Focused PM Ending",
+            "description": "The meeting ends on time, blockers have owners, and nobody has to fake network issues.",
+            "moralLesson": "Good meetings create clarity and action.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Good meetings create clarity and action."
+            },
+            "analyticsTags": [
+              "project_manager",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 3,
+            "discipline": 4,
+            "communication": 4,
+            "chaos": -1
+          }
+        },
+        {
+          "text": "Cancel standup forever",
+          "outcome": {
+            "title": "Mystery Sprint Ending",
+            "description": "Nobody knows status until delivery day. Delivery day files a missing person report.",
+            "moralLesson": "Process should be improved, not abandoned blindly.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Process should be improved, not abandoned blindly."
+            },
+            "analyticsTags": [
+              "project_manager",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "discipline": -2,
+            "communication": -3,
+            "chaos": 4
+          }
+        }
+      ],
+      "learningObjective": "Practice risk register workflow for a Project Manager situation involving team communication and blockers.",
+      "skillLevel": "intermediate",
+      "workflowId": "risk_register",
+      "skillTags": [
+        "risk_management",
+        "risk_register"
+      ],
+      "realWorldConstraints": [
+        "documentation",
+        "time",
+        "client_pressure"
+      ],
+      "safetyGuardrails": [
+        "Do not hide risk to protect status color.",
+        "Escalate blockers early with options.",
+        "Balance scope, time, cost, quality, and people."
+      ],
+      "practicalTakeaway": "Use the risk register workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Delivery simulation: do not hide risk; document scope/time/budget trade-offs and escalate blockers early. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Delivery Mentor says: At intermediate level, show your evidence, explain the trade-off, and follow the risk register workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "project_manager_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.project_manager.chapter.2.title",
+      "analyticsTags": [
+        "project_manager",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Do not hide risk to protect status color.",
+          "Escalate blockers early with options.",
+          "Balance scope, time, cost, quality, and people."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "pm_risk"
+      ]
+    },
+    {
+      "id": "project_manager_demo_day_disaster",
+      "title": "Demo Day Disaster",
+      "difficulty": "Hard",
+      "theme": "Stakeholder management and readiness",
+      "story": "Demo is in one hour. Build is ready, but nobody has checked test data, permissions, or the projector. Classic suspense.",
+      "task": "Prepare for a reliable demo.",
+      "choices": [
+        {
+          "text": "Trust that everything will work",
+          "outcome": {
+            "title": "Live Demo Ghost Ending",
+            "description": "Login fails, test data is empty, and the projector shows only your desktop wallpaper.",
+            "moralLesson": "Demo readiness must be verified, not hoped for.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Demo readiness must be verified, not hoped for."
+            },
+            "analyticsTags": [
+              "project_manager",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "discipline": -3,
+            "communication": -2,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Run a dry test, verify data, roles, flow, fallback, and speaking points",
+          "outcome": {
+            "title": "Confident Demo Ending",
+            "description": "The demo runs smoothly, questions are handled, and the team gets actual appreciation.",
+            "moralLesson": "Preparation converts pressure into confidence.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Preparation converts pressure into confidence."
+            },
+            "analyticsTags": [
+              "project_manager",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "communication": 4,
+            "chaos": -2
+          }
+        },
+        {
+          "text": "Ask developer to demo without context",
+          "outcome": {
+            "title": "Developer Poetry Ending",
+            "description": "Developer explains database indexes while client asks where the button is.",
+            "moralLesson": "Stakeholder demos need audience-focused communication.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Use evidence, documentation, and escalation when the risk is bigger than your authority.",
+              "practicalTakeaway": "Stakeholder demos need audience-focused communication."
+            },
+            "analyticsTags": [
+              "project_manager",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "communication": -3,
+            "chaos": 3
+          }
+        }
+      ],
+      "learningObjective": "Practice delivery replan workflow for a Project Manager situation involving stakeholder management and readiness.",
+      "skillLevel": "advanced",
+      "workflowId": "delivery_replan",
+      "skillTags": [
+        "stakeholder_alignment",
+        "delivery_replan"
+      ],
+      "realWorldConstraints": [
+        "budget",
+        "team_trust",
+        "client_pressure"
+      ],
+      "safetyGuardrails": [
+        "Do not hide risk to protect status color.",
+        "Escalate blockers early with options.",
+        "Balance scope, time, cost, quality, and people."
+      ],
+      "practicalTakeaway": "Use the delivery replan workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Delivery simulation: do not hide risk; document scope/time/budget trade-offs and escalate blockers early. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Delivery Mentor says: At advanced level, show your evidence, explain the trade-off, and follow the delivery replan workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "project_manager_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.project_manager.chapter.3.title",
+      "analyticsTags": [
+        "project_manager",
+        "hard"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Do not hide risk to protect status color.",
+          "Escalate blockers early with options.",
+          "Balance scope, time, cost, quality, and people."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "pm_resource"
+      ]
+    }
+  ],
+  "contentPackId": "core_roles_v23",
+  "contentVersion": "23.0.0",
+  "assetPackId": "base_visuals_v23",
+  "assetVersion": "23.0.0",
+  "localizationKey": "role.project_manager.title",
+  "rolePluginId": "project_manager_core",
+  "contentTier": "free",
+  "supportsOfflineCache": true
+}

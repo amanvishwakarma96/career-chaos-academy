@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "fetchedAt": "",
+  "values": {
+    "minimumSupportedContentVersion": "23.0.0",
+    "defaultContentPackId": "core_roles_v23",
+    "defaultAssetPackId": "base_visuals_v23",
+    "offlineCacheStaleAfterDays": 30,
+    "enableRemoteContentPacks": false,
+    "enableRemoteAssetPacks": false,
+    "enablePremiumContent": false,
+    "enableMultiplayer": false
+  }
+}

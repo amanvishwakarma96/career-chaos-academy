@@ -1,0 +1,11 @@
+{
+  "app.title": "Career Chaos Academy",
+  "home.activityHub": "Activity Hub",
+  "home.flameMiniGames": "Flame Mini-games",
+  "home.aiMentor": "AI Mentor",
+  "home.achievements": "Achievements",
+  "future.featureFlags": "Feature Flags",
+  "future.offlineCache": "Offline Content Cache",
+  "future.premiumPlaceholder": "Premium content is planned but disabled in this build.",
+  "future.multiplayerPlaceholder": "Multiplayer architecture is ready for a future phase."
+}

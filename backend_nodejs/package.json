@@ -1,0 +1,17 @@
+{
+  "name": "career-chaos-academy-backend-nodejs",
+  "version": "1.0.0",
+  "description": "Node.js backend API and web admin panel for Career Chaos Academy.",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node --check src/config.js && node --check src/security.js && node --check src/server.js && node --check src/dataStore.js && node --check src/validation.js && node --check src/smoke-test.js",
+    "test:smoke": "node src/smoke-test.js",
+    "test": "npm run test:smoke"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

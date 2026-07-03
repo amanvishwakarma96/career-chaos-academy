@@ -1,0 +1,752 @@
+{
+  "version": 1,
+  "rounds": [
+    "technical",
+    "behavioral",
+    "situation"
+  ],
+  "rubric": {
+    "clarity": "Answer is structured and easy to follow.",
+    "roleKnowledge": "Uses role-specific skills, tools, or professional process.",
+    "evidence": "Mentions facts, verification, constraints, or documentation.",
+    "communication": "Handles stakeholders clearly and respectfully.",
+    "ethics": "Avoids unsafe shortcuts and protects users, clients, patients, teams, or data."
+  },
+  "questions": [
+    {
+      "id": "developer_technical_round_1",
+      "roleId": "developer",
+      "roleName": "Developer",
+      "roundType": "technical",
+      "difficulty": "intermediate",
+      "prompt": "A production login bug appears after a small UI change. Walk through your safest debugging and release plan.",
+      "skillTags": [
+        "code review",
+        "debugging",
+        "testing",
+        "deployment"
+      ],
+      "expectedKeywords": [
+        "logs",
+        "reproduce",
+        "branch",
+        "test",
+        "review",
+        "rollback",
+        "deploy",
+        "monitor"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply developer best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "developer_behavioral_round_1",
+      "roleId": "developer",
+      "roleName": "Developer",
+      "roundType": "behavioral",
+      "difficulty": "beginner",
+      "prompt": "Tell me about a time you received code review feedback that changed your approach.",
+      "skillTags": [
+        "code review",
+        "debugging",
+        "testing",
+        "deployment"
+      ],
+      "expectedKeywords": [
+        "feedback",
+        "learned",
+        "review",
+        "communication",
+        "ownership",
+        "improved"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply developer best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "developer_situation_round_1",
+      "roleId": "developer",
+      "roleName": "Developer",
+      "roundType": "situation",
+      "difficulty": "intermediate",
+      "prompt": "The client asks you to bypass QA to meet a demo deadline. What do you do?",
+      "skillTags": [
+        "code review",
+        "debugging",
+        "testing",
+        "deployment"
+      ],
+      "expectedKeywords": [
+        "risk",
+        "qa",
+        "communicate",
+        "evidence",
+        "alternative",
+        "rollback",
+        "ethics"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply developer best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "qa_tester_technical_round_1",
+      "roleId": "qa_tester",
+      "roleName": "QA Tester",
+      "roundType": "technical",
+      "difficulty": "intermediate",
+      "prompt": "How would you design a regression test plan for a critical payment flow?",
+      "skillTags": [
+        "test planning",
+        "defect triage",
+        "automation",
+        "release risk"
+      ],
+      "expectedKeywords": [
+        "risk",
+        "test cases",
+        "regression",
+        "automation",
+        "edge",
+        "data",
+        "priority"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply qa tester best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "qa_tester_behavioral_round_1",
+      "roleId": "qa_tester",
+      "roleName": "QA Tester",
+      "roundType": "behavioral",
+      "difficulty": "beginner",
+      "prompt": "Describe a time you had to convince a developer that a defect was important.",
+      "skillTags": [
+        "test planning",
+        "defect triage",
+        "automation",
+        "release risk"
+      ],
+      "expectedKeywords": [
+        "evidence",
+        "logs",
+        "steps",
+        "impact",
+        "collaboration",
+        "priority"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply qa tester best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "qa_tester_situation_round_1",
+      "roleId": "qa_tester",
+      "roleName": "QA Tester",
+      "roundType": "situation",
+      "difficulty": "intermediate",
+      "prompt": "Release is today and your smoke test fails only on one device. What is your action plan?",
+      "skillTags": [
+        "test planning",
+        "defect triage",
+        "automation",
+        "release risk"
+      ],
+      "expectedKeywords": [
+        "blocker",
+        "severity",
+        "reproduce",
+        "device",
+        "stakeholder",
+        "risk",
+        "decision"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply qa tester best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "project_manager_technical_round_1",
+      "roleId": "project_manager",
+      "roleName": "Project Manager",
+      "roundType": "technical",
+      "difficulty": "intermediate",
+      "prompt": "A sprint is 40% complete but a critical dependency is delayed. How do you re-plan?",
+      "skillTags": [
+        "planning",
+        "stakeholder communication",
+        "risk",
+        "scope"
+      ],
+      "expectedKeywords": [
+        "dependency",
+        "risk",
+        "timeline",
+        "scope",
+        "stakeholder",
+        "priority",
+        "mitigation"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply project manager best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "project_manager_behavioral_round_1",
+      "roleId": "project_manager",
+      "roleName": "Project Manager",
+      "roundType": "behavioral",
+      "difficulty": "beginner",
+      "prompt": "Share an example of handling conflict between client expectations and team capacity.",
+      "skillTags": [
+        "planning",
+        "stakeholder communication",
+        "risk",
+        "scope"
+      ],
+      "expectedKeywords": [
+        "expectation",
+        "capacity",
+        "transparent",
+        "trade-off",
+        "agreement",
+        "follow-up"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply project manager best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "project_manager_situation_round_1",
+      "roleId": "project_manager",
+      "roleName": "Project Manager",
+      "roundType": "situation",
+      "difficulty": "intermediate",
+      "prompt": "Two teams blame each other for a missed milestone. How do you recover momentum?",
+      "skillTags": [
+        "planning",
+        "stakeholder communication",
+        "risk",
+        "scope"
+      ],
+      "expectedKeywords": [
+        "facts",
+        "timeline",
+        "owner",
+        "action plan",
+        "communication",
+        "retrospective"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply project manager best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "hr_executive_technical_round_1",
+      "roleId": "hr_executive",
+      "roleName": "HR Executive",
+      "roundType": "technical",
+      "difficulty": "intermediate",
+      "prompt": "How would you structure a fair interview process for a junior technical role?",
+      "skillTags": [
+        "recruitment",
+        "policy",
+        "conflict handling",
+        "compliance"
+      ],
+      "expectedKeywords": [
+        "rubric",
+        "criteria",
+        "bias",
+        "questions",
+        "documentation",
+        "feedback",
+        "fairness"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply hr executive best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "hr_executive_behavioral_round_1",
+      "roleId": "hr_executive",
+      "roleName": "HR Executive",
+      "roundType": "behavioral",
+      "difficulty": "beginner",
+      "prompt": "Tell me about a difficult employee conversation and how you handled confidentiality.",
+      "skillTags": [
+        "recruitment",
+        "policy",
+        "conflict handling",
+        "compliance"
+      ],
+      "expectedKeywords": [
+        "confidential",
+        "empathy",
+        "policy",
+        "document",
+        "follow-up",
+        "neutral"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply hr executive best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "hr_executive_situation_round_1",
+      "roleId": "hr_executive",
+      "roleName": "HR Executive",
+      "roundType": "situation",
+      "difficulty": "intermediate",
+      "prompt": "A manager asks you to reject a candidate for a non-job-related reason. What do you do?",
+      "skillTags": [
+        "recruitment",
+        "policy",
+        "conflict handling",
+        "compliance"
+      ],
+      "expectedKeywords": [
+        "bias",
+        "policy",
+        "legal",
+        "fair",
+        "escalate",
+        "documentation",
+        "ethics"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply hr executive best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "doctor_technical_round_1",
+      "roleId": "doctor",
+      "roleName": "Doctor",
+      "roundType": "technical",
+      "difficulty": "intermediate",
+      "prompt": "How do you prioritize multiple patients arriving with different symptoms?",
+      "skillTags": [
+        "triage",
+        "patient communication",
+        "ethics",
+        "documentation"
+      ],
+      "expectedKeywords": [
+        "triage",
+        "severity",
+        "vitals",
+        "history",
+        "protocol",
+        "document",
+        "escalate"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply doctor best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "doctor_behavioral_round_1",
+      "roleId": "doctor",
+      "roleName": "Doctor",
+      "roundType": "behavioral",
+      "difficulty": "beginner",
+      "prompt": "Describe a time you explained a complex concern to a worried patient or family.",
+      "skillTags": [
+        "triage",
+        "patient communication",
+        "ethics",
+        "documentation"
+      ],
+      "expectedKeywords": [
+        "empathy",
+        "clear",
+        "listen",
+        "confirm",
+        "safety",
+        "follow-up"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply doctor best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "doctor_situation_round_1",
+      "roleId": "doctor",
+      "roleName": "Doctor",
+      "roundType": "situation",
+      "difficulty": "intermediate",
+      "prompt": "A patient asks for advice outside your scope or without enough information. How do you respond safely?",
+      "skillTags": [
+        "triage",
+        "patient communication",
+        "ethics",
+        "documentation"
+      ],
+      "expectedKeywords": [
+        "scope",
+        "examine",
+        "refer",
+        "emergency",
+        "documentation",
+        "safety",
+        "ethics"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply doctor best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "civil_engineer_technical_round_1",
+      "roleId": "civil_engineer",
+      "roleName": "Civil Engineer",
+      "roundType": "technical",
+      "difficulty": "intermediate",
+      "prompt": "A concrete pour is scheduled but material test results are incomplete. What checks do you perform?",
+      "skillTags": [
+        "site safety",
+        "quality checks",
+        "drawings",
+        "materials"
+      ],
+      "expectedKeywords": [
+        "test",
+        "specification",
+        "quality",
+        "safety",
+        "hold",
+        "approval",
+        "documentation"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply civil engineer best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "civil_engineer_behavioral_round_1",
+      "roleId": "civil_engineer",
+      "roleName": "Civil Engineer",
+      "roundType": "behavioral",
+      "difficulty": "beginner",
+      "prompt": "Tell me about a time you pushed back on unsafe site pressure.",
+      "skillTags": [
+        "site safety",
+        "quality checks",
+        "drawings",
+        "materials"
+      ],
+      "expectedKeywords": [
+        "safety",
+        "evidence",
+        "supervisor",
+        "stop work",
+        "communicate",
+        "record"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply civil engineer best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "civil_engineer_situation_round_1",
+      "roleId": "civil_engineer",
+      "roleName": "Civil Engineer",
+      "roundType": "situation",
+      "difficulty": "intermediate",
+      "prompt": "A contractor wants to continue work despite a drawing mismatch. What is your response?",
+      "skillTags": [
+        "site safety",
+        "quality checks",
+        "drawings",
+        "materials"
+      ],
+      "expectedKeywords": [
+        "drawing",
+        "rfi",
+        "approval",
+        "hold",
+        "risk",
+        "stakeholder",
+        "record"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply civil engineer best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "architect_technical_round_1",
+      "roleId": "architect",
+      "roleName": "Architect",
+      "roundType": "technical",
+      "difficulty": "intermediate",
+      "prompt": "How do you validate that a client-requested layout change still meets code and usability requirements?",
+      "skillTags": [
+        "client requirements",
+        "layouts",
+        "code compliance",
+        "design decisions"
+      ],
+      "expectedKeywords": [
+        "code",
+        "accessibility",
+        "client",
+        "constraints",
+        "review",
+        "documentation",
+        "iteration"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply architect best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "architect_behavioral_round_1",
+      "roleId": "architect",
+      "roleName": "Architect",
+      "roundType": "behavioral",
+      "difficulty": "beginner",
+      "prompt": "Describe a time you balanced aesthetics with budget or constructability.",
+      "skillTags": [
+        "client requirements",
+        "layouts",
+        "code compliance",
+        "design decisions"
+      ],
+      "expectedKeywords": [
+        "budget",
+        "trade-off",
+        "client",
+        "constructability",
+        "option",
+        "decision"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply architect best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "architect_situation_round_1",
+      "roleId": "architect",
+      "roleName": "Architect",
+      "roundType": "situation",
+      "difficulty": "intermediate",
+      "prompt": "The client loves a design option that violates a compliance constraint. What do you do?",
+      "skillTags": [
+        "client requirements",
+        "layouts",
+        "code compliance",
+        "design decisions"
+      ],
+      "expectedKeywords": [
+        "compliance",
+        "explain",
+        "alternative",
+        "document",
+        "ethics",
+        "approval"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply architect best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "back_office_executive_technical_round_1",
+      "roleId": "back_office_executive",
+      "roleName": "Back Office Executive",
+      "roundType": "technical",
+      "difficulty": "intermediate",
+      "prompt": "How would you process a high-volume data update while avoiding duplicate or wrong entries?",
+      "skillTags": [
+        "data accuracy",
+        "documentation",
+        "SLA",
+        "escalation"
+      ],
+      "expectedKeywords": [
+        "validation",
+        "dedup",
+        "audit",
+        "sample",
+        "backup",
+        "accuracy",
+        "sla"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply back office executive best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "back_office_executive_behavioral_round_1",
+      "roleId": "back_office_executive",
+      "roleName": "Back Office Executive",
+      "roundType": "behavioral",
+      "difficulty": "beginner",
+      "prompt": "Tell me about a time you found a data mismatch before it reached the client.",
+      "skillTags": [
+        "data accuracy",
+        "documentation",
+        "SLA",
+        "escalation"
+      ],
+      "expectedKeywords": [
+        "detail",
+        "verify",
+        "escalate",
+        "correct",
+        "ownership",
+        "prevent"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply back office executive best practices, communicate trade-offs, and document the decision before follow-up."
+    },
+    {
+      "id": "back_office_executive_situation_round_1",
+      "roleId": "back_office_executive",
+      "roleName": "Back Office Executive",
+      "roundType": "situation",
+      "difficulty": "intermediate",
+      "prompt": "A senior asks you to mark incomplete work as done to close an SLA. What do you do?",
+      "skillTags": [
+        "data accuracy",
+        "documentation",
+        "SLA",
+        "escalation"
+      ],
+      "expectedKeywords": [
+        "integrity",
+        "evidence",
+        "escalate",
+        "sla",
+        "truth",
+        "documentation",
+        "ethics"
+      ],
+      "rubric": {
+        "clarity": 20,
+        "roleKnowledge": 25,
+        "evidence": 20,
+        "communication": 15,
+        "ethics": 20
+      },
+      "sampleStrongAnswer": "I would first clarify the situation, gather evidence, apply back office executive best practices, communicate trade-offs, and document the decision before follow-up."
+    }
+  ]
+}

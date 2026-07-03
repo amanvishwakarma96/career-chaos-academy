@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Career Chaos Academy Admin</title>
+  <style>
+    :root { color-scheme: light dark; --brand: #982f61; --card: rgba(255,255,255,.86); --border: rgba(152,47,97,.22); }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: linear-gradient(135deg, #fff7fb, #f3edff); color: #20161d; }
+    header { padding: 24px; background: linear-gradient(135deg, #982f61, #5b1c72); color: white; }
+    main { max-width: 1180px; margin: 0 auto; padding: 24px; display: grid; gap: 18px; }
+    section { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 18px; box-shadow: 0 12px 32px rgba(70,30,70,.08); }
+    h1, h2, h3 { margin: 0 0 12px; }
+    label { display: block; font-weight: 700; margin: 10px 0 6px; }
+    input, textarea, select { width: 100%; padding: 11px 12px; border-radius: 12px; border: 1px solid #cdb9c7; font: inherit; }
+    textarea { min-height: 160px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    button { border: 0; border-radius: 999px; padding: 10px 16px; background: var(--brand); color: white; font-weight: 800; cursor: pointer; margin: 6px 6px 6px 0; }
+    button.secondary { background: #4f4750; }
+    button.danger { background: #a31621; }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .card { border: 1px solid var(--border); border-radius: 14px; padding: 14px; background: rgba(255,255,255,.7); }
+    .muted { color: #695c67; font-size: .93rem; }
+    pre { white-space: pre-wrap; overflow: auto; background: #211722; color: #f7eaff; padding: 14px; border-radius: 12px; }
+    .hidden { display: none; }
+    .pill { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #f1dcea; color: #732249; font-size: 12px; font-weight: 800; }
+    @media (prefers-color-scheme: dark) { body { background: #171116; color: #f7eaff; } .card, section { background: #241a22; } input, textarea, select { background: #140f13; color: #f7eaff; border-color: #5f495a; } .muted { color: #cdb9c7; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Career Chaos Academy Admin</h1>
+    <p>Manage roles, chapters, scenarios, mini-games, AI reviews, and publish state.</p>
+  </header>
+  <main>
+    <section id="loginSection">
+      <h2>Admin Login</h2>
+      <div class="grid">
+        <div><label>Username</label><input id="username" value="admin" /></div>
+        <div><label>Password</label><input id="password" type="password" value="ChangeMe@123" /></div>
+        <div><label>Admin Role</label><select id="adminRole"><option value="super_admin">Super Admin</option><option value="content_admin">Content Admin</option><option value="trainer_admin">Trainer Admin</option><option value="auditor">Auditor</option></select></div>
+      </div>
+      <button onclick="login()">Login</button>
+      <p class="muted">Change default credentials using environment variables before production.</p>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <h2>Dashboard</h2>
+      <button onclick="loadRoles()">Refresh Roles</button>
+      <button onclick="loadBadges()" class="secondary">Load Badges</button>
+      <button onclick="loadAuditLogs()" class="secondary">Audit Logs</button>
+      <button onclick="loadSecurityStatus()" class="secondary">Security Status</button>
+      <button onclick="loadAiReviews()" class="secondary">AI Reviews</button>
+      <button onclick="loadFutureConfig()" class="secondary">Future Config</button>
+      <button onclick="loadAdaptiveDrafts()" class="secondary">Adaptive Drafts</button>
+      <button onclick="logout()" class="danger">Logout</button>
+      <div id="status" class="muted"></div>
+    </section>
+
+    <section id="roleManager" class="hidden">
+      <h2>Role Management</h2>
+      <div class="grid">
+        <div><label>Role ID</label><input id="roleId" placeholder="developer" /></div>
+        <div><label>Role Name</label><input id="roleName" placeholder="Developer" /></div>
+        <div><label>Icon Key</label><input id="roleIcon" value="work" /></div>
+      </div>
+      <label>Description</label><input id="roleDescription" placeholder="Role description" />
+      <button onclick="saveRole()">Create / Update Role</button>
+      <div id="roles"></div>
+    </section>
+
+    <section id="chapterManager" class="hidden">
+      <h2>Chapter / Scenario Editor</h2>
+      <p class="muted">Create content as a full chapter JSON. It must pass validation before publishing.</p>
+      <div class="grid">
+        <div><label>Target Role ID</label><input id="chapterRoleId" placeholder="developer" /></div>
+        <div><label>Preview / Publish Chapter ID</label><input id="scenarioId" placeholder="developer_login_button_disaster" /></div>
+      </div>
+      <label>Chapter JSON</label>
+      <textarea id="chapterJson"></textarea>
+
+      <h3>Phase 14A/14B Cinematic Asset Fields</h3>
+      <p class="muted">Optional cinematic scenes are shown before mini-games and choices. Use AssetRegistry keys like <code>bg_office_morning</code> and <code>char_developer_worried</code>. Add <code>characterId</code> such as <code>developer_player</code>, <code>senior_dev_mentor</code>, or <code>panic_pm_pressure</code> to let the Flutter character engine choose emotion expressions. Direct asset paths and future remote URLs are supported as fallback.</p>
+      <div class="card muted"><strong>Available sample keys:</strong><br/>Backgrounds: bg_office_morning, bg_production_war_room, bg_clinic_waiting_room, bg_doctor_consult_room<br/>Characters: char_developer_worried, char_senior_serious, char_manager_panic, char_doctor_calm, char_patient_worried, char_nurse_serious</div>
+      <label>Scenes JSON</label>
+      <textarea id="scenesJson" placeholder='[{"id":"opening","backgroundImage":"bg_office_morning","characterId":"developer_player","transitionType":"fade","dialogues":[{"speaker":"You","characterId":"developer_player","emotion":"tense","text":"The room goes silent."}]}]'></textarea>
+      <button onclick="applyCinematicFields()" class="secondary">Apply Cinematic Scenes to JSON</button>
+
+      <h3>Phase 24 Adaptive Story Fields</h3>
+      <p class="muted">Adaptive fields are optional. Draft side missions must never auto-publish; they must go through admin review.</p>
+      <label>Adaptive Dialogue Injections JSON</label>
+      <textarea id="adaptiveDialogueJson" placeholder='[{"id":"mentor_shortcut_warning","speaker":"Mentor","text":"I see a shortcut pattern. Evidence first.","requiredBehaviorPatterns":["shortcut_prone"],"priority":100}]'></textarea>
+      <label>Adaptive Difficulty JSON</label>
+      <textarea id="adaptiveDifficultyJson" placeholder='{"baseLevel":"normal","easierLevel":"guided","harderLevel":"advanced","increaseWhenPatterns":["high_performer"],"decreaseWhenPatterns":["shortcut_prone","repeated_failures"]}'></textarea>
+      <div class="grid"><div><label>Allow Adaptive Side Missions?</label><select id="allowsAdaptiveSideMissions"><option value="false">No</option><option value="true">Yes</option></select></div></div>
+      <button onclick="applyAdaptiveFields()" class="secondary">Apply Adaptive Story Fields</button>
+
+      <h3>Phase 21 Audio Fields</h3>
+      <p class="muted">Use audio keys from the manifest. Audio is optional and must never block gameplay. Scene audio supports BGM/SFX; dialogue audio supports SFX, future voice clips, and subtitles.</p>
+      <div class="card muted"><strong>Sample audio keys:</strong><br/>BGM: bgm_office_light, bgm_clinic_calm, bgm_cinematic_tension<br/>SFX: notification_ping, choice_select, success_stinger, failure_stinger, badge_unlock, comedy_bonk<br/>Voice placeholder: voice_placeholder</div>
+      <div class="grid">
+        <div><label>Scene BGM Key</label><input id="sceneBgm" placeholder="bgm_office_light" /></div>
+        <div><label>Scene SFX Key</label><input id="sceneSfx" placeholder="notification_ping" /></div>
+        <div><label>Loop BGM?</label><select id="loopBgm"><option value="true">Yes</option><option value="false">No</option></select></div>
+        <div><label>Stop BGM?</label><select id="stopBgm"><option value="false">No</option><option value="true">Yes</option></select></div>
+        <div><label>Dialogue Voice Key</label><input id="dialogueVoice" placeholder="voice_placeholder" /></div>
+        <div><label>Dialogue Subtitle</label><input id="dialogueSubtitle" placeholder="Future voice subtitle / caption" /></div>
+      </div>
+      <button onclick="applyAudioFields()" class="secondary">Apply Audio Fields to First Scene</button>
+
+      <h3>Phase 13 Consequence Fields</h3>
+      <div class="grid">
+        <div><label>Prerequisites (comma separated chapter ids)</label><input id="prerequisites" placeholder="chapter_1,chapter_2" /></div>
+        <div><label>Required Flags / Consequence Flags</label><input id="consequenceFlags" placeholder="skipped_testing" /></div>
+        <div><label>Blocked By Flags</label><input id="blockedByFlags" placeholder="unsafe_medical_advice" /></div>
+        <div><label>Role Mechanic Type</label><input id="roleMechanicType" placeholder="rollback_planning" /></div>
+        <div><label>Cleanup Mission?</label><select id="isCleanupMission"><option value="false">No</option><option value="true">Yes</option></select></div>
+        <div><label>Finale?</label><select id="isFinale"><option value="false">No</option><option value="true">Yes</option></select></div>
+      </div>
+      <h3>Selected Outcome Consequence Helper</h3>
+      <p class="muted">These helper fields apply to the first choice outcome in the JSON editor. You can still edit the JSON manually for other choices.</p>
+      <div class="grid">
+        <div><label>Set Flags</label><input id="setFlags" placeholder="skipped_testing,privacy_risk" /></div>
+        <div><label>Clear Flags</label><input id="clearFlags" placeholder="skipped_testing" /></div>
+        <div><label>Unlock Cleanup Mission IDs</label><input id="unlockCleanupMissionIds" placeholder="developer_rollback_cleanup" /></div>
+        <div><label>Reputation Impact JSON</label><input id="reputationImpact" placeholder='{"trust":-1,"safety":0}' /></div>
+      </div>
+      <label>Consequence Summary</label><input id="consequenceSummary" placeholder="This decision creates a future regression risk." />
+      <label>Debrief JSON</label><textarea id="debriefJson" placeholder='{"whatWentWell":"...","whatWasMissed":"...","realWorldPrinciple":"..."}'></textarea>
+      <button onclick="applyConsequenceFields()" class="secondary">Apply Consequence Fields to JSON</button>
+
+
+      <h3>Phase 18 Professional Simulation Fields</h3>
+      <p class="muted">Use these fields to make chapters educational, realistic, and safe while keeping humor aligned to professional learning.</p>
+      <div class="grid">
+        <div><label>Learning Objective</label><input id="learningObjective" placeholder="Practice safe escalation under time pressure" /></div>
+        <div><label>Skill Level</label><select id="skillLevel"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></div>
+        <div><label>Workflow ID</label><input id="workflowId" placeholder="bug_triage" /></div>
+        <div><label>Skill Tags</label><input id="skillTags" placeholder="debugging,release_safety" /></div>
+        <div><label>Real-world Constraints</label><input id="realWorldConstraints" placeholder="time,budget,safety,ethics,client_pressure,documentation" /></div>
+        <div><label>Safety Guardrails</label><input id="safetyGuardrails" placeholder="No diagnosis,Escalate red flags" /></div>
+      </div>
+      <label>Safe Explanation</label><input id="safeExplanation" placeholder="This is educational and does not replace qualified professional review." />
+      <label>Practical Takeaway</label><input id="practicalTakeaway" placeholder="Document evidence before escalation." />
+      <label>Mentor Feedback</label><input id="mentorFeedback" placeholder="Mentor says: show evidence and explain the trade-off." />
+      <button onclick="applyProfessionalFields()" class="secondary">Apply Professional Simulation Fields to JSON</button>
+
+      <h3>Phase 17 Branching Narrative Fields</h3>
+      <p class="muted">Use story flags for narrative continuity and relationship scores for mentor/client/team/public trust. Dialogue lines may include <code>requiredStoryFlags</code> or <code>blockedByStoryFlags</code>.</p>
+      <div class="grid">
+        <div><label>Required Story Flags</label><input id="requiredStoryFlags" placeholder="mentor_warned_after_shortcut" /></div>
+        <div><label>Blocked By Story Flags</label><input id="blockedByStoryFlags" placeholder="documented_before_fix" /></div>
+        <div><label>Required Relationship Minimums JSON</label><input id="requiredRelationshipMinimums" placeholder='{"mentorTrust":2,"clientTrust":0}' /></div>
+      </div>
+      <label>Chapter Story Flags JSON</label><textarea id="storyFlagsJson" placeholder='[{"id":"mentor_warned_after_shortcut","label":"Mentor warned","description":"Senior remembers the risky shortcut.","category":"mentor","isPositive":false}]'></textarea>
+      <label>Ending Rules JSON</label><textarea id="endingRulesJson" placeholder='[{"id":"expert","title":"Role Expert","requiredStoryFlags":["documented_before_fix"],"priority":100}]'></textarea>
+      <h3>Selected Outcome Story Continuity Helper</h3>
+      <div class="grid">
+        <div><label>Set Story Flags</label><input id="setStoryFlags" placeholder="mentor_warned_after_shortcut" /></div>
+        <div><label>Clear Story Flags</label><input id="clearStoryFlags" placeholder="client_trust_shaken" /></div>
+        <div><label>Relationship Impact JSON</label><input id="relationshipImpact" placeholder='{"mentorTrust":-2,"clientTrust":-1}' /></div>
+      </div>
+      <label>Delayed Consequence Messages</label><input id="delayedConsequenceMessages" placeholder="Senior Dev will remember this in the next chapter." />
+      <button onclick="applyBranchingFields()" class="secondary">Apply Branching Fields to JSON</button>
+
+
+      <h3>Phase 23 Future Scope Architecture Fields</h3>
+      <p class="muted">Use these optional fields for content versioning, asset pack tracking, safety review, localization, premium placeholders, and future multiplayer support.</p>
+      <div class="grid">
+        <div><label>Content Version</label><input id="contentVersion" value="23.0.0" /></div>
+        <div><label>Content Pack ID</label><input id="contentPackId" value="core_roles_v23" /></div>
+        <div><label>Asset Version</label><input id="assetVersion" value="23.0.0" /></div>
+        <div><label>Asset Pack ID</label><input id="assetPackId" value="base_visuals_v23" /></div>
+        <div><label>Role Plugin ID</label><input id="rolePluginId" placeholder="developer_core" /></div>
+        <div><label>Localization Key</label><input id="localizationKey" placeholder="role.developer.chapter.1.title" /></div>
+        <div><label>Content Tier</label><select id="contentTier"><option value="free">Free</option><option value="premium">Premium Placeholder</option><option value="creator_only">Creator Only</option></select></div>
+        <div><label>Supports Offline Cache?</label><select id="supportsOfflineCache"><option value="true">Yes</option><option value="false">No</option></select></div>
+      </div>
+      <label>Safety Review JSON</label><textarea id="safetyReviewJson" placeholder='{"status":"approved","domains":["professional_learning"],"guardrails":[],"notes":"Reviewed for safe educational framing."}'></textarea>
+      <label>Analytics Tags</label><input id="analyticsTags" placeholder="developer,beginner,ethics" />
+      <label>Multiplayer Placeholder JSON</label><textarea id="multiplayerJson" placeholder='{"mode":"solo","enabled":false,"roomId":"","participantIds":[]}'></textarea>
+      <button onclick="applyFutureScopeFields()" class="secondary">Apply Future Scope Fields to JSON</button>
+
+      <button onclick="validateEditorJson()" class="secondary">Validate Draft</button>
+
+      <button onclick="saveChapter()">Save Draft Chapter</button>
+      <button onclick="previewScenario()" class="secondary">Preview</button>
+      <button onclick="publishScenario()">Publish</button>
+      <button onclick="unpublishScenario()" class="danger">Unpublish</button>
+    </section>
+
+    <section id="aiReview" class="hidden">
+      <h2>AI Content Review</h2>
+      <label>Generated Scenario JSON</label>
+      <textarea id="aiJson" placeholder='{"title":"..."}'></textarea>
+      <button onclick="submitAiReview()">Submit for Review</button>
+      <div id="aiReviews"></div>
+    </section>
+
+
+
+    <section id="securityScale" class="hidden">
+      <h2>Production Security & Scale</h2>
+      <p class="muted">Phase 35 controls: RBAC, request validation, rate limiting, audit logs, moderation, prompt-abuse protection, backup/restore, crash monitoring, privacy retention, and deployment checklist.</p>
+      <div class="grid">
+        <div class="card"><strong>Request Validation</strong><p>Invalid JSON, oversized request bodies, and malformed write requests are rejected by the API.</p></div>
+        <div class="card"><strong>RBAC</strong><p>Admin endpoints require a role permission before the handler runs.</p></div>
+        <div class="card"><strong>Privacy</strong><p>Audit, monitoring, and analytics outputs redact tokens, passwords, email, phone, OTP, and secret-like fields.</p></div>
+      </div>
+      <label>Moderation Title</label><input id="moderationTitle" value="AI generated developer scenario" />
+      <label>Moderation Content JSON</label><textarea id="moderationContent">{"prompt":"Create a safe developer rollback scenario","contentType":"scenario"}</textarea>
+      <button onclick="loadSecurityStatus()">Security Status</button>
+      <button onclick="submitModerationItem()">Submit Moderation Item</button>
+      <button onclick="loadModerationQueue()">Moderation Queue</button>
+      <button onclick="inspectPromptAbuse()">Inspect Prompt</button>
+      <button onclick="createBackup()">Create Backup</button>
+      <button onclick="loadBackups()">Backup Strategy</button>
+      <button onclick="loadErrorEvents()">Crash/Error Events</button>
+      <button onclick="loadRetentionRules()">Retention Rules</button>
+      <pre id="securityOutput">Security output appears here.</pre>
+    </section>
+
+    <section id="outputSection" class="hidden">
+      <h2>Output</h2>
+      <pre id="output">Ready.</pre>
+    </section>
+  </main>
+
+  <script>
+    let token = sessionStorage.getItem('cca_admin_token') || '';
+    const $ = (id) => document.getElementById(id);
+    function showApp() {
+      const loggedIn = Boolean(token);
+      ['dashboard','roleManager','chapterManager','aiReview','securityScale','outputSection'].forEach(id => $(id).classList.toggle('hidden', !loggedIn));
+      $('loginSection').classList.toggle('hidden', loggedIn);
+    }
+    function headers() { return { 'Content-Type': 'application/json', 'X-Admin-Token': token }; }
+    function out(value) { $('output').textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2); }
+    function status(value) { $('status').textContent = value; }
+    async function request(path, options = {}) {
+      const res = await fetch(path, options);
+      const text = await res.text();
+      const json = text ? JSON.parse(text) : null;
+      if (!res.ok) throw json || new Error('Request failed');
+      return json;
+    }
+    async function login() {
+      try {
+        const res = await request('/api/admin/login', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ username: $('username').value, password: $('password').value, role: $('adminRole').value }) });
+        token = res.token; window.adminToken = token; sessionStorage.setItem('cca_admin_token', token); showApp(); loadRoles();
+      } catch (e) { out(e); }
+    }
+    function logout() { token = ''; window.adminToken = ''; sessionStorage.removeItem('cca_admin_token'); showApp(); }
+    async function loadRoles() {
+      try {
+        const roles = await request('/api/admin/roles', { headers: headers() });
+        $('roles').innerHTML = roles.map(r => `<div class="card"><strong>${r.name}</strong> <span class="pill">${r.id}</span><p>${r.description || ''}</p><button onclick="selectRole('${r.id}')">Select</button></div>`).join('');
+        status(`${roles.length} roles loaded.`); out(roles);
+      } catch(e) { out(e); }
+    }
+    function selectRole(roleId) { $('chapterRoleId').value = roleId; $('roleId').value = roleId; }
+    async function saveRole() {
+      try {
+        const role = await request('/api/admin/roles', { method: 'POST', headers: headers(), body: JSON.stringify({ id: $('roleId').value, name: $('roleName').value, description: $('roleDescription').value, iconKey: $('roleIcon').value, isPublished: true }) });
+        out(role); loadRoles();
+      } catch(e) { out(e); }
+    }
+
+    function csv(value) { return value.split(',').map(x => x.trim()).filter(Boolean); }
+    function readJsonOrEmpty(id) {
+      const raw = $(id).value.trim();
+      if (!raw) return {};
+      return JSON.parse(raw);
+    }
+
+    function validateAudioClient(audio, path, errors) {
+      if (!audio) return;
+      if (typeof audio !== 'object' || Array.isArray(audio)) { errors.push(`${path} must be an object.`); return; }
+      ['backgroundMusic','bgm','music','soundEffect','sfx','voiceClip','voice','voiceOver','subtitle','caption'].forEach(key => {
+        if (audio[key] !== undefined && typeof audio[key] !== 'string') errors.push(`${path}.${key} must be a string.`);
+      });
+      ['loopBackgroundMusic','loopBgm','stopBackgroundMusic','stopBgm'].forEach(key => {
+        if (audio[key] !== undefined && typeof audio[key] !== 'boolean') errors.push(`${path}.${key} must be boolean.`);
+      });
+      ['musicVolume','bgmVolume','sfxVolume','voiceVolume'].forEach(key => {
+        if (audio[key] !== undefined && (typeof audio[key] !== 'number' || audio[key] < 0 || audio[key] > 1)) errors.push(`${path}.${key} must be a number between 0 and 1.`);
+      });
+    }
+
+    function validateScenesClient(scenes) {
+      const errors = [];
+      if (scenes === undefined || scenes === null) return errors;
+      if (!Array.isArray(scenes)) return ['scenes must be an array.'];
+      scenes.forEach((scene, sceneIndex) => {
+        if (!scene || typeof scene !== 'object' || Array.isArray(scene)) {
+          errors.push(`scenes[${sceneIndex}] must be an object.`);
+          return;
+        }
+        ['backgroundImage','characterId','characterImage','soundEffect','transitionType'].forEach(key => {
+          if (scene[key] !== undefined && typeof scene[key] !== 'string') errors.push(`scenes[${sceneIndex}].${key} must be a string.`);
+        });
+        validateAudioClient(scene.audio, `scenes[${sceneIndex}].audio`, errors);
+        if (!Array.isArray(scene.dialogues) || scene.dialogues.length < 1) {
+          errors.push(`scenes[${sceneIndex}].dialogues must contain at least one dialogue line.`);
+          return;
+        }
+        scene.dialogues.forEach((line, lineIndex) => {
+          if (!line || typeof line !== 'object' || Array.isArray(line)) {
+            errors.push(`scenes[${sceneIndex}].dialogues[${lineIndex}] must be an object.`);
+            return;
+          }
+          if (!line.speaker) errors.push(`scenes[${sceneIndex}].dialogues[${lineIndex}].speaker is required.`);
+          if (!line.text && !line.dialogue) errors.push(`scenes[${sceneIndex}].dialogues[${lineIndex}].text is required.`);
+          if (line.emotion !== undefined && typeof line.emotion !== 'string') errors.push(`scenes[${sceneIndex}].dialogues[${lineIndex}].emotion must be a string.`);
+          if (line.characterId !== undefined && typeof line.characterId !== 'string') errors.push(`scenes[${sceneIndex}].dialogues[${lineIndex}].characterId must be a string.`);
+          if (line.voiceClip !== undefined && typeof line.voiceClip !== 'string') errors.push(`scenes[${sceneIndex}].dialogues[${lineIndex}].voiceClip must be a string.`);
+          if (line.subtitle !== undefined && typeof line.subtitle !== 'string') errors.push(`scenes[${sceneIndex}].dialogues[${lineIndex}].subtitle must be a string.`);
+          validateAudioClient(line.audio, `scenes[${sceneIndex}].dialogues[${lineIndex}].audio`, errors);
+        });
+      });
+      return errors;
+    }
+    function validateChapterClient(body) {
+      const errors = [];
+      if (!body || typeof body !== 'object') errors.push('Chapter JSON must be an object.');
+      if (!body.id && !body.title) errors.push('Provide at least title or id.');
+      errors.push(...validateScenesClient(body.scenes));
+      if (!Array.isArray(body.choices) || body.choices.length < 2) errors.push('At least two choices are required.');
+      (body.choices || []).forEach((choice, index) => {
+        if (!choice.text) errors.push(`choices[${index}].text is required.`);
+        if (!choice.outcome) errors.push(`choices[${index}].outcome is required.`);
+        if (!choice.scoreImpact) errors.push(`choices[${index}].scoreImpact is required.`);
+        const outcome = choice.outcome || {};
+        ['setFlags','clearFlags','unlockCleanupMissionIds','setStoryFlags','clearStoryFlags','delayedConsequenceMessages'].forEach(key => {
+          if (outcome[key] && !Array.isArray(outcome[key])) errors.push(`choices[${index}].outcome.${key} must be an array.`);
+        });
+      });
+      ['learningObjective','skillLevel','workflowId','safeExplanation','practicalTakeaway','mentorFeedback'].forEach(key => { if (body[key] && typeof body[key] !== 'string') errors.push(`${key} must be a string.`); });
+      ['skillTags','realWorldConstraints','safetyGuardrails','prerequisites','consequenceFlags','blockedByFlags','requiredStoryFlags','blockedByStoryFlags'].forEach(key => {
+        if (body[key] && !Array.isArray(body[key])) errors.push(`${key} must be an array.`);
+      });
+      if (body.storyFlags && !Array.isArray(body.storyFlags)) errors.push('storyFlags must be an array.');
+      if (body.adaptiveDialogueInjections && !Array.isArray(body.adaptiveDialogueInjections)) errors.push('adaptiveDialogueInjections must be an array.');
+      (body.adaptiveDialogueInjections || []).forEach((item, index) => {
+        if (!item || typeof item !== 'object' || Array.isArray(item)) errors.push(`adaptiveDialogueInjections[${index}] must be an object.`);
+        else {
+          if (!item.id) errors.push(`adaptiveDialogueInjections[${index}].id is required.`);
+          if (!item.text) errors.push(`adaptiveDialogueInjections[${index}].text is required.`);
+          if (item.requiredBehaviorPatterns && !Array.isArray(item.requiredBehaviorPatterns)) errors.push(`adaptiveDialogueInjections[${index}].requiredBehaviorPatterns must be an array.`);
+          if (item.blockedBehaviorPatterns && !Array.isArray(item.blockedBehaviorPatterns)) errors.push(`adaptiveDialogueInjections[${index}].blockedBehaviorPatterns must be an array.`);
+        }
+      });
+      if (body.adaptiveDifficulty && (typeof body.adaptiveDifficulty !== 'object' || Array.isArray(body.adaptiveDifficulty))) errors.push('adaptiveDifficulty must be an object.');
+      if (body.allowsAdaptiveSideMissions !== undefined && typeof body.allowsAdaptiveSideMissions !== 'boolean') errors.push('allowsAdaptiveSideMissions must be boolean.');
+      if (body.endingRules && !Array.isArray(body.endingRules)) errors.push('endingRules must be an array.');
+      ['contentVersion','contentPackId','assetVersion','assetPackId','rolePluginId','localizationKey','contentTier'].forEach(key => { if (body[key] && typeof body[key] !== 'string') errors.push(`${key} must be a string.`); });
+      if (body.supportsOfflineCache !== undefined && typeof body.supportsOfflineCache !== 'boolean') errors.push('supportsOfflineCache must be boolean.');
+      if (body.analyticsTags && !Array.isArray(body.analyticsTags)) errors.push('analyticsTags must be an array.');
+      if (body.safetyReview && (typeof body.safetyReview !== 'object' || Array.isArray(body.safetyReview))) errors.push('safetyReview must be an object.');
+      if (body.safetyReview && body.safetyReview.status && !['draft','pending','approved','rejected','needs_changes','needsChanges'].includes(body.safetyReview.status)) errors.push('safetyReview.status is unsupported.');
+      if (body.multiplayer && (typeof body.multiplayer !== 'object' || Array.isArray(body.multiplayer))) errors.push('multiplayer must be an object.');
+      if (body.isCleanupMission && body.isFinale) errors.push('A chapter cannot be both cleanup mission and finale.');
+      return errors;
+    }
+    function applyCinematicFields() {
+      try {
+        const body = JSON.parse($('chapterJson').value || '{}');
+        const raw = $('scenesJson').value.trim();
+        if (!raw) {
+          delete body.scenes;
+        } else {
+          const scenes = JSON.parse(raw);
+          const errors = validateScenesClient(scenes);
+          if (errors.length) { out({ valid: false, errors }); return; }
+          body.scenes = scenes;
+        }
+        $('chapterJson').value = JSON.stringify(body, null, 2);
+        validateEditorJson();
+      } catch (e) { out({ error: String(e) }); }
+    }
+
+
+    function applyAdaptiveFields() {
+      try {
+        const body = JSON.parse($('chapterJson').value || '{}');
+        const dialogueRaw = $('adaptiveDialogueJson').value.trim();
+        if (dialogueRaw) body.adaptiveDialogueInjections = JSON.parse(dialogueRaw);
+        const difficultyRaw = $('adaptiveDifficultyJson').value.trim();
+        if (difficultyRaw) body.adaptiveDifficulty = JSON.parse(difficultyRaw);
+        body.allowsAdaptiveSideMissions = $('allowsAdaptiveSideMissions').value === 'true';
+        $('chapterJson').value = JSON.stringify(body, null, 2);
+        validateEditorJson();
+      } catch (e) { out({ error: String(e) }); }
+    }
+
+    function applyAudioFields() {
+      try {
+        const body = JSON.parse($('chapterJson').value || '{}');
+        if (!Array.isArray(body.scenes) || !body.scenes.length) { out({ valid: false, errors: ['Add scenes before applying audio.'] }); return; }
+        const scene = body.scenes[0];
+        scene.audio = scene.audio || {};
+        if ($('sceneBgm').value.trim()) scene.audio.backgroundMusic = $('sceneBgm').value.trim();
+        if ($('sceneSfx').value.trim()) scene.audio.soundEffect = $('sceneSfx').value.trim();
+        scene.audio.loopBackgroundMusic = $('loopBgm').value === 'true';
+        scene.audio.stopBackgroundMusic = $('stopBgm').value === 'true';
+        if (Array.isArray(scene.dialogues) && scene.dialogues[0]) {
+          scene.dialogues[0].audio = scene.dialogues[0].audio || {};
+          if ($('dialogueVoice').value.trim()) scene.dialogues[0].audio.voiceClip = $('dialogueVoice').value.trim();
+          if ($('dialogueSubtitle').value.trim()) scene.dialogues[0].audio.subtitle = $('dialogueSubtitle').value.trim();
+        }
+        $('chapterJson').value = JSON.stringify(body, null, 2);
+        $('scenesJson').value = JSON.stringify(body.scenes, null, 2);
+        validateEditorJson();
+      } catch (e) { out({ error: String(e) }); }
+    }
+
+    function applyConsequenceFields() {
+      try {
+        const body = JSON.parse($('chapterJson').value || '{}');
+        body.prerequisites = csv($('prerequisites').value);
+        body.consequenceFlags = csv($('consequenceFlags').value);
+        body.blockedByFlags = csv($('blockedByFlags').value);
+        body.roleMechanicType = $('roleMechanicType').value.trim() || undefined;
+        body.isCleanupMission = $('isCleanupMission').value === 'true';
+        body.isFinale = $('isFinale').value === 'true';
+        if (Array.isArray(body.choices) && body.choices[0] && body.choices[0].outcome) {
+          const outcome = body.choices[0].outcome;
+          outcome.setFlags = csv($('setFlags').value);
+          outcome.clearFlags = csv($('clearFlags').value);
+          outcome.unlockCleanupMissionIds = csv($('unlockCleanupMissionIds').value);
+          const rep = readJsonOrEmpty('reputationImpact');
+          if (Object.keys(rep).length) outcome.reputationImpact = rep;
+          if ($('consequenceSummary').value.trim()) outcome.consequenceSummary = $('consequenceSummary').value.trim();
+          const debrief = readJsonOrEmpty('debriefJson');
+          if (Object.keys(debrief).length) outcome.debrief = debrief;
+        }
+        $('chapterJson').value = JSON.stringify(body, null, 2);
+        validateEditorJson();
+      } catch (e) { out({ error: String(e) }); }
+    }
+
+    function applyProfessionalFields() {
+      try {
+        const body = JSON.parse($('chapterJson').value || '{}');
+        body.learningObjective = $('learningObjective').value.trim() || body.learningObjective || '';
+        body.skillLevel = $('skillLevel').value || body.skillLevel || 'beginner';
+        body.workflowId = $('workflowId').value.trim() || body.workflowId || '';
+        body.skillTags = csv($('skillTags').value);
+        body.realWorldConstraints = csv($('realWorldConstraints').value);
+        body.safetyGuardrails = csv($('safetyGuardrails').value);
+        body.safeExplanation = $('safeExplanation').value.trim() || body.safeExplanation || '';
+        body.practicalTakeaway = $('practicalTakeaway').value.trim() || body.practicalTakeaway || '';
+        body.mentorFeedback = $('mentorFeedback').value.trim() || body.mentorFeedback || '';
+        if (Array.isArray(body.choices) && body.choices[0] && body.choices[0].outcome) {
+          body.choices[0].outcome.professionalFeedback = {
+            mentorFeedback: body.mentorFeedback,
+            safeExplanation: body.safeExplanation,
+            practicalTakeaway: body.practicalTakeaway,
+          };
+        }
+        $('chapterJson').value = JSON.stringify(body, null, 2);
+        validateEditorJson();
+      } catch (e) { out({ error: String(e) }); }
+    }
+
+    function applyBranchingFields() {
+      try {
+        const body = JSON.parse($('chapterJson').value || '{}');
+        body.requiredStoryFlags = csv($('requiredStoryFlags').value);
+        body.blockedByStoryFlags = csv($('blockedByStoryFlags').value);
+        const requiredRelationship = readJsonOrEmpty('requiredRelationshipMinimums');
+        if (Object.keys(requiredRelationship).length) body.requiredRelationshipMinimums = requiredRelationship;
+        const storyFlagsRaw = $('storyFlagsJson').value.trim();
+        if (storyFlagsRaw) body.storyFlags = JSON.parse(storyFlagsRaw);
+        const endingRulesRaw = $('endingRulesJson').value.trim();
+        if (endingRulesRaw) body.endingRules = JSON.parse(endingRulesRaw);
+        if (Array.isArray(body.choices) && body.choices[0] && body.choices[0].outcome) {
+          const outcome = body.choices[0].outcome;
+          outcome.setStoryFlags = csv($('setStoryFlags').value);
+          outcome.clearStoryFlags = csv($('clearStoryFlags').value);
+          const relationship = readJsonOrEmpty('relationshipImpact');
+          if (Object.keys(relationship).length) outcome.relationshipImpact = relationship;
+          outcome.delayedConsequenceMessages = csv($('delayedConsequenceMessages').value);
+        }
+        $('chapterJson').value = JSON.stringify(body, null, 2);
+        validateEditorJson();
+      } catch (e) { out({ error: String(e) }); }
+    }
+
+
+    function applyFutureScopeFields() {
+      try {
+        const body = JSON.parse($('chapterJson').value || '{}');
+        body.contentVersion = $('contentVersion').value.trim() || '23.0.0';
+        body.contentPackId = $('contentPackId').value.trim() || 'core_roles_v23';
+        body.assetVersion = $('assetVersion').value.trim() || '23.0.0';
+        body.assetPackId = $('assetPackId').value.trim() || 'base_visuals_v23';
+        body.rolePluginId = $('rolePluginId').value.trim() || `${$('chapterRoleId').value || 'role'}_core`;
+        body.localizationKey = $('localizationKey').value.trim() || `role.${$('chapterRoleId').value || 'role'}.chapter.${body.id || 'new'}.title`;
+        body.contentTier = $('contentTier').value;
+        body.supportsOfflineCache = $('supportsOfflineCache').value === 'true';
+        body.analyticsTags = csv($('analyticsTags').value);
+        const safetyRaw = $('safetyReviewJson').value.trim();
+        if (safetyRaw) body.safetyReview = JSON.parse(safetyRaw);
+        const multiplayerRaw = $('multiplayerJson').value.trim();
+        if (multiplayerRaw) body.multiplayer = JSON.parse(multiplayerRaw);
+        $('chapterJson').value = JSON.stringify(body, null, 2);
+        validateEditorJson();
+      } catch (e) { out({ error: String(e) }); }
+    }
+
+    function validateEditorJson() {
+      try {
+        const body = JSON.parse($('chapterJson').value || '{}');
+        const errors = validateChapterClient(body);
+        out(errors.length ? { valid: false, errors } : { valid: true, message: 'Draft passes client-side Phase 23 validation.' });
+        return errors.length === 0;
+      } catch (e) { out({ valid: false, errors: [String(e)] }); return false; }
+    }
+
+    async function saveChapter() {
+      try {
+        const body = JSON.parse($('chapterJson').value);
+        const errors = validateChapterClient(body);
+        if (errors.length) { out({ valid: false, errors }); return; }
+        const roleId = $('chapterRoleId').value;
+        const chapter = await request(`/api/admin/roles/${encodeURIComponent(roleId)}/chapters`, { method: 'POST', headers: headers(), body: JSON.stringify(body) });
+        $('scenarioId').value = chapter.id; out(chapter);
+      } catch(e) { out(e); }
+    }
+    async function previewScenario() {
+      try { out(await request(`/api/admin/scenarios/${encodeURIComponent($('scenarioId').value)}/preview`, { headers: headers() })); } catch(e) { out(e); }
+    }
+    async function publishScenario() {
+      try { out(await request(`/api/admin/scenarios/${encodeURIComponent($('scenarioId').value)}/publish`, { method: 'POST', headers: headers() })); } catch(e) { out(e); }
+    }
+    async function unpublishScenario() {
+      try { out(await request(`/api/admin/scenarios/${encodeURIComponent($('scenarioId').value)}/unpublish`, { method: 'POST', headers: headers() })); } catch(e) { out(e); }
+    }
+    async function submitAiReview() {
+      try { out(await request('/api/admin/ai-reviews', { method: 'POST', headers: headers(), body: $('aiJson').value || '{}' })); loadAiReviews(); } catch(e) { out(e); }
+    }
+    async function loadAiReviews() {
+      try {
+        const reviews = await request('/api/admin/ai-reviews', { headers: headers() });
+        $('aiReviews').innerHTML = reviews.map(r => `<div class="card"><strong>${r.status}</strong> <span class="pill">${r.id}</span><p>${r.createdAt}</p><button onclick="approveReview('${r.id}')">Approve</button><button class="danger" onclick="rejectReview('${r.id}')">Reject</button></div>`).join(''); out(reviews);
+      } catch(e) { out(e); }
+    }
+    async function approveReview(id) { try { out(await request(`/api/admin/ai-reviews/${id}/approve`, { method: 'POST', headers: headers(), body: JSON.stringify({notes:'Approved from admin panel'}) })); loadAiReviews(); } catch(e) { out(e); } }
+    async function rejectReview(id) { try { out(await request(`/api/admin/ai-reviews/${id}/reject`, { method: 'POST', headers: headers(), body: JSON.stringify({notes:'Rejected from admin panel'}) })); loadAiReviews(); } catch(e) { out(e); } }
+
+    async function loadAdaptiveDrafts() {
+      try {
+        const drafts = await request('/api/admin/adaptive-drafts', { headers: headers() });
+        out({ adaptiveDrafts: drafts, policy: 'Approved drafts remain manual-publish only; they are not automatically added to scenario files.' });
+      } catch(e) { out(e); }
+    }
+    async function approveAdaptiveDraft(id) {
+      try { out(await request(`/api/admin/adaptive-drafts/${id}/approve`, { method: 'POST', headers: headers(), body: JSON.stringify({notes:'Approved for manual content rewrite.'}) })); } catch(e) { out(e); }
+    }
+    async function rejectAdaptiveDraft(id) {
+      try { out(await request(`/api/admin/adaptive-drafts/${id}/reject`, { method: 'POST', headers: headers(), body: JSON.stringify({notes:'Rejected by safety/content review.'}) })); } catch(e) { out(e); }
+    }
+    async function loadFutureConfig() {
+      try {
+        const [flags, content, assets, plugins, cache, safety, pipeline] = await Promise.all([
+          request('/api/config/feature-flags'),
+          request('/api/content/manifest'),
+          request('/api/assets/manifest-version'),
+          request('/api/role-plugins'),
+          request('/api/offline-cache/strategy'),
+          request('/api/safety-review/workflow'),
+          request('/api/scenario-validation/pipeline'),
+        ]);
+        out({ flags, content, assets, plugins, cache, safety, pipeline });
+      } catch(e) { out(e); }
+    }
+    async function loadAuditLogs() { try { out(await request('/api/admin/audit-logs', { headers: headers() })); } catch(e) { out(e); } }
+    async function loadBadges() { try { out(await request('/api/badges')); } catch(e) { out(e); } }
+    showApp();
+    if (token) loadRoles();
+  </script>
+
+
+<section class="card">
+  <h2>Creator Studio Scenario Packs</h2>
+  <p>Create, preview, review, publish, unpublish, feature, price, and cache scenario packs. Published packs must pass validation and professional safety review before appearing in Flutter.</p>
+  <div class="grid">
+    <label>Pack ID <input id="packId" value="creator_demo_pack" /></label>
+    <label>Title <input id="packTitle" value="Creator Demo Pack" /></label>
+    <label>Role <input id="packRoleId" value="developer" /></label>
+    <label>Difficulty <input id="packDifficulty" value="Intermediate" /></label>
+    <label>Creator <input id="packCreator" value="Career Chaos Creator Lab" /></label>
+    <label>Version <input id="packVersion" value="1.0.0" /></label>
+    <label>Price Type <select id="packPriceType"><option>free</option><option>premium</option><option>paid</option><option>creator_only</option></select></label>
+    <label>Safety Status <select id="packSafetyStatus"><option>draft</option><option>pending</option><option>approved</option><option>rejected</option><option>needs_changes</option></select></label>
+  </div>
+  <label>Scenario Pack JSON</label>
+  <textarea id="scenarioPackJson" rows="12">{
+  "id": "creator_demo_pack",
+  "title": "Creator Demo Pack",
+  "roleId": "developer",
+  "roleName": "Developer",
+  "difficulty": "Intermediate",
+  "creator": { "id": "creator_lab", "name": "Career Chaos Creator Lab", "verified": true },
+  "version": "1.0.0",
+  "priceType": "free",
+  "safetyStatus": "approved",
+  "reviewStatus": "approved",
+  "isPublished": false,
+  "isFeatured": false,
+  "isDownloadable": true,
+  "supportsOfflineCache": true,
+  "safetyReview": { "status": "approved", "domains": ["professional_learning"], "guardrails": [] },
+  "compatibility": { "minAppVersion": "1.0.0", "requiredFeatureFlags": ["scenario_marketplace"], "schemaVersion": "scenario_pack_v1" },
+  "chapters": []
+}</textarea>
+  <div class="actions">
+    <button onclick="saveScenarioPack()">Save Pack Draft</button>
+    <button onclick="previewScenarioPack()">Preview Pack</button>
+    <button onclick="publishScenarioPack(true)">Publish</button>
+    <button onclick="publishScenarioPack(false)">Unpublish</button>
+    <button onclick="loadScenarioPacks()">Load Packs</button>
+  </div>
+  <pre id="scenarioPackOutput">Scenario pack admin output appears here.</pre>
+</section>
+<script>
+async function apiJson(path, options = {}) {
+  const headers = Object.assign({'Content-Type':'application/json'}, options.headers || {});
+  const token = window.adminToken || sessionStorage.getItem('cca_admin_token');
+  if (token) headers['X-Admin-Token'] = token;
+  const response = await fetch(path, Object.assign({}, options, { headers }));
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(body.error || 'Request failed');
+  return body;
+}
+function parsePackJson() {
+  const pack = JSON.parse(document.getElementById('scenarioPackJson').value);
+  pack.id = document.getElementById('packId').value || pack.id;
+  pack.title = document.getElementById('packTitle').value || pack.title;
+  pack.roleId = document.getElementById('packRoleId').value || pack.roleId;
+  pack.difficulty = document.getElementById('packDifficulty').value || pack.difficulty;
+  pack.creator = pack.creator || {};
+  pack.creator.name = document.getElementById('packCreator').value || pack.creator.name;
+  pack.version = document.getElementById('packVersion').value || pack.version;
+  pack.priceType = document.getElementById('packPriceType').value;
+  pack.safetyStatus = document.getElementById('packSafetyStatus').value;
+  return pack;
+}
+async function saveScenarioPack() {
+  try {
+    const saved = await apiJson('/api/admin/scenario-packs', { method: 'POST', body: JSON.stringify(parsePackJson()) });
+    document.getElementById('scenarioPackOutput').textContent = JSON.stringify(saved, null, 2);
+  } catch (e) { document.getElementById('scenarioPackOutput').textContent = e.message; }
+}
+async function previewScenarioPack() {
+  try {
+    const id = document.getElementById('packId').value;
+    const pack = await apiJson('/api/admin/scenario-packs/' + encodeURIComponent(id) + '/preview');
+    document.getElementById('scenarioPackOutput').textContent = JSON.stringify(pack, null, 2);
+  } catch (e) { document.getElementById('scenarioPackOutput').textContent = e.message; }
+}
+async function publishScenarioPack(value) {
+  try {
+    const id = document.getElementById('packId').value;
+    const pack = await apiJson('/api/admin/scenario-packs/' + encodeURIComponent(id) + (value ? '/publish' : '/unpublish'), { method: 'POST', body: '{}' });
+    document.getElementById('scenarioPackOutput').textContent = JSON.stringify(pack, null, 2);
+  } catch (e) { document.getElementById('scenarioPackOutput').textContent = e.message; }
+}
+async function loadScenarioPacks() {
+  try {
+    const packs = await apiJson('/api/admin/scenario-packs');
+    document.getElementById('scenarioPackOutput').textContent = JSON.stringify(packs, null, 2);
+  } catch (e) { document.getElementById('scenarioPackOutput').textContent = e.message; }
+}
+</script>
+
+
+
+<section class="card">
+  <h2>Corporate / College Edition</h2>
+  <p>Create organizations, batches, role-based scenario pack assignments, trainee progress, and export reports for colleges, companies, and coaching institutes.</p>
+  <div class="grid">
+    <label>Organization Name <input id="orgName" value="Career Chaos Demo College" /></label>
+    <label>Organization Type <select id="orgType"><option>college</option><option>company</option><option>coaching_institute</option></select></label>
+    <label>Industry <input id="orgIndustry" value="technology_training" /></label>
+    <label>Organization ID <input id="orgId" placeholder="created organization id" /></label>
+    <label>Batch ID <input id="batchId" placeholder="created batch id" /></label>
+    <label>Assignment ID <input id="assignmentId" placeholder="created assignment id" /></label>
+  </div>
+  <div class="actions">
+    <button onclick="createOrganizationAdmin()">Create Organization</button>
+    <button onclick="createBatchAdmin()">Create Batch</button>
+    <button onclick="assignPackAdmin()">Assign Scenario Pack</button>
+    <button onclick="completeTrainingAdmin()">Complete Training</button>
+    <button onclick="loadOrgDashboardAdmin()">Dashboard</button>
+    <button onclick="exportOrgReportAdmin()">Export JSON Report</button>
+  </div>
+  <pre id="orgOutput">Corporate dashboard output appears here.</pre>
+</section>
+<script>
+async function orgApi(path, options = {}) {
+  const headers = Object.assign({ 'Content-Type': 'application/json' }, options.headers || {});
+  const token = window.adminToken || sessionStorage.getItem('cca_admin_token');
+  if (token) headers['X-Admin-Token'] = token;
+  const response = await fetch(path, Object.assign({}, options, { headers }));
+  const text = await response.text();
+  const body = text ? JSON.parse(text) : null;
+  if (!response.ok) throw body || new Error('Organization request failed');
+  return body;
+}
+function orgOut(value) { document.getElementById('orgOutput').textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2); }
+async function createOrganizationAdmin() {
+  try {
+    const body = { name: document.getElementById('orgName').value, type: document.getElementById('orgType').value, industry: document.getElementById('orgIndustry').value, actorUserId: 'admin', actorRole: 'org_admin', customScenarioPackIds: ['creator_dev_fire_drill_v1'] };
+    const result = await orgApi('/api/organizations', { method: 'POST', body: JSON.stringify(body) });
+    document.getElementById('orgId').value = result.organization.id;
+    orgOut(result);
+  } catch (e) { orgOut(e); }
+}
+async function createBatchAdmin() {
+  try {
+    const orgId = document.getElementById('orgId').value;
+    const result = await orgApi('/api/organizations/' + encodeURIComponent(orgId) + '/batches', { method: 'POST', body: JSON.stringify({ title: 'Developer Readiness Batch', roleFocus: 'developer', trainerUserIds: ['trainer-1'], traineeUserIds: ['trainee-1'], actorUserId: 'trainer-1', actorRole: 'trainer' }) });
+    document.getElementById('batchId').value = result.batch.id;
+    orgOut(result);
+  } catch (e) { orgOut(e); }
+}
+async function assignPackAdmin() {
+  try {
+    const orgId = document.getElementById('orgId').value;
+    const batchId = document.getElementById('batchId').value;
+    const result = await orgApi('/api/organizations/' + encodeURIComponent(orgId) + '/assignments', { method: 'POST', body: JSON.stringify({ batchId, title: 'Developer Fire Drill Assignment', roleId: 'developer', scenarioPackId: 'creator_dev_fire_drill_v1', actorUserId: 'trainer-1', actorRole: 'trainer' }) });
+    document.getElementById('assignmentId').value = result.assignment.id;
+    orgOut(result);
+  } catch (e) { orgOut(e); }
+}
+async function completeTrainingAdmin() {
+  try {
+    const orgId = document.getElementById('orgId').value;
+    const result = await orgApi('/api/organizations/' + encodeURIComponent(orgId) + '/progress', { method: 'POST', body: JSON.stringify({ batchId: document.getElementById('batchId').value, assignmentId: document.getElementById('assignmentId').value, userId: 'trainee-1', displayName: 'Trainee One', progressPercent: 100, score: 92, actorUserId: 'trainee-1', actorRole: 'trainee' }) });
+    orgOut(result);
+  } catch (e) { orgOut(e); }
+}
+async function loadOrgDashboardAdmin() {
+  try { orgOut(await orgApi('/api/organizations/' + encodeURIComponent(document.getElementById('orgId').value) + '/dashboard')); } catch (e) { orgOut(e); }
+}
+async function exportOrgReportAdmin() {
+  try { orgOut(await orgApi('/api/organizations/' + encodeURIComponent(document.getElementById('orgId').value) + '/reports/export?format=json')); } catch (e) { orgOut(e); }
+}
+</script>
+
+
+<section class="card">
+  <h2>Learning Analytics</h2>
+  <p>View privacy-safe aggregate learning progress across chapters, choices, mini-games, time spent, roles, and skill improvement. Admin output never shows raw user IDs, names, answers, emails, phone numbers, tokens, or free-text messages.</p>
+  <div class="actions">
+    <button onclick="loadAnalyticsCatalogAdmin()">Analytics Event Model</button>
+    <button onclick="loadAdminAnalyticsDashboard()">Admin Analytics Dashboard</button>
+    <button onclick="seedAnalyticsEventAdmin()">Log Demo Event</button>
+  </div>
+  <pre id="analyticsOutput">Analytics dashboard output appears here.</pre>
+</section>
+<script>
+function analyticsOut(value) { document.getElementById('analyticsOutput').textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2); }
+async function loadAnalyticsCatalogAdmin() {
+  try { analyticsOut(await orgApi('/api/analytics/catalog')); } catch (e) { analyticsOut(e); }
+}
+async function loadAdminAnalyticsDashboard() {
+  try { analyticsOut(await orgApi('/api/admin/analytics/dashboard')); } catch (e) { analyticsOut(e); }
+}
+async function seedAnalyticsEventAdmin() {
+  try {
+    const result = await orgApi('/api/analytics/events', {
+      method: 'POST',
+      body: JSON.stringify({ userId: 'admin-demo-user', eventType: 'chapter_completed', roleId: 'developer', chapterId: 'developer_login_button_disaster', durationSeconds: 140, scoreDelta: { skill: 3, ethics: 2, communication: 1 }, metadata: { safeSurface: 'admin_seed', email: 'redacted@example.com' } })
+    });
+    analyticsOut(result);
+  } catch (e) { analyticsOut(e); }
+}
+</script>
+
+
+<script>
+function securityOut(value) { document.getElementById('securityOutput').textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2); }
+async function loadSecurityStatus() {
+  try { securityOut(await apiJson('/api/admin/security/status')); } catch (e) { securityOut(e.message || e); }
+}
+async function submitModerationItem() {
+  try {
+    const content = JSON.parse(document.getElementById('moderationContent').value);
+    const result = await apiJson('/api/admin/content-moderation', { method: 'POST', body: JSON.stringify({ title: document.getElementById('moderationTitle').value, contentType: content.contentType || 'scenario', content }) });
+    securityOut(result);
+  } catch (e) { securityOut(e.message || e); }
+}
+async function loadModerationQueue() {
+  try { securityOut(await apiJson('/api/admin/content-moderation')); } catch (e) { securityOut(e.message || e); }
+}
+async function inspectPromptAbuse() {
+  try {
+    const content = JSON.parse(document.getElementById('moderationContent').value);
+    securityOut(await apiJson('/api/admin/security/prompt-inspect', { method: 'POST', body: JSON.stringify({ prompt: content.prompt || content }) }));
+  } catch (e) { securityOut(e.message || e); }
+}
+async function createBackup() {
+  try { securityOut(await apiJson('/api/admin/backups', { method: 'POST', body: '{}' })); } catch (e) { securityOut(e.message || e); }
+}
+async function loadBackups() {
+  try { securityOut(await apiJson('/api/admin/backups')); } catch (e) { securityOut(e.message || e); }
+}
+async function loadErrorEvents() {
+  try { securityOut(await apiJson('/api/admin/error-events')); } catch (e) { securityOut(e.message || e); }
+}
+async function loadRetentionRules() {
+  try { securityOut(await apiJson('/api/privacy/retention-rules')); } catch (e) { securityOut(e.message || e); }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+phase: 28
+flutter_dart_files: 151
+flutter_tests: 26
+backend_js_files: 5
+team_phase_files: ['flutter_app/lib/models/team_session_model.dart', 'flutter_app/lib/services/team_session_service.dart', 'flutter_app/lib/screens/team_simulation_screen.dart', 'flutter_app/lib/screens/team_debrief_screen.dart', 'flutter_app/test/phase28/team_session_model_test.dart', 'docs/phase28_multiplayer_team_simulation_validation_report.md']

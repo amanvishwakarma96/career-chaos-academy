@@ -1,0 +1,890 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-17T00:00:00.000Z",
+  "packs": [
+    {
+      "id": "creator_dev_fire_drill_v1",
+      "title": "Creator Pack: Developer Fire Drill",
+      "roleId": "developer",
+      "roleName": "Developer",
+      "roleIconKey": "code",
+      "description": "A creator-made incident response side pack about production bugs, rollback, postmortem discipline, and stakeholder communication.",
+      "difficulty": "Intermediate",
+      "creator": {
+        "id": "core_creator_lab",
+        "name": "Career Chaos Creator Lab",
+        "displayName": "Career Chaos Creator Lab",
+        "verified": true
+      },
+      "version": "1.0.0",
+      "contentVersion": "27.0.0",
+      "minAppVersion": "1.0.0",
+      "maxAppVersion": "2.0.0",
+      "priceType": "free",
+      "safetyStatus": "approved",
+      "reviewStatus": "approved",
+      "isPublished": true,
+      "isFeatured": true,
+      "isDownloadable": true,
+      "supportsOfflineCache": true,
+      "rating": {
+        "average": 4.8,
+        "count": 12,
+        "userRating": 0
+      },
+      "reviews": [],
+      "tags": [
+        "developer",
+        "incident",
+        "rollback",
+        "postmortem"
+      ],
+      "compatibility": {
+        "minAppVersion": "1.0.0",
+        "requiredFeatureFlags": [
+          "scenario_marketplace"
+        ],
+        "schemaVersion": "scenario_pack_v1"
+      },
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "content_safety_lead",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "No unsafe production shortcuts."
+        ]
+      },
+      "offline": {
+        "cacheStrategy": "downloadable_json_pack",
+        "estimatedSizeKb": 18,
+        "checksum": "dev-fire-drill-demo-checksum",
+        "supportsDeltaUpdate": false
+      },
+      "chapters": [
+        {
+          "id": "creator_dev_fire_drill_triage",
+          "title": "Creator Pack: Production Fire Drill",
+          "difficulty": "Intermediate",
+          "theme": "Bug triage, rollback planning, communication",
+          "story": "A creator-made side pack drops you into a release room where the login graph looks like a falling cricket score. The client wants a fix now, the mentor wants evidence, and the team wants lunch.",
+          "task": "Handle the incident without creating a second incident.",
+          "learningObjective": "Practice incident triage and controlled rollback communication.",
+          "skillLevel": "intermediate",
+          "workflowId": "developer_bug_triage",
+          "skillTags": [
+            "triage",
+            "rollback",
+            "communication"
+          ],
+          "skillNodeIds": [
+            "dev_release_safety",
+            "dev_debugging"
+          ],
+          "realWorldConstraints": [
+            "time",
+            "client_pressure",
+            "documentation"
+          ],
+          "safetyGuardrails": [
+            "Do not hide production evidence.",
+            "Do not patch without rollback and verification."
+          ],
+          "safeExplanation": "Incident response needs evidence, rollback readiness, and stakeholder updates.",
+          "practicalTakeaway": "Stabilize first, explain clearly, then fix with proof.",
+          "professionalLearningPoint": "The fastest fix is not professional if it removes traceability.",
+          "contentVersion": "27.0.0",
+          "contentPackId": "creator_dev_fire_drill_v1",
+          "assetVersion": "27.0.0",
+          "assetPackId": "base_visuals_v23",
+          "rolePluginId": "developer_core",
+          "contentTier": "free",
+          "supportsOfflineCache": true,
+          "safetyReview": {
+            "status": "approved",
+            "domains": [
+              "professional_learning"
+            ],
+            "guardrails": [
+              "No unsafe engineering shortcuts."
+            ]
+          },
+          "analyticsTags": [
+            "scenario_pack",
+            "creator_pack",
+            "developer"
+          ],
+          "isPublished": true,
+          "choices": [
+            {
+              "text": "Rollback to the last known safe build, announce impact, and start evidence-based triage.",
+              "outcome": {
+                "title": "Controlled Fire Drill",
+                "description": "The room is still tense, but nobody is inventing mystery fixes at 2x speed. The client gets a clear update and the team gets a reproducible path.",
+                "moralLesson": "In incidents, calm evidence beats heroic guessing.",
+                "clearFlags": [
+                  "production_regression_risk"
+                ],
+                "setStoryFlags": [
+                  "documented_before_fix"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": 2,
+                  "clientTrust": 1,
+                  "teamTrust": 2,
+                  "publicReputation": 0
+                },
+                "reputationImpact": {
+                  "trust": 2,
+                  "safety": 2,
+                  "professionalism": 2,
+                  "reliability": 2,
+                  "stakeholderConfidence": 1
+                },
+                "consequenceSummary": "You reduced incident risk and improved team confidence.",
+                "professionalFeedback": {
+                  "mentorFeedback": "Good. You acted like a release owner, not a keyboard magician.",
+                  "safeExplanation": "Use rollback, monitoring, and communication before attempting risky changes.",
+                  "practicalTakeaway": "Always pair incident action with stakeholder communication."
+                }
+              },
+              "scoreImpact": {
+                "skill": 3,
+                "discipline": 3,
+                "ethics": 1,
+                "communication": 2,
+                "chaos": -2
+              }
+            },
+            {
+              "text": "Push a hotfix directly because the error looks obvious and confidence is free.",
+              "outcome": {
+                "title": "Confidence.exe Has Crashed",
+                "description": "The hotfix fixes login and breaks logout. The client asks if this is a feature. Your mentor develops a headache with sprint velocity.",
+                "moralLesson": "Confidence without verification is just chaos wearing sunglasses.",
+                "setFlags": [
+                  "skipped_testing",
+                  "production_regression_risk"
+                ],
+                "setStoryFlags": [
+                  "mentor_warned_after_shortcut"
+                ],
+                "unlockCleanupMissionIds": [
+                  "developer_rollback_cleanup"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": -2,
+                  "clientTrust": -2,
+                  "teamTrust": -1,
+                  "publicReputation": 0
+                },
+                "reputationImpact": {
+                  "trust": -2,
+                  "safety": -2,
+                  "professionalism": -1,
+                  "reliability": -2,
+                  "stakeholderConfidence": -2
+                },
+                "consequenceSummary": "You created a regression risk and unlocked a cleanup mission.",
+                "professionalFeedback": {
+                  "mentorFeedback": "Fast, yes. Safe, no. That was not a fix; that was a plot twist.",
+                  "safeExplanation": "Production changes require verification and rollback readiness.",
+                  "practicalTakeaway": "Never let pressure remove your release discipline."
+                }
+              },
+              "scoreImpact": {
+                "skill": -1,
+                "discipline": -3,
+                "ethics": -1,
+                "communication": -1,
+                "chaos": 5
+              }
+            },
+            {
+              "text": "Ask the QA lead for last failing evidence before choosing between rollback and patch.",
+              "outcome": {
+                "title": "Evidence Before Ego",
+                "description": "QA shares the reproduction path. The senior dev nods. Somewhere, a dashboard quietly stops sweating.",
+                "moralLesson": "Good incident work is collaborative, not solo hero drama.",
+                "setStoryFlags": [
+                  "asked_for_evidence"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": 1,
+                  "clientTrust": 0,
+                  "teamTrust": 3,
+                  "publicReputation": 0
+                },
+                "reputationImpact": {
+                  "trust": 1,
+                  "safety": 1,
+                  "professionalism": 2,
+                  "reliability": 1,
+                  "stakeholderConfidence": 1
+                },
+                "consequenceSummary": "You improved team trust and kept the fix evidence-based.",
+                "professionalFeedback": {
+                  "mentorFeedback": "This is how adults debug: evidence first, ego later if required never.",
+                  "safeExplanation": "Ask for reproduction evidence before committing to production action.",
+                  "practicalTakeaway": "Collaborate with QA during incidents."
+                }
+              },
+              "scoreImpact": {
+                "skill": 2,
+                "discipline": 2,
+                "ethics": 1,
+                "communication": 3,
+                "chaos": -1
+              }
+            }
+          ]
+        },
+        {
+          "id": "creator_dev_fire_drill_postmortem",
+          "title": "Creator Pack: The Postmortem Without Finger-Pointing",
+          "difficulty": "Intermediate",
+          "theme": "Postmortem, learning culture, documentation",
+          "story": "The incident is over. Now comes the meeting where everyone pretends they definitely knew the root cause yesterday.",
+          "task": "Lead a blameless postmortem that creates real improvement.",
+          "learningObjective": "Practice blameless review and action-item discipline.",
+          "skillLevel": "intermediate",
+          "workflowId": "developer_code_review",
+          "skillTags": [
+            "postmortem",
+            "documentation",
+            "team_trust"
+          ],
+          "skillNodeIds": [
+            "dev_documentation",
+            "dev_release_safety"
+          ],
+          "realWorldConstraints": [
+            "documentation",
+            "stakeholder_confidence"
+          ],
+          "safetyGuardrails": [
+            "Do not blame individuals for system failures.",
+            "Document action items with owners."
+          ],
+          "safeExplanation": "Postmortems should improve systems, not punish people for surfacing issues.",
+          "practicalTakeaway": "A useful postmortem turns evidence into owned improvements.",
+          "professionalLearningPoint": "Blameless postmortems protect learning and accountability together.",
+          "contentVersion": "27.0.0",
+          "contentPackId": "creator_dev_fire_drill_v1",
+          "assetVersion": "27.0.0",
+          "assetPackId": "base_visuals_v23",
+          "rolePluginId": "developer_core",
+          "contentTier": "free",
+          "supportsOfflineCache": true,
+          "safetyReview": {
+            "status": "approved",
+            "domains": [
+              "professional_learning"
+            ],
+            "guardrails": [
+              "No unsafe engineering shortcuts."
+            ]
+          },
+          "analyticsTags": [
+            "scenario_pack",
+            "creator_pack",
+            "developer"
+          ],
+          "isPublished": true,
+          "choices": [
+            {
+              "text": "Map timeline, root cause, missed signals, and owners for preventive actions.",
+              "outcome": {
+                "title": "Postmortem With Spine",
+                "description": "The team leaves with action items instead of dramatic quotes for office folklore.",
+                "moralLesson": "Learning needs structure, not blame.",
+                "setStoryFlags": [
+                  "blameless_postmortem_done"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": 2,
+                  "clientTrust": 1,
+                  "teamTrust": 3,
+                  "publicReputation": 0
+                },
+                "reputationImpact": {
+                  "trust": 2,
+                  "safety": 1,
+                  "professionalism": 2,
+                  "reliability": 2,
+                  "stakeholderConfidence": 1
+                },
+                "consequenceSummary": "Team trust improved through structured learning.",
+                "professionalFeedback": {
+                  "mentorFeedback": "Good postmortem. Nobody cried, and the system actually improved.",
+                  "safeExplanation": "Document facts, contributing conditions, and preventive actions.",
+                  "practicalTakeaway": "Always close postmortems with owners and dates."
+                }
+              },
+              "scoreImpact": {
+                "skill": 2,
+                "discipline": 3,
+                "ethics": 2,
+                "communication": 2,
+                "chaos": -2
+              }
+            },
+            {
+              "text": "Blame the intern because their Jira comment used lowercase letters.",
+              "outcome": {
+                "title": "Blame Culture DLC",
+                "description": "Everyone learns one thing: hide mistakes faster next time. Productivity goes down and side-eye goes up.",
+                "moralLesson": "Blame hides risk; accountability fixes systems.",
+                "setStoryFlags": [
+                  "blame_culture_created"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": -2,
+                  "clientTrust": -1,
+                  "teamTrust": -4,
+                  "publicReputation": 0
+                },
+                "reputationImpact": {
+                  "trust": -3,
+                  "safety": -2,
+                  "professionalism": -3,
+                  "reliability": -2,
+                  "stakeholderConfidence": -1
+                },
+                "consequenceSummary": "Team trust dropped and future incident reporting may weaken.",
+                "professionalFeedback": {
+                  "mentorFeedback": "That was not leadership. That was a keyboard-powered scapegoat festival.",
+                  "safeExplanation": "Avoid blame; focus on process and system improvement.",
+                  "practicalTakeaway": "Psychological safety improves incident reporting."
+                }
+              },
+              "scoreImpact": {
+                "skill": -1,
+                "discipline": -2,
+                "ethics": -4,
+                "communication": -2,
+                "chaos": 4
+              }
+            },
+            {
+              "text": "Create a short public client update and a longer internal action register.",
+              "outcome": {
+                "title": "Two Audiences, One Truth",
+                "description": "The client gets clarity without internal noise. The team gets details without performative panic.",
+                "moralLesson": "Professional communication changes depth, not truth.",
+                "setStoryFlags": [
+                  "client_update_sent"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": 1,
+                  "clientTrust": 3,
+                  "teamTrust": 1,
+                  "publicReputation": 1
+                },
+                "reputationImpact": {
+                  "trust": 2,
+                  "safety": 1,
+                  "professionalism": 2,
+                  "reliability": 1,
+                  "stakeholderConfidence": 3
+                },
+                "consequenceSummary": "Client trust improved through clear communication.",
+                "professionalFeedback": {
+                  "mentorFeedback": "Excellent. Transparency without oversharing is a professional superpower.",
+                  "safeExplanation": "Communicate accurate impact, mitigation, and next steps.",
+                  "practicalTakeaway": "Tailor communication to audience while preserving truth."
+                }
+              },
+              "scoreImpact": {
+                "skill": 1,
+                "discipline": 2,
+                "ethics": 2,
+                "communication": 4,
+                "chaos": -1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "developer_premium_pack_v1",
+      "title": "Premium Pack Preview: Developer Crisis Lab",
+      "roleId": "developer",
+      "roleName": "Developer",
+      "roleIconKey": "code",
+      "description": "Premium preview pack for advanced incident response, ethics, and stakeholder communication. Preview is visible; gameplay is locked until entitlement check passes.",
+      "difficulty": "Advanced",
+      "creator": {
+        "id": "core_creator_lab",
+        "name": "Career Chaos Creator Lab",
+        "displayName": "Career Chaos Creator Lab",
+        "verified": true
+      },
+      "version": "1.0.0",
+      "contentVersion": "27.0.0",
+      "minAppVersion": "1.0.0",
+      "maxAppVersion": "2.0.0",
+      "priceType": "premium",
+      "safetyStatus": "approved",
+      "reviewStatus": "approved",
+      "isPublished": true,
+      "isFeatured": true,
+      "isDownloadable": true,
+      "supportsOfflineCache": true,
+      "rating": {
+        "average": 0,
+        "count": 0,
+        "userRating": 0
+      },
+      "reviews": [],
+      "tags": [
+        "developer",
+        "premium",
+        "incident",
+        "advanced"
+      ],
+      "compatibility": {
+        "minAppVersion": "1.0.0",
+        "requiredFeatureFlags": [
+          "scenario_marketplace",
+          "monetization_system"
+        ],
+        "schemaVersion": "scenario_pack_v1"
+      },
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "content_safety_lead",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "No unsafe production shortcuts."
+        ]
+      },
+      "offline": {
+        "cacheStrategy": "locked_until_entitled_downloadable_json_pack",
+        "estimatedSizeKb": 24,
+        "checksum": "developer-premium-pack-placeholder",
+        "supportsDeltaUpdate": false
+      },
+      "chapters": [
+        {
+          "id": "developer_premium_crisis_lab_1",
+          "title": "Premium Preview: Production Fire Drill",
+          "difficulty": "Intermediate",
+          "theme": "Bug triage, rollback planning, communication",
+          "story": "A creator-made side pack drops you into a release room where the login graph looks like a falling cricket score. The client wants a fix now, the mentor wants evidence, and the team wants lunch.",
+          "task": "Handle the incident without creating a second incident.",
+          "learningObjective": "Practice incident triage and controlled rollback communication.",
+          "skillLevel": "intermediate",
+          "workflowId": "developer_bug_triage",
+          "skillTags": [
+            "triage",
+            "rollback",
+            "communication"
+          ],
+          "skillNodeIds": [
+            "dev_release_safety",
+            "dev_debugging"
+          ],
+          "realWorldConstraints": [
+            "time",
+            "client_pressure",
+            "documentation"
+          ],
+          "safetyGuardrails": [
+            "Do not hide production evidence.",
+            "Do not patch without rollback and verification."
+          ],
+          "safeExplanation": "Incident response needs evidence, rollback readiness, and stakeholder updates.",
+          "practicalTakeaway": "Stabilize first, explain clearly, then fix with proof.",
+          "professionalLearningPoint": "The fastest fix is not professional if it removes traceability.",
+          "contentVersion": "27.0.0",
+          "contentPackId": "creator_dev_fire_drill_v1",
+          "assetVersion": "27.0.0",
+          "assetPackId": "base_visuals_v23",
+          "rolePluginId": "developer_core",
+          "contentTier": "premium",
+          "supportsOfflineCache": true,
+          "safetyReview": {
+            "status": "approved",
+            "domains": [
+              "professional_learning"
+            ],
+            "guardrails": [
+              "No unsafe engineering shortcuts."
+            ]
+          },
+          "analyticsTags": [
+            "developer",
+            "premium",
+            "monetization"
+          ],
+          "isPublished": true,
+          "choices": [
+            {
+              "text": "Rollback to the last known safe build, announce impact, and start evidence-based triage.",
+              "outcome": {
+                "title": "Controlled Fire Drill",
+                "description": "The room is still tense, but nobody is inventing mystery fixes at 2x speed. The client gets a clear update and the team gets a reproducible path.",
+                "moralLesson": "In incidents, calm evidence beats heroic guessing.",
+                "clearFlags": [
+                  "production_regression_risk"
+                ],
+                "setStoryFlags": [
+                  "documented_before_fix"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": 2,
+                  "clientTrust": 1,
+                  "teamTrust": 2,
+                  "publicReputation": 0
+                },
+                "reputationImpact": {
+                  "trust": 2,
+                  "safety": 2,
+                  "professionalism": 2,
+                  "reliability": 2,
+                  "stakeholderConfidence": 1
+                },
+                "consequenceSummary": "You reduced incident risk and improved team confidence.",
+                "professionalFeedback": {
+                  "mentorFeedback": "Good. You acted like a release owner, not a keyboard magician.",
+                  "safeExplanation": "Use rollback, monitoring, and communication before attempting risky changes.",
+                  "practicalTakeaway": "Always pair incident action with stakeholder communication."
+                }
+              },
+              "scoreImpact": {
+                "skill": 3,
+                "discipline": 3,
+                "ethics": 1,
+                "communication": 2,
+                "chaos": -2
+              }
+            },
+            {
+              "text": "Push a hotfix directly because the error looks obvious and confidence is free.",
+              "outcome": {
+                "title": "Confidence.exe Has Crashed",
+                "description": "The hotfix fixes login and breaks logout. The client asks if this is a feature. Your mentor develops a headache with sprint velocity.",
+                "moralLesson": "Confidence without verification is just chaos wearing sunglasses.",
+                "setFlags": [
+                  "skipped_testing",
+                  "production_regression_risk"
+                ],
+                "setStoryFlags": [
+                  "mentor_warned_after_shortcut"
+                ],
+                "unlockCleanupMissionIds": [
+                  "developer_rollback_cleanup"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": -2,
+                  "clientTrust": -2,
+                  "teamTrust": -1,
+                  "publicReputation": 0
+                },
+                "reputationImpact": {
+                  "trust": -2,
+                  "safety": -2,
+                  "professionalism": -1,
+                  "reliability": -2,
+                  "stakeholderConfidence": -2
+                },
+                "consequenceSummary": "You created a regression risk and unlocked a cleanup mission.",
+                "professionalFeedback": {
+                  "mentorFeedback": "Fast, yes. Safe, no. That was not a fix; that was a plot twist.",
+                  "safeExplanation": "Production changes require verification and rollback readiness.",
+                  "practicalTakeaway": "Never let pressure remove your release discipline."
+                }
+              },
+              "scoreImpact": {
+                "skill": -1,
+                "discipline": -3,
+                "ethics": -1,
+                "communication": -1,
+                "chaos": 5
+              }
+            },
+            {
+              "text": "Ask the QA lead for last failing evidence before choosing between rollback and patch.",
+              "outcome": {
+                "title": "Evidence Before Ego",
+                "description": "QA shares the reproduction path. The senior dev nods. Somewhere, a dashboard quietly stops sweating.",
+                "moralLesson": "Good incident work is collaborative, not solo hero drama.",
+                "setStoryFlags": [
+                  "asked_for_evidence"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": 1,
+                  "clientTrust": 0,
+                  "teamTrust": 3,
+                  "publicReputation": 0
+                },
+                "reputationImpact": {
+                  "trust": 1,
+                  "safety": 1,
+                  "professionalism": 2,
+                  "reliability": 1,
+                  "stakeholderConfidence": 1
+                },
+                "consequenceSummary": "You improved team trust and kept the fix evidence-based.",
+                "professionalFeedback": {
+                  "mentorFeedback": "This is how adults debug: evidence first, ego later if required never.",
+                  "safeExplanation": "Ask for reproduction evidence before committing to production action.",
+                  "practicalTakeaway": "Collaborate with QA during incidents."
+                }
+              },
+              "scoreImpact": {
+                "skill": 2,
+                "discipline": 2,
+                "ethics": 1,
+                "communication": 3,
+                "chaos": -1
+              }
+            }
+          ],
+          "contentAccess": {
+            "tier": "premium",
+            "isLockedPlaceholder": true,
+            "unlockHint": "Unlock with Premium Scenario Pack Bundle entitlement."
+          }
+        },
+        {
+          "id": "developer_premium_crisis_lab_2",
+          "title": "Premium Preview: The Postmortem Without Finger-Pointing",
+          "difficulty": "Intermediate",
+          "theme": "Postmortem, learning culture, documentation",
+          "story": "The incident is over. Now comes the meeting where everyone pretends they definitely knew the root cause yesterday.",
+          "task": "Lead a blameless postmortem that creates real improvement.",
+          "learningObjective": "Practice blameless review and action-item discipline.",
+          "skillLevel": "intermediate",
+          "workflowId": "developer_code_review",
+          "skillTags": [
+            "postmortem",
+            "documentation",
+            "team_trust"
+          ],
+          "skillNodeIds": [
+            "dev_documentation",
+            "dev_release_safety"
+          ],
+          "realWorldConstraints": [
+            "documentation",
+            "stakeholder_confidence"
+          ],
+          "safetyGuardrails": [
+            "Do not blame individuals for system failures.",
+            "Document action items with owners."
+          ],
+          "safeExplanation": "Postmortems should improve systems, not punish people for surfacing issues.",
+          "practicalTakeaway": "A useful postmortem turns evidence into owned improvements.",
+          "professionalLearningPoint": "Blameless postmortems protect learning and accountability together.",
+          "contentVersion": "27.0.0",
+          "contentPackId": "creator_dev_fire_drill_v1",
+          "assetVersion": "27.0.0",
+          "assetPackId": "base_visuals_v23",
+          "rolePluginId": "developer_core",
+          "contentTier": "premium",
+          "supportsOfflineCache": true,
+          "safetyReview": {
+            "status": "approved",
+            "domains": [
+              "professional_learning"
+            ],
+            "guardrails": [
+              "No unsafe engineering shortcuts."
+            ]
+          },
+          "analyticsTags": [
+            "developer",
+            "premium",
+            "monetization"
+          ],
+          "isPublished": true,
+          "choices": [
+            {
+              "text": "Map timeline, root cause, missed signals, and owners for preventive actions.",
+              "outcome": {
+                "title": "Postmortem With Spine",
+                "description": "The team leaves with action items instead of dramatic quotes for office folklore.",
+                "moralLesson": "Learning needs structure, not blame.",
+                "setStoryFlags": [
+                  "blameless_postmortem_done"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": 2,
+                  "clientTrust": 1,
+                  "teamTrust": 3,
+                  "publicReputation": 0
+                },
+                "reputationImpact": {
+                  "trust": 2,
+                  "safety": 1,
+                  "professionalism": 2,
+                  "reliability": 2,
+                  "stakeholderConfidence": 1
+                },
+                "consequenceSummary": "Team trust improved through structured learning.",
+                "professionalFeedback": {
+                  "mentorFeedback": "Good postmortem. Nobody cried, and the system actually improved.",
+                  "safeExplanation": "Document facts, contributing conditions, and preventive actions.",
+                  "practicalTakeaway": "Always close postmortems with owners and dates."
+                }
+              },
+              "scoreImpact": {
+                "skill": 2,
+                "discipline": 3,
+                "ethics": 2,
+                "communication": 2,
+                "chaos": -2
+              }
+            },
+            {
+              "text": "Blame the intern because their Jira comment used lowercase letters.",
+              "outcome": {
+                "title": "Blame Culture DLC",
+                "description": "Everyone learns one thing: hide mistakes faster next time. Productivity goes down and side-eye goes up.",
+                "moralLesson": "Blame hides risk; accountability fixes systems.",
+                "setStoryFlags": [
+                  "blame_culture_created"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": -2,
+                  "clientTrust": -1,
+                  "teamTrust": -4,
+                  "publicReputation": 0
+                },
+                "reputationImpact": {
+                  "trust": -3,
+                  "safety": -2,
+                  "professionalism": -3,
+                  "reliability": -2,
+                  "stakeholderConfidence": -1
+                },
+                "consequenceSummary": "Team trust dropped and future incident reporting may weaken.",
+                "professionalFeedback": {
+                  "mentorFeedback": "That was not leadership. That was a keyboard-powered scapegoat festival.",
+                  "safeExplanation": "Avoid blame; focus on process and system improvement.",
+                  "practicalTakeaway": "Psychological safety improves incident reporting."
+                }
+              },
+              "scoreImpact": {
+                "skill": -1,
+                "discipline": -2,
+                "ethics": -4,
+                "communication": -2,
+                "chaos": 4
+              }
+            },
+            {
+              "text": "Create a short public client update and a longer internal action register.",
+              "outcome": {
+                "title": "Two Audiences, One Truth",
+                "description": "The client gets clarity without internal noise. The team gets details without performative panic.",
+                "moralLesson": "Professional communication changes depth, not truth.",
+                "setStoryFlags": [
+                  "client_update_sent"
+                ],
+                "relationshipImpact": {
+                  "mentorTrust": 1,
+                  "clientTrust": 3,
+                  "teamTrust": 1,
+                  "publicReputation": 1
+                },
+                "reputationImpact": {
+                  "trust": 2,
+                  "safety": 1,
+                  "professionalism": 2,
+                  "reliability": 1,
+                  "stakeholderConfidence": 3
+                },
+                "consequenceSummary": "Client trust improved through clear communication.",
+                "professionalFeedback": {
+                  "mentorFeedback": "Excellent. Transparency without oversharing is a professional superpower.",
+                  "safeExplanation": "Communicate accurate impact, mitigation, and next steps.",
+                  "practicalTakeaway": "Tailor communication to audience while preserving truth."
+                }
+              },
+              "scoreImpact": {
+                "skill": 1,
+                "discipline": 2,
+                "ethics": 2,
+                "communication": 4,
+                "chaos": -1
+              }
+            }
+          ],
+          "contentAccess": {
+            "tier": "premium",
+            "isLockedPlaceholder": true,
+            "unlockHint": "Unlock with Premium Scenario Pack Bundle entitlement."
+          }
+        }
+      ]
+    },
+    {
+      "id": "doctor_safe_triage_pack_draft",
+      "title": "Creator Pack: Safe Triage Practice",
+      "roleId": "doctor",
+      "roleName": "Doctor",
+      "roleIconKey": "medical_services",
+      "description": "Draft pack reserved for safe triage and communication practice. Not published until medical safety review is approved.",
+      "difficulty": "Intermediate",
+      "creator": {
+        "id": "core_creator_lab",
+        "name": "Career Chaos Creator Lab",
+        "displayName": "Career Chaos Creator Lab",
+        "verified": true
+      },
+      "version": "0.1.0",
+      "contentVersion": "27.0.0",
+      "minAppVersion": "1.0.0",
+      "priceType": "free",
+      "safetyStatus": "pending",
+      "reviewStatus": "pending",
+      "isPublished": false,
+      "isFeatured": false,
+      "isDownloadable": true,
+      "supportsOfflineCache": true,
+      "rating": {
+        "average": 0,
+        "count": 0,
+        "userRating": 0
+      },
+      "reviews": [],
+      "tags": [
+        "doctor",
+        "triage",
+        "safety"
+      ],
+      "compatibility": {
+        "minAppVersion": "1.0.0",
+        "requiredFeatureFlags": [
+          "scenario_marketplace"
+        ],
+        "schemaVersion": "scenario_pack_v1"
+      },
+      "safetyReview": {
+        "status": "pending",
+        "domains": [
+          "medical"
+        ],
+        "guardrails": [
+          "No diagnosis, prescription, or dosage."
+        ]
+      },
+      "offline": {
+        "cacheStrategy": "downloadable_json_pack",
+        "estimatedSizeKb": 9,
+        "checksum": "draft-safe-triage-demo-checksum",
+        "supportsDeltaUpdate": false
+      },
+      "chapters": []
+    }
+  ]
+}

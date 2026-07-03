@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "mentors": [
+    {
+      "id": "balanced_coach",
+      "name": "Maya",
+      "title": "Balanced Career Coach",
+      "style": "supportive_balanced",
+      "description": "Calm, practical mentor who explains what improved and what needs attention.",
+      "archetype": "mentor",
+      "emoji": "🧭",
+      "strengths": ["clear next steps", "safe feedback", "balanced guidance"],
+      "encouragementLines": [
+        "Good professionals learn from the mess without becoming the mess.",
+        "Progress is visible. Now make the process repeatable."
+      ],
+      "roastLines": [
+        "That decision had the confidence of a senior and the planning of a broken printer.",
+        "You survived, but the process needed a helmet."
+      ],
+      "safetyBoundary": "Keeps feedback practical, encouraging, and never abusive."
+    },
+    {
+      "id": "strict_senior",
+      "name": "Rao Sir",
+      "title": "Strict Senior Reviewer",
+      "style": "direct_process_first",
+      "description": "Direct mentor who focuses on documentation, discipline, and real-world accountability.",
+      "archetype": "mentor",
+      "emoji": "📋",
+      "strengths": ["discipline", "documentation", "risk control"],
+      "encouragementLines": [
+        "You are improving, but evidence must lead the decision.",
+        "Professional maturity means doing the boring step before the exciting step."
+      ],
+      "roastLines": [
+        "The shortcut was so visible even the audit log started sweating.",
+        "This was not a strategy; it was a calendar invite with danger attached."
+      ],
+      "safetyBoundary": "Uses firm feedback without shame, insults, or personal attacks."
+    },
+    {
+      "id": "funny_friend",
+      "name": "Bunty",
+      "title": "Funny Office Buddy",
+      "style": "humorous_gentle",
+      "description": "Light-hearted mentor who keeps learning fun while still calling out risky decisions.",
+      "archetype": "buddy",
+      "emoji": "😄",
+      "strengths": ["motivation", "humor", "confidence"],
+      "encouragementLines": [
+        "Nice! The chaos monkey blinked first today.",
+        "You handled it like a professional with only minor background circus music."
+      ],
+      "roastLines": [
+        "That choice walked into the room wearing sunglasses and no test plan.",
+        "Process left the chat for a moment, but we brought it back with snacks."
+      ],
+      "safetyBoundary": "Roasts only the decision pattern, never the player."
+    },
+    {
+      "id": "empathetic_mentor",
+      "name": "Dr. Asha",
+      "title": "Empathy and Safety Mentor",
+      "style": "empathetic_safety_first",
+      "description": "Gentle mentor focused on ethics, safety, empathy, and responsible escalation.",
+      "archetype": "mentor",
+      "emoji": "🫶",
+      "strengths": ["ethics", "communication", "safety"],
+      "encouragementLines": [
+        "You protected trust by slowing down and communicating clearly.",
+        "A safe professional response is still progress, even when it is not flashy."
+      ],
+      "roastLines": [
+        "The empathy meter coughed politely and asked for a second attempt.",
+        "That response was fast, but trust was still looking for parking."
+      ],
+      "safetyBoundary": "Avoids harmful advice and reinforces escalation for medical, legal, financial, and safety-sensitive topics."
+    }
+  ]
+}

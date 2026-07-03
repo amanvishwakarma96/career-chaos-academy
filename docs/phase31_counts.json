@@ -1,0 +1,27 @@
+{
+  "phase": 31,
+  "generatedAt": "2026-06-17T00:00:00+05:30",
+  "flutterDartFiles": 161,
+  "flutterTestFiles": 29,
+  "backendJsFiles": 5,
+  "backendDataFiles": 35,
+  "docsFiles": 36,
+  "newPhase31Files": [
+    "flutter_app/lib/models/organization_model.dart",
+    "flutter_app/lib/services/corporate_edition_service.dart",
+    "flutter_app/lib/screens/corporate_college_edition_screen.dart",
+    "flutter_app/test/phase31_corporate_college_edition_model_test.dart",
+    "docs/phase31_corporate_college_edition_validation_report.md"
+  ],
+  "backendRoutesAdded": [
+    "GET /api/organizations",
+    "POST /api/organizations",
+    "GET /api/organizations/:organizationId",
+    "GET/POST /api/organizations/:organizationId/batches",
+    "GET/POST /api/organizations/:organizationId/assignments",
+    "POST /api/organizations/:organizationId/progress",
+    "GET /api/organizations/:organizationId/dashboard",
+    "GET /api/organizations/:organizationId/reports/export",
+    "GET /api/organizations/:organizationId/scenario-packs"
+  ]
+}

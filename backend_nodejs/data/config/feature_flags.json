@@ -1,0 +1,144 @@
+{
+  "version": 12,
+  "flags": [
+    {
+      "key": "story_mode",
+      "enabled": true,
+      "description": "Core role chapter gameplay",
+      "owner": "product",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "activity_hub",
+      "enabled": true,
+      "description": "Repeatable learning activities",
+      "owner": "product",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "flame_minigames",
+      "enabled": true,
+      "description": "Flame-powered mini-games",
+      "owner": "gameplay",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "ai_mentor",
+      "enabled": true,
+      "description": "Mentor feedback and weak-area suggestions",
+      "owner": "learning",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "career_coach",
+      "enabled": true,
+      "description": "Personalized AI career coach dashboard, weekly plan, and safe mentor-style advice",
+      "owner": "learning",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "ai_scenario_lab",
+      "enabled": false,
+      "description": "Creator/admin AI scenario review surface",
+      "owner": "content",
+      "rolloutPercentage": 0
+    },
+    {
+      "key": "adaptive_story_engine",
+      "enabled": true,
+      "description": "Adaptive story recommendations, dialogue injection, and admin-reviewed side mission drafts",
+      "owner": "learning",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "premium_content",
+      "enabled": false,
+      "description": "Future premium role/chapter gating",
+      "owner": "business",
+      "rolloutPercentage": 0
+    },
+    {
+      "key": "creator_mode",
+      "enabled": false,
+      "description": "Creator-only tooling in app",
+      "owner": "content",
+      "rolloutPercentage": 0
+    },
+    {
+      "key": "multiplayer_placeholder",
+      "enabled": false,
+      "description": "Legacy placeholder retained for compatibility; Phase 28 uses team_simulation.",
+      "owner": "platform",
+      "rolloutPercentage": 0
+    },
+    {
+      "key": "scenario_marketplace",
+      "enabled": true,
+      "description": "Enable creator scenario pack marketplace and offline pack previews."
+    },
+    {
+      "key": "team_simulation",
+      "enabled": true,
+      "description": "Enable multiplayer role-based team simulation rooms, turn decisions, scoring, and debrief.",
+      "owner": "platform",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "interview_mode",
+      "enabled": true,
+      "description": "Enable role-wise interview readiness mode with technical, behavioral, situation rounds, AI feedback, scoring, retry tips, and saved reports.",
+      "owner": "learning",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "certification_engine",
+      "enabled": true,
+      "description": "Enable role-wise final assessments, timed tests, practical mini-game scoring, certificates, verification IDs, and PDF certificate records.",
+      "owner": "learning",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "corporate_college_edition",
+      "enabled": true,
+      "description": "Enable organization, batch, assignment, trainee progress dashboard, report export, custom scenario packs, and RBAC training mode.",
+      "owner": "enterprise_learning",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "ai_voice_conversation",
+      "enabled": true,
+      "description": "Enable subtitle-first voice settings, TTS/STT placeholders, safe scenario-bound character chat, English/Hinglish/Hindi language mode, and text fallback.",
+      "owner": "learning_experience",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "learning_analytics",
+      "enabled": true,
+      "description": "Enable privacy-safe learning analytics events, personal dashboards, admin aggregates, progress insights, skill improvement tracking, and disable controls.",
+      "owner": "learning_platform",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "monetization_system",
+      "enabled": true,
+      "description": "Enable purchase-ready monetization architecture: product catalog, premium locks, entitlements, placeholders, restore purchase, certificate payment, and corporate license support.",
+      "owner": "business",
+      "rolloutPercentage": 100,
+      "developmentModeNoPaymentRequired": true
+    },
+    {
+      "key": "production_security_scale",
+      "enabled": true,
+      "description": "Enable production security and scale controls: secure token storage, rate limiting, request validation, admin RBAC, audit logs, content moderation, prompt abuse protection, backup/restore, monitoring, and privacy retention rules.",
+      "owner": "security_platform",
+      "rolloutPercentage": 100
+    },
+    {
+      "key": "game_visual_overhaul",
+      "enabled": true,
+      "description": "Enable Phase 36 cinematic Flame atmosphere, polished decision feedback, visual quality controls, and the Developer Chapter 1 Bug Hunt vertical slice.",
+      "owner": "gameplay_experience",
+      "rolloutPercentage": 100
+    }
+  ]
+}

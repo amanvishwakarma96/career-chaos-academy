@@ -1,0 +1,477 @@
+{
+  "role": {
+    "id": "back_office_executive",
+    "name": "Back Office Executive",
+    "description": "Protect business workflows through clean, accurate data.",
+    "iconKey": "table",
+    "pluginId": "back_office_executive_core",
+    "contentPackId": "core_roles_v23",
+    "contentVersion": "23.0.0",
+    "contentTier": "free"
+  },
+  "chapters": [
+    {
+      "id": "back_office_excel_sheet_of_doom",
+      "title": "Excel Sheet of Doom",
+      "difficulty": "Beginner",
+      "theme": "Data accuracy and validation",
+      "story": "You receive 500 customer records. Some names have extra spaces, emails are missing, dates are wrong, and one customer name is literally \u201cTest Test Please Ignore.\u201d",
+      "task": "Prepare data before upload.",
+      "choices": [
+        {
+          "text": "Upload directly",
+          "outcome": {
+            "title": "Printer Possession Ending",
+            "description": "System sends invoice to vendor, birthday wish to finance, and printer starts printing dance steps.",
+            "moralLesson": "Small data mistakes create big business problems.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Protect confidential data, verify duplicates, and keep a traceable correction record.",
+              "practicalTakeaway": "Small data mistakes create big business problems."
+            },
+            "analyticsTags": [
+              "back_office_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "discipline": -3,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Clean duplicates, validate mandatory fields, check dates",
+          "outcome": {
+            "title": "Data Hero Ending",
+            "description": "Upload succeeds. Manager says, \u201cAaj Excel ne tumhe nahi, tumne Excel ko control kiya.\u201d",
+            "moralLesson": "Accuracy is a professional skill.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Protect confidential data, verify duplicates, and keep a traceable correction record.",
+              "practicalTakeaway": "Accuracy is a professional skill."
+            },
+            "analyticsTags": [
+              "back_office_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "communication": 1
+          }
+        },
+        {
+          "text": "Delete confusing rows without asking",
+          "outcome": {
+            "title": "Vanishing Customer Ending",
+            "description": "Half the customers disappear. Sales team starts searching like CID episode.",
+            "moralLesson": "Never delete business data without confirmation.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Protect confidential data, verify duplicates, and keep a traceable correction record.",
+              "practicalTakeaway": "Never delete business data without confirmation."
+            },
+            "analyticsTags": [
+              "back_office_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "ethics": -2,
+            "discipline": -2,
+            "chaos": 4
+          }
+        }
+      ],
+      "miniGame": {
+        "id": "back_office_excel_data_cleanup",
+        "type": "data_cleanup",
+        "title": "Clean the Excel Sheet of Doom",
+        "instructions": "Select the rows that must be cleaned before upload.",
+        "prompt": "The upload portal rejects messy records. Identify rows that need correction.",
+        "hint": "Look for missing email, duplicate employee ID, and impossible date.",
+        "options": [
+          {
+            "id": "missing_email",
+            "text": "Employee 1042 has no email address",
+            "helperText": "Mandatory field missing."
+          },
+          {
+            "id": "valid_row",
+            "text": "Employee 1043 has name, email, and valid joining date",
+            "helperText": "This one looks fine."
+          },
+          {
+            "id": "duplicate_id",
+            "text": "Employee ID 1044 appears twice",
+            "helperText": "Duplicate key risk."
+          },
+          {
+            "id": "future_joining_date",
+            "text": "Joining date is 31-Feb-2027",
+            "helperText": "Calendar says no."
+          }
+        ],
+        "correctOptionIds": [
+          "missing_email",
+          "duplicate_id",
+          "future_joining_date"
+        ],
+        "successScoreImpact": {
+          "skill": 4,
+          "discipline": 3,
+          "ethics": 1,
+          "communication": 1,
+          "chaos": 0
+        },
+        "failureScoreImpact": {
+          "skill": 0,
+          "discipline": -1,
+          "ethics": 0,
+          "communication": 0,
+          "chaos": 4
+        },
+        "successMessage": "Data cleaned! Excel stopped screaming and the upload button became friendly again.",
+        "failureMessage": "Messy data uploaded. The server coughed, sneezed, and generated 407 error emails.",
+        "skillTags": [
+          "data_validation",
+          "duplicate_check"
+        ],
+        "skillLevel": "beginner",
+        "workflowId": "duplicate_check",
+        "skillNodeIds": [
+          "back_data_basics"
+        ]
+      },
+      "learningObjective": "Practice duplicate check workflow for a Back Office Executive situation involving data accuracy and validation.",
+      "skillLevel": "beginner",
+      "workflowId": "duplicate_check",
+      "skillTags": [
+        "data_validation",
+        "duplicate_check"
+      ],
+      "realWorldConstraints": [
+        "time",
+        "documentation",
+        "ethics"
+      ],
+      "safetyGuardrails": [
+        "Protect personal data and confidential documents.",
+        "Do not process duplicate/unclear records without verification.",
+        "Keep audit trail for every correction."
+      ],
+      "practicalTakeaway": "Use the duplicate check workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Operations simulation: protect private data, verify unclear records, and keep an audit trail. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Operations Mentor says: At beginner level, show your evidence, explain the trade-off, and follow the duplicate check workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "back_office_executive_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.back_office_executive.chapter.1.title",
+      "analyticsTags": [
+        "back_office_executive",
+        "beginner"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Protect personal data and confidential documents.",
+          "Do not process duplicate/unclear records without verification.",
+          "Keep audit trail for every correction."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "back_data_basics"
+      ]
+    },
+    {
+      "id": "back_office_invoice_avalanche",
+      "title": "Invoice Avalanche",
+      "difficulty": "Medium",
+      "theme": "Document accuracy and approval flow",
+      "story": "A stack of invoices arrives. Some totals mismatch, one vendor GST number is missing, and one invoice is clearly a restaurant bill.",
+      "task": "Process documents correctly.",
+      "choices": [
+        {
+          "text": "Upload all invoices quickly",
+          "outcome": {
+            "title": "Finance Thunder Ending",
+            "description": "Finance calls immediately. The restaurant bill is now waiting for project approval.",
+            "moralLesson": "Speed without validation creates rework.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Protect confidential data, verify duplicates, and keep a traceable correction record.",
+              "practicalTakeaway": "Speed without validation creates rework."
+            },
+            "analyticsTags": [
+              "back_office_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "discipline": -3,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Validate vendor details, totals, dates, and approval requirements",
+          "outcome": {
+            "title": "Clean Processing Ending",
+            "description": "Only correct invoices move forward. Finance sends a thumbs-up instead of a thunderstorm.",
+            "moralLesson": "Back office quality protects business records.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: acceptable start, but explain the trade-off and document what you checked.",
+              "safeExplanation": "Protect confidential data, verify duplicates, and keep a traceable correction record.",
+              "practicalTakeaway": "Back office quality protects business records."
+            },
+            "analyticsTags": [
+              "back_office_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "communication": 2
+          }
+        },
+        {
+          "text": "Guess missing details from old files",
+          "outcome": {
+            "title": "Assumption Audit Ending",
+            "description": "Audit asks for proof. Your answer is \u201cI felt it was correct.\u201d Audit does not enjoy feelings.",
+            "moralLesson": "Missing data should be clarified, not guessed.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Protect confidential data, verify duplicates, and keep a traceable correction record.",
+              "practicalTakeaway": "Missing data should be clarified, not guessed."
+            },
+            "analyticsTags": [
+              "back_office_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "ethics": -2,
+            "discipline": -2,
+            "chaos": 3
+          }
+        }
+      ],
+      "learningObjective": "Practice privacy filter workflow for a Back Office Executive situation involving document accuracy and approval flow.",
+      "skillLevel": "intermediate",
+      "workflowId": "privacy_filter",
+      "skillTags": [
+        "privacy_safe_communication",
+        "privacy_filter"
+      ],
+      "realWorldConstraints": [
+        "ethics",
+        "documentation",
+        "client_pressure"
+      ],
+      "safetyGuardrails": [
+        "Protect personal data and confidential documents.",
+        "Do not process duplicate/unclear records without verification.",
+        "Keep audit trail for every correction."
+      ],
+      "practicalTakeaway": "Use the privacy filter workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Operations simulation: protect private data, verify unclear records, and keep an audit trail. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Operations Mentor says: At intermediate level, show your evidence, explain the trade-off, and follow the privacy filter workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "back_office_executive_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.back_office_executive.chapter.2.title",
+      "analyticsTags": [
+        "back_office_executive",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Protect personal data and confidential documents.",
+          "Do not process duplicate/unclear records without verification.",
+          "Keep audit trail for every correction."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "back_duplicates"
+      ]
+    },
+    {
+      "id": "back_office_mail_merge_madness",
+      "title": "Mail Merge Madness",
+      "difficulty": "Hard",
+      "theme": "Communication accuracy and privacy",
+      "story": "You must send 300 customer emails. One wrong column mapping can call everyone \u201cDear Outstanding Payment.\u201d",
+      "task": "Prepare the communication safely.",
+      "choices": [
+        {
+          "text": "Send immediately to save time",
+          "outcome": {
+            "title": "Dear Chaos Ending",
+            "description": "Customers receive wrong names, wrong amounts, and one person gets called \u201cTest User.\u201d",
+            "moralLesson": "Bulk communication needs careful preview and validation.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Protect confidential data, verify duplicates, and keep a traceable correction record.",
+              "practicalTakeaway": "Bulk communication needs careful preview and validation."
+            },
+            "analyticsTags": [
+              "back_office_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -3,
+            "communication": -3,
+            "chaos": 5
+          }
+        },
+        {
+          "text": "Preview sample rows, verify fields, check recipients, and send test mail",
+          "outcome": {
+            "title": "Safe Send Ending",
+            "description": "Emails go correctly, privacy is protected, and nobody receives a bill for another customer.",
+            "moralLesson": "Testing applies to office workflows too.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "Protect confidential data, verify duplicates, and keep a traceable correction record.",
+              "practicalTakeaway": "Testing applies to office workflows too."
+            },
+            "analyticsTags": [
+              "back_office_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "communication": 4,
+            "ethics": 3
+          }
+        },
+        {
+          "text": "CC everyone for transparency",
+          "outcome": {
+            "title": "Privacy Parade Ending",
+            "description": "All customer emails are visible. Legal team enters the chat at running speed.",
+            "moralLesson": "Transparency must not break privacy.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "Protect confidential data, verify duplicates, and keep a traceable correction record.",
+              "practicalTakeaway": "Transparency must not break privacy."
+            },
+            "analyticsTags": [
+              "back_office_executive",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "ethics": -4,
+            "communication": -2,
+            "chaos": 5
+          }
+        }
+      ],
+      "learningObjective": "Practice audit correction workflow for a Back Office Executive situation involving communication accuracy and privacy.",
+      "skillLevel": "advanced",
+      "workflowId": "audit_correction",
+      "skillTags": [
+        "audit_trail",
+        "audit_correction"
+      ],
+      "realWorldConstraints": [
+        "documentation",
+        "time",
+        "ethics"
+      ],
+      "safetyGuardrails": [
+        "Protect personal data and confidential documents.",
+        "Do not process duplicate/unclear records without verification.",
+        "Keep audit trail for every correction."
+      ],
+      "practicalTakeaway": "Use the audit correction workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Operations simulation: protect private data, verify unclear records, and keep an audit trail. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Operations Mentor says: At advanced level, show your evidence, explain the trade-off, and follow the audit correction workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "back_office_executive_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.back_office_executive.chapter.3.title",
+      "analyticsTags": [
+        "back_office_executive",
+        "hard"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "professional_learning"
+        ],
+        "guardrails": [
+          "Protect personal data and confidential documents.",
+          "Do not process duplicate/unclear records without verification.",
+          "Keep audit trail for every correction."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "back_privacy"
+      ]
+    }
+  ],
+  "contentPackId": "core_roles_v23",
+  "contentVersion": "23.0.0",
+  "assetPackId": "base_visuals_v23",
+  "assetVersion": "23.0.0",
+  "localizationKey": "role.back_office_executive.title",
+  "rolePluginId": "back_office_executive_core",
+  "contentTier": "free",
+  "supportsOfflineCache": true
+}

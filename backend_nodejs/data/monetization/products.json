@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "developmentMode": {
+    "noPaymentRequired": true,
+    "environment": "development",
+    "paymentProvider": "placeholder_only"
+  },
+  "products": [
+    {
+      "id": "free_starter_role_pack",
+      "title": "Starter Role Pack",
+      "description": "Free access to the core starter chapters and training preview content.",
+      "productType": "scenario_pack",
+      "priceType": "free",
+      "currency": "INR",
+      "amountMinor": 0,
+      "isActive": true,
+      "featureFlag": "monetization_system",
+      "entitlementKey": "content.free.starter",
+      "contentIds": [
+        "core_roles_v23",
+        "creator_dev_fire_drill_v1"
+      ],
+      "scenarioPackIds": [
+        "creator_dev_fire_drill_v1"
+      ],
+      "roleIds": [
+        "developer",
+        "qa_tester",
+        "project_manager",
+        "doctor",
+        "hr",
+        "civil_engineer",
+        "architect",
+        "back_office"
+      ],
+      "preview": {
+        "title": "Free training preview",
+        "description": "Core chapters remain playable without purchase.",
+        "includedItems": [
+          "Starter chapters",
+          "Basic progress",
+          "Mini-game attempts"
+        ]
+      }
+    },
+    {
+      "id": "premium_scenario_pack_bundle_v1",
+      "title": "Premium Scenario Pack Bundle",
+      "description": "Future premium creator packs with deeper role simulations and advanced consequences.",
+      "productType": "scenario_pack",
+      "priceType": "premium",
+      "currency": "INR",
+      "amountMinor": 49900,
+      "isActive": true,
+      "featureFlag": "monetization_system",
+      "entitlementKey": "content.premium.scenario_packs",
+      "contentIds": [
+        "premium_scenario_pack_bundle_v1",
+        "developer_premium_pack_v1"
+      ],
+      "scenarioPackIds": [
+        "developer_premium_pack_v1"
+      ],
+      "roleIds": [
+        "developer",
+        "qa_tester",
+        "project_manager"
+      ],
+      "preview": {
+        "title": "Premium pack preview",
+        "description": "Preview chapters, outcomes, and skill coverage before purchase. Gameplay remains locked until an entitlement exists.",
+        "includedItems": [
+          "Advanced role crisis pack",
+          "Premium debrief templates",
+          "Extra skill-tree links"
+        ],
+        "lockedMessage": "Buy or activate a development entitlement to play the full premium pack."
+      }
+    },
+    {
+      "id": "career_chaos_plus_monthly",
+      "title": "Career Chaos Plus Monthly",
+      "description": "Subscription placeholder for all premium packs, voice practice labs, and future analytics insights.",
+      "productType": "subscription",
+      "priceType": "subscription",
+      "currency": "INR",
+      "amountMinor": 29900,
+      "billingPeriod": "monthly",
+      "isActive": true,
+      "featureFlag": "monetization_system",
+      "entitlementKey": "subscription.career_chaos_plus",
+      "contentIds": [
+        "premium_scenario_pack_bundle_v1",
+        "interview_voice_plus",
+        "advanced_analytics_plus"
+      ],
+      "scenarioPackIds": [
+        "developer_premium_pack_v1"
+      ],
+      "roleIds": [],
+      "preview": {
+        "title": "Plus preview",
+        "description": "Subscription flow is prepared as a placeholder; no real billing occurs in development.",
+        "includedItems": [
+          "Premium pack entitlement",
+          "Interview voice prototype entitlement",
+          "Future analytics add-ons"
+        ]
+      }
+    },
+    {
+      "id": "certificate_generation_fee_v1",
+      "title": "Certificate Generation Fee",
+      "description": "Placeholder product for paid PDF certificate generation after passing an assessment.",
+      "productType": "certificate",
+      "priceType": "payment_placeholder",
+      "currency": "INR",
+      "amountMinor": 9900,
+      "isActive": true,
+      "featureFlag": "monetization_system",
+      "entitlementKey": "certificate.generate.paid",
+      "contentIds": [
+        "certificate_pdf_generation"
+      ],
+      "scenarioPackIds": [],
+      "roleIds": [],
+      "preview": {
+        "title": "Certificate payment preview",
+        "description": "Certificates still require a passing assessment. Payment is a placeholder in development.",
+        "includedItems": [
+          "PDF certificate generation",
+          "Verification ID record",
+          "View later support"
+        ]
+      }
+    },
+    {
+      "id": "corporate_license_seat_placeholder",
+      "title": "Corporate License Seat",
+      "description": "Placeholder license for colleges, companies, and coaching institutes using organization batches.",
+      "productType": "corporate_license",
+      "priceType": "license_placeholder",
+      "currency": "INR",
+      "amountMinor": 0,
+      "isActive": true,
+      "featureFlag": "monetization_system",
+      "entitlementKey": "license.organization.seat",
+      "contentIds": [
+        "corporate_college_edition",
+        "organization_dashboard",
+        "export_reports"
+      ],
+      "scenarioPackIds": [],
+      "roleIds": [],
+      "preview": {
+        "title": "Corporate license preview",
+        "description": "Admin, trainer, batch, assignment, and report workflows are purchase-ready without requiring payment in dev.",
+        "includedItems": [
+          "Trainer/admin roles",
+          "Batch assignments",
+          "Progress export reports"
+        ]
+      }
+    }
+  ]
+}

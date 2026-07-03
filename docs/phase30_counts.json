@@ -1,0 +1,15 @@
+{
+  "phase": 30,
+  "timestamp": "2026-06-17T09:30:00.000Z",
+  "previousPhaseValidationDocsChecked": 19,
+  "missingPreviousValidationDocs": [],
+  "roleAssessments": 8,
+  "assessmentQuestions": 32,
+  "practicalMiniGameAssessments": 8,
+  "certificateTemplatePresent": true,
+  "certificationFeatureFlagEnabled": true,
+  "backendRoutesAdded": 9,
+  "flutterFilesAdded": 5,
+  "backendChecks": "npm run check && npm run test:smoke passed",
+  "flutterCliAvailable": false
+}

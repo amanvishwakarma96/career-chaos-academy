@@ -1,0 +1,8 @@
+{
+  "contentPackId": "core_roles_v23",
+  "version": "23.0.0",
+  "minAppVersion": "1.0.0",
+  "checksum": "local-dev-manifest",
+  "publishedAt": "2026-06-17T00:00:00.000Z",
+  "roleIds": ["developer", "qa_tester", "doctor", "civil_engineer", "architect", "back_office", "project_manager", "hr"]
+}

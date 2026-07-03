@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "characters": [
+    {
+      "id": "narrator",
+      "displayName": "Narrator",
+      "role": "system",
+      "archetype": "narrator",
+      "defaultEmotion": "neutral",
+      "defaultImage": "prop_missing_asset",
+      "aliases": ["Narrator"],
+      "personalityTraits": ["witty", "observant", "dramatic"],
+      "dialogueStyle": "Adds cinematic context and humorous professional tension.",
+      "expressions": {
+        "neutral": "prop_missing_asset",
+        "tense": "prop_missing_asset",
+        "focused": "prop_missing_asset"
+      }
+    },
+    {
+      "id": "developer_player",
+      "displayName": "You",
+      "role": "Developer",
+      "archetype": "player",
+      "defaultEmotion": "focused",
+      "defaultImage": "char_developer_neutral",
+      "aliases": ["You", "Developer", "Dev"],
+      "personalityTraits": ["curious", "under pressure", "improving judgment"],
+      "dialogueStyle": "Thinks in trade-offs, rollback plans, and nervous jokes.",
+      "expressions": {
+        "neutral": "char_developer_neutral",
+        "focused": "char_developer_focused",
+        "worried": "char_developer_worried",
+        "tense": "char_developer_worried",
+        "comedy": "char_developer_worried"
+      }
+    },
+    {
+      "id": "senior_dev_mentor",
+      "displayName": "Senior Dev",
+      "role": "Developer",
+      "archetype": "mentor",
+      "defaultEmotion": "serious",
+      "defaultImage": "char_senior_serious",
+      "aliases": ["Senior Dev", "Mentor", "Tech Lead"],
+      "personalityTraits": ["calm", "evidence-driven", "protective"],
+      "dialogueStyle": "Mentors through sharp one-liners and production wisdom.",
+      "expressions": {
+        "neutral": "char_senior_calm",
+        "calm": "char_senior_calm",
+        "serious": "char_senior_serious",
+        "focused": "char_senior_serious"
+      }
+    },
+    {
+      "id": "panic_pm_pressure",
+      "displayName": "Project Manager",
+      "role": "Project Manager",
+      "archetype": "pressure_villain",
+      "defaultEmotion": "panic",
+      "defaultImage": "char_manager_panic",
+      "aliases": ["Project Manager", "PM", "Client Pressure"],
+      "personalityTraits": ["deadline-driven", "dramatic", "scope-pressure"],
+      "dialogueStyle": "Creates pressure without always being wrong; a villain-style force for rushed decisions.",
+      "expressions": {
+        "neutral": "char_manager_panic",
+        "panic": "char_manager_panic",
+        "angry": "char_manager_angry",
+        "tense": "char_manager_angry",
+        "comedy": "char_manager_panic"
+      }
+    },
+    {
+      "id": "doctor_player",
+      "displayName": "You",
+      "role": "Doctor",
+      "archetype": "player",
+      "defaultEmotion": "calm",
+      "defaultImage": "char_doctor_calm",
+      "aliases": ["Doctor", "You"],
+      "personalityTraits": ["calm", "safe", "empathetic"],
+      "dialogueStyle": "Uses safe triage, empathy, and escalation boundaries.",
+      "expressions": {
+        "neutral": "char_doctor_calm",
+        "calm": "char_doctor_calm",
+        "focused": "char_doctor_focused",
+        "serious": "char_doctor_focused"
+      }
+    },
+    {
+      "id": "worried_patient",
+      "displayName": "Patient",
+      "role": "Doctor",
+      "archetype": "stakeholder",
+      "defaultEmotion": "worried",
+      "defaultImage": "char_patient_worried",
+      "aliases": ["Patient"],
+      "personalityTraits": ["anxious", "internet-researched", "needs reassurance"],
+      "dialogueStyle": "Mixes anxiety with funny exaggeration, requiring safe communication.",
+      "expressions": {
+        "neutral": "char_patient_worried",
+        "worried": "char_patient_worried",
+        "relieved": "char_patient_relieved",
+        "comedy": "char_patient_worried"
+      }
+    },
+    {
+      "id": "nurse_mentor",
+      "displayName": "Nurse",
+      "role": "Doctor",
+      "archetype": "mentor",
+      "defaultEmotion": "serious",
+      "defaultImage": "char_nurse_serious",
+      "aliases": ["Nurse", "Clinical Mentor"],
+      "personalityTraits": ["practical", "safety-first", "clear"],
+      "dialogueStyle": "Keeps the scene grounded in safety, triage, and documentation.",
+      "expressions": {
+        "neutral": "char_nurse_calm",
+        "calm": "char_nurse_calm",
+        "serious": "char_nurse_serious",
+        "focused": "char_nurse_serious"
+      }
+    }
+  ]
+}

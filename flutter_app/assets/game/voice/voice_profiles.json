@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "subtitleFirst": true,
+  "supportedLanguages": ["english", "hinglish", "hindi"],
+  "textToSpeech": {
+    "provider": "placeholder",
+    "status": "future_ready",
+    "fallbackToText": true,
+    "notes": "Real TTS providers can be connected later. Subtitles remain the source of truth."
+  },
+  "speechToText": {
+    "provider": "placeholder",
+    "status": "future_ready",
+    "fallbackToText": true,
+    "notes": "Real STT providers can be connected later. Typed input remains available."
+  },
+  "conversationSafety": {
+    "scenarioBound": true,
+    "noPersistentPersonalMemory": true,
+    "unsafeAdviceBlocked": true,
+    "allowedContextKeys": ["roleId", "scenarioId", "scenarioTitle", "currentUserMessage", "languageMode"],
+    "blockedTopics": ["medical diagnosis", "dosage", "hide evidence", "delete logs", "bypass safety", "steal data", "fake certificate", "discrimination"]
+  },
+  "profiles": [
+    {
+      "id": "senior_dev_mentor_voice",
+      "characterId": "senior_dev_mentor",
+      "displayName": "Senior Dev Mentor",
+      "roleId": "developer",
+      "tone": "calm, evidence-driven, slightly witty",
+      "defaultLanguage": "english",
+      "languageModes": ["english", "hinglish", "hindi"],
+      "voiceEnabledByDefault": false,
+      "subtitlesAlwaysOn": true,
+      "ttsProvider": "placeholder",
+      "sttProvider": "placeholder",
+      "fallbackToText": true,
+      "sampleSubtitle": "Check evidence first, then communicate the risk clearly.",
+      "memoryPolicy": {
+        "scenarioBound": true,
+        "noPersistentPersonalMemory": true,
+        "maxTurnsRetained": 20
+      }
+    },
+    {
+      "id": "project_manager_voice",
+      "characterId": "panic_pm_pressure",
+      "displayName": "Project Manager",
+      "roleId": "project_manager",
+      "tone": "urgent but professional",
+      "defaultLanguage": "hinglish",
+      "languageModes": ["english", "hinglish", "hindi"],
+      "voiceEnabledByDefault": false,
+      "subtitlesAlwaysOn": true,
+      "ttsProvider": "placeholder",
+      "sttProvider": "placeholder",
+      "fallbackToText": true,
+      "sampleSubtitle": "Deadline hai, but risk ko document karke safe call lo.",
+      "memoryPolicy": {
+        "scenarioBound": true,
+        "noPersistentPersonalMemory": true,
+        "maxTurnsRetained": 20
+      }
+    },
+    {
+      "id": "doctor_mentor_voice",
+      "characterId": "doctor_player",
+      "displayName": "Safe Triage Doctor",
+      "roleId": "doctor",
+      "tone": "calm, empathetic, safety-first",
+      "defaultLanguage": "hindi",
+      "languageModes": ["english", "hinglish", "hindi"],
+      "voiceEnabledByDefault": false,
+      "subtitlesAlwaysOn": true,
+      "ttsProvider": "placeholder",
+      "sttProvider": "placeholder",
+      "fallbackToText": true,
+      "sampleSubtitle": "Safety first. Escalate, document, and avoid diagnosis outside scope.",
+      "memoryPolicy": {
+        "scenarioBound": true,
+        "noPersistentPersonalMemory": true,
+        "maxTurnsRetained": 20
+      }
+    }
+  ]
+}

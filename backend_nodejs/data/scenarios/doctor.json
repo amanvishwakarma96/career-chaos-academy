@@ -1,0 +1,849 @@
+{
+  "role": {
+    "id": "doctor",
+    "name": "Doctor",
+    "description": "Use patient history and responsible diagnosis to reduce chaos.",
+    "iconKey": "medical",
+    "pluginId": "doctor_core",
+    "contentPackId": "core_roles_v23",
+    "contentVersion": "23.0.0",
+    "contentTier": "free"
+  },
+  "chapters": [
+    {
+      "id": "doctor_sneeze_storm",
+      "title": "The Sneeze Storm",
+      "difficulty": "Medium",
+      "theme": "Patient history and responsible diagnosis",
+      "story": "A patient rushes in: \u201cDoctor, Google says I have a rare disease.\u201d He also had cold drink, spicy chaat, dust exposure, and three hours of sleep.",
+      "task": "Handle the patient responsibly.",
+      "choices": [
+        {
+          "text": "Give medicine immediately without asking history",
+          "outcome": {
+            "title": "Confetti Clinic Ending",
+            "description": "Patient sneezes so hard that hospital files fly like wedding confetti.",
+            "moralLesson": "Diagnosis needs structured questioning.",
+            "setFlags": [
+              "poor_patient_communication"
+            ],
+            "unlockCleanupMissionIds": [
+              "doctor_safe_escalation_cleanup"
+            ],
+            "reputationImpact": {
+              "trust": -2,
+              "safety": -3,
+              "professionalism": -2,
+              "reliability": -1,
+              "stakeholderConfidence": -2
+            },
+            "consequenceSummary": "Unsafe communication creates a follow-up cleanup mission focused on red-flag escalation.",
+            "debrief": {
+              "whatWentWell": "You tried to respond quickly.",
+              "whatWasMissed": "You did not identify red flags or escalate safely.",
+              "realWorldPrinciple": "Medical learning scenarios should focus on safe triage and escalation, not diagnosis or prescription."
+            },
+            "setStoryFlags": [
+              "patient_trust_shaken"
+            ],
+            "relationshipImpact": {
+              "mentorTrust": -1,
+              "clientTrust": -2,
+              "teamTrust": 0,
+              "publicReputation": -1
+            },
+            "delayedConsequenceMessages": [
+              "The patient may hesitate before sharing symptoms next time."
+            ],
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Diagnosis needs structured questioning."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -2,
+            "ethics": -2,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Ask symptoms, duration, fever, allergy, food, and exposure history",
+          "outcome": {
+            "title": "Calm Clinic Ending",
+            "description": "You identify likely allergy/irritation pattern and advise proper next steps. Patient stops diagnosing himself from memes.",
+            "moralLesson": "Observation and history come before treatment.",
+            "clearFlags": [
+              "poor_patient_communication"
+            ],
+            "reputationImpact": {
+              "trust": 2,
+              "safety": 3,
+              "professionalism": 2,
+              "reliability": 2,
+              "stakeholderConfidence": 2
+            },
+            "consequenceSummary": "Safe triage communication improves patient trust and safety reputation.",
+            "setStoryFlags": [
+              "empathetic_history_taken"
+            ],
+            "relationshipImpact": {
+              "mentorTrust": 2,
+              "clientTrust": 3,
+              "teamTrust": 1,
+              "publicReputation": 1
+            },
+            "delayedConsequenceMessages": [
+              "The patient is more likely to report red flags clearly in future scenes."
+            ],
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Observation and history come before treatment."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 3,
+            "ethics": 4,
+            "communication": 3
+          }
+        },
+        {
+          "text": "Tell patient to stop using Google and go home",
+          "outcome": {
+            "title": "Savage But Unsafe Ending",
+            "description": "Patient laughs, then sneezes again. Reception renames you Dr. Roast.",
+            "moralLesson": "Humor is fine, but care needs responsibility.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Humor is fine, but care needs responsibility."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "communication": -2,
+            "ethics": -1,
+            "chaos": 2
+          }
+        }
+      ],
+      "miniGame": {
+        "id": "doctor_symptom_triage_match_pairs",
+        "type": "match_pairs",
+        "title": "Match Symptom to First Action",
+        "instructions": "Match each patient signal with the safest first action.",
+        "prompt": "The waiting room is turning into a sneeze orchestra. Triage quickly and responsibly.",
+        "hint": "Emergency signs need escalation. Mild symptoms need basic assessment first.",
+        "pairs": [
+          {
+            "leftId": "breathing_issue",
+            "leftText": "Patient has breathing difficulty",
+            "rightId": "urgent_escalation",
+            "rightText": "Escalate urgently and check vitals"
+          },
+          {
+            "leftId": "mild_sneeze",
+            "leftText": "Patient has mild sneezing",
+            "rightId": "basic_history",
+            "rightText": "Take history and check allergies"
+          },
+          {
+            "leftId": "medicine_allergy",
+            "leftText": "Patient reports medicine allergy",
+            "rightId": "avoid_allergen",
+            "rightText": "Avoid that drug and document allergy"
+          }
+        ],
+        "successScoreImpact": {
+          "skill": 4,
+          "discipline": 2,
+          "ethics": 3,
+          "communication": 1,
+          "chaos": 0
+        },
+        "failureScoreImpact": {
+          "skill": -1,
+          "discipline": 0,
+          "ethics": -1,
+          "communication": 0,
+          "chaos": 4
+        },
+        "successMessage": "Excellent triage. Even the sneezes formed a disciplined queue.",
+        "failureMessage": "Triage went sideways. The sneeze orchestra has added drums and a fog machine.",
+        "failureConsequence": {
+          "setFlags": [
+            "missed_red_flag"
+          ],
+          "unlockCleanupMissionIds": [
+            "doctor_safe_escalation_cleanup"
+          ],
+          "reputationImpact": {
+            "trust": -1,
+            "safety": -3,
+            "professionalism": -1,
+            "reliability": -1,
+            "stakeholderConfidence": -1
+          },
+          "consequenceSummary": "The failed triage challenge unlocks safe escalation cleanup."
+        },
+        "successConsequence": {
+          "clearFlags": [
+            "missed_red_flag"
+          ],
+          "reputationImpact": {
+            "trust": 1,
+            "safety": 2,
+            "professionalism": 1,
+            "reliability": 1,
+            "stakeholderConfidence": 1
+          },
+          "consequenceSummary": "You correctly focused on safe red-flag escalation."
+        },
+        "skillTags": [
+          "red_flag_triage",
+          "initial_triage"
+        ],
+        "skillLevel": "intermediate",
+        "workflowId": "initial_triage",
+        "skillNodeIds": [
+          "doctor_triage"
+        ]
+      },
+      "roleMechanicType": "red_flag_triage",
+      "safetyDisclaimer": "Educational scenario only. This app does not diagnose, prescribe, or replace medical care. Escalate red flags to qualified medical professionals.",
+      "scenes": [
+        {
+          "id": "doctor_waiting_room",
+          "title": "The Waiting Room Rumor Storm",
+          "backgroundImage": "bg_clinic_waiting_room",
+          "characterImage": "char_patient_worried",
+          "soundEffect": "clinic_murmur",
+          "transitionType": "fade",
+          "dialogues": [
+            {
+              "speaker": "Patient",
+              "emotion": "worried",
+              "text": "Doctor, Google says this sneeze is either dust allergy or I am turning into a weather report.",
+              "characterImage": "char_patient_worried",
+              "characterId": "worried_patient",
+              "audio": {
+                "subtitle": "Doctor, Google says this sneeze is either dust allergy or I am turning into a weather report.",
+                "voiceClip": "voice_placeholder"
+              }
+            },
+            {
+              "speaker": "Nurse",
+              "emotion": "serious",
+              "text": "Vitals are stable, but the patient is anxious. Please use safe triage and clear communication.",
+              "characterImage": "char_nurse_serious",
+              "characterId": "nurse_mentor",
+              "audio": {
+                "subtitle": "Vitals are stable, but the patient is anxious. Please use safe triage and clear communication.",
+                "voiceClip": "voice_placeholder"
+              }
+            }
+          ],
+          "characterId": "worried_patient",
+          "audio": {
+            "backgroundMusic": "bgm_clinic_calm",
+            "soundEffect": "clinic_murmur",
+            "loopBackgroundMusic": true
+          }
+        },
+        {
+          "id": "doctor_consult_room",
+          "title": "Safe Triage Moment",
+          "backgroundImage": "bg_doctor_consult_room",
+          "characterImage": "char_doctor_calm",
+          "soundEffect": "soft_chime",
+          "transitionType": "slide",
+          "dialogues": [
+            {
+              "speaker": "You",
+              "emotion": "calm",
+              "text": "No diagnosis shortcuts. I need symptoms, duration, exposure, allergies, red flags, and escalation if anything seems unsafe.",
+              "characterImage": "char_doctor_calm",
+              "characterId": "doctor_player",
+              "audio": {
+                "subtitle": "No diagnosis shortcuts. I need symptoms, duration, exposure, allergies, red flags, and escalatio",
+                "voiceClip": "voice_placeholder"
+              }
+            },
+            {
+              "speaker": "Narrator",
+              "emotion": "focused",
+              "text": "Your next choice should teach safe communication. No prescriptions, no dosage, no dangerous confidence.",
+              "characterImage": "char_doctor_calm",
+              "characterId": "narrator",
+              "audio": {
+                "subtitle": "Your next choice should teach safe communication. No prescriptions, no dosage, no dangerous conf"
+              }
+            }
+          ],
+          "characterId": "doctor_player",
+          "audio": {
+            "backgroundMusic": "bgm_clinic_calm",
+            "soundEffect": "soft_chime",
+            "loopBackgroundMusic": true
+          }
+        }
+      ],
+      "storyFlags": [
+        {
+          "id": "patient_trust_shaken",
+          "label": "Patient trust shaken",
+          "description": "The patient felt rushed instead of heard.",
+          "category": "communication",
+          "isPositive": false
+        },
+        {
+          "id": "empathetic_history_taken",
+          "label": "Empathetic history taken",
+          "description": "The doctor listened, asked history, and explained safe next steps.",
+          "category": "safety",
+          "isPositive": true
+        }
+      ],
+      "learningObjective": "Practice initial triage workflow for a Doctor situation involving patient history and responsible diagnosis.",
+      "skillLevel": "intermediate",
+      "workflowId": "initial_triage",
+      "skillTags": [
+        "red_flag_triage",
+        "initial_triage"
+      ],
+      "realWorldConstraints": [
+        "safety",
+        "time",
+        "ethics"
+      ],
+      "safetyGuardrails": [
+        "Educational simulation only; do not diagnose, prescribe, or provide dosage.",
+        "Escalate red flags to qualified medical professionals/emergency care.",
+        "Communicate clearly and document observations."
+      ],
+      "practicalTakeaway": "Use the initial triage workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Educational simulation only: do not diagnose, prescribe, or provide dosage. Escalate red-flag symptoms to qualified medical/emergency care. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Clinical Mentor says: At intermediate level, show your evidence, explain the trade-off, and follow the initial triage workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "doctor_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.doctor.chapter.1.title",
+      "analyticsTags": [
+        "doctor",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "medical"
+        ],
+        "guardrails": [
+          "Educational simulation only; do not diagnose, prescribe, or provide dosage.",
+          "Escalate red flags to qualified medical professionals/emergency care.",
+          "Communicate clearly and document observations."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "doctor_triage"
+      ]
+    },
+    {
+      "id": "doctor_midnight_stomach_case",
+      "title": "Midnight Stomach Drama",
+      "difficulty": "Medium",
+      "theme": "History taking and red flags",
+      "story": "A patient ate street food, ice cream, spicy snacks, and three kinds of confidence. Now stomach pain has arrived with attitude.",
+      "task": "Decide the responsible first step.",
+      "choices": [
+        {
+          "text": "Give strong medicine immediately",
+          "outcome": {
+            "title": "Shortcut Prescription Ending",
+            "description": "Symptoms get hidden, but the real issue remains. The stomach starts sending legal notices.",
+            "moralLesson": "Treatment decisions need history and red-flag screening.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Treatment decisions need history and red-flag screening."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -2,
+            "ethics": -2,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Ask pain location, fever, vomiting, stool, hydration, and severity",
+          "outcome": {
+            "title": "Responsible Care Ending",
+            "description": "You identify likely food-related irritation and know when urgent evaluation is needed.",
+            "moralLesson": "Structured questions help separate mild cases from emergencies.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Structured questions help separate mild cases from emergencies."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 3,
+            "ethics": 4,
+            "communication": 3
+          }
+        },
+        {
+          "text": "Scold patient for eating everything",
+          "outcome": {
+            "title": "Lecture Clinic Ending",
+            "description": "Patient feels guilty but still has pain. Reception starts selling regret tablets.",
+            "moralLesson": "Advice should educate, not shame.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Advice should educate, not shame."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "communication": -2,
+            "ethics": -1,
+            "chaos": 2
+          }
+        }
+      ],
+      "scenes": [
+        {
+          "id": "midnight_triage",
+          "title": "Midnight Stomach Case",
+          "backgroundImage": "bg_doctor_consult_room",
+          "transitionType": "fade",
+          "characterId": "doctor_player",
+          "dialogues": [
+            {
+              "speaker": "Patient",
+              "characterId": "worried_patient",
+              "emotion": "worried",
+              "text": "Doctor, I am scared to explain everything because last time felt rushed.",
+              "requiredStoryFlags": [
+                "patient_trust_shaken"
+              ],
+              "audio": {
+                "subtitle": "Doctor, I am scared to explain everything because last time felt rushed.",
+                "voiceClip": "voice_placeholder"
+              }
+            },
+            {
+              "speaker": "Patient",
+              "characterId": "worried_patient",
+              "emotion": "calm",
+              "text": "Last time you listened carefully, so I noted the symptoms and timing.",
+              "requiredStoryFlags": [
+                "empathetic_history_taken"
+              ],
+              "audio": {
+                "subtitle": "Last time you listened carefully, so I noted the symptoms and timing.",
+                "voiceClip": "voice_placeholder"
+              }
+            },
+            {
+              "speaker": "Nurse",
+              "characterId": "nurse_mentor",
+              "emotion": "serious",
+              "text": "Let us check red flags first. Safe triage before assumptions.",
+              "audio": {
+                "subtitle": "Let us check red flags first. Safe triage before assumptions.",
+                "voiceClip": "voice_placeholder"
+              }
+            }
+          ],
+          "audio": {
+            "backgroundMusic": "bgm_clinic_calm",
+            "soundEffect": "notification_ping",
+            "loopBackgroundMusic": true
+          }
+        }
+      ],
+      "learningObjective": "Practice safe communication workflow for a Doctor situation involving history taking and red flags.",
+      "skillLevel": "intermediate",
+      "workflowId": "safe_communication",
+      "skillTags": [
+        "patient_communication",
+        "safe_communication"
+      ],
+      "realWorldConstraints": [
+        "ethics",
+        "documentation"
+      ],
+      "safetyGuardrails": [
+        "Educational simulation only; do not diagnose, prescribe, or provide dosage.",
+        "Escalate red flags to qualified medical professionals/emergency care.",
+        "Communicate clearly and document observations."
+      ],
+      "practicalTakeaway": "Use the safe communication workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Educational simulation only: do not diagnose, prescribe, or provide dosage. Escalate red-flag symptoms to qualified medical/emergency care. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Clinical Mentor says: At intermediate level, show your evidence, explain the trade-off, and follow the safe communication workflow before choosing speed.",
+      "safetyDisclaimer": "Educational simulation only: do not diagnose, prescribe, or provide dosage. Escalate red-flag symptoms to qualified medical/emergency care.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "doctor_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.doctor.chapter.2.title",
+      "analyticsTags": [
+        "doctor",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "medical"
+        ],
+        "guardrails": [
+          "Educational simulation only; do not diagnose, prescribe, or provide dosage.",
+          "Escalate red flags to qualified medical professionals/emergency care.",
+          "Communicate clearly and document observations."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "doctor_communication"
+      ]
+    },
+    {
+      "id": "doctor_cough_conference",
+      "title": "Cough Conference",
+      "difficulty": "Hard",
+      "theme": "Triage and follow-up",
+      "story": "Three family members arrive with cough. One has fever, one has dust allergy, one says \u201cI saw reel, it is serious.\u201d",
+      "task": "Handle triage and guidance.",
+      "choices": [
+        {
+          "text": "Give same advice to everyone",
+          "outcome": {
+            "title": "Copy-Paste Clinic Ending",
+            "description": "Different problems receive same solution. The clinic printer becomes your medical assistant.",
+            "moralLesson": "Similar symptoms can have different causes.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Similar symptoms can have different causes."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -2,
+            "ethics": -2,
+            "chaos": 4
+          }
+        },
+        {
+          "text": "Assess severity, duration, exposure, fever, breathing, and follow-up needs",
+          "outcome": {
+            "title": "Smart Triage Ending",
+            "description": "You separate mild irritation from concerning symptoms and give clear follow-up advice.",
+            "moralLesson": "Triage is about prioritizing risk.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Triage is about prioritizing risk."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 4,
+            "discipline": 4,
+            "ethics": 4,
+            "communication": 3
+          }
+        },
+        {
+          "text": "Tell them all to drink hot water only",
+          "outcome": {
+            "title": "Thermos Treatment Ending",
+            "description": "Everyone gets steam, but nobody gets proper assessment. The kettle becomes senior consultant.",
+            "moralLesson": "Home care can support treatment but cannot replace evaluation.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Home care can support treatment but cannot replace evaluation."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -1,
+            "ethics": -1,
+            "chaos": 3
+          }
+        }
+      ],
+      "learningObjective": "Practice escalation handoff workflow for a Doctor situation involving triage and follow-up.",
+      "skillLevel": "advanced",
+      "workflowId": "escalation_handoff",
+      "skillTags": [
+        "clinical_documentation",
+        "escalation_handoff"
+      ],
+      "realWorldConstraints": [
+        "safety",
+        "time",
+        "documentation"
+      ],
+      "safetyGuardrails": [
+        "Educational simulation only; do not diagnose, prescribe, or provide dosage.",
+        "Escalate red flags to qualified medical professionals/emergency care.",
+        "Communicate clearly and document observations."
+      ],
+      "practicalTakeaway": "Use the escalation handoff workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Educational simulation only: do not diagnose, prescribe, or provide dosage. Escalate red-flag symptoms to qualified medical/emergency care. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Clinical Mentor says: At advanced level, show your evidence, explain the trade-off, and follow the escalation handoff workflow before choosing speed.",
+      "safetyDisclaimer": "Educational simulation only: do not diagnose, prescribe, or provide dosage. Escalate red-flag symptoms to qualified medical/emergency care.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "doctor_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.doctor.chapter.3.title",
+      "analyticsTags": [
+        "doctor",
+        "hard"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "medical"
+        ],
+        "guardrails": [
+          "Educational simulation only; do not diagnose, prescribe, or provide dosage.",
+          "Escalate red flags to qualified medical professionals/emergency care.",
+          "Communicate clearly and document observations."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "doctor_escalation"
+      ]
+    },
+    {
+      "id": "doctor_safe_escalation_cleanup",
+      "title": "Red-Flag Escalation Cleanup",
+      "difficulty": "Medium",
+      "theme": "Safe triage, escalation, patient communication",
+      "story": "A patient interaction needs repair. The goal is not to diagnose; the goal is to communicate urgency safely and escalate red flags to qualified care.",
+      "task": "Choose the safest remediation response.",
+      "professionalLearningPoint": "In high-risk medical scenarios, safe escalation and clear communication matter more than confident guessing.",
+      "safetyDisclaimer": "Educational scenario only. Do not diagnose, prescribe, or advise dosage. Encourage urgent professional medical care when red flags appear.",
+      "isCleanupMission": true,
+      "consequenceFlags": [
+        "poor_patient_communication",
+        "missed_red_flag"
+      ],
+      "roleMechanicType": "safe_escalation_order",
+      "choices": [
+        {
+          "text": "Acknowledge concern, explain red flags clearly, document, and escalate to qualified urgent care.",
+          "outcome": {
+            "title": "Safe Escalation",
+            "description": "The patient understands why urgent care matters and gets directed to qualified help without panic or false certainty.",
+            "moralLesson": "Safety-first communication protects patients.",
+            "clearFlags": [
+              "poor_patient_communication",
+              "missed_red_flag"
+            ],
+            "reputationImpact": {
+              "trust": 3,
+              "safety": 4,
+              "professionalism": 3,
+              "reliability": 2,
+              "stakeholderConfidence": 3
+            },
+            "consequenceSummary": "The unsafe communication flag is cleared through safe escalation.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: good judgment. You balanced action with evidence, communication, and professional responsibility.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Safety-first communication protects patients."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": 3,
+            "discipline": 3,
+            "ethics": 5,
+            "communication": 4,
+            "chaos": -3
+          }
+        },
+        {
+          "text": "Give a confident diagnosis because the patient looks worried.",
+          "outcome": {
+            "title": "Dangerous Confidence",
+            "description": "Confidence without proper evaluation creates risk. The scenario stops you from giving diagnosis or prescription advice.",
+            "moralLesson": "Do not replace qualified medical assessment.",
+            "setFlags": [
+              "unsafe_medical_advice"
+            ],
+            "reputationImpact": {
+              "trust": -3,
+              "safety": -5,
+              "professionalism": -3,
+              "reliability": -2,
+              "stakeholderConfidence": -3
+            },
+            "consequenceSummary": "Unsafe advice damages safety reputation and leaves cleanup unresolved.",
+            "professionalFeedback": {
+              "mentorFeedback": "Mentor feedback: funny disaster aside, this is a professional risk. Stop, document, and repair the decision path before moving forward.",
+              "safeExplanation": "No diagnosis, prescription, or dosage is taught here; safe triage means recognizing red flags and escalating to qualified care.",
+              "practicalTakeaway": "Do not replace qualified medical assessment."
+            },
+            "analyticsTags": [
+              "doctor",
+              "choice_outcome"
+            ]
+          },
+          "scoreImpact": {
+            "skill": -2,
+            "discipline": -2,
+            "ethics": -5,
+            "communication": -1,
+            "chaos": 5
+          }
+        }
+      ],
+      "learningObjective": "Practice initial triage workflow for a Doctor situation involving safe triage, escalation, patient communication.",
+      "skillLevel": "intermediate",
+      "workflowId": "initial_triage",
+      "skillTags": [
+        "red_flag_triage",
+        "initial_triage"
+      ],
+      "realWorldConstraints": [
+        "safety",
+        "time",
+        "ethics"
+      ],
+      "safetyGuardrails": [
+        "Educational simulation only; do not diagnose, prescribe, or provide dosage.",
+        "Escalate red flags to qualified medical professionals/emergency care.",
+        "Communicate clearly and document observations."
+      ],
+      "practicalTakeaway": "Use the initial triage workflow to balance professional judgment with constraints instead of guessing under pressure.",
+      "safeExplanation": "Educational simulation only: do not diagnose, prescribe, or provide dosage. Escalate red-flag symptoms to qualified medical/emergency care. This chapter is educational and does not replace qualified professional review.",
+      "mentorFeedback": "Clinical Mentor says: At intermediate level, show your evidence, explain the trade-off, and follow the initial triage workflow before choosing speed.",
+      "contentVersion": "23.0.0",
+      "contentPackId": "core_roles_v23",
+      "assetVersion": "23.0.0",
+      "assetPackId": "base_visuals_v23",
+      "rolePluginId": "doctor_core",
+      "contentTier": "free",
+      "supportsOfflineCache": true,
+      "localizationKey": "role.doctor.chapter.4.title",
+      "analyticsTags": [
+        "doctor",
+        "medium"
+      ],
+      "safetyReview": {
+        "status": "approved",
+        "reviewedBy": "phase23_seed_review",
+        "reviewedAt": "2026-06-17T00:00:00.000Z",
+        "domains": [
+          "medical"
+        ],
+        "guardrails": [
+          "Educational simulation only; do not diagnose, prescribe, or provide dosage.",
+          "Escalate red flags to qualified medical professionals/emergency care.",
+          "Communicate clearly and document observations."
+        ],
+        "notes": "Phase 23 metadata seed. Requires human review before production publishing changes."
+      },
+      "multiplayer": {
+        "mode": "solo",
+        "enabled": false,
+        "roomId": "",
+        "participantIds": []
+      },
+      "skillNodeIds": [
+        "doctor_escalation"
+      ]
+    }
+  ],
+  "contentPackId": "core_roles_v23",
+  "contentVersion": "23.0.0",
+  "assetPackId": "base_visuals_v23",
+  "assetVersion": "23.0.0",
+  "localizationKey": "role.doctor.title",
+  "rolePluginId": "doctor_core",
+  "contentTier": "free",
+  "supportsOfflineCache": true
+}

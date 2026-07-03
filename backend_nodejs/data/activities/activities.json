@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "activities": [
+    {
+      "id": "daily_dev_triage",
+      "type": "daily_challenge",
+      "title": "Daily Chaos Triage",
+      "roleId": "developer",
+      "difficulty": "Beginner",
+      "description": "A morning production alert is screaming louder than office chai machine. Pick the first safe move.",
+      "prompt": "What should you do first when a login error suddenly spikes after release?",
+      "options": [
+        "Patch directly in production because speed is king",
+        "Check logs, confirm scope, communicate impact, then plan rollback/fix",
+        "Ask the intern to restart random servers",
+        "Ignore it until the client calls twice"
+      ],
+      "correctAnswers": [
+        "Check logs, confirm scope, communicate impact, then plan rollback/fix"
+      ],
+      "durationSeconds": 45,
+      "rewardXp": 90,
+      "rewardBadgeId": "daily_chaos_starter",
+      "successMessage": "Good triage! The bug is still ugly, but at least it is wearing an ID card now.",
+      "failureMessage": "The bug escaped wearing sunglasses. Funny, but your first response needs evidence before action.",
+      "learningPoint": "Incident response starts with verification, impact assessment, communication, and rollback readiness.",
+      "practicalTakeaway": "Before fixing, identify what changed, who is affected, and what safe rollback path exists."
+    },
+    {
+      "id": "qa_bug_hunt_login",
+      "type": "bug_hunt",
+      "title": "Bug Hunt: Login Safari",
+      "roleId": "qa_tester",
+      "difficulty": "Intermediate",
+      "description": "The app works on everyone\u2019s laptop except the client\u2019s phone, which is apparently haunted.",
+      "prompt": "Select the strongest evidence items for a useful bug report.",
+      "options": [
+        "Exact device/browser/app version",
+        "Repro steps with expected vs actual result",
+        "Screenshot or recording",
+        "Only write: not working please check",
+        "Impact/severity note"
+      ],
+      "correctAnswers": [
+        "Exact device/browser/app version",
+        "Repro steps with expected vs actual result",
+        "Screenshot or recording",
+        "Impact/severity note"
+      ],
+      "durationSeconds": 60,
+      "rewardXp": 120,
+      "rewardBadgeId": "bug_hunt_pro",
+      "successMessage": "Evidence captured. The bug can no longer hide behind \u2018works on my machine\u2019. ",
+      "failureMessage": "The bug report went to gym but skipped leg day: weak evidence, weak reproduction.",
+      "learningPoint": "A useful bug report reduces ambiguity and helps developers reproduce quickly.",
+      "practicalTakeaway": "Always include environment, steps, expected/actual behavior, evidence, and severity context."
+    },
+    {
+      "id": "backoffice_cleanup_race",
+      "type": "data_cleanup_race",
+      "title": "Data Cleanup Race",
+      "roleId": "back_office_executive",
+      "difficulty": "Intermediate",
+      "description": "A spreadsheet has duplicate customers, mystery blanks, and one row named \u2018asdfasdf\u2019 with full confidence.",
+      "prompt": "Which actions are privacy-safe cleanup steps?",
+      "options": [
+        "Identify duplicate rows before deletion",
+        "Validate suspicious data against approved source",
+        "Send the full sheet to a WhatsApp group for fast help",
+        "Keep an audit note of changes",
+        "Guess missing phone numbers from memory"
+      ],
+      "correctAnswers": [
+        "Identify duplicate rows before deletion",
+        "Validate suspicious data against approved source",
+        "Keep an audit note of changes"
+      ],
+      "durationSeconds": 75,
+      "rewardXp": 130,
+      "rewardBadgeId": "cleanup_racer",
+      "successMessage": "Clean sheet, clean conscience. The spreadsheet stopped making ghost noises.",
+      "failureMessage": "The spreadsheet is cleaner, but privacy is now standing outside with a complaint form.",
+      "learningPoint": "Data cleanup must protect privacy, preserve audit trail, and avoid guessing.",
+      "practicalTakeaway": "Validate against approved sources and document changes instead of sharing raw data casually."
+    },
+    {
+      "id": "pm_client_negotiation_scope",
+      "type": "client_negotiation",
+      "title": "Client Negotiation: One Small Change\u2122",
+      "roleId": "project_manager",
+      "difficulty": "Advanced",
+      "description": "The client says it is a tiny change. The Jira ticket is already sweating.",
+      "prompt": "Choose the healthiest negotiation response.",
+      "options": [
+        "Accept immediately to look helpful",
+        "Reject rudely because scope is sacred",
+        "Clarify impact, offer options, confirm priority and change approval",
+        "Tell the team to work weekend silently"
+      ],
+      "correctAnswers": [
+        "Clarify impact, offer options, confirm priority and change approval"
+      ],
+      "durationSeconds": 50,
+      "rewardXp": 110,
+      "rewardBadgeId": "scope_negotiator",
+      "successMessage": "Scope controlled without drama. Somewhere a Gantt chart smiled.",
+      "failureMessage": "The scope grew legs, arms, and a subscription plan. Negotiate with evidence next time.",
+      "learningPoint": "Scope control is not saying no; it is making trade-offs visible.",
+      "practicalTakeaway": "Use impact, options, and approval flow before accepting new work."
+    },
+    {
+      "id": "doctor_ethics_red_flag",
+      "type": "ethical_dilemma",
+      "title": "Ethical Dilemma: Red Flag Rush",
+      "roleId": "doctor",
+      "difficulty": "Advanced",
+      "description": "A patient reports worrying symptoms while the waiting room looks like a railway platform.",
+      "prompt": "What is the safest learning-game response?",
+      "options": [
+        "Give a diagnosis in the app and move on",
+        "Suggest medicine dosage because confidence looks professional",
+        "Identify red flags, communicate calmly, document, and escalate to qualified urgent care",
+        "Make a joke and ignore the concern"
+      ],
+      "correctAnswers": [
+        "Identify red flags, communicate calmly, document, and escalate to qualified urgent care"
+      ],
+      "durationSeconds": 60,
+      "rewardXp": 100,
+      "rewardBadgeId": "safe_triage_thinker",
+      "successMessage": "Safe escalation chosen. Humor stayed outside the emergency door where it belongs.",
+      "failureMessage": "Unsafe shortcut detected. In medical content, red flags need escalation, not guesswork.",
+      "learningPoint": "This game teaches triage thinking and communication, not diagnosis or prescriptions.",
+      "practicalTakeaway": "For concerning symptoms, escalate to qualified medical/emergency care and document clearly."
+    },
+    {
+      "id": "hr_role_quiz_feedback",
+      "type": "role_quiz",
+      "title": "Role Quiz: Feedback Without Fireworks",
+      "roleId": "hr_executive",
+      "difficulty": "Beginner",
+      "description": "A candidate needs feedback. The wrong sentence can become a legal boomerang with glitter.",
+      "prompt": "Which feedback style is safest and most professional?",
+      "options": [
+        "Give role-related, evidence-based feedback with respectful wording",
+        "Comment on personality and personal background",
+        "Say nothing because silence is easiest",
+        "Send a meme instead of feedback"
+      ],
+      "correctAnswers": [
+        "Give role-related, evidence-based feedback with respectful wording"
+      ],
+      "durationSeconds": 40,
+      "rewardXp": 80,
+      "rewardBadgeId": "ethical_feedback_quiz",
+      "successMessage": "Clean feedback! The candidate learned something and Legal did not faint.",
+      "failureMessage": "Feedback slipped on a banana peel. Keep it role-related, respectful, and evidence-based.",
+      "learningPoint": "HR feedback should focus on role criteria and observable evidence.",
+      "practicalTakeaway": "Avoid personal, biased, or legally risky comments; use structured scorecard evidence."
+    },
+    {
+      "id": "weekly_challenge_placeholder",
+      "type": "boss_battle",
+      "title": "Weekly Boss Battle: Coming Soon",
+      "roleId": "",
+      "difficulty": "Weekly",
+      "description": "A future weekly challenge will combine role constraints, timers, and branching consequences.",
+      "prompt": "Weekly challenge placeholder.",
+      "options": [
+        "Coming soon"
+      ],
+      "correctAnswers": [
+        "Coming soon"
+      ],
+      "durationSeconds": 0,
+      "rewardXp": 0,
+      "rewardBadgeId": "",
+      "successMessage": "Weekly challenge is being prepared.",
+      "failureMessage": "Weekly challenge is not active yet.",
+      "learningPoint": "Weekly challenges will improve replayability.",
+      "practicalTakeaway": "Return later for rotating constraints and rewards.",
+      "weeklyPlaceholder": true
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "styles": [
+    {
+      "id": "strict_mentor",
+      "name": "Strict Mentor",
+      "tone": "direct_process_first",
+      "description": "Clear, disciplined, no-excuses feedback focused on professional standards.",
+      "encouragement": "You can improve this, but the process must become repeatable.",
+      "safetyBoundary": "Never shame the user; critique decisions, not identity."
+    },
+    {
+      "id": "funny_mentor",
+      "name": "Funny Mentor",
+      "tone": "humorous_gentle",
+      "description": "Light humor with practical next steps.",
+      "encouragement": "The chaos made an entrance, but we can still teach it manners.",
+      "safetyBoundary": "Humor must not minimize unsafe, biased, medical, legal, or financial risks."
+    },
+    {
+      "id": "corporate_mentor",
+      "name": "Corporate Mentor",
+      "tone": "stakeholder_ready",
+      "description": "Professional, stakeholder-aware feedback with documentation focus.",
+      "encouragement": "Strong professionals protect clarity, trust, and auditability.",
+      "safetyBoundary": "Avoid guaranteed outcomes or legal/financial certainty."
+    },
+    {
+      "id": "calm_teacher",
+      "name": "Calm Teacher",
+      "tone": "patient_explainer",
+      "description": "Slow, supportive explanations for steady learning.",
+      "encouragement": "One better decision at a time is still progress.",
+      "safetyBoundary": "Keep advice educational and encourage expert escalation when needed."
+    },
+    {
+      "id": "roast_mentor",
+      "name": "Roast Mentor",
+      "tone": "safe_roast",
+      "description": "Optional playful roasting that stays kind and decision-focused.",
+      "encouragement": "We roast the shortcut, not the learner.",
+      "safetyBoundary": "No abusive words, no insults about identity, health, intelligence, or worth."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "plugins": [
+    { "pluginId": "developer_core", "roleId": "developer", "displayName": "Developer Core Plugin", "routeKey": "default_role_flow", "contentPackId": "core_roles_v23", "enabled": true, "requiredFeatureFlags": ["story_mode"] },
+    { "pluginId": "qa_tester_core", "roleId": "qa_tester", "displayName": "QA Tester Core Plugin", "routeKey": "default_role_flow", "contentPackId": "core_roles_v23", "enabled": true, "requiredFeatureFlags": ["story_mode"] },
+    { "pluginId": "doctor_core", "roleId": "doctor", "displayName": "Doctor Core Plugin", "routeKey": "default_role_flow", "contentPackId": "core_roles_v23", "enabled": true, "requiredFeatureFlags": ["story_mode"] },
+    { "pluginId": "civil_engineer_core", "roleId": "civil_engineer", "displayName": "Civil Engineer Core Plugin", "routeKey": "default_role_flow", "contentPackId": "core_roles_v23", "enabled": true, "requiredFeatureFlags": ["story_mode"] },
+    { "pluginId": "architect_core", "roleId": "architect", "displayName": "Architect Core Plugin", "routeKey": "default_role_flow", "contentPackId": "core_roles_v23", "enabled": true, "requiredFeatureFlags": ["story_mode"] },
+    { "pluginId": "back_office_core", "roleId": "back_office", "displayName": "Back Office Core Plugin", "routeKey": "default_role_flow", "contentPackId": "core_roles_v23", "enabled": true, "requiredFeatureFlags": ["story_mode"] },
+    { "pluginId": "project_manager_core", "roleId": "project_manager", "displayName": "Project Manager Core Plugin", "routeKey": "default_role_flow", "contentPackId": "core_roles_v23", "enabled": true, "requiredFeatureFlags": ["story_mode"] },
+    { "pluginId": "hr_core", "roleId": "hr", "displayName": "HR Core Plugin", "routeKey": "default_role_flow", "contentPackId": "core_roles_v23", "enabled": true, "requiredFeatureFlags": ["story_mode"] }
+  ]
+}

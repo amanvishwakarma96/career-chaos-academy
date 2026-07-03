@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "note": "Placeholder audio keys for Phase 21. Replace WAV files with optimized production audio using the same filenames or update AudioRegistry.",
+  "backgroundMusic": [
+    "bgm_office_light",
+    "bgm_clinic_calm",
+    "bgm_cinematic_tension"
+  ],
+  "soundEffects": [
+    "notification_ping",
+    "choice_select",
+    "success_stinger",
+    "failure_stinger",
+    "badge_unlock",
+    "comedy_bonk"
+  ],
+  "voice": [
+    "voice_placeholder"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "assetPackId": "base_visuals_v23",
+  "version": "23.0.0",
+  "baseUrl": "",
+  "assetVersions": {
+    "bg_office_morning": "23.0.0",
+    "bg_production_war_room": "23.0.0",
+    "bg_clinic_waiting_room": "23.0.0",
+    "char_developer_worried": "23.0.0",
+    "char_senior_serious": "23.0.0",
+    "char_doctor_calm": "23.0.0",
+    "success_stinger": "23.0.0",
+    "failure_stinger": "23.0.0"
+  }
+}

@@ -1,0 +1,6 @@
+Phase 33 final counts generated at 2026-06-17T10:05:42.615908+00:00
+flutter_dart_files: 167
+flutter_test_files: 31
+backend_js_files: 5
+backend_data_json_files: 39
+docs_files: 45

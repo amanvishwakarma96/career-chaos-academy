@@ -1,0 +1,9 @@
+{
+  "roles": 8,
+  "chapters": 27,
+  "choices": 79,
+  "outcomes": 79,
+  "minigames": 6,
+  "feature_flags": 8,
+  "role_plugins": 8
+}

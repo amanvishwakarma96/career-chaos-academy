@@ -1,0 +1,11 @@
+{
+  "phase": 33,
+  "generatedAt": "2026-06-17T10:05:42.615241+00:00",
+  "counts": {
+    "flutter_dart_files": 167,
+    "flutter_test_files": 31,
+    "backend_js_files": 5,
+    "backend_data_json_files": 39,
+    "docs_files": 45
+  }
+}

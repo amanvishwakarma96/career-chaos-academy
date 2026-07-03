@@ -1,0 +1,698 @@
+{
+  "version": 1,
+  "contentVersion": "26.0.0",
+  "skillTrees": [
+    {
+      "roleId": "architect",
+      "title": "Architect Skill Tree",
+      "description": "Role-wise mastery path for Architect.",
+      "version": "26.0.0",
+      "nodes": [
+        {
+          "id": "architect_constraints",
+          "title": "Constraint Discovery",
+          "description": "Build constraint discovery through chapters, mini-games, and activities.",
+          "level": "beginner",
+          "category": "communication",
+          "prerequisiteNodeIds": [],
+          "linkedChapterIds": [
+            "architect_seven_swimming_pools"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "architect_space",
+          "title": "Space Planning",
+          "description": "Build space planning through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "technical",
+          "prerequisiteNodeIds": [
+            "architect_constraints"
+          ],
+          "linkedChapterIds": [
+            "architect_vastu_vs_ventilation"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "architect_budget",
+          "title": "Budget Trade-offs",
+          "description": "Build budget trade-offs through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "discipline",
+          "prerequisiteNodeIds": [
+            "architect_space"
+          ],
+          "linkedChapterIds": [
+            "architect_budget_balcony_battle"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "architect_accessibility",
+          "title": "Accessibility and Safety",
+          "description": "Build accessibility and safety through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "ethics",
+          "prerequisiteNodeIds": [
+            "architect_budget"
+          ],
+          "linkedChapterIds": [
+            "architect_budget_balcony_battle"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "architect_mastery",
+          "title": "Client-Safe Design Judgment",
+          "description": "Build client-safe design judgment through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "mastery",
+          "prerequisiteNodeIds": [
+            "architect_accessibility"
+          ],
+          "linkedChapterIds": [
+            "architect_budget_balcony_battle"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": "architect_mastery_badge"
+        }
+      ]
+    },
+    {
+      "roleId": "civil_engineer",
+      "title": "Civil Engineer Skill Tree",
+      "description": "Role-wise mastery path for Civil Engineer.",
+      "version": "26.0.0",
+      "nodes": [
+        {
+          "id": "civil_safety",
+          "title": "Site Safety Basics",
+          "description": "Build site safety basics through chapters, mini-games, and activities.",
+          "level": "beginner",
+          "category": "safety",
+          "prerequisiteNodeIds": [],
+          "linkedChapterIds": [
+            "civil_engineer_bridge_of_overconfidence"
+          ],
+          "linkedMiniGameIds": [
+            "civil_bridge_safety_arrange_order"
+          ],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "civil_inspection",
+          "title": "Inspection Discipline",
+          "description": "Build inspection discipline through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "discipline",
+          "prerequisiteNodeIds": [
+            "civil_safety"
+          ],
+          "linkedChapterIds": [
+            "civil_engineer_rainy_site_visit"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "civil_materials",
+          "title": "Material Validation",
+          "description": "Build material validation through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "technical",
+          "prerequisiteNodeIds": [
+            "civil_inspection"
+          ],
+          "linkedChapterIds": [
+            "civil_engineer_concrete_countdown"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "civil_escalation",
+          "title": "Unsafe Work Escalation",
+          "description": "Build unsafe work escalation through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "communication",
+          "prerequisiteNodeIds": [
+            "civil_materials"
+          ],
+          "linkedChapterIds": [
+            "civil_engineer_concrete_countdown"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "civil_mastery",
+          "title": "Safety-First Engineering",
+          "description": "Build safety-first engineering through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "mastery",
+          "prerequisiteNodeIds": [
+            "civil_escalation"
+          ],
+          "linkedChapterIds": [
+            "civil_engineer_concrete_countdown"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": "civil_mastery_badge"
+        }
+      ]
+    },
+    {
+      "roleId": "developer",
+      "title": "Developer Skill Tree",
+      "description": "Role-wise mastery path for Developer.",
+      "version": "26.0.0",
+      "nodes": [
+        {
+          "id": "dev_foundations",
+          "title": "Debugging Foundations",
+          "description": "Build debugging foundations through chapters, mini-games, and activities.",
+          "level": "beginner",
+          "category": "technical",
+          "prerequisiteNodeIds": [],
+          "linkedChapterIds": [
+            "developer_login_button_disaster"
+          ],
+          "linkedMiniGameIds": [
+            "developer_login_button_code_fix"
+          ],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "dev_testing_discipline",
+          "title": "Testing Discipline",
+          "description": "Build testing discipline through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "discipline",
+          "prerequisiteNodeIds": [
+            "dev_foundations"
+          ],
+          "linkedChapterIds": [
+            "developer_api_timeout_panic"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "dev_release_safety",
+          "title": "Release Safety",
+          "description": "Build release safety through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "safety",
+          "prerequisiteNodeIds": [
+            "dev_testing_discipline"
+          ],
+          "linkedChapterIds": [
+            "developer_hotfix_friday"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "dev_communication",
+          "title": "Technical Communication",
+          "description": "Build technical communication through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "communication",
+          "prerequisiteNodeIds": [
+            "dev_release_safety"
+          ],
+          "linkedChapterIds": [
+            "developer_rollback_cleanup"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "dev_mastery",
+          "title": "Production Judgment",
+          "description": "Build production judgment through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "mastery",
+          "prerequisiteNodeIds": [
+            "dev_communication"
+          ],
+          "linkedChapterIds": [
+            "developer_role_finale"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": "dev_mastery_badge"
+        }
+      ]
+    },
+    {
+      "roleId": "doctor",
+      "title": "Doctor Skill Tree",
+      "description": "Role-wise mastery path for Doctor.",
+      "version": "26.0.0",
+      "nodes": [
+        {
+          "id": "doctor_triage",
+          "title": "Safe Triage",
+          "description": "Build safe triage through chapters, mini-games, and activities.",
+          "level": "beginner",
+          "category": "safety",
+          "prerequisiteNodeIds": [],
+          "linkedChapterIds": [
+            "doctor_sneeze_storm"
+          ],
+          "linkedMiniGameIds": [
+            "doctor_symptom_triage_match_pairs"
+          ],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "doctor_communication",
+          "title": "Patient Communication",
+          "description": "Build patient communication through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "communication",
+          "prerequisiteNodeIds": [
+            "doctor_triage"
+          ],
+          "linkedChapterIds": [
+            "doctor_midnight_stomach_case"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "doctor_escalation",
+          "title": "Escalation Judgment",
+          "description": "Build escalation judgment through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "safety",
+          "prerequisiteNodeIds": [
+            "doctor_communication"
+          ],
+          "linkedChapterIds": [
+            "doctor_cough_conference"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "doctor_documentation",
+          "title": "Clinical Documentation",
+          "description": "Build clinical documentation through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "discipline",
+          "prerequisiteNodeIds": [
+            "doctor_escalation"
+          ],
+          "linkedChapterIds": [
+            "doctor_safe_escalation_cleanup"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "doctor_mastery",
+          "title": "Safe Care Judgment",
+          "description": "Build safe care judgment through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "mastery",
+          "prerequisiteNodeIds": [
+            "doctor_documentation"
+          ],
+          "linkedChapterIds": [
+            "doctor_safe_escalation_cleanup"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": "doctor_mastery_badge"
+        }
+      ]
+    },
+    {
+      "roleId": "project_manager",
+      "title": "Project Manager Skill Tree",
+      "description": "Role-wise mastery path for Project Manager.",
+      "version": "26.0.0",
+      "nodes": [
+        {
+          "id": "pm_scope",
+          "title": "Scope Control",
+          "description": "Build scope control through chapters, mini-games, and activities.",
+          "level": "beginner",
+          "category": "communication",
+          "prerequisiteNodeIds": [],
+          "linkedChapterIds": [
+            "project_manager_small_change_sir"
+          ],
+          "linkedMiniGameIds": [
+            "pm_scope_decision_matrix"
+          ],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "pm_risk",
+          "title": "Risk Management",
+          "description": "Build risk management through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "discipline",
+          "prerequisiteNodeIds": [
+            "pm_scope"
+          ],
+          "linkedChapterIds": [
+            "project_manager_standup_storm"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "pm_resource",
+          "title": "Resource Balancing",
+          "description": "Build resource balancing through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "technical",
+          "prerequisiteNodeIds": [
+            "pm_risk"
+          ],
+          "linkedChapterIds": [
+            "project_manager_demo_day_disaster"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "pm_stakeholder",
+          "title": "Stakeholder Trust",
+          "description": "Build stakeholder trust through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "communication",
+          "prerequisiteNodeIds": [
+            "pm_resource"
+          ],
+          "linkedChapterIds": [
+            "project_manager_demo_day_disaster"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "pm_mastery",
+          "title": "Delivery Judgment",
+          "description": "Build delivery judgment through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "mastery",
+          "prerequisiteNodeIds": [
+            "pm_stakeholder"
+          ],
+          "linkedChapterIds": [
+            "project_manager_demo_day_disaster"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": "pm_mastery_badge"
+        }
+      ]
+    },
+    {
+      "roleId": "qa_tester",
+      "title": "QA Tester Skill Tree",
+      "description": "Role-wise mastery path for QA Tester.",
+      "version": "26.0.0",
+      "nodes": [
+        {
+          "id": "qa_foundations",
+          "title": "Testing Foundations",
+          "description": "Build testing foundations through chapters, mini-games, and activities.",
+          "level": "beginner",
+          "category": "technical",
+          "prerequisiteNodeIds": [],
+          "linkedChapterIds": [
+            "qa_tester_works_on_my_machine"
+          ],
+          "linkedMiniGameIds": [
+            "qa_payment_test_multiple_select"
+          ],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "qa_evidence",
+          "title": "Evidence Collection",
+          "description": "Build evidence collection through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "discipline",
+          "prerequisiteNodeIds": [
+            "qa_foundations"
+          ],
+          "linkedChapterIds": [
+            "qa_tester_otp_loop"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "qa_regression",
+          "title": "Regression Strategy",
+          "description": "Build regression strategy through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "technical",
+          "prerequisiteNodeIds": [
+            "qa_evidence"
+          ],
+          "linkedChapterIds": [
+            "qa_tester_release_notes_ghost"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "qa_communication",
+          "title": "Defect Communication",
+          "description": "Build defect communication through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "communication",
+          "prerequisiteNodeIds": [
+            "qa_regression"
+          ],
+          "linkedChapterIds": [
+            "qa_tester_release_notes_ghost"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "qa_mastery",
+          "title": "Release Judgment",
+          "description": "Build release judgment through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "mastery",
+          "prerequisiteNodeIds": [
+            "qa_communication"
+          ],
+          "linkedChapterIds": [
+            "qa_tester_release_notes_ghost"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": "qa_mastery_badge"
+        }
+      ]
+    },
+    {
+      "roleId": "back_office_executive",
+      "title": "Back Office Executive Skill Tree",
+      "description": "Role-wise mastery path for Back Office Executive.",
+      "version": "26.0.0",
+      "nodes": [
+        {
+          "id": "back_data_basics",
+          "title": "Data Accuracy Basics",
+          "description": "Build data accuracy basics through chapters, mini-games, and activities.",
+          "level": "beginner",
+          "category": "technical",
+          "prerequisiteNodeIds": [],
+          "linkedChapterIds": [
+            "back_office_excel_sheet_of_doom"
+          ],
+          "linkedMiniGameIds": [
+            "back_office_excel_data_cleanup"
+          ],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "back_duplicates",
+          "title": "Duplicate Detection",
+          "description": "Build duplicate detection through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "discipline",
+          "prerequisiteNodeIds": [
+            "back_data_basics"
+          ],
+          "linkedChapterIds": [
+            "back_office_invoice_avalanche"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "back_privacy",
+          "title": "Privacy-Safe Handling",
+          "description": "Build privacy-safe handling through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "ethics",
+          "prerequisiteNodeIds": [
+            "back_duplicates"
+          ],
+          "linkedChapterIds": [
+            "back_office_mail_merge_madness"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "back_audit",
+          "title": "Audit Trail Discipline",
+          "description": "Build audit trail discipline through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "discipline",
+          "prerequisiteNodeIds": [
+            "back_privacy"
+          ],
+          "linkedChapterIds": [],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "back_mastery",
+          "title": "Reliable Operations Judgment",
+          "description": "Build reliable operations judgment through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "mastery",
+          "prerequisiteNodeIds": [
+            "back_audit"
+          ],
+          "linkedChapterIds": [],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": "back_mastery_badge"
+        }
+      ]
+    },
+    {
+      "roleId": "hr_executive",
+      "title": "HR Executive Skill Tree",
+      "description": "Role-wise mastery path for HR Executive.",
+      "version": "26.0.0",
+      "nodes": [
+        {
+          "id": "hr_structure",
+          "title": "Structured Interviewing",
+          "description": "Build structured interviewing through chapters, mini-games, and activities.",
+          "level": "beginner",
+          "category": "discipline",
+          "prerequisiteNodeIds": [],
+          "linkedChapterIds": [
+            "hr_executive_interview_gone_wild"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "hr_bias",
+          "title": "Bias Detection",
+          "description": "Build bias detection through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "ethics",
+          "prerequisiteNodeIds": [
+            "hr_structure"
+          ],
+          "linkedChapterIds": [
+            "hr_executive_notice_period_negotiation"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "hr_feedback",
+          "title": "Legal-Safe Feedback",
+          "description": "Build legal-safe feedback through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "communication",
+          "prerequisiteNodeIds": [
+            "hr_bias"
+          ],
+          "linkedChapterIds": [
+            "hr_executive_feedback_fireworks"
+          ],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "hr_candidate",
+          "title": "Candidate Experience",
+          "description": "Build candidate experience through chapters, mini-games, and activities.",
+          "level": "intermediate",
+          "category": "communication",
+          "prerequisiteNodeIds": [
+            "hr_feedback"
+          ],
+          "linkedChapterIds": [],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": ""
+        },
+        {
+          "id": "hr_mastery",
+          "title": "Fair Hiring Judgment",
+          "description": "Build fair hiring judgment through chapters, mini-games, and activities.",
+          "level": "advanced",
+          "category": "mastery",
+          "prerequisiteNodeIds": [
+            "hr_candidate"
+          ],
+          "linkedChapterIds": [],
+          "linkedMiniGameIds": [],
+          "masteryTarget": 100,
+          "unlocksBadgeId": "hr_mastery_badge"
+        }
+      ]
+    }
+  ]
+}

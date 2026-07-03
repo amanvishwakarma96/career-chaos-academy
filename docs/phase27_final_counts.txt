@@ -1,0 +1,9 @@
+roles: 8
+coreChapters: 27
+coreChoices: 79
+miniGames: 6
+scenarioPacks: 2
+publishedScenarioPacks: 1
+featuredScenarioPacks: 1
+packChapters: 2
+featureFlags: 11

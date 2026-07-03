@@ -1,0 +1,1013 @@
+{
+  "version": 1,
+  "certificateTemplate": {
+    "id": "career_chaos_certificate_v1",
+    "title": "Career Chaos Academy Role Certification",
+    "subtitle": "Awarded for passing the final role-wise assessment.",
+    "issuer": "Career Chaos Academy",
+    "verificationUrlPattern": "/api/certificates/{verificationId}",
+    "pdfUrlPattern": "/api/certificates/{verificationId}/pdf"
+  },
+  "assessments": [
+    {
+      "id": "developer_final_assessment_v1",
+      "roleId": "developer",
+      "roleName": "Developer",
+      "title": "Developer Final Certification Assessment",
+      "description": "Role-specific final test using Developer skill tree skills, timed professional judgement, and a practical mini-game assessment.",
+      "version": "30.0.0",
+      "timeLimitSeconds": 900,
+      "minimumPassingScore": 70,
+      "minimumPracticalScore": 60,
+      "minimumEthicsScore": 60,
+      "certificateTemplateId": "career_chaos_certificate_v1",
+      "skillIds": [
+        "debugging",
+        "code_review",
+        "release_safety"
+      ],
+      "questions": [
+        {
+          "id": "developer_final_q1",
+          "roleId": "developer",
+          "roundType": "technical",
+          "skillId": "debugging",
+          "skillName": "Debugging",
+          "prompt": "In a Developer final assessment, what is the safest first action when using Debugging?",
+          "options": [
+            "Reproduce issue, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore time, documentation if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Debugging, evidence, communication, and professional control under time, documentation.",
+          "points": 20,
+          "tags": [
+            "debugging",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "developer_final_q2",
+          "roleId": "developer",
+          "roundType": "technical",
+          "skillId": "code_review",
+          "skillName": "Code Review",
+          "prompt": "In a Developer final assessment, what is the safest first action when using Code Review?",
+          "options": [
+            "Read diff context, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore ethics, documentation if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Code Review, evidence, communication, and professional control under ethics, documentation.",
+          "points": 20,
+          "tags": [
+            "code_review",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "developer_final_q3",
+          "roleId": "developer",
+          "roundType": "practical_judgement",
+          "skillId": "release_safety",
+          "skillName": "Release Safety",
+          "prompt": "In a Developer final assessment, what is the safest first action when using Release Safety?",
+          "options": [
+            "Identify last safe version, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore time, safety if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Release Safety, evidence, communication, and professional control under time, safety.",
+          "points": 20,
+          "tags": [
+            "release_safety",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "developer_final_ethics",
+          "roleId": "developer",
+          "roundType": "ethics",
+          "skillId": "professional_ethics",
+          "skillName": "Professional Ethics",
+          "prompt": "A shortcut may improve the Developer task score but creates safety, privacy, or fairness risk. What should you do?",
+          "options": [
+            "Reject the shortcut, document the risk, and propose a safer alternative.",
+            "Use the shortcut quietly because the final score matters most.",
+            "Hide the risk until the work is approved.",
+            "Blame another role if the shortcut fails."
+          ],
+          "correctIndex": 0,
+          "explanation": "Certificates require professional ethics: safe alternatives, transparency, and documented risk control.",
+          "points": 20,
+          "tags": [
+            "ethics",
+            "safety",
+            "certification"
+          ]
+        }
+      ],
+      "practicalMiniGame": {
+        "id": "developer_practical_cert_mini_game",
+        "title": "Debugging Practical Challenge",
+        "miniGameType": "scenario_skill_check",
+        "skillId": "debugging",
+        "skillName": "Debugging",
+        "instructions": "Complete a mini-game style task that proves Debugging: inspect the situation, choose the safest action, and explain your evidence.",
+        "maxScore": 100,
+        "minimumScore": 60,
+        "durationSeconds": 180
+      },
+      "rubric": {
+        "technical": 40,
+        "practicalJudgement": 20,
+        "ethics": 20,
+        "practicalMiniGame": 20
+      }
+    },
+    {
+      "id": "qa_tester_final_assessment_v1",
+      "roleId": "qa_tester",
+      "roleName": "QA Tester",
+      "title": "QA Tester Final Certification Assessment",
+      "description": "Role-specific final test using QA Tester skill tree skills, timed professional judgement, and a practical mini-game assessment.",
+      "version": "30.0.0",
+      "timeLimitSeconds": 900,
+      "minimumPassingScore": 70,
+      "minimumPracticalScore": 60,
+      "minimumEthicsScore": 60,
+      "certificateTemplateId": "career_chaos_certificate_v1",
+      "skillIds": [
+        "severity_classification",
+        "regression_scope",
+        "evidence_collection"
+      ],
+      "questions": [
+        {
+          "id": "qa_tester_final_q1",
+          "roleId": "qa_tester",
+          "roundType": "technical",
+          "skillId": "severity_classification",
+          "skillName": "Severity Classification",
+          "prompt": "In a QA Tester final assessment, what is the safest first action when using Severity Classification?",
+          "options": [
+            "Reproduce issue, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore documentation, time if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Severity Classification, evidence, communication, and professional control under documentation, time.",
+          "points": 20,
+          "tags": [
+            "severity_classification",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "qa_tester_final_q2",
+          "roleId": "qa_tester",
+          "roundType": "technical",
+          "skillId": "regression_scope",
+          "skillName": "Regression Scope",
+          "prompt": "In a QA Tester final assessment, what is the safest first action when using Regression Scope?",
+          "options": [
+            "Map impacted areas, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore time, client_pressure if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Regression Scope, evidence, communication, and professional control under time, client_pressure.",
+          "points": 20,
+          "tags": [
+            "regression_scope",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "qa_tester_final_q3",
+          "roleId": "qa_tester",
+          "roundType": "practical_judgement",
+          "skillId": "evidence_collection",
+          "skillName": "Evidence Collection",
+          "prompt": "In a QA Tester final assessment, what is the safest first action when using Evidence Collection?",
+          "options": [
+            "Review open defects, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore ethics, client_pressure if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Evidence Collection, evidence, communication, and professional control under ethics, client_pressure.",
+          "points": 20,
+          "tags": [
+            "evidence_collection",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "qa_tester_final_ethics",
+          "roleId": "qa_tester",
+          "roundType": "ethics",
+          "skillId": "professional_ethics",
+          "skillName": "Professional Ethics",
+          "prompt": "A shortcut may improve the QA Tester task score but creates safety, privacy, or fairness risk. What should you do?",
+          "options": [
+            "Reject the shortcut, document the risk, and propose a safer alternative.",
+            "Use the shortcut quietly because the final score matters most.",
+            "Hide the risk until the work is approved.",
+            "Blame another role if the shortcut fails."
+          ],
+          "correctIndex": 0,
+          "explanation": "Certificates require professional ethics: safe alternatives, transparency, and documented risk control.",
+          "points": 20,
+          "tags": [
+            "ethics",
+            "safety",
+            "certification"
+          ]
+        }
+      ],
+      "practicalMiniGame": {
+        "id": "qa_tester_practical_cert_mini_game",
+        "title": "Severity Classification Practical Challenge",
+        "miniGameType": "scenario_skill_check",
+        "skillId": "severity_classification",
+        "skillName": "Severity Classification",
+        "instructions": "Complete a mini-game style task that proves Severity Classification: inspect the situation, choose the safest action, and explain your evidence.",
+        "maxScore": 100,
+        "minimumScore": 60,
+        "durationSeconds": 180
+      },
+      "rubric": {
+        "technical": 40,
+        "practicalJudgement": 20,
+        "ethics": 20,
+        "practicalMiniGame": 20
+      }
+    },
+    {
+      "id": "doctor_final_assessment_v1",
+      "roleId": "doctor",
+      "roleName": "Doctor",
+      "title": "Doctor Final Certification Assessment",
+      "description": "Role-specific final test using Doctor skill tree skills, timed professional judgement, and a practical mini-game assessment.",
+      "version": "30.0.0",
+      "timeLimitSeconds": 900,
+      "minimumPassingScore": 70,
+      "minimumPracticalScore": 60,
+      "minimumEthicsScore": 60,
+      "certificateTemplateId": "career_chaos_certificate_v1",
+      "skillIds": [
+        "red_flag_triage",
+        "patient_communication",
+        "clinical_documentation"
+      ],
+      "questions": [
+        {
+          "id": "doctor_final_q1",
+          "roleId": "doctor",
+          "roundType": "technical",
+          "skillId": "red_flag_triage",
+          "skillName": "Red-flag Triage",
+          "prompt": "In a Doctor final assessment, what is the safest first action when using Red-flag Triage?",
+          "options": [
+            "Listen to complaint, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore safety, time if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Red-flag Triage, evidence, communication, and professional control under safety, time.",
+          "points": 20,
+          "tags": [
+            "red_flag_triage",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "doctor_final_q2",
+          "roleId": "doctor",
+          "roundType": "technical",
+          "skillId": "patient_communication",
+          "skillName": "Patient Communication",
+          "prompt": "In a Doctor final assessment, what is the safest first action when using Patient Communication?",
+          "options": [
+            "Use plain language, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore ethics, documentation if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Patient Communication, evidence, communication, and professional control under ethics, documentation.",
+          "points": 20,
+          "tags": [
+            "patient_communication",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "doctor_final_q3",
+          "roleId": "doctor",
+          "roundType": "practical_judgement",
+          "skillId": "clinical_documentation",
+          "skillName": "Clinical Documentation",
+          "prompt": "In a Doctor final assessment, what is the safest first action when using Clinical Documentation?",
+          "options": [
+            "Summarize red flags, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore safety, time if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Clinical Documentation, evidence, communication, and professional control under safety, time.",
+          "points": 20,
+          "tags": [
+            "clinical_documentation",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "doctor_final_ethics",
+          "roleId": "doctor",
+          "roundType": "ethics",
+          "skillId": "professional_ethics",
+          "skillName": "Professional Ethics",
+          "prompt": "A shortcut may improve the Doctor task score but creates safety, privacy, or fairness risk. What should you do?",
+          "options": [
+            "Reject the shortcut, document the risk, and propose a safer alternative.",
+            "Use the shortcut quietly because the final score matters most.",
+            "Hide the risk until the work is approved.",
+            "Blame another role if the shortcut fails."
+          ],
+          "correctIndex": 0,
+          "explanation": "Certificates require professional ethics: safe alternatives, transparency, and documented risk control.",
+          "points": 20,
+          "tags": [
+            "ethics",
+            "safety",
+            "certification"
+          ]
+        }
+      ],
+      "practicalMiniGame": {
+        "id": "doctor_practical_cert_mini_game",
+        "title": "Red-flag Triage Practical Challenge",
+        "miniGameType": "scenario_skill_check",
+        "skillId": "red_flag_triage",
+        "skillName": "Red-flag Triage",
+        "instructions": "Complete a mini-game style task that proves Red-flag Triage: inspect the situation, choose the safest action, and explain your evidence.",
+        "maxScore": 100,
+        "minimumScore": 60,
+        "durationSeconds": 180
+      },
+      "rubric": {
+        "technical": 40,
+        "practicalJudgement": 20,
+        "ethics": 20,
+        "practicalMiniGame": 20
+      }
+    },
+    {
+      "id": "civil_engineer_final_assessment_v1",
+      "roleId": "civil_engineer",
+      "roleName": "Civil Engineer",
+      "title": "Civil Engineer Final Certification Assessment",
+      "description": "Role-specific final test using Civil Engineer skill tree skills, timed professional judgement, and a practical mini-game assessment.",
+      "version": "30.0.0",
+      "timeLimitSeconds": 900,
+      "minimumPassingScore": 70,
+      "minimumPracticalScore": 60,
+      "minimumEthicsScore": 60,
+      "certificateTemplateId": "career_chaos_certificate_v1",
+      "skillIds": [
+        "site_inspection",
+        "material_validation",
+        "risk_escalation"
+      ],
+      "questions": [
+        {
+          "id": "civil_engineer_final_q1",
+          "roleId": "civil_engineer",
+          "roundType": "technical",
+          "skillId": "site_inspection",
+          "skillName": "Site Inspection",
+          "prompt": "In a Civil Engineer final assessment, what is the safest first action when using Site Inspection?",
+          "options": [
+            "Check PPE and access, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore safety, documentation if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Site Inspection, evidence, communication, and professional control under safety, documentation.",
+          "points": 20,
+          "tags": [
+            "site_inspection",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "civil_engineer_final_q2",
+          "roleId": "civil_engineer",
+          "roundType": "technical",
+          "skillId": "material_validation",
+          "skillName": "Material Validation",
+          "prompt": "In a Civil Engineer final assessment, what is the safest first action when using Material Validation?",
+          "options": [
+            "Review delivery note, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore budget, safety if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Material Validation, evidence, communication, and professional control under budget, safety.",
+          "points": 20,
+          "tags": [
+            "material_validation",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "civil_engineer_final_q3",
+          "roleId": "civil_engineer",
+          "roundType": "practical_judgement",
+          "skillId": "risk_escalation",
+          "skillName": "Risk Escalation",
+          "prompt": "In a Civil Engineer final assessment, what is the safest first action when using Risk Escalation?",
+          "options": [
+            "Compare against drawings, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore ethics, client_pressure if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Risk Escalation, evidence, communication, and professional control under ethics, client_pressure.",
+          "points": 20,
+          "tags": [
+            "risk_escalation",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "civil_engineer_final_ethics",
+          "roleId": "civil_engineer",
+          "roundType": "ethics",
+          "skillId": "professional_ethics",
+          "skillName": "Professional Ethics",
+          "prompt": "A shortcut may improve the Civil Engineer task score but creates safety, privacy, or fairness risk. What should you do?",
+          "options": [
+            "Reject the shortcut, document the risk, and propose a safer alternative.",
+            "Use the shortcut quietly because the final score matters most.",
+            "Hide the risk until the work is approved.",
+            "Blame another role if the shortcut fails."
+          ],
+          "correctIndex": 0,
+          "explanation": "Certificates require professional ethics: safe alternatives, transparency, and documented risk control.",
+          "points": 20,
+          "tags": [
+            "ethics",
+            "safety",
+            "certification"
+          ]
+        }
+      ],
+      "practicalMiniGame": {
+        "id": "civil_engineer_practical_cert_mini_game",
+        "title": "Site Inspection Practical Challenge",
+        "miniGameType": "scenario_skill_check",
+        "skillId": "site_inspection",
+        "skillName": "Site Inspection",
+        "instructions": "Complete a mini-game style task that proves Site Inspection: inspect the situation, choose the safest action, and explain your evidence.",
+        "maxScore": 100,
+        "minimumScore": 60,
+        "durationSeconds": 180
+      },
+      "rubric": {
+        "technical": 40,
+        "practicalJudgement": 20,
+        "ethics": 20,
+        "practicalMiniGame": 20
+      }
+    },
+    {
+      "id": "architect_final_assessment_v1",
+      "roleId": "architect",
+      "roleName": "Architect",
+      "title": "Architect Final Certification Assessment",
+      "description": "Role-specific final test using Architect skill tree skills, timed professional judgement, and a practical mini-game assessment.",
+      "version": "30.0.0",
+      "timeLimitSeconds": 900,
+      "minimumPassingScore": 70,
+      "minimumPracticalScore": 60,
+      "minimumEthicsScore": 60,
+      "certificateTemplateId": "career_chaos_certificate_v1",
+      "skillIds": [
+        "space_planning",
+        "client_negotiation",
+        "compliance_awareness"
+      ],
+      "questions": [
+        {
+          "id": "architect_final_q1",
+          "roleId": "architect",
+          "roundType": "technical",
+          "skillId": "space_planning",
+          "skillName": "Space Planning",
+          "prompt": "In a Architect final assessment, what is the safest first action when using Space Planning?",
+          "options": [
+            "Collect needs, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore budget, client_pressure if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Space Planning, evidence, communication, and professional control under budget, client_pressure.",
+          "points": 20,
+          "tags": [
+            "space_planning",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "architect_final_q2",
+          "roleId": "architect",
+          "roundType": "technical",
+          "skillId": "client_negotiation",
+          "skillName": "Client Negotiation",
+          "prompt": "In a Architect final assessment, what is the safest first action when using Client Negotiation?",
+          "options": [
+            "Sketch options, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore time, budget if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Client Negotiation, evidence, communication, and professional control under time, budget.",
+          "points": 20,
+          "tags": [
+            "client_negotiation",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "architect_final_q3",
+          "roleId": "architect",
+          "roundType": "practical_judgement",
+          "skillId": "compliance_awareness",
+          "skillName": "Compliance Awareness",
+          "prompt": "In a Architect final assessment, what is the safest first action when using Compliance Awareness?",
+          "options": [
+            "Summarize approved scope, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore ethics, documentation if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Compliance Awareness, evidence, communication, and professional control under ethics, documentation.",
+          "points": 20,
+          "tags": [
+            "compliance_awareness",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "architect_final_ethics",
+          "roleId": "architect",
+          "roundType": "ethics",
+          "skillId": "professional_ethics",
+          "skillName": "Professional Ethics",
+          "prompt": "A shortcut may improve the Architect task score but creates safety, privacy, or fairness risk. What should you do?",
+          "options": [
+            "Reject the shortcut, document the risk, and propose a safer alternative.",
+            "Use the shortcut quietly because the final score matters most.",
+            "Hide the risk until the work is approved.",
+            "Blame another role if the shortcut fails."
+          ],
+          "correctIndex": 0,
+          "explanation": "Certificates require professional ethics: safe alternatives, transparency, and documented risk control.",
+          "points": 20,
+          "tags": [
+            "ethics",
+            "safety",
+            "certification"
+          ]
+        }
+      ],
+      "practicalMiniGame": {
+        "id": "architect_practical_cert_mini_game",
+        "title": "Space Planning Practical Challenge",
+        "miniGameType": "scenario_skill_check",
+        "skillId": "space_planning",
+        "skillName": "Space Planning",
+        "instructions": "Complete a mini-game style task that proves Space Planning: inspect the situation, choose the safest action, and explain your evidence.",
+        "maxScore": 100,
+        "minimumScore": 60,
+        "durationSeconds": 180
+      },
+      "rubric": {
+        "technical": 40,
+        "practicalJudgement": 20,
+        "ethics": 20,
+        "practicalMiniGame": 20
+      }
+    },
+    {
+      "id": "back_office_executive_final_assessment_v1",
+      "roleId": "back_office_executive",
+      "roleName": "Back Office Executive",
+      "title": "Back Office Executive Final Certification Assessment",
+      "description": "Role-specific final test using Back Office Executive skill tree skills, timed professional judgement, and a practical mini-game assessment.",
+      "version": "30.0.0",
+      "timeLimitSeconds": 900,
+      "minimumPassingScore": 70,
+      "minimumPracticalScore": 60,
+      "minimumEthicsScore": 60,
+      "certificateTemplateId": "career_chaos_certificate_v1",
+      "skillIds": [
+        "data_validation",
+        "privacy_safe_communication",
+        "audit_trail"
+      ],
+      "questions": [
+        {
+          "id": "back_office_executive_final_q1",
+          "roleId": "back_office_executive",
+          "roundType": "technical",
+          "skillId": "data_validation",
+          "skillName": "Data Validation",
+          "prompt": "In a Back Office Executive final assessment, what is the safest first action when using Data Validation?",
+          "options": [
+            "Sort identifiers, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore time, documentation if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Data Validation, evidence, communication, and professional control under time, documentation.",
+          "points": 20,
+          "tags": [
+            "data_validation",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "back_office_executive_final_q2",
+          "roleId": "back_office_executive",
+          "roundType": "technical",
+          "skillId": "privacy_safe_communication",
+          "skillName": "Privacy-safe Communication",
+          "prompt": "In a Back Office Executive final assessment, what is the safest first action when using Privacy-safe Communication?",
+          "options": [
+            "Identify sensitive fields, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore ethics, documentation if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Privacy-safe Communication, evidence, communication, and professional control under ethics, documentation.",
+          "points": 20,
+          "tags": [
+            "privacy_safe_communication",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "back_office_executive_final_q3",
+          "roleId": "back_office_executive",
+          "roundType": "practical_judgement",
+          "skillId": "audit_trail",
+          "skillName": "Audit Trail Discipline",
+          "prompt": "In a Back Office Executive final assessment, what is the safest first action when using Audit Trail Discipline?",
+          "options": [
+            "Find source error, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore documentation, time if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Audit Trail Discipline, evidence, communication, and professional control under documentation, time.",
+          "points": 20,
+          "tags": [
+            "audit_trail",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "back_office_executive_final_ethics",
+          "roleId": "back_office_executive",
+          "roundType": "ethics",
+          "skillId": "professional_ethics",
+          "skillName": "Professional Ethics",
+          "prompt": "A shortcut may improve the Back Office Executive task score but creates safety, privacy, or fairness risk. What should you do?",
+          "options": [
+            "Reject the shortcut, document the risk, and propose a safer alternative.",
+            "Use the shortcut quietly because the final score matters most.",
+            "Hide the risk until the work is approved.",
+            "Blame another role if the shortcut fails."
+          ],
+          "correctIndex": 0,
+          "explanation": "Certificates require professional ethics: safe alternatives, transparency, and documented risk control.",
+          "points": 20,
+          "tags": [
+            "ethics",
+            "safety",
+            "certification"
+          ]
+        }
+      ],
+      "practicalMiniGame": {
+        "id": "back_office_executive_practical_cert_mini_game",
+        "title": "Data Validation Practical Challenge",
+        "miniGameType": "scenario_skill_check",
+        "skillId": "data_validation",
+        "skillName": "Data Validation",
+        "instructions": "Complete a mini-game style task that proves Data Validation: inspect the situation, choose the safest action, and explain your evidence.",
+        "maxScore": 100,
+        "minimumScore": 60,
+        "durationSeconds": 180
+      },
+      "rubric": {
+        "technical": 40,
+        "practicalJudgement": 20,
+        "ethics": 20,
+        "practicalMiniGame": 20
+      }
+    },
+    {
+      "id": "project_manager_final_assessment_v1",
+      "roleId": "project_manager",
+      "roleName": "Project Manager",
+      "title": "Project Manager Final Certification Assessment",
+      "description": "Role-specific final test using Project Manager skill tree skills, timed professional judgement, and a practical mini-game assessment.",
+      "version": "30.0.0",
+      "timeLimitSeconds": 900,
+      "minimumPassingScore": 70,
+      "minimumPracticalScore": 60,
+      "minimumEthicsScore": 60,
+      "certificateTemplateId": "career_chaos_certificate_v1",
+      "skillIds": [
+        "scope_control",
+        "risk_management",
+        "stakeholder_alignment"
+      ],
+      "questions": [
+        {
+          "id": "project_manager_final_q1",
+          "roleId": "project_manager",
+          "roundType": "technical",
+          "skillId": "scope_control",
+          "skillName": "Scope Control",
+          "prompt": "In a Project Manager final assessment, what is the safest first action when using Scope Control?",
+          "options": [
+            "Capture request, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore client_pressure, budget if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Scope Control, evidence, communication, and professional control under client_pressure, budget.",
+          "points": 20,
+          "tags": [
+            "scope_control",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "project_manager_final_q2",
+          "roleId": "project_manager",
+          "roundType": "technical",
+          "skillId": "risk_management",
+          "skillName": "Risk Management",
+          "prompt": "In a Project Manager final assessment, what is the safest first action when using Risk Management?",
+          "options": [
+            "Identify risk, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore documentation, time if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Risk Management, evidence, communication, and professional control under documentation, time.",
+          "points": 20,
+          "tags": [
+            "risk_management",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "project_manager_final_q3",
+          "roleId": "project_manager",
+          "roundType": "practical_judgement",
+          "skillId": "stakeholder_alignment",
+          "skillName": "Stakeholder Alignment",
+          "prompt": "In a Project Manager final assessment, what is the safest first action when using Stakeholder Alignment?",
+          "options": [
+            "Check constraints, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore budget, team_trust if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Stakeholder Alignment, evidence, communication, and professional control under budget, team_trust.",
+          "points": 20,
+          "tags": [
+            "stakeholder_alignment",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "project_manager_final_ethics",
+          "roleId": "project_manager",
+          "roundType": "ethics",
+          "skillId": "professional_ethics",
+          "skillName": "Professional Ethics",
+          "prompt": "A shortcut may improve the Project Manager task score but creates safety, privacy, or fairness risk. What should you do?",
+          "options": [
+            "Reject the shortcut, document the risk, and propose a safer alternative.",
+            "Use the shortcut quietly because the final score matters most.",
+            "Hide the risk until the work is approved.",
+            "Blame another role if the shortcut fails."
+          ],
+          "correctIndex": 0,
+          "explanation": "Certificates require professional ethics: safe alternatives, transparency, and documented risk control.",
+          "points": 20,
+          "tags": [
+            "ethics",
+            "safety",
+            "certification"
+          ]
+        }
+      ],
+      "practicalMiniGame": {
+        "id": "project_manager_practical_cert_mini_game",
+        "title": "Scope Control Practical Challenge",
+        "miniGameType": "scenario_skill_check",
+        "skillId": "scope_control",
+        "skillName": "Scope Control",
+        "instructions": "Complete a mini-game style task that proves Scope Control: inspect the situation, choose the safest action, and explain your evidence.",
+        "maxScore": 100,
+        "minimumScore": 60,
+        "durationSeconds": 180
+      },
+      "rubric": {
+        "technical": 40,
+        "practicalJudgement": 20,
+        "ethics": 20,
+        "practicalMiniGame": 20
+      }
+    },
+    {
+      "id": "hr_executive_final_assessment_v1",
+      "roleId": "hr_executive",
+      "roleName": "HR Executive",
+      "title": "HR Executive Final Certification Assessment",
+      "description": "Role-specific final test using HR Executive skill tree skills, timed professional judgement, and a practical mini-game assessment.",
+      "version": "30.0.0",
+      "timeLimitSeconds": 900,
+      "minimumPassingScore": 70,
+      "minimumPracticalScore": 60,
+      "minimumEthicsScore": 60,
+      "certificateTemplateId": "career_chaos_certificate_v1",
+      "skillIds": [
+        "structured_interview",
+        "bias_detection",
+        "feedback_safety"
+      ],
+      "questions": [
+        {
+          "id": "hr_executive_final_q1",
+          "roleId": "hr_executive",
+          "roundType": "technical",
+          "skillId": "structured_interview",
+          "skillName": "Structured Interviewing",
+          "prompt": "In a HR Executive final assessment, what is the safest first action when using Structured Interviewing?",
+          "options": [
+            "Define criteria, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore ethics, documentation if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Structured Interviewing, evidence, communication, and professional control under ethics, documentation.",
+          "points": 20,
+          "tags": [
+            "structured_interview",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "hr_executive_final_q2",
+          "roleId": "hr_executive",
+          "roundType": "technical",
+          "skillId": "bias_detection",
+          "skillName": "Bias Detection",
+          "prompt": "In a HR Executive final assessment, what is the safest first action when using Bias Detection?",
+          "options": [
+            "Spot assumption, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore ethics, documentation if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Bias Detection, evidence, communication, and professional control under ethics, documentation.",
+          "points": 20,
+          "tags": [
+            "bias_detection",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "hr_executive_final_q3",
+          "roleId": "hr_executive",
+          "roundType": "practical_judgement",
+          "skillId": "feedback_safety",
+          "skillName": "Legal-safe Feedback",
+          "prompt": "In a HR Executive final assessment, what is the safest first action when using Legal-safe Feedback?",
+          "options": [
+            "Be respectful, capture evidence, and communicate the decision path.",
+            "Skip verification to finish quickly and fix problems later.",
+            "Ask another team to handle it without context.",
+            "Ignore ethics, client_pressure if the client is pressuring the team."
+          ],
+          "correctIndex": 0,
+          "explanation": "The correct answer shows Legal-safe Feedback, evidence, communication, and professional control under ethics, client_pressure.",
+          "points": 20,
+          "tags": [
+            "feedback_safety",
+            "role_specific_skill",
+            "final_assessment"
+          ]
+        },
+        {
+          "id": "hr_executive_final_ethics",
+          "roleId": "hr_executive",
+          "roundType": "ethics",
+          "skillId": "professional_ethics",
+          "skillName": "Professional Ethics",
+          "prompt": "A shortcut may improve the HR Executive task score but creates safety, privacy, or fairness risk. What should you do?",
+          "options": [
+            "Reject the shortcut, document the risk, and propose a safer alternative.",
+            "Use the shortcut quietly because the final score matters most.",
+            "Hide the risk until the work is approved.",
+            "Blame another role if the shortcut fails."
+          ],
+          "correctIndex": 0,
+          "explanation": "Certificates require professional ethics: safe alternatives, transparency, and documented risk control.",
+          "points": 20,
+          "tags": [
+            "ethics",
+            "safety",
+            "certification"
+          ]
+        }
+      ],
+      "practicalMiniGame": {
+        "id": "hr_executive_practical_cert_mini_game",
+        "title": "Structured Interviewing Practical Challenge",
+        "miniGameType": "scenario_skill_check",
+        "skillId": "structured_interview",
+        "skillName": "Structured Interviewing",
+        "instructions": "Complete a mini-game style task that proves Structured Interviewing: inspect the situation, choose the safest action, and explain your evidence.",
+        "maxScore": 100,
+        "minimumScore": 60,
+        "durationSeconds": 180
+      },
+      "rubric": {
+        "technical": 40,
+        "practicalJudgement": 20,
+        "ethics": 20,
+        "practicalMiniGame": 20
+      }
+    }
+  ]
+}

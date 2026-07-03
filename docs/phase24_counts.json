@@ -1,0 +1,11 @@
+{
+  "roles": 8,
+  "chapters": 27,
+  "choices": 79,
+  "outcomes": 79,
+  "miniGames": 6,
+  "scenes": 7,
+  "dialogueLines": 16,
+  "featureFlags": 9,
+  "adaptiveDialogueInjections": 2
+}
