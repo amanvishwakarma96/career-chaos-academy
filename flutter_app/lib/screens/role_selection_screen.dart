@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../core/app_routes.dart';
 import '../core/responsive_layout.dart';
+import '../games/hub_world_game.dart';
+import '../models/flame_mini_game_model.dart';
 import '../models/role_progress_model.dart';
 import '../services/progress_service.dart';
 import '../services/scenario_service.dart';
@@ -32,6 +34,7 @@ import 'corporate_college_edition_screen.dart';
 import 'chapter_list_screen.dart';
 import 'coach_dashboard_screen.dart';
 import 'scenario_pack_marketplace_screen.dart';
+import 'scenario_screen.dart';
 import 'team_simulation_screen.dart';
 import 'voice_settings_screen.dart';
 
@@ -629,15 +632,70 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                               roleScenario: roleScenario,
                               progressPercent: progressPercent,
                               onTap: () {
+                                final useDeveloperHub =
+                                    roleScenario.role.id == 'developer';
                                 Navigator.of(context).push(
                                   AnimationService.instance.motionRoute<void>(
+                                    // Keep the existing chapter-list route name so
+                                    // ResultScreen's current Continue action returns
+                                    // to this persistent hub without changing story
+                                    // or progression logic in Phase 36B.
                                     settings: const RouteSettings(
                                       name: AppRoutes.chapterList,
                                     ),
                                     transition: MotionRouteTransition.slideLeft,
-                                    builder: (_) => ChapterListScreen(
-                                      roleScenario: roleScenario,
-                                    ),
+                                    builder: (_) {
+                                      if (!useDeveloperHub) {
+                                        return ChapterListScreen(
+                                          roleScenario: roleScenario,
+                                        );
+                                      }
+
+                                      return FlameGameHostScreen(
+                                        hubTitle:
+                                            '${roleScenario.role.name} District',
+                                        hubContentBuilder:
+                                            (overlayContext, location) {
+                                          switch (location) {
+                                            case HubWorldLocationKind.chapterOne:
+                                              if (roleScenario
+                                                  .mainChapters.isEmpty) {
+                                                return const Scaffold(
+                                                  backgroundColor:
+                                                      Color(0xFF070913),
+                                                  body: Center(
+                                                    child: Text(
+                                                      'Developer Chapter 1 is unavailable.',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              final chapter = roleScenario
+                                                  .mainChapters.first;
+                                              final chapterIndex = roleScenario
+                                                  .chapters
+                                                  .indexWhere(
+                                                (item) => item.id == chapter.id,
+                                              );
+                                              return ScenarioScreen(
+                                                roleScenario: roleScenario,
+                                                scenario: chapter,
+                                                chapterIndex: chapterIndex < 0
+                                                    ? 0
+                                                    : chapterIndex,
+                                              );
+                                            case HubWorldLocationKind.bugHuntRoom:
+                                              return const FlameGameHostScreen(
+                                                initialKind:
+                                                    FlameMiniGameKind.bugHuntRoom,
+                                              );
+                                          }
+                                        },
+                                      );
+                                    },
                                   ),
                                 );
                               },
