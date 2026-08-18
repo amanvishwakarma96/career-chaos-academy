@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/asset_registry.dart';
 import '../services/animation_service.dart';
 import 'game_asset_image.dart';
 
