@@ -23,7 +23,7 @@ void main() {
     });
 
     test('Bug Hunt vertical slice has enough interactive incident targets', () {
-      final definition = BugHuntRoomGame.definition;
+      const definition = BugHuntRoomGame.gameDefinition;
       final correctTargets =
           definition.targets.where((target) => target.isCorrect).length;
 
