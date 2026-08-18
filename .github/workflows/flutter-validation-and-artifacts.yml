@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -47,8 +47,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Analyze source
-        run: flutter analyze
+      - name: Analyze source (errors are fatal)
+        run: flutter analyze --no-fatal-warnings --no-fatal-infos
 
       - name: Run tests
         run: flutter test --reporter expanded
@@ -64,7 +64,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -111,7 +111,8 @@ jobs:
           {
             echo '## Career Chaos shareable builds'
             echo ''
-            echo '- Validation: `flutter analyze` + `flutter test`'
+            echo '- Validation: analyzer errors are fatal; existing warnings/infos are reported as technical debt'
+            echo '- Tests: full Flutter test suite'
             echo '- Web: release build for Chrome/browser testing'
             echo '- Android: debug APK for direct tester installation'
             echo '- Artifact retention: 14 days'
