@@ -9,20 +9,29 @@ import 'package:career_chaos_academy/models/score_model.dart';
 void main() {
   group('Phase 20 Flame hybrid mini-games', () {
     test('three required Flame mini-games have playable definitions', () {
-      final definitions = [
-        BugHuntRoomGame.definition,
-        DataCleanupRaceGame.definition,
-        BlueprintSafetyPuzzleGame.definition,
+      const definitions = <FlameMiniGameDefinitionModel>[
+        BugHuntRoomGame.gameDefinition,
+        DataCleanupRaceGame.gameDefinition,
+        BlueprintSafetyPuzzleGame.gameDefinition,
       ];
 
-      expect(definitions.map((item) => item.kind).toSet(), containsAll([
-        FlameMiniGameKind.bugHuntRoom,
-        FlameMiniGameKind.dataCleanupRace,
-        FlameMiniGameKind.blueprintSafetyPuzzle,
-      ]));
+      expect(
+        definitions.map((item) => item.kind).toSet(),
+        containsAll(<FlameMiniGameKind>[
+          FlameMiniGameKind.bugHuntRoom,
+          FlameMiniGameKind.dataCleanupRace,
+          FlameMiniGameKind.blueprintSafetyPuzzle,
+        ]),
+      );
       expect(definitions.every((item) => item.targets.length >= 5), isTrue);
-      expect(definitions.every((item) => item.successXp > item.failureXp), isTrue);
-      expect(definitions.every((item) => item.timeLimitSeconds > 0), isTrue);
+      expect(
+        definitions.every((item) => item.successXp > item.failureXp),
+        isTrue,
+      );
+      expect(
+        definitions.every((item) => item.timeLimitSeconds > 0),
+        isTrue,
+      );
     });
 
     test('Flame mini-game result serializes into progress safely', () {
