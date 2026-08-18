@@ -8,15 +8,24 @@ void main() {
   group('Phase 21 audio experience', () {
     test('audio registry resolves keys, direct assets, remote URLs, and unknown keys safely', () {
       expect(
-        AudioRegistry.resolve('bgm_office_light', type: GameAudioType.backgroundMusic),
+        AudioRegistry.resolve(
+          'bgm_office_light',
+          type: GameAudioType.backgroundMusic,
+        ),
         'assets/game/audio/bgm_office_light.wav',
       );
       expect(
-        AudioRegistry.resolve('choice_select', type: GameAudioType.soundEffect),
+        AudioRegistry.resolve(
+          'choice_select',
+          type: GameAudioType.soundEffect,
+        ),
         'assets/game/audio/choice_select.wav',
       );
       expect(
-        AudioRegistry.resolve('voice_placeholder', type: GameAudioType.voice),
+        AudioRegistry.resolve(
+          'voice_placeholder',
+          type: GameAudioType.voice,
+        ),
         'assets/game/audio/voice_placeholder.wav',
       );
       expect(
@@ -29,7 +38,9 @@ void main() {
       );
       expect(AudioRegistry.resolve('not_registered'), isNull);
       expect(
-        AudioRegistry.toAudioplayersAssetPath('assets/game/audio/choice_select.wav'),
+        AudioRegistry.toAudioplayersAssetPath(
+          'assets/game/audio/choice_select.wav',
+        ),
         'game/audio/choice_select.wav',
       );
     });
@@ -86,7 +97,10 @@ void main() {
       });
 
       expect(snapshot.totalXp, 10);
-      expect(snapshot.toJson()['version'], 8);
+      expect(
+        snapshot.toJson()['version'],
+        ProgressSnapshotModel.currentVersion,
+      );
     });
   });
 }
