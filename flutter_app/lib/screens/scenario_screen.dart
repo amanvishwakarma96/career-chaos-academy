@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../core/app_routes.dart';
 import '../core/responsive_layout.dart';
+import '../models/mini_game_model.dart';
 import '../models/mini_game_progress_model.dart';
 import '../models/mini_game_result_model.dart';
 import '../models/role_scenario_model.dart';
@@ -182,7 +183,8 @@ class _ScenarioScreenState extends State<ScenarioScreen> {
         builder: (_) => ResultScreen(
           scenario: scenario,
           choice: choice,
-          isLastChapter: scenario.isFinale || chapterIndex >= roleScenario.totalChapters - 1,
+          isLastChapter:
+              scenario.isFinale || chapterIndex >= roleScenario.totalChapters - 1,
           progressUpdate: progressUpdate,
           roleScenario: roleScenario,
         ),
