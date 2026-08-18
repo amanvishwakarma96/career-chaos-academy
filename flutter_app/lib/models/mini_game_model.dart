@@ -45,9 +45,7 @@ extension MiniGameTypeX on MiniGameType {
         return 'Decision Matrix';
     }
   }
-
 }
-
 
 MiniGameType miniGameTypeFromJson(String value) {
   switch (value) {
@@ -248,6 +246,13 @@ class MiniGameModel {
     return miniGame;
   }
 
+  static String? _readOptionalString(Object? value) {
+    if (value is String && value.trim().isNotEmpty) {
+      return value.trim();
+    }
+    return null;
+  }
+
   static List<MiniGameOptionModel> _readOptions(Object? value) {
     if (value == null) {
       return const <MiniGameOptionModel>[];
@@ -300,9 +305,11 @@ class MiniGameModel {
     if (value is! List) {
       throw const FormatException('miniGame.correctOrderIds must be a list.');
     }
-    return value.whereType<String>().map((item) => item.trim()).where(
-      (item) => item.isNotEmpty,
-    ).toList(growable: false);
+    return value
+        .whereType<String>()
+        .map((item) => item.trim())
+        .where((item) => item.isNotEmpty)
+        .toList(growable: false);
   }
 
   static ScoreModel _readScore(Object? value, {required String parent}) {
@@ -315,7 +322,6 @@ class MiniGameModel {
     return ScoreModel.fromJson(value);
   }
 
-
   static OutcomeModel _readConsequence(
     Object? value, {
     required String fallbackTitle,
@@ -325,7 +331,8 @@ class MiniGameModel {
       return OutcomeModel.fromJson(<String, dynamic>{
         'title': fallbackTitle,
         'description': fallbackDescription,
-        'moralLesson': 'Mini-game performance affects professional consequences.',
+        'moralLesson':
+            'Mini-game performance affects professional consequences.',
         ...value,
       });
     }
@@ -335,6 +342,7 @@ class MiniGameModel {
       moralLesson: 'Mini-game performance affects professional consequences.',
     );
   }
+
   void _validateShape() {
     switch (type) {
       case MiniGameType.codeFix:

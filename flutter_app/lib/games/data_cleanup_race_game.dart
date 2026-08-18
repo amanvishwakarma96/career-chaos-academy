@@ -3,9 +3,10 @@ import '../models/score_model.dart';
 import 'base_mini_game.dart';
 
 class DataCleanupRaceGame extends BaseMiniGame {
-  DataCleanupRaceGame() : super(definition: definition);
+  DataCleanupRaceGame() : super(definition: gameDefinition);
 
-  static const FlameMiniGameDefinitionModel definition = FlameMiniGameDefinitionModel(
+  static const FlameMiniGameDefinitionModel gameDefinition =
+      FlameMiniGameDefinitionModel(
     id: 'flame_data_cleanup_race',
     kind: FlameMiniGameKind.dataCleanupRace,
     title: 'Data Cleanup Race',

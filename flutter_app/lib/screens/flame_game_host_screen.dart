@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +8,8 @@ import '../games/base_mini_game.dart';
 import '../games/flame_mini_game_factory.dart';
 import '../games/hub_world_game.dart';
 import '../models/flame_mini_game_model.dart';
+import '../services/animation_service.dart';
+import '../services/audio_service.dart';
 import '../services/progress_service.dart';
 import '../widgets/info_panel.dart';
 import '../widgets/motion_feedback_animation.dart';
@@ -49,7 +53,14 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
   void initState() {
     super.initState();
     if (widget.isHubMode) {
-      _hubGame = HubWorldGame(onLocationSelected: _openHubLocation);
+      _hubGame = HubWorldGame(
+        onLocationSelected: _openHubLocation,
+        reducedMotion: AnimationService.instance.isReducedMotion,
+      );
+      AnimationService.instance.reducedMotion.addListener(
+        _handleReducedMotionChanged,
+      );
+      unawaited(_startHubAudio());
       return;
     }
 
@@ -62,7 +73,32 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
   @override
   void dispose() {
     _game?.disposeNotifiers();
+    if (widget.isHubMode) {
+      AnimationService.instance.reducedMotion.removeListener(
+        _handleReducedMotionChanged,
+      );
+      _hubGame?.disposeNotifiers();
+      unawaited(AudioService.instance.stopBackgroundMusic());
+    }
     super.dispose();
+  }
+
+  void _handleReducedMotionChanged() {
+    _hubGame?.setReducedMotion(AnimationService.instance.isReducedMotion);
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> _startHubAudio() {
+    if (!widget.isHubMode || _hubOverlayOpen) {
+      return Future<void>.value();
+    }
+    return AudioService.instance.playBackgroundMusic(
+      'bgm_office_light',
+      loop: true,
+      volumeOverride: 0.28,
+    );
   }
 
   Future<void> _openHubLocation(HubWorldLocationKind location) async {
@@ -72,12 +108,16 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
     }
 
     setState(() => _hubOverlayOpen = true);
+    await AudioService.instance.stopBackgroundMusic();
+
     try {
       await showGeneralDialog<void>(
         context: context,
         barrierDismissible: false,
-        barrierColor: Colors.black.withOpacity(0.64),
-        transitionDuration: const Duration(milliseconds: 260),
+        barrierColor: Colors.black.withValues(alpha: 0.64),
+        transitionDuration: AnimationService.instance.duration(
+          const Duration(milliseconds: 260),
+        ),
         pageBuilder: (dialogContext, _, __) {
           return SafeArea(
             child: Material(
@@ -87,6 +127,9 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
           );
         },
         transitionBuilder: (context, animation, secondaryAnimation, child) {
+          if (AnimationService.instance.isReducedMotion) {
+            return child;
+          }
           final curved = CurvedAnimation(
             parent: animation,
             curve: Curves.easeOutCubic,
@@ -102,8 +145,10 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
         },
       );
     } finally {
+      _hubGame?.markHubReady();
       if (mounted) {
         setState(() => _hubOverlayOpen = false);
+        unawaited(_startHubAudio());
       }
     }
   }
@@ -221,47 +266,83 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
         title: Text(widget.hubTitle ?? 'Developer Hub'),
         backgroundColor: const Color(0xFF070913),
         foregroundColor: Colors.white,
+        actions: [
+          ValueListenableBuilder<bool>(
+            valueListenable: AnimationService.instance.reducedMotion,
+            builder: (context, reducedMotion, _) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Tooltip(
+                  message: reducedMotion
+                      ? 'Reduced motion enabled'
+                      : 'Hub movement enabled',
+                  child: Icon(
+                    reducedMotion
+                        ? Icons.motion_photos_off_rounded
+                        : Icons.directions_walk_rounded,
+                    color: Colors.white70,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: Stack(
           children: [
-            Positioned.fill(child: GameWidget<HubWorldGame>(game: game)),
+            Positioned.fill(
+              child: Listener(
+                onPointerDown: (_) => unawaited(_startHubAudio()),
+                child: GameWidget<HubWorldGame>(game: game),
+              ),
+            ),
             Positioned(
               left: 16,
               right: 16,
               bottom: 14,
               child: IgnorePointer(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    color: const Color(0xFF0C0E18).withOpacity(0.88),
-                    border: Border.all(color: Colors.white.withOpacity(0.10)),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.touch_app_rounded,
-                        color: Color(0xFFFF80AD),
-                        size: 20,
+                child: ValueListenableBuilder<String>(
+                  valueListenable: game.statusMessage,
+                  builder: (context, status, _) {
+                    final message = _hubOverlayOpen
+                        ? 'Mission active • the hub stays loaded underneath.'
+                        : status;
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 10,
                       ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          _hubOverlayOpen
-                              ? 'Mission active • the hub stays loaded underneath.'
-                              : 'Tap a location to enter an existing mission.',
-                          style: const TextStyle(
-                            color: Colors.white70,
-                            fontWeight: FontWeight.w700,
-                          ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: const Color(0xFF0C0E18).withValues(alpha: 0.88),
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.10),
                         ),
                       ),
-                    ],
-                  ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            game.isWalking
+                                ? Icons.directions_walk_rounded
+                                : Icons.touch_app_rounded,
+                            color: const Color(0xFFFF80AD),
+                            size: 20,
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              message,
+                              style: const TextStyle(
+                                color: Colors.white70,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -322,9 +403,9 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                 height: 48,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: const Color(0xFFFF4D8D).withOpacity(0.16),
+                  color: const Color(0xFFFF4D8D).withValues(alpha: 0.16),
                   border: Border.all(
-                    color: const Color(0xFFFF4D8D).withOpacity(0.44),
+                    color: const Color(0xFFFF4D8D).withValues(alpha: 0.44),
                   ),
                 ),
                 child: Icon(
@@ -360,10 +441,12 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
             height: arenaHeight,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(28),
-              border: Border.all(color: Colors.white.withOpacity(0.14)),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.14),
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFFFF4D8D).withOpacity(0.18),
+                  color: const Color(0xFFFF4D8D).withValues(alpha: 0.18),
                   blurRadius: 32,
                   spreadRadius: 2,
                 ),
@@ -380,8 +463,10 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  color: Colors.white.withOpacity(0.07),
-                  border: Border.all(color: Colors.white.withOpacity(0.12)),
+                  color: Colors.white.withValues(alpha: 0.07),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.12),
+                  ),
                 ),
                 child: Row(
                   children: [
@@ -445,7 +530,9 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                   label: const Text('Restart'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    side: BorderSide(color: Colors.white.withOpacity(0.24)),
+                    side: BorderSide(
+                      color: Colors.white.withValues(alpha: 0.24),
+                    ),
                   ),
                 ),
               ),
@@ -513,7 +600,7 @@ class _GameMissionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white.withOpacity(0.06),
+      color: Colors.white.withValues(alpha: 0.06),
       borderRadius: BorderRadius.circular(24),
       child: InkWell(
         onTap: onTap,
@@ -522,13 +609,16 @@ class _GameMissionCard extends StatelessWidget {
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.white.withOpacity(0.12)),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.12),
+            ),
           ),
           child: Row(
             children: [
               CircleAvatar(
                 radius: 24,
-                backgroundColor: const Color(0xFFFF4D8D).withOpacity(0.18),
+                backgroundColor:
+                    const Color(0xFFFF4D8D).withValues(alpha: 0.18),
                 foregroundColor: const Color(0xFFFF7AAA),
                 child: Icon(icon),
               ),

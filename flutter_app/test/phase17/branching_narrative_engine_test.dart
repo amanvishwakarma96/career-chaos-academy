@@ -148,6 +148,6 @@ void main() {
     expect(snapshot.storyFlagsByRole['developer'], contains('mentor_warned_after_shortcut'));
     expect(snapshot.relationshipScoresByRole['developer']?.mentorTrust, -2);
     expect(snapshot.delayedConsequencesByRole['developer']?.single, contains('evidence'));
-    expect(snapshot.toJson()['version'], 5);
+    expect(snapshot.toJson()['version'], ProgressSnapshotModel.currentVersion);
   });
 }

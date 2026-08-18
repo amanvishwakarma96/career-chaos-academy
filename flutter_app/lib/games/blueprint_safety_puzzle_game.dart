@@ -3,9 +3,10 @@ import '../models/score_model.dart';
 import 'base_mini_game.dart';
 
 class BlueprintSafetyPuzzleGame extends BaseMiniGame {
-  BlueprintSafetyPuzzleGame() : super(definition: definition);
+  BlueprintSafetyPuzzleGame() : super(definition: gameDefinition);
 
-  static const FlameMiniGameDefinitionModel definition = FlameMiniGameDefinitionModel(
+  static const FlameMiniGameDefinitionModel gameDefinition =
+      FlameMiniGameDefinitionModel(
     id: 'flame_blueprint_safety_puzzle',
     kind: FlameMiniGameKind.blueprintSafetyPuzzle,
     title: 'Blueprint Safety Puzzle',

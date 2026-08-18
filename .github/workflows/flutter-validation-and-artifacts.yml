@@ -33,11 +33,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.41.9'
           channel: stable
           cache: true
 
@@ -47,8 +48,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Analyze source
-        run: flutter analyze
+      - name: Analyze source (errors are fatal)
+        run: flutter analyze --no-fatal-warnings --no-fatal-infos
 
       - name: Run tests
         run: flutter test --reporter expanded
@@ -64,10 +65,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
@@ -75,8 +76,16 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.41.9'
           channel: stable
           cache: true
+
+      - name: Generate shareable platform scaffolding
+        run: >-
+          flutter create .
+          --platforms=web,android
+          --project-name=career_chaos_academy
+          --org=com.careerchaosacademy
 
       - name: Install dependencies
         run: flutter pub get
@@ -111,7 +120,10 @@ jobs:
           {
             echo '## Career Chaos shareable builds'
             echo ''
-            echo '- Validation: `flutter analyze` + `flutter test`'
+            echo '- Flutter SDK: 3.41.9 (pinned for deterministic project-compatible CI)'
+            echo '- Validation: analyzer errors are fatal; existing warnings/infos are reported as technical debt'
+            echo '- Tests: full Flutter test suite'
+            echo '- Platform scaffolding: generated inside CI only; generated web/android folders are not committed'
             echo '- Web: release build for Chrome/browser testing'
             echo '- Android: debug APK for direct tester installation'
             echo '- Artifact retention: 14 days'

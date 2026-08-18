@@ -24,13 +24,21 @@ void main() {
     expect(progress.isNodeUnlocked(tree.nodes.first), true);
     expect(progress.isNodeUnlocked(tree.nodes.last), false);
     progress = progress.upsertNodeProgress(
-      const SkillNodeProgressModel(nodeId: 'dev_foundations', masteryPoints: 100),
+      const SkillNodeProgressModel(
+        nodeId: 'dev_foundations',
+        masteryPoints: 100,
+      ),
     );
     expect(progress.isNodeUnlocked(tree.nodes.last), true);
   });
 
   test('scenario JSON can link a chapter to skill node ids', () {
-    final role = RoleModel(id: 'developer', name: 'Developer', description: 'Build safely.', iconKey: 'developer');
+    const role = RoleModel(
+      id: 'developer',
+      name: 'Developer',
+      description: 'Build safely.',
+      iconKey: 'developer',
+    );
     final scenario = ScenarioModel.fromJson({
       'id': 'dev_story',
       'title': 'Production Panic',
@@ -42,12 +50,18 @@ void main() {
         {
           'id': 'safe',
           'text': 'Pause and verify evidence.',
+          'scoreImpact': {
+            'skill': 1,
+            'discipline': 1,
+            'ethics': 1,
+            'communication': 1,
+            'chaos': 0,
+          },
           'outcome': {
             'title': 'Evidence first',
             'description': 'You prevented chaos.',
             'moralLesson': 'Safety needs verification.',
-            'scoreImpact': {'skill': 1, 'discipline': 1, 'ethics': 1, 'communication': 1, 'chaos': 0}
-          }
+          },
         }
       ],
       'skillNodeIds': ['dev_release_safety']
@@ -66,7 +80,7 @@ void main() {
 
   test('new progress JSON preserves skill progress', () {
     final snapshot = ProgressSnapshotModel.fromJson({
-      'version': 13,
+      'version': ProgressSnapshotModel.currentVersion,
       'skillTreeProgressByRole': {
         'developer': {
           'roleId': 'developer',
@@ -80,6 +94,11 @@ void main() {
         }
       }
     });
-    expect(snapshot.skillTreeProgressByRole['developer']!.progressFor('dev_foundations').masteryPoints, 45);
+    expect(
+      snapshot.skillTreeProgressByRole['developer']!
+          .progressFor('dev_foundations')
+          .masteryPoints,
+      45,
+    );
   });
 }

@@ -7,10 +7,11 @@ import 'data_cleanup_race_game.dart';
 class FlameMiniGameFactory {
   const FlameMiniGameFactory._();
 
-  static List<FlameMiniGameDefinitionModel> get definitions => const <FlameMiniGameDefinitionModel>[
-        BugHuntRoomGame.definition,
-        DataCleanupRaceGame.definition,
-        BlueprintSafetyPuzzleGame.definition,
+  static List<FlameMiniGameDefinitionModel> get definitions =>
+      const <FlameMiniGameDefinitionModel>[
+        BugHuntRoomGame.gameDefinition,
+        DataCleanupRaceGame.gameDefinition,
+        BlueprintSafetyPuzzleGame.gameDefinition,
       ];
 
   static BaseMiniGame create(FlameMiniGameKind kind) {

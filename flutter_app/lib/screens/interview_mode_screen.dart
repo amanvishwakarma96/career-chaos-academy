@@ -5,6 +5,7 @@ import '../models/role_scenario_model.dart';
 import '../services/device_user_service.dart';
 import '../services/interview_service.dart';
 import '../services/scenario_service.dart';
+import 'voice_settings_screen.dart';
 
 class InterviewModeScreen extends StatefulWidget {
   const InterviewModeScreen({super.key});
@@ -18,8 +19,10 @@ class _InterviewModeScreenState extends State<InterviewModeScreen> {
   RoleScenarioModel? _selectedRole;
   InterviewQuestionBankResult? _bank;
   InterviewReadinessReportModel? _report;
-  final Map<String, TextEditingController> _answerControllers = <String, TextEditingController>{};
-  final Map<String, InterviewAnswerFeedbackModel> _feedbackByQuestion = <String, InterviewAnswerFeedbackModel>{};
+  final Map<String, TextEditingController> _answerControllers =
+      <String, TextEditingController>{};
+  final Map<String, InterviewAnswerFeedbackModel> _feedbackByQuestion =
+      <String, InterviewAnswerFeedbackModel>{};
   String _userId = '';
   String _message = '';
   bool _isLoading = false;
@@ -59,7 +62,8 @@ class _InterviewModeScreenState extends State<InterviewModeScreen> {
       _isLoading = true;
     });
     try {
-      final bank = await InterviewService.instance.loadQuestionsForRole(roleScenario.role.id);
+      final bank =
+          await InterviewService.instance.loadQuestionsForRole(roleScenario.role.id);
       if (!mounted) return;
       setState(() {
         _bank = bank;
@@ -80,7 +84,9 @@ class _InterviewModeScreenState extends State<InterviewModeScreen> {
   Future<void> _submitAnswer(InterviewQuestionModel question) async {
     final answer = _answerControllers[question.id]?.text.trim() ?? '';
     if (answer.isEmpty) {
-      setState(() => _message = 'Write an answer before requesting AI feedback.');
+      setState(
+        () => _message = 'Write an answer before requesting AI feedback.',
+      );
       return;
     }
     setState(() {
@@ -88,7 +94,10 @@ class _InterviewModeScreenState extends State<InterviewModeScreen> {
       _message = '';
     });
     try {
-      final feedback = await InterviewService.instance.generateFeedback(question: question, answer: answer);
+      final feedback = await InterviewService.instance.generateFeedback(
+        question: question,
+        answer: answer,
+      );
       if (!mounted) return;
       setState(() {
         _feedbackByQuestion[question.id] = feedback;
@@ -108,7 +117,8 @@ class _InterviewModeScreenState extends State<InterviewModeScreen> {
     setState(() {
       _feedbackByQuestion.remove(question.id);
       _report = null;
-      _message = 'Retry started for ${question.roundLabel}. Use the tips and improve your answer.';
+      _message =
+          'Retry started for ${question.roundLabel}. Use the tips and improve your answer.';
     });
   }
 
@@ -117,7 +127,10 @@ class _InterviewModeScreenState extends State<InterviewModeScreen> {
     final bank = _bank;
     if (role == null || bank == null) return;
     if (_feedbackByQuestion.length < bank.questions.length) {
-      setState(() => _message = 'Complete all rounds before saving the readiness report.');
+      setState(
+        () => _message =
+            'Complete all rounds before saving the readiness report.',
+      );
       return;
     }
     setState(() {
@@ -164,8 +177,12 @@ class _InterviewModeScreenState extends State<InterviewModeScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                if (snapshot.hasError || snapshot.data == null || snapshot.data!.roles.isEmpty) {
-                  return const Center(child: Text('Unable to load interview roles.'));
+                if (snapshot.hasError ||
+                    snapshot.data == null ||
+                    snapshot.data!.roles.isEmpty) {
+                  return const Center(
+                    child: Text('Unable to load interview roles.'),
+                  );
                 }
                 final roles = snapshot.data!.roles;
                 return ListView(
@@ -217,7 +234,10 @@ class _InterviewModeScreenState extends State<InterviewModeScreen> {
             ),
             if (_isLoading)
               Container(
-                color: Theme.of(context).colorScheme.surface.withOpacity(0.45),
+                color: Theme.of(context)
+                    .colorScheme
+                    .surface
+                    .withValues(alpha: 0.45),
                 child: const Center(child: CircularProgressIndicator()),
               ),
           ],
@@ -249,16 +269,22 @@ class _HeaderCard extends StatelessWidget {
         children: [
           Text(
             'Interview & Job Readiness Mode',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall
+                ?.copyWith(fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 8),
-          const Text('Select a career role, answer technical, behavioral, and situation rounds, then use AI-style feedback to improve before saving your readiness report.'),
+          const Text(
+            'Select a career role, answer technical, behavioral, and situation rounds, then use AI-style feedback to improve before saving your readiness report.',
+          ),
           const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute<void>(
-                  builder: (_) => const VoiceSettingsScreen(interviewPrototype: true),
+                  builder: (_) =>
+                      const VoiceSettingsScreen(interviewPrototype: true),
                 ),
               );
             },
@@ -276,7 +302,11 @@ class _RolePickerCard extends StatelessWidget {
   final String? selectedRoleId;
   final ValueChanged<RoleScenarioModel> onSelected;
 
-  const _RolePickerCard({required this.roles, required this.selectedRoleId, required this.onSelected});
+  const _RolePickerCard({
+    required this.roles,
+    required this.selectedRoleId,
+    required this.onSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -286,7 +316,13 @@ class _RolePickerCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Select interview role', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800)),
+            Text(
+              'Select interview role',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontWeight: FontWeight.w800),
+            ),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -320,7 +356,13 @@ class _RubricCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Scoring Rubric', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800)),
+            Text(
+              'Scoring Rubric',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontWeight: FontWeight.w800),
+            ),
             const SizedBox(height: 8),
             for (final entry in rubric.entries)
               Padding(
@@ -364,11 +406,18 @@ class _QuestionCard extends StatelessWidget {
               children: [
                 Chip(label: Text(question.roundLabel)),
                 Chip(label: Text(question.difficulty)),
-                for (final tag in question.skillTags.take(3)) Chip(label: Text(tag)),
+                for (final tag in question.skillTags.take(3))
+                  Chip(label: Text(tag)),
               ],
             ),
             const SizedBox(height: 8),
-            Text(question.prompt, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800)),
+            Text(
+              question.prompt,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(fontWeight: FontWeight.w800),
+            ),
             const SizedBox(height: 10),
             TextField(
               controller: controller,
@@ -376,7 +425,8 @@ class _QuestionCard extends StatelessWidget {
               maxLines: 6,
               decoration: const InputDecoration(
                 labelText: 'Your answer',
-                hintText: 'Use STAR format, mention evidence, stakeholders, risks, and follow-up.',
+                hintText:
+                    'Use STAR format, mention evidence, stakeholders, risks, and follow-up.',
                 alignLabelWithHint: true,
                 border: OutlineInputBorder(),
               ),
@@ -420,36 +470,67 @@ class _FeedbackPanel extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.7),
+        color: Theme.of(context)
+            .colorScheme
+            .surfaceContainerHighest
+            .withValues(alpha: 0.7),
         borderRadius: BorderRadius.circular(18),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Score: ${feedback.score}/100', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900)),
+          Text(
+            'Score: ${feedback.score}/100',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.w900),
+          ),
           const SizedBox(height: 6),
           LinearProgressIndicator(value: feedback.score.clamp(0, 100) / 100),
           const SizedBox(height: 8),
           Text(feedback.aiSummary),
           const SizedBox(height: 10),
-          Text('Rubric', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800)),
+          Text(
+            'Rubric',
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall
+                ?.copyWith(fontWeight: FontWeight.w800),
+          ),
           const SizedBox(height: 4),
           Wrap(
             spacing: 8,
             runSpacing: 8,
             children: [
-              for (final entry in feedback.rubricScores.entries) Chip(label: Text('${_title(entry.key)} ${entry.value}')),
+              for (final entry in feedback.rubricScores.entries)
+                Chip(label: Text('${_title(entry.key)} ${entry.value}')),
             ],
           ),
           const SizedBox(height: 10),
-          Text('Strengths', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800)),
+          Text(
+            'Strengths',
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall
+                ?.copyWith(fontWeight: FontWeight.w800),
+          ),
           for (final item in feedback.strengths) Text('• $item'),
           const SizedBox(height: 10),
-          Text('Improvement tips', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800)),
+          Text(
+            'Improvement tips',
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall
+                ?.copyWith(fontWeight: FontWeight.w800),
+          ),
           for (final item in feedback.improvementTips) Text('• $item'),
           if (feedback.retryPrompt.isNotEmpty) ...[
             const SizedBox(height: 10),
-            Text(feedback.retryPrompt, style: const TextStyle(fontStyle: FontStyle.italic)),
+            Text(
+              feedback.retryPrompt,
+              style: const TextStyle(fontStyle: FontStyle.italic),
+            ),
           ],
         ],
       ),
@@ -470,18 +551,41 @@ class _ReportCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Saved Readiness Report', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900)),
+            Text(
+              'Saved Readiness Report',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontWeight: FontWeight.w900),
+            ),
             const SizedBox(height: 8),
-            Text('${report.roleName} • ${report.readinessLevel}', style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              '${report.roleName} • ${report.readinessLevel}',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 8),
-            LinearProgressIndicator(value: report.totalScore.clamp(0, 100) / 100),
+            LinearProgressIndicator(
+              value: report.totalScore.clamp(0, 100) / 100,
+            ),
             const SizedBox(height: 6),
             Text('Total score: ${report.totalScore}/100'),
             const SizedBox(height: 12),
-            Text('Top strengths', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800)),
+            Text(
+              'Top strengths',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(fontWeight: FontWeight.w800),
+            ),
             for (final item in report.strengths) Text('• $item'),
             const SizedBox(height: 10),
-            Text('Next steps', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800)),
+            Text(
+              'Next steps',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(fontWeight: FontWeight.w800),
+            ),
             for (final item in report.nextSteps) Text('• $item'),
           ],
         ),
@@ -492,6 +596,9 @@ class _ReportCard extends StatelessWidget {
 
 String _title(String value) {
   if (value.isEmpty) return value;
-  final spaced = value.replaceAllMapped(RegExp(r'([a-z])([A-Z])'), (match) => '${match[1]} ${match[2]}');
+  final spaced = value.replaceAllMapped(
+    RegExp(r'([a-z])([A-Z])'),
+    (match) => '${match[1]} ${match[2]}',
+  );
   return spaced[0].toUpperCase() + spaced.substring(1);
 }

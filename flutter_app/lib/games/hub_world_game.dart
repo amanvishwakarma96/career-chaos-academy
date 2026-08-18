@@ -33,9 +33,15 @@ typedef HubWorldLocationSelected = void Function(HubWorldLocationKind kind);
 /// Phase 36B intentionally keeps this presentation-only: it does not change
 /// scenario progression, scoring, XP, reputation, skill trees, or backend data.
 class HubWorldGame extends FlameGame with TapCallbacks {
-  HubWorldGame({required this.onLocationSelected});
+  HubWorldGame({
+    required this.onLocationSelected,
+    bool reducedMotion = false,
+  }) : _reducedMotion = reducedMotion;
 
   final HubWorldLocationSelected onLocationSelected;
+  final ValueNotifier<String> statusMessage = ValueNotifier<String>(
+    'Tap a location and your Developer will walk there.',
+  );
 
   static const List<HubWorldLocation> locations = <HubWorldLocation>[
     HubWorldLocation(
@@ -54,18 +60,103 @@ class HubWorldGame extends FlameGame with TapCallbacks {
     ),
   ];
 
+  static const Offset _spawnPosition = Offset(0.18, 0.80);
+  static const double _walkSpeed = 0.46;
+
+  Offset _playerPosition = _spawnPosition;
+  HubWorldLocation? _pendingLocation;
+  bool _reducedMotion;
+  double _motionClock = 0;
+  double _idleClock = 0;
+
+  bool get isWalking => _pendingLocation != null;
+
   @override
   Color backgroundColor() => const Color(0xFF060812);
+
+  void setReducedMotion(bool value) {
+    if (_reducedMotion == value) {
+      return;
+    }
+    _reducedMotion = value;
+
+    final pending = _pendingLocation;
+    if (value && pending != null) {
+      _playerPosition = _walkTargetFor(pending);
+      _pendingLocation = null;
+      statusMessage.value = 'Entering ${pending.label}…';
+      onLocationSelected(pending.kind);
+    }
+  }
+
+  void markHubReady() {
+    statusMessage.value = _reducedMotion
+        ? 'Tap a location to enter instantly. Reduced motion is on.'
+        : 'Tap a location and your Developer will walk there.';
+  }
+
+  void disposeNotifiers() {
+    statusMessage.dispose();
+  }
 
   @override
   void onTapDown(TapDownEvent event) {
     final tap = event.localPosition.toOffset();
     for (final location in locations) {
       if (_locationRect(location).inflate(10).contains(tap)) {
-        onLocationSelected(location.kind);
+        _moveToLocation(location);
         return;
       }
     }
+  }
+
+  void _moveToLocation(HubWorldLocation location) {
+    if (_pendingLocation != null) {
+      return;
+    }
+
+    if (_reducedMotion) {
+      _playerPosition = _walkTargetFor(location);
+      statusMessage.value = 'Entering ${location.label}…';
+      onLocationSelected(location.kind);
+      return;
+    }
+
+    _pendingLocation = location;
+    _motionClock = 0;
+    statusMessage.value = 'Walking to ${location.label}…';
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    final pending = _pendingLocation;
+    if (pending == null) {
+      if (!_reducedMotion) {
+        _idleClock += dt;
+      }
+      return;
+    }
+
+    if (_reducedMotion) {
+      return;
+    }
+
+    _motionClock += dt;
+    final target = _walkTargetFor(pending);
+    final delta = target - _playerPosition;
+    final distance = delta.distance;
+    final step = _walkSpeed * dt;
+
+    if (distance <= step || distance < 0.002) {
+      _playerPosition = target;
+      _pendingLocation = null;
+      statusMessage.value = 'Entering ${pending.label}…';
+      onLocationSelected(pending.kind);
+      return;
+    }
+
+    _playerPosition += delta / distance * step;
   }
 
   @override
@@ -91,7 +182,7 @@ class HubWorldGame extends FlameGame with TapCallbacks {
     for (final location in locations) {
       _drawLocation(canvas, location);
     }
-    _drawPlayerSpawn(canvas);
+    _drawPlayer(canvas);
     _drawHeader(canvas);
     _drawVignette(canvas, bounds);
   }
@@ -117,7 +208,7 @@ class HubWorldGame extends FlameGame with TapCallbacks {
     final start = _locationRect(locations.first).center;
     final end = _locationRect(locations.last).center;
     final path = Path()
-      ..moveTo(size.x * 0.18, size.y * 0.80)
+      ..moveTo(size.x * _spawnPosition.dx, size.y * _spawnPosition.dy)
       ..quadraticBezierTo(size.x * 0.36, size.y * 0.68, start.dx, start.dy)
       ..quadraticBezierTo(size.x * 0.50, size.y * 0.48, end.dx, end.dy);
 
@@ -140,10 +231,11 @@ class HubWorldGame extends FlameGame with TapCallbacks {
   }
 
   void _drawAmbientZones(Canvas canvas) {
+    final pulse = _reducedMotion ? 1.0 : 0.88 + (math.sin(_idleClock * 1.6) * 0.12);
     final glowPaint = Paint()
       ..shader = RadialGradient(
         colors: <Color>[
-          const Color(0xFFFF4D8D).withOpacity(0.10),
+          const Color(0xFFFF4D8D).withOpacity(0.10 * pulse),
           Colors.transparent,
         ],
       ).createShader(
@@ -162,9 +254,20 @@ class HubWorldGame extends FlameGame with TapCallbacks {
       size.x * location.normalizedPosition.dx,
       size.y * location.normalizedPosition.dy,
     );
-    final left = (center.dx - width / 2).clamp(14.0, math.max(14.0, size.x - width - 14));
-    final top = (center.dy - height / 2).clamp(82.0, math.max(82.0, size.y - height - 24));
-    return Rect.fromLTWH(left.toDouble(), top.toDouble(), width, height);
+    final maxLeft = math.max(14.0, size.x - width - 14);
+    final maxTop = math.max(82.0, size.y - height - 24);
+    final left = (center.dx - width / 2).clamp(14.0, maxLeft).toDouble();
+    final top = (center.dy - height / 2).clamp(82.0, maxTop).toDouble();
+    return Rect.fromLTWH(left, top, width, height);
+  }
+
+  Offset _walkTargetFor(HubWorldLocation location) {
+    final rect = _locationRect(location);
+    final target = Offset(rect.center.dx, rect.bottom + 30);
+    return Offset(
+      (target.dx / math.max(1.0, size.x)).clamp(0.08, 0.92).toDouble(),
+      (target.dy / math.max(1.0, size.y)).clamp(0.16, 0.90).toDouble(),
+    );
   }
 
   void _drawLocation(Canvas canvas, HubWorldLocation location) {
@@ -172,6 +275,17 @@ class HubWorldGame extends FlameGame with TapCallbacks {
     final accent = location.kind == HubWorldLocationKind.chapterOne
         ? const Color(0xFF70D6FF)
         : const Color(0xFFFF4D8D);
+    final selected = _pendingLocation?.kind == location.kind;
+
+    if (selected && !_reducedMotion) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          rect.inflate(8 + math.sin(_motionClock * 8).abs() * 3),
+          const Radius.circular(28),
+        ),
+        Paint()..color = accent.withOpacity(0.10),
+      );
+    }
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -190,7 +304,7 @@ class HubWorldGame extends FlameGame with TapCallbacks {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: <Color>[
-            accent.withOpacity(0.34),
+            accent.withOpacity(selected ? 0.46 : 0.34),
             const Color(0xFF121625).withOpacity(0.96),
           ],
         ).createShader(rect),
@@ -200,8 +314,8 @@ class HubWorldGame extends FlameGame with TapCallbacks {
       RRect.fromRectAndRadius(rect, const Radius.circular(22)),
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 1.5
-        ..color = accent.withOpacity(0.70),
+        ..strokeWidth = selected ? 2.2 : 1.5
+        ..color = accent.withOpacity(selected ? 0.95 : 0.70),
     );
 
     final iconCenter = Offset(rect.left + 34, rect.center.dy);
@@ -241,7 +355,7 @@ class HubWorldGame extends FlameGame with TapCallbacks {
     );
     _drawText(
       canvas,
-      'TAP TO ENTER',
+      selected ? 'APPROACHING…' : 'TAP TO ENTER',
       Offset(rect.left + 64, rect.bottom - 24),
       fontSize: 8.5,
       color: accent,
@@ -250,31 +364,87 @@ class HubWorldGame extends FlameGame with TapCallbacks {
     );
   }
 
-  void _drawPlayerSpawn(Canvas canvas) {
-    final center = Offset(size.x * 0.18, size.y * 0.80);
+  void _drawPlayer(Canvas canvas) {
+    final base = Offset(
+      size.x * _playerPosition.dx,
+      size.y * _playerPosition.dy,
+    );
+    final moving = isWalking && !_reducedMotion;
+    final bob = _reducedMotion
+        ? 0.0
+        : moving
+            ? math.sin(_motionClock * 15) * 2.2
+            : math.sin(_idleClock * 3.0) * 1.8;
+    final stride = moving ? math.sin(_motionClock * 17) * 5.0 : 0.0;
+    final center = base.translate(0, bob);
+
+    canvas.drawOval(
+      Rect.fromCenter(
+        center: base.translate(0, 22),
+        width: 42,
+        height: 13,
+      ),
+      Paint()..color = Colors.black.withOpacity(0.36),
+    );
+
     canvas.drawCircle(
       center,
-      24,
+      26,
       Paint()..color = const Color(0xFF56F2C3).withOpacity(0.12),
     );
-    canvas.drawCircle(
-      center,
-      13,
+
+    final limbPaint = Paint()
+      ..color = const Color(0xFF56F2C3)
+      ..strokeWidth = 5
+      ..strokeCap = StrokeCap.round;
+
+    canvas.drawLine(
+      center.translate(-5, 9),
+      center.translate(-7 + stride, 24),
+      limbPaint,
+    );
+    canvas.drawLine(
+      center.translate(5, 9),
+      center.translate(7 - stride, 24),
+      limbPaint,
+    );
+    canvas.drawLine(
+      center.translate(-8, -1),
+      center.translate(-15 - stride * 0.45, 8),
+      limbPaint,
+    );
+    canvas.drawLine(
+      center.translate(8, -1),
+      center.translate(15 + stride * 0.45, 8),
+      limbPaint,
+    );
+
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(center: center.translate(0, 4), width: 22, height: 25),
+        const Radius.circular(8),
+      ),
       Paint()..color = const Color(0xFF56F2C3),
     );
     canvas.drawCircle(
-      center.translate(0, -4),
-      5,
+      center.translate(0, -12),
+      9,
+      Paint()..color = const Color(0xFF8BFFE0),
+    );
+    canvas.drawCircle(
+      center.translate(0, -13),
+      4,
       Paint()..color = const Color(0xFF071D1B),
     );
+
     _drawText(
       canvas,
-      'YOU',
-      center.translate(-20, 28),
+      moving ? 'WALKING' : 'YOU',
+      base.translate(-28, 31),
       fontSize: 8,
       color: const Color(0xFF56F2C3),
       fontWeight: FontWeight.w900,
-      maxWidth: 40,
+      maxWidth: 56,
       textAlign: TextAlign.center,
     );
   }
@@ -291,7 +461,7 @@ class HubWorldGame extends FlameGame with TapCallbacks {
     );
     _drawText(
       canvas,
-      'Choose where the chaos starts.',
+      'Walk into the next problem.',
       const Offset(20, 38),
       fontSize: 20,
       color: Colors.white,

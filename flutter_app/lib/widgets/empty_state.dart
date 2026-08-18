@@ -3,23 +3,28 @@ import 'package:flutter/material.dart';
 class EmptyState extends StatelessWidget {
   final String title;
   final String message;
-  final String actionLabel;
-  final VoidCallback onActionPressed;
+  final String? actionLabel;
+  final VoidCallback? onActionPressed;
   final IconData icon;
 
   const EmptyState({
     super.key,
     required this.title,
     required this.message,
-    required this.actionLabel,
-    required this.onActionPressed,
+    this.actionLabel,
+    this.onActionPressed,
     this.icon = Icons.school_outlined,
-  });
+  }) : assert(
+          (actionLabel == null) == (onActionPressed == null),
+          'actionLabel and onActionPressed must either both be provided or both be omitted.',
+        );
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final action = onActionPressed;
+    final label = actionLabel;
 
     return Center(
       child: Padding(
@@ -62,12 +67,14 @@ class EmptyState extends StatelessWidget {
                       color: colorScheme.onSurfaceVariant,
                     ),
                   ),
-                  const SizedBox(height: 22),
-                  FilledButton.icon(
-                    onPressed: onActionPressed,
-                    icon: const Icon(Icons.refresh),
-                    label: Text(actionLabel),
-                  ),
+                  if (action != null && label != null) ...[
+                    const SizedBox(height: 22),
+                    FilledButton.icon(
+                      onPressed: action,
+                      icon: const Icon(Icons.refresh),
+                      label: Text(label),
+                    ),
+                  ],
                 ],
               ),
             ),

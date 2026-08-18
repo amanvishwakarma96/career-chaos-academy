@@ -27,7 +27,7 @@ void main() {
     scoreImpact: ScoreModel(skill: 3),
   );
 
-  testWidgets('RoleCard displays role, chapter count, progress, and handles tap', (tester) async {
+  testWidgets('RoleCard displays role, mission count, progress, and handles tap', (tester) async {
     var tapped = false;
     final roleScenario = RoleScenarioModel(
       role: role,
@@ -72,7 +72,7 @@ void main() {
     );
 
     expect(find.text('Developer'), findsOneWidget);
-    expect(find.text('2 chapters'), findsOneWidget);
+    expect(find.text('2 missions'), findsOneWidget);
     expect(find.text('50%'), findsOneWidget);
 
     await tester.tap(find.byType(RoleCard));

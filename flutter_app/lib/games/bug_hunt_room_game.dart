@@ -3,9 +3,10 @@ import '../models/score_model.dart';
 import 'base_mini_game.dart';
 
 class BugHuntRoomGame extends BaseMiniGame {
-  BugHuntRoomGame() : super(definition: definition);
+  BugHuntRoomGame() : super(definition: gameDefinition);
 
-  static const FlameMiniGameDefinitionModel definition = FlameMiniGameDefinitionModel(
+  static const FlameMiniGameDefinitionModel gameDefinition =
+      FlameMiniGameDefinitionModel(
     id: 'flame_bug_hunt_room',
     kind: FlameMiniGameKind.bugHuntRoom,
     title: 'Bug Hunt Room',
