@@ -1,0 +1,5 @@
+# Developer Role — Definition of Fun
+
+Within the first 90 seconds, the player should feel like they have entered a chaotic tech workplace rather than opened an education app. The Developer appears inside a persistent office/tech-campus hub with clearly visible destinations instead of immediately entering a menu of chapters. Selecting Chapter 1 should feel like entering the Production Office, while the Bug Hunt Lab should feel like a separate live debugging destination. Existing story, progression, scoring, XP, reputation, skill-tree, and backend behavior must remain unchanged; the hub is a presentation and navigation layer around the current content.
+
+The moment to remember is the transition from the calm Developer hub into the production-incident experience: the player chooses the Production Office, experiences the existing Chapter 1 cinematic story, and can enter the Bug Hunt challenge without losing the sense that the hub world is still underneath the experience. Later motion/audio polish should reinforce this moment rather than add unrelated features.
