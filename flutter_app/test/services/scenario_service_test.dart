@@ -2,9 +2,14 @@ import 'package:career_chaos_academy/data/scenario_asset_paths.dart';
 import 'package:career_chaos_academy/models/mini_game_model.dart';
 import 'package:career_chaos_academy/services/scenario_service.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUp(() {
+    SharedPreferences.setMockInitialValues(<String, Object>{});
+  });
 
   test('loads every static scenario JSON asset without using API', () async {
     final result = await ScenarioService.instance.loadScenarios(
