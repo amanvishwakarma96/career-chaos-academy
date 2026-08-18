@@ -3,7 +3,6 @@ class AppRoutes {
 
   static const achievement = '/achievements';
   static const chapterList = '/chapter-list';
-  static const developerHub = '/developer-hub';
   static const scenario = '/scenario';
   static const dialogueScene = '/dialogue-scene';
   static const miniGame = '/mini-game';
