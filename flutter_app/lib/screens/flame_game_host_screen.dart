@@ -4,20 +4,35 @@ import 'package:flutter/material.dart';
 import '../core/responsive_layout.dart';
 import '../games/base_mini_game.dart';
 import '../games/flame_mini_game_factory.dart';
+import '../games/hub_world_game.dart';
 import '../models/flame_mini_game_model.dart';
 import '../services/progress_service.dart';
 import '../widgets/info_panel.dart';
 import '../widgets/motion_feedback_animation.dart';
 
+typedef FlameHubContentBuilder = Widget Function(
+  BuildContext context,
+  HubWorldLocationKind location,
+);
+
 class FlameGameHostScreen extends StatefulWidget {
   final FlameMiniGameKind? initialKind;
   final bool chapterMode;
+  final FlameHubContentBuilder? hubContentBuilder;
+  final String? hubTitle;
 
   const FlameGameHostScreen({
     super.key,
     this.initialKind,
     this.chapterMode = false,
-  });
+    this.hubContentBuilder,
+    this.hubTitle,
+  }) : assert(
+          hubContentBuilder == null || initialKind == null,
+          'Hub mode and direct mini-game mode are mutually exclusive.',
+        );
+
+  bool get isHubMode => hubContentBuilder != null;
 
   @override
   State<FlameGameHostScreen> createState() => _FlameGameHostScreenState();
@@ -27,10 +42,17 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
   BaseMiniGame? _game;
   FlameMiniGameKind? _kind;
   FlameMiniGameResultModel? _lastResult;
+  HubWorldGame? _hubGame;
+  bool _hubOverlayOpen = false;
 
   @override
   void initState() {
     super.initState();
+    if (widget.isHubMode) {
+      _hubGame = HubWorldGame(onLocationSelected: _openHubLocation);
+      return;
+    }
+
     final initialKind = widget.initialKind;
     if (initialKind != null) {
       _startGame(initialKind);
@@ -41,6 +63,49 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
   void dispose() {
     _game?.disposeNotifiers();
     super.dispose();
+  }
+
+  Future<void> _openHubLocation(HubWorldLocationKind location) async {
+    final builder = widget.hubContentBuilder;
+    if (builder == null || _hubOverlayOpen || !mounted) {
+      return;
+    }
+
+    setState(() => _hubOverlayOpen = true);
+    try {
+      await showGeneralDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        barrierColor: Colors.black.withOpacity(0.64),
+        transitionDuration: const Duration(milliseconds: 260),
+        pageBuilder: (dialogContext, _, __) {
+          return SafeArea(
+            child: Material(
+              color: const Color(0xFF070913),
+              child: builder(dialogContext, location),
+            ),
+          );
+        },
+        transitionBuilder: (context, animation, secondaryAnimation, child) {
+          final curved = CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeOutCubic,
+            reverseCurve: Curves.easeInCubic,
+          );
+          return FadeTransition(
+            opacity: curved,
+            child: ScaleTransition(
+              scale: Tween<double>(begin: 0.985, end: 1).animate(curved),
+              child: child,
+            ),
+          );
+        },
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _hubOverlayOpen = false);
+      }
+    }
   }
 
   void _startGame(FlameMiniGameKind kind) {
@@ -123,6 +188,10 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.isHubMode) {
+      return _buildHubWorld(context);
+    }
+
     final game = _game;
     return Scaffold(
       backgroundColor: const Color(0xFF070913),
@@ -133,6 +202,71 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
       ),
       body: SafeArea(
         child: game == null ? _buildGamePicker(context) : _buildGame(context, game),
+      ),
+    );
+  }
+
+  Widget _buildHubWorld(BuildContext context) {
+    final game = _hubGame;
+    if (game == null) {
+      return const Scaffold(
+        backgroundColor: Color(0xFF070913),
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    return Scaffold(
+      backgroundColor: const Color(0xFF070913),
+      appBar: AppBar(
+        title: Text(widget.hubTitle ?? 'Developer Hub'),
+        backgroundColor: const Color(0xFF070913),
+        foregroundColor: Colors.white,
+      ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Positioned.fill(child: GameWidget<HubWorldGame>(game: game)),
+            Positioned(
+              left: 16,
+              right: 16,
+              bottom: 14,
+              child: IgnorePointer(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    color: const Color(0xFF0C0E18).withOpacity(0.88),
+                    border: Border.all(color: Colors.white.withOpacity(0.10)),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.touch_app_rounded,
+                        color: Color(0xFFFF80AD),
+                        size: 20,
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          _hubOverlayOpen
+                              ? 'Mission active • the hub stays loaded underneath.'
+                              : 'Tap a location to enter an existing mission.',
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
