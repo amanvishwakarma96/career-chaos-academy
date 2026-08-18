@@ -38,6 +38,25 @@ abstract class BaseMiniGame extends FlameGame with TapCallbacks {
   double get _visualTime =>
       AnimationService.instance.isReducedMotion ? 0 : _elapsed;
 
+  Offset get sceneFeedbackOffset => Offset.zero;
+
+  double targetFeedbackScale(
+    FlameMiniGameTargetModel target,
+    int index,
+  ) => 1;
+
+  Offset targetFeedbackOffset(
+    FlameMiniGameTargetModel target,
+    int index,
+  ) => Offset.zero;
+
+  void onTargetTapped({
+    required FlameMiniGameTargetModel target,
+    required int index,
+    required Offset tapPosition,
+    required bool isAdding,
+  }) {}
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
@@ -89,12 +108,13 @@ abstract class BaseMiniGame extends FlameGame with TapCallbacks {
 
     final tap = event.localPosition.toOffset();
     for (var index = 0; index < definition.targets.length; index += 1) {
-      final rect = _targetRectFor(index, definition.targets.length);
+      final rect = targetRectFor(index, definition.targets.length);
       if (!rect.inflate(6).contains(tap)) {
         continue;
       }
 
       final target = definition.targets[index];
+      final isAdding = !selectedTargetIds.value.contains(target.id);
       toggleTarget(target.id);
       feedbackMessage.value = target.hint;
       _tapBursts.add(
@@ -104,6 +124,12 @@ abstract class BaseMiniGame extends FlameGame with TapCallbacks {
               ? const Color(0xFF69F0AE)
               : const Color(0xFFFFC857),
         ),
+      );
+      onTargetTapped(
+        target: target,
+        index: index,
+        tapPosition: tap,
+        isAdding: isAdding,
       );
       HapticFeedback.selectionClick();
       break;
@@ -184,6 +210,10 @@ abstract class BaseMiniGame extends FlameGame with TapCallbacks {
   @override
   void render(Canvas canvas) {
     super.render(canvas);
+    final sceneOffset = sceneFeedbackOffset;
+    canvas.save();
+    canvas.translate(sceneOffset.dx, sceneOffset.dy);
+
     final rect = Offset.zero & Size(size.x, size.y);
     final paint = Paint()
       ..shader = LinearGradient(
@@ -201,6 +231,7 @@ abstract class BaseMiniGame extends FlameGame with TapCallbacks {
     _drawTapBursts(canvas);
     _drawHud(canvas);
     _drawVignette(canvas);
+    canvas.restore();
   }
 
   List<Color> get _backgroundColors {
@@ -290,11 +321,18 @@ abstract class BaseMiniGame extends FlameGame with TapCallbacks {
     final targets = definition.targets;
     for (var index = 0; index < targets.length; index += 1) {
       final target = targets[index];
-      final rect = _targetRectFor(index, targets.length);
+      final rect = targetRectFor(index, targets.length);
       final isSelected = selected.contains(target.id);
       final floatOffset = math.sin(_visualTime * 1.8 + index * 0.8) *
           (_visualQuality == GameVisualQuality.performance ? 1.5 : 3.5);
-      final animatedRect = rect.shift(Offset(0, floatOffset));
+      final feedbackOffset = targetFeedbackOffset(target, index);
+      final shiftedRect = rect.shift(Offset(0, floatOffset) + feedbackOffset);
+      final feedbackScale = targetFeedbackScale(target, index);
+      final animatedRect = Rect.fromCenter(
+        center: shiftedRect.center,
+        width: shiftedRect.width * feedbackScale,
+        height: shiftedRect.height * feedbackScale,
+      );
       final pulse = (math.sin(_visualTime * 3 + index) + 1) / 2;
 
       final shadowPaint = Paint()
@@ -378,7 +416,7 @@ abstract class BaseMiniGame extends FlameGame with TapCallbacks {
     }
   }
 
-  Rect _targetRectFor(int index, int count) {
+  Rect targetRectFor(int index, int count) {
     final safeWidth = math.max(300.0, size.x);
     final safeHeight = math.max(300.0, size.y);
     final horizontalPadding = 18.0;
