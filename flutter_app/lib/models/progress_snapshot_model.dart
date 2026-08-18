@@ -12,6 +12,8 @@ import 'score_model.dart';
 import 'skill_tree/skill_tree_model.dart';
 
 class ProgressSnapshotModel {
+  static const int currentVersion = 13;
+
   final Map<String, RoleProgressModel> progressByRole;
   final ScoreModel totalScore;
   final int totalXp;
@@ -115,26 +117,39 @@ class ProgressSnapshotModel {
       activityHistory: _readActivityHistory(json['activityHistory']),
       activityStreak: _readActivityStreak(json['activityStreak']),
       activityXp: _readNonNegativeInt(json['activityXp']),
-      flameMiniGameHistory: _readFlameMiniGameHistory(json['flameMiniGameHistory']),
+      flameMiniGameHistory:
+          _readFlameMiniGameHistory(json['flameMiniGameHistory']),
       flameMiniGameXp: _readNonNegativeInt(json['flameMiniGameXp']),
       flameMiniGameScore: json['flameMiniGameScore'] is Map<String, dynamic>
-          ? ScoreModel.fromJson(json['flameMiniGameScore'] as Map<String, dynamic>)
+          ? ScoreModel.fromJson(
+              json['flameMiniGameScore'] as Map<String, dynamic>,
+            )
           : ScoreModel.zero,
       mentorPreference: json['mentorPreference'] is Map<String, dynamic>
-          ? MentorPreferenceModel.fromJson(json['mentorPreference'] as Map<String, dynamic>)
+          ? MentorPreferenceModel.fromJson(
+              json['mentorPreference'] as Map<String, dynamic>,
+            )
           : MentorPreferenceModel.defaults,
       contentCacheState: json['contentCacheState'] is Map<String, dynamic>
-          ? ContentCacheStateModel.fromJson(json['contentCacheState'] as Map<String, dynamic>)
+          ? ContentCacheStateModel.fromJson(
+              json['contentCacheState'] as Map<String, dynamic>,
+            )
           : ContentCacheStateModel.defaults,
       featureFlagOverrides: _readBoolMap(json['featureFlagOverrides']),
       userBehaviorSummary: json['userBehaviorSummary'] is Map<String, dynamic>
-          ? UserBehaviorSummaryModel.fromJson(json['userBehaviorSummary'] as Map<String, dynamic>)
+          ? UserBehaviorSummaryModel.fromJson(
+              json['userBehaviorSummary'] as Map<String, dynamic>,
+            )
           : UserBehaviorSummaryModel.empty,
-      adaptiveStoryDrafts: _readAdaptiveStoryDrafts(json['adaptiveStoryDrafts']),
+      adaptiveStoryDrafts:
+          _readAdaptiveStoryDrafts(json['adaptiveStoryDrafts']),
       careerCoachState: json['careerCoachState'] is Map<String, dynamic>
-          ? CareerCoachStateModel.fromJson(json['careerCoachState'] as Map<String, dynamic>)
+          ? CareerCoachStateModel.fromJson(
+              json['careerCoachState'] as Map<String, dynamic>,
+            )
           : CareerCoachStateModel.defaults,
-      skillTreeProgressByRole: _readSkillTreeProgressMap(json['skillTreeProgressByRole']),
+      skillTreeProgressByRole:
+          _readSkillTreeProgressMap(json['skillTreeProgressByRole']),
     );
   }
 
@@ -172,9 +187,11 @@ class ProgressSnapshotModel {
         result[key] = _readStringSet(item);
       }
     });
-    return Map<String, Set<String>>.unmodifiable(result.map(
-      (key, value) => MapEntry(key, Set<String>.unmodifiable(value)),
-    ));
+    return Map<String, Set<String>>.unmodifiable(
+      result.map(
+        (key, value) => MapEntry(key, Set<String>.unmodifiable(value)),
+      ),
+    );
   }
 
   static Map<String, ReputationModel> _readReputationMap(Object? value) {
@@ -203,7 +220,6 @@ class ProgressSnapshotModel {
     return Map<String, int>.unmodifiable(result);
   }
 
-
   static int _readNonNegativeInt(Object? value) {
     if (value is int && value >= 0) {
       return value;
@@ -227,8 +243,9 @@ class ProgressSnapshotModel {
     return List<ActivityHistoryModel>.unmodifiable(result);
   }
 
-
-  static List<FlameMiniGameResultModel> _readFlameMiniGameHistory(Object? value) {
+  static List<FlameMiniGameResultModel> _readFlameMiniGameHistory(
+    Object? value,
+  ) {
     if (value is! List) {
       return const <FlameMiniGameResultModel>[];
     }
@@ -240,8 +257,6 @@ class ProgressSnapshotModel {
     }
     return List<FlameMiniGameResultModel>.unmodifiable(result);
   }
-
-
 
   static List<AdaptiveStoryDraftModel> _readAdaptiveStoryDrafts(Object? value) {
     if (value is! List) {
@@ -263,7 +278,9 @@ class ProgressSnapshotModel {
     return ActivityStreakModel.zero;
   }
 
-  static Map<String, RelationshipScoreModel> _readRelationshipScoreMap(Object? value) {
+  static Map<String, RelationshipScoreModel> _readRelationshipScoreMap(
+    Object? value,
+  ) {
     if (value is! Map) {
       return const <String, RelationshipScoreModel>{};
     }
@@ -283,14 +300,23 @@ class ProgressSnapshotModel {
     final result = <String, List<String>>{};
     value.forEach((key, item) {
       if (key is String && item is List) {
-        result[key] = item.whereType<String>().map((entry) => entry.trim()).where((entry) => entry.isNotEmpty).toList(growable: false);
+        result[key] = item
+            .whereType<String>()
+            .map((entry) => entry.trim())
+            .where((entry) => entry.isNotEmpty)
+            .toList(growable: false);
       }
     });
-    return Map<String, List<String>>.unmodifiable(result.map((key, value) => MapEntry(key, List<String>.unmodifiable(value))));
+    return Map<String, List<String>>.unmodifiable(
+      result.map(
+        (key, value) => MapEntry(key, List<String>.unmodifiable(value)),
+      ),
+    );
   }
 
-
-  static Map<String, SkillTreeProgressModel> _readSkillTreeProgressMap(Object? value) {
+  static Map<String, SkillTreeProgressModel> _readSkillTreeProgressMap(
+    Object? value,
+  ) {
     if (value is! Map) {
       return const <String, SkillTreeProgressModel>{};
     }
@@ -333,7 +359,7 @@ class ProgressSnapshotModel {
     final badgeList = badges.toList()..sort();
 
     return <String, dynamic>{
-      'version': 13,
+      'version': currentVersion,
       'progressByRole': progressByRole.map(
         (roleId, progress) => MapEntry(roleId, progress.toJson()),
       ),
@@ -341,7 +367,8 @@ class ProgressSnapshotModel {
       'totalXp': totalXp,
       'badges': badgeList,
       'activeFlagsByRole': _stringSetMapToJson(activeFlagsByRole),
-      'completedCleanupMissions': _stringSetMapToJson(completedCleanupMissions),
+      'completedCleanupMissions':
+          _stringSetMapToJson(completedCleanupMissions),
       'roleReputation': roleReputation.map(
         (roleId, reputation) => MapEntry(roleId, reputation.toJson()),
       ),
@@ -352,19 +379,26 @@ class ProgressSnapshotModel {
         (roleId, relationship) => MapEntry(roleId, relationship.toJson()),
       ),
       'delayedConsequencesByRole': delayedConsequencesByRole,
-      'activityHistory': activityHistory.map((item) => item.toJson()).toList(growable: false),
+      'activityHistory':
+          activityHistory.map((item) => item.toJson()).toList(growable: false),
       'activityStreak': activityStreak.toJson(),
       'activityXp': activityXp,
-      'flameMiniGameHistory': flameMiniGameHistory.map((item) => item.toJson()).toList(growable: false),
+      'flameMiniGameHistory': flameMiniGameHistory
+          .map((item) => item.toJson())
+          .toList(growable: false),
       'flameMiniGameXp': flameMiniGameXp,
       'flameMiniGameScore': flameMiniGameScore.toJson(),
       'mentorPreference': mentorPreference.toJson(),
       'contentCacheState': contentCacheState.toJson(),
       'featureFlagOverrides': featureFlagOverrides,
       'userBehaviorSummary': userBehaviorSummary.toJson(),
-      'adaptiveStoryDrafts': adaptiveStoryDrafts.map((item) => item.toJson()).toList(growable: false),
+      'adaptiveStoryDrafts': adaptiveStoryDrafts
+          .map((item) => item.toJson())
+          .toList(growable: false),
       'careerCoachState': careerCoachState.toJson(),
-      'skillTreeProgressByRole': skillTreeProgressByRole.map((roleId, progress) => MapEntry(roleId, progress.toJson())),
+      'skillTreeProgressByRole': skillTreeProgressByRole.map(
+        (roleId, progress) => MapEntry(roleId, progress.toJson()),
+      ),
     };
   }
 
