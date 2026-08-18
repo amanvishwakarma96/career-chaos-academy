@@ -70,7 +70,8 @@ class AdaptiveStoryService {
     required List<RoleScenarioModel> roleScenarios,
     UserBehaviorSummaryModel? summary,
   }) {
-    final behavior = summary ?? buildBehaviorSummary(roleScenarios: roleScenarios);
+    final behavior =
+        summary ?? buildBehaviorSummary(roleScenarios: roleScenarios);
     final preferredRole = behavior.preferredRoles.isNotEmpty
         ? behavior.preferredRoles.first
         : (roleScenarios.isNotEmpty ? roleScenarios.first.role.id : 'developer');
@@ -93,7 +94,8 @@ class AdaptiveStoryService {
       return AdaptiveStoryRecommendationModel(
         roleId: preferredRole,
         chapterId: nextChapter?.id,
-        reason: 'You often choose speed over evidence. Try a cleanup or documentation-heavy scenario next.',
+        reason:
+            'You often choose speed over evidence. Try a cleanup or documentation-heavy scenario next.',
         suggestedActivityType: 'ethical_dilemma',
         difficulty: 'guided',
         shouldGenerateSideMission: true,
@@ -103,7 +105,8 @@ class AdaptiveStoryService {
       return AdaptiveStoryRecommendationModel(
         roleId: preferredRole,
         chapterId: nextChapter?.id,
-        reason: 'Repeated mini-game failures detected. A lower-pressure practice mission is recommended.',
+        reason:
+            'Repeated mini-game failures detected. A lower-pressure practice mission is recommended.',
         suggestedActivityType: 'daily_challenge',
         difficulty: 'guided',
         shouldGenerateSideMission: true,
@@ -113,7 +116,8 @@ class AdaptiveStoryService {
       return AdaptiveStoryRecommendationModel(
         roleId: preferredRole,
         chapterId: nextChapter?.id,
-        reason: 'Communication is a weak area, so the next mission should focus on stakeholder clarity.',
+        reason:
+            'Communication is a weak area, so the next mission should focus on stakeholder clarity.',
         suggestedActivityType: 'client_negotiation',
         difficulty: 'normal',
       );
@@ -122,7 +126,8 @@ class AdaptiveStoryService {
       return AdaptiveStoryRecommendationModel(
         roleId: preferredRole,
         chapterId: nextChapter?.id,
-        reason: 'Ethics needs reinforcement. Choose a dilemma that rewards safe escalation and transparency.',
+        reason:
+            'Ethics needs reinforcement. Choose a dilemma that rewards safe escalation and transparency.',
         suggestedActivityType: 'ethical_dilemma',
         difficulty: 'normal',
       );
@@ -131,7 +136,8 @@ class AdaptiveStoryService {
       return AdaptiveStoryRecommendationModel(
         roleId: preferredRole,
         chapterId: nextChapter?.id,
-        reason: 'Your recent profile is strong. The story can safely increase ambiguity and difficulty.',
+        reason:
+            'Your recent profile is strong. The story can safely increase ambiguity and difficulty.',
         suggestedActivityType: 'boss_battle',
         difficulty: 'advanced',
       );
@@ -139,7 +145,8 @@ class AdaptiveStoryService {
     return AdaptiveStoryRecommendationModel(
       roleId: preferredRole,
       chapterId: nextChapter?.id,
-      reason: 'Continue the next available chapter. Adaptive engine is watching for stronger patterns.',
+      reason:
+          'Continue the next available chapter. Adaptive engine is watching for stronger patterns.',
       suggestedActivityType: 'role_quiz',
       difficulty: 'normal',
     );
@@ -173,7 +180,9 @@ class AdaptiveStoryService {
     required AdaptiveStoryRecommendationModel recommendation,
   }) {
     final now = DateTime.now();
-    final weakArea = summary.weakSkills.isNotEmpty ? summary.weakSkills.first : 'professional_judgment';
+    final weakArea = summary.weakSkills.isNotEmpty
+        ? summary.weakSkills.first
+        : 'professional_judgment';
     return AdaptiveStoryDraftModel(
       id: 'adaptive_${roleId}_${now.millisecondsSinceEpoch}',
       roleId: roleId,
@@ -186,7 +195,8 @@ class AdaptiveStoryService {
         'title': 'Adaptive Practice: ${_titleCase(weakArea)}',
         'difficulty': recommendation.difficulty,
         'theme': 'Personalized remediation',
-        'learningObjective': 'Practice $weakArea using safe, evidence-based professional choices.',
+        'learningObjective':
+            'Practice $weakArea using safe, evidence-based professional choices.',
         'safetyReview': {
           'status': 'pending',
           'domains': ['professional_learning'],
@@ -202,7 +212,9 @@ class AdaptiveStoryService {
 
   Future<String> loadSafePromptTemplate() async {
     try {
-      return rootBundle.loadString('assets/config/adaptive_story_prompt_template.md');
+      return await rootBundle.loadString(
+        'assets/config/adaptive_story_prompt_template.md',
+      );
     } catch (_) {
       return defaultSafePromptTemplate;
     }
@@ -218,7 +230,13 @@ Include roleId, title, difficulty, scenario, choices, outcomes, moralLesson, pro
 ''';
 
   bool isDraftSafeForReview(AdaptiveStoryDraftModel draft) {
-    final jsonText = jsonEncode(draft.generatedJson).toLowerCase();
+    // Safety metadata intentionally names prohibited concepts (for example,
+    // "No ... dosage ..."). Exclude that policy text from the unsafe-content
+    // scan so the guardrail cannot flag itself as dangerous.
+    final contentForSafetyScan = Map<String, dynamic>.from(draft.generatedJson)
+      ..remove('safetyReview')
+      ..remove('professionalSafetyLimits');
+    final jsonText = jsonEncode(contentForSafetyScan).toLowerCase();
     final dangerous = <String>[
       'prescribe ',
       'dosage',
