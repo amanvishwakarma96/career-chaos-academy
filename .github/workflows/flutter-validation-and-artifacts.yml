@@ -1,0 +1,120 @@
+name: Flutter Validation & Shareable Builds
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'flutter_app/**'
+      - '.github/workflows/flutter-validation-and-artifacts.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'flutter_app/**'
+      - '.github/workflows/flutter-validation-and-artifacts.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: flutter-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Analyze & Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: flutter_app
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Show Flutter version
+        run: flutter --version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze source
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test --reporter expanded
+
+  build-shareable:
+    name: Build Shareable Artifacts
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: flutter_app
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Chrome-compatible web release
+        run: flutter build web --release
+
+      - name: Build Android debug APK
+        run: flutter build apk --debug
+
+      - name: Upload web build
+        uses: actions/upload-artifact@v4
+        with:
+          name: career-chaos-web-${{ github.run_number }}
+          path: flutter_app/build/web/
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 6
+
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: career-chaos-android-debug-${{ github.run_number }}
+          path: flutter_app/build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+
+      - name: Publish build summary
+        if: always()
+        run: |
+          {
+            echo '## Career Chaos shareable builds'
+            echo ''
+            echo '- Validation: `flutter analyze` + `flutter test`'
+            echo '- Web: release build for Chrome/browser testing'
+            echo '- Android: debug APK for direct tester installation'
+            echo '- Artifact retention: 14 days'
+            echo ''
+            echo 'Download artifacts from the **Artifacts** section of this workflow run.'
+          } >> "$GITHUB_STEP_SUMMARY"
