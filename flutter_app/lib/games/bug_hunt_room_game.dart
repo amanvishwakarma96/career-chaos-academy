@@ -10,7 +10,7 @@ import '../services/audio_service.dart';
 import 'base_mini_game.dart';
 
 class BugHuntRoomGame extends BaseMiniGame {
-  BugHuntRoomGame() : super(definition: gameDefinition);
+  BugHuntRoomGame({int? seed}) : super(definition: _buildRuntimeDefinition(seed));
 
   static const FlameMiniGameDefinitionModel gameDefinition =
       FlameMiniGameDefinitionModel(
@@ -18,27 +18,186 @@ class BugHuntRoomGame extends BaseMiniGame {
     kind: FlameMiniGameKind.bugHuntRoom,
     title: 'Bug Hunt Room',
     subtitle: 'Find the risky defects before the release train becomes a clown car.',
-    instructions: 'Select only the real production blockers. Coffee stains and scary comments are not bugs, even if they feel personal.',
+    instructions:
+        'Select only the real production blockers. Every run contains a different incident mix. Wrong calls accelerate the incident clock; fast correct streaks briefly slow it.',
     timeLimitSeconds: 45,
     successThreshold: 3,
-    successScoreImpact: ScoreModel(skill: 5, discipline: 3, communication: 1, ethics: 1, chaos: -2),
-    failureScoreImpact: ScoreModel(skill: 1, discipline: -1, communication: 0, ethics: 0, chaos: 3),
+    successScoreImpact: ScoreModel(
+      skill: 5,
+      discipline: 3,
+      communication: 1,
+      ethics: 1,
+      chaos: -2,
+    ),
+    failureScoreImpact: ScoreModel(
+      skill: 1,
+      discipline: -1,
+      communication: 0,
+      ethics: 0,
+      chaos: 3,
+    ),
     successXp: 120,
     failureXp: 35,
-    successMessage: 'Bug hunt cleared. QA nods respectfully. The release train remains on tracks.',
-    failureMessage: 'You chased a coffee stain while the login bug escaped wearing sunglasses. Useful chaos, but still chaos.',
+    successMessage:
+        'Bug hunt cleared. QA nods respectfully. The release train remains on tracks.',
+    failureMessage:
+        'The incident escaped containment. Useful chaos, but still chaos.',
     targets: <FlameMiniGameTargetModel>[
-      FlameMiniGameTargetModel(id: 'null_token', label: 'Null token after refresh', hint: 'Auth blockers stop users cold.', isCorrect: true, feedback: 'Correct: token refresh bugs block sessions.'),
-      FlameMiniGameTargetModel(id: 'ios_keyboard_overlap', label: 'iOS keyboard hides submit', hint: 'Blocks a core flow on one platform.', isCorrect: true, feedback: 'Correct: platform blockers need release attention.'),
-      FlameMiniGameTargetModel(id: 'payment_double_tap', label: 'Double-tap creates duplicate payment', hint: 'Money flow issues are high priority.', isCorrect: true, feedback: 'Correct: duplicate payment risk is serious.'),
-      FlameMiniGameTargetModel(id: 'coffee_stain', label: 'Coffee stain on Jira screenshot', hint: 'Funny, not a production blocker.', isCorrect: false, feedback: 'Not a blocker. Hydrate the screenshot later.'),
-      FlameMiniGameTargetModel(id: 'variable_name_vibe', label: 'Variable name has bad vibes', hint: 'Refactor later unless it causes risk.', isCorrect: false, feedback: 'Code vibes are real, but not release blockers.'),
+      FlameMiniGameTargetModel(
+        id: 'null_token',
+        label: 'Null token after refresh',
+        hint: 'Auth blockers stop users cold.',
+        isCorrect: true,
+        feedback: 'Correct: token refresh bugs block sessions.',
+      ),
+      FlameMiniGameTargetModel(
+        id: 'ios_keyboard_overlap',
+        label: 'iOS keyboard hides submit',
+        hint: 'Blocks a core flow on one platform.',
+        isCorrect: true,
+        feedback: 'Correct: platform blockers need release attention.',
+      ),
+      FlameMiniGameTargetModel(
+        id: 'payment_double_tap',
+        label: 'Double-tap creates duplicate payment',
+        hint: 'Money flow issues are high priority.',
+        isCorrect: true,
+        feedback: 'Correct: duplicate payment risk is serious.',
+      ),
+      FlameMiniGameTargetModel(
+        id: 'coffee_stain',
+        label: 'Coffee stain on Jira screenshot',
+        hint: 'Funny, not a production blocker.',
+        isCorrect: false,
+        feedback: 'Not a blocker. Hydrate the screenshot later.',
+      ),
+      FlameMiniGameTargetModel(
+        id: 'variable_name_vibe',
+        label: 'Variable name has bad vibes',
+        hint: 'Refactor later unless it causes risk.',
+        isCorrect: false,
+        feedback: 'Code vibes are real, but not release blockers.',
+      ),
     ],
   );
+
+  static const List<FlameMiniGameTargetModel> _correctPool =
+      <FlameMiniGameTargetModel>[
+    FlameMiniGameTargetModel(
+      id: 'null_token',
+      label: 'Null token after refresh',
+      hint: 'Auth blockers stop users cold.',
+      isCorrect: true,
+      feedback: 'Correct: token refresh bugs block sessions.',
+    ),
+    FlameMiniGameTargetModel(
+      id: 'ios_keyboard_overlap',
+      label: 'iOS keyboard hides submit',
+      hint: 'Blocks a core flow on one platform.',
+      isCorrect: true,
+      feedback: 'Correct: platform blockers need release attention.',
+    ),
+    FlameMiniGameTargetModel(
+      id: 'payment_double_tap',
+      label: 'Double-tap creates duplicate payment',
+      hint: 'Money flow issues are high priority.',
+      isCorrect: true,
+      feedback: 'Correct: duplicate payment risk is serious.',
+    ),
+    FlameMiniGameTargetModel(
+      id: 'offline_sync_loss',
+      label: 'Offline draft disappears after reconnect',
+      hint: 'Users lose real work when sync recovery fails.',
+      isCorrect: true,
+      feedback: 'Correct: destructive sync loss is a release blocker.',
+    ),
+    FlameMiniGameTargetModel(
+      id: 'admin_leak',
+      label: 'Restricted admin field visible to normal user',
+      hint: 'Authorization leaks are production risks.',
+      isCorrect: true,
+      feedback: 'Correct: access-control leaks require immediate attention.',
+    ),
+    FlameMiniGameTargetModel(
+      id: 'checkout_crash',
+      label: 'Checkout crashes on slow network',
+      hint: 'Core revenue flow cannot fail under normal network stress.',
+      isCorrect: true,
+      feedback: 'Correct: reproducible checkout crashes block release.',
+    ),
+  ];
+
+  static const List<FlameMiniGameTargetModel> _decoyPool =
+      <FlameMiniGameTargetModel>[
+    FlameMiniGameTargetModel(
+      id: 'coffee_stain',
+      label: 'Coffee stain on Jira screenshot',
+      hint: 'Funny, not a production blocker.',
+      isCorrect: false,
+      feedback: 'Not a blocker. Hydrate the screenshot later.',
+    ),
+    FlameMiniGameTargetModel(
+      id: 'variable_name_vibe',
+      label: 'Variable name has bad vibes',
+      hint: 'Refactor later unless it causes risk.',
+      isCorrect: false,
+      feedback: 'Code vibes are real, but not release blockers.',
+    ),
+    FlameMiniGameTargetModel(
+      id: 'button_blue',
+      label: 'Button blue is 2% less dramatic',
+      hint: 'Visual polish can wait behind production risk.',
+      isCorrect: false,
+      feedback: 'Not a blocker. The button can survive being slightly less cinematic.',
+    ),
+    FlameMiniGameTargetModel(
+      id: 'comment_grammar',
+      label: 'TODO comment has bad grammar',
+      hint: 'Embarrassing is not the same as release-blocking.',
+      isCorrect: false,
+      feedback: 'Not a blocker. Fix the sentence after the incident.',
+    ),
+    FlameMiniGameTargetModel(
+      id: 'emoji_commit',
+      label: 'Commit message contains too many emojis',
+      hint: 'Questionable taste is not a production outage.',
+      isCorrect: false,
+      feedback: 'Not a blocker. The emoji situation can be handled diplomatically.',
+    ),
+  ];
+
+  static FlameMiniGameDefinitionModel _buildRuntimeDefinition(int? seed) {
+    final random = math.Random(seed ?? DateTime.now().microsecondsSinceEpoch);
+    final correct = List<FlameMiniGameTargetModel>.from(_correctPool)..shuffle(random);
+    final decoys = List<FlameMiniGameTargetModel>.from(_decoyPool)..shuffle(random);
+    final targets = <FlameMiniGameTargetModel>[
+      ...correct.take(3),
+      ...decoys.take(2),
+    ]..shuffle(random);
+
+    return FlameMiniGameDefinitionModel(
+      id: gameDefinition.id,
+      kind: gameDefinition.kind,
+      title: gameDefinition.title,
+      subtitle: gameDefinition.subtitle,
+      instructions: gameDefinition.instructions,
+      timeLimitSeconds: gameDefinition.timeLimitSeconds,
+      successThreshold: gameDefinition.successThreshold,
+      successScoreImpact: gameDefinition.successScoreImpact,
+      failureScoreImpact: gameDefinition.failureScoreImpact,
+      successXp: gameDefinition.successXp,
+      failureXp: gameDefinition.failureXp,
+      successMessage: gameDefinition.successMessage,
+      failureMessage: gameDefinition.failureMessage,
+      targets: List<FlameMiniGameTargetModel>.unmodifiable(targets),
+    );
+  }
 
   static const double _comboWindowSeconds = 2.4;
   static const double _targetFeedbackDuration = 0.34;
   static const double _wrongShakeDuration = 0.28;
+  static const double _wrongClockPenaltyDuration = 0.85;
+  static const double _comboClockReliefDuration = 0.70;
 
   final math.Random _juiceRandom = math.Random(911);
   final List<_BugHuntImpactParticle> _impactParticles =
@@ -51,15 +210,31 @@ class BugHuntRoomGame extends BaseMiniGame {
   bool _feedbackWasCorrect = false;
   double _targetFeedbackAge = _targetFeedbackDuration;
   double _wrongShakeRemaining = 0;
+  double _wrongClockPenaltyRemaining = 0;
+  double _comboClockReliefRemaining = 0;
+  double _incidentPressure = 18;
+  int _mistakeCount = 0;
 
   bool get _reducedMotion => AnimationService.instance.isReducedMotion;
+  int get incidentPressure => _incidentPressure.round().clamp(0, 100);
+  int get mistakeCount => _mistakeCount;
 
   @override
   void update(double dt) {
-    super.update(dt);
+    final clockScale = _wrongClockPenaltyRemaining > 0
+        ? 4.0
+        : _comboClockReliefRemaining > 0
+            ? 0.30
+            : 1.0;
+    super.update(dt * clockScale);
+
     _juiceElapsed += dt;
     _targetFeedbackAge += dt;
     _wrongShakeRemaining = math.max(0, _wrongShakeRemaining - dt);
+    _wrongClockPenaltyRemaining =
+        math.max(0, _wrongClockPenaltyRemaining - dt);
+    _comboClockReliefRemaining = math.max(0, _comboClockReliefRemaining - dt);
+    _incidentPressure = math.min(100, _incidentPressure + dt * 0.55);
 
     for (final particle in _impactParticles) {
       particle.age += dt;
@@ -118,6 +293,10 @@ class BugHuntRoomGame extends BaseMiniGame {
     _feedbackTargetIndex = null;
     _targetFeedbackAge = _targetFeedbackDuration;
     _wrongShakeRemaining = 0;
+    _wrongClockPenaltyRemaining = 0;
+    _comboClockReliefRemaining = 0;
+    _incidentPressure = 18;
+    _mistakeCount = 0;
     _impactParticles.clear();
   }
 
@@ -129,16 +308,24 @@ class BugHuntRoomGame extends BaseMiniGame {
     required bool isAdding,
   }) {
     if (!isAdding) {
-      feedbackMessage.value = 'Selection removed. Keep only real production blockers.';
+      feedbackMessage.value =
+          'Selection removed. Keep only real production blockers.';
       return;
     }
 
-    feedbackMessage.value = target.feedback;
     _feedbackTargetIndex = index;
     _feedbackWasCorrect = target.isCorrect;
     _targetFeedbackAge = 0;
 
     if (target.isCorrect) {
+      _incidentPressure = math.max(0, _incidentPressure - 8);
+      if (comboCount.value >= 2) {
+        _comboClockReliefRemaining = _comboClockReliefDuration;
+        feedbackMessage.value =
+            '${target.feedback} COMBO x${comboCount.value}: incident clock slowed.';
+      } else {
+        feedbackMessage.value = target.feedback;
+      }
       _spawnImpactParticles(
         tapPosition,
         const Color(0xFF69F0AE),
@@ -148,6 +335,11 @@ class BugHuntRoomGame extends BaseMiniGame {
         AudioService.instance.playSoundEffect('notification_ping'),
       );
     } else {
+      _mistakeCount += 1;
+      _incidentPressure = math.min(100, _incidentPressure + 24);
+      _wrongClockPenaltyRemaining = _wrongClockPenaltyDuration;
+      feedbackMessage.value =
+          '${target.feedback} Wrong call: incident clock accelerating!';
       if (!_reducedMotion) {
         _wrongShakeRemaining = _wrongShakeDuration;
       }
@@ -214,8 +406,65 @@ class BugHuntRoomGame extends BaseMiniGame {
   @override
   void render(Canvas canvas) {
     super.render(canvas);
+    _drawPressureOverlay(canvas);
     _drawImpactParticles(canvas);
     _drawComboBadge(canvas);
+    _drawPressureHud(canvas);
+  }
+
+  void _drawPressureOverlay(Canvas canvas) {
+    if (incidentPressure < 70) {
+      return;
+    }
+    final intensity = (incidentPressure - 70) / 30;
+    final pulse = _reducedMotion ? 0.65 : (math.sin(_juiceElapsed * 8) + 1) / 2;
+    canvas.drawRect(
+      Offset.zero & Size(size.x, size.y),
+      Paint()
+        ..color = const Color(0xFFFF3B55).withValues(
+          alpha: 0.025 + intensity * 0.055 * pulse,
+        ),
+    );
+  }
+
+  void _drawPressureHud(Canvas canvas) {
+    final width = math.min(260.0, math.max(170.0, size.x * 0.36));
+    final rect = Rect.fromLTWH(18, math.max(78, size.y - 58), width, 32);
+    final danger = incidentPressure >= 70;
+    final color = danger ? const Color(0xFFFF5C70) : const Color(0xFFFFC857);
+
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(rect, const Radius.circular(16)),
+      Paint()..color = const Color(0xFF080A12).withValues(alpha: 0.90),
+    );
+    final bar = Rect.fromLTWH(
+      rect.left + 8,
+      rect.bottom - 8,
+      (rect.width - 16) * (incidentPressure / 100),
+      3,
+    );
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(bar, const Radius.circular(4)),
+      Paint()..color = color,
+    );
+
+    final mode = _wrongClockPenaltyRemaining > 0
+        ? 'CLOCK x4'
+        : _comboClockReliefRemaining > 0
+            ? 'CLOCK x0.3'
+            : 'LIVE';
+    final painter = TextPainter(
+      text: TextSpan(
+        text: 'INCIDENT $incidentPressure%  •  $mode',
+        style: TextStyle(
+          color: color,
+          fontSize: 10,
+          fontWeight: FontWeight.w900,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout(maxWidth: rect.width - 16);
+    painter.paint(canvas, Offset(rect.left + 8, rect.top + 6));
   }
 
   void _spawnImpactParticles(
@@ -252,7 +501,7 @@ class BugHuntRoomGame extends BaseMiniGame {
       canvas.drawCircle(
         particle.position,
         particle.radius * (1 - progress * 0.35),
-        Paint()..color = particle.color.withOpacity(opacity),
+        Paint()..color = particle.color.withValues(alpha: opacity),
       );
     }
   }
@@ -271,7 +520,7 @@ class BugHuntRoomGame extends BaseMiniGame {
     );
     canvas.drawRRect(
       RRect.fromRectAndRadius(badgeRect, const Radius.circular(16)),
-      Paint()..color = const Color(0xFF69F0AE).withOpacity(0.90),
+      Paint()..color = const Color(0xFF69F0AE).withValues(alpha: 0.90),
     );
 
     final painter = TextPainter(
