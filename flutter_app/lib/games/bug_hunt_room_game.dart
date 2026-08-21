@@ -174,7 +174,10 @@ class BugHuntRoomGame extends BaseMiniGame {
       return;
     }
 
-    final tap = event.localPosition.toOffset();
+    final tap = Offset(
+      event.localPosition.x,
+      event.localPosition.y,
+    );
     final actions = DeveloperIncidentAction.values;
     for (var index = 0; index < actions.length; index += 1) {
       if (!_actionRect(index).inflate(5).contains(tap)) {
@@ -212,6 +215,9 @@ class BugHuntRoomGame extends BaseMiniGame {
         'Completed workflow tasks stay completed. Continue with: ${incident.currentTask}';
   }
 
+  // The live incident workstation replaces BaseMiniGame's selectable-card
+  // renderer while reusing its timer/result contract.
+  // ignore: must_call_super
   @override
   void render(Canvas canvas) {
     final bounds = Offset.zero & Size(size.x, size.y);
@@ -466,7 +472,7 @@ class BugHuntRoomGame extends BaseMiniGame {
 
   Rect _actionRect(int index) {
     final width = math.max(300.0, size.x);
-    final gap = 9.0;
+    const gap = 9.0;
     const horizontalPadding = 18.0;
     final cardWidth = (width - horizontalPadding * 2 - gap) / 2;
     final row = index ~/ 2;
