@@ -1,5 +1,3 @@
-export '../core/flame_vector_compat.dart';
-
 import '../core/json_reader.dart';
 
 class ScoreModel {
