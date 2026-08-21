@@ -5,15 +5,32 @@ import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../models/developer_session_model.dart';
 import '../models/flame_mini_game_model.dart';
 import '../models/score_model.dart';
 import '../services/animation_service.dart';
 import '../services/audio_service.dart';
+import '../services/developer_session_director_service.dart';
+import '../services/progress_service.dart';
 import 'base_mini_game.dart';
 import 'developer_incident_engine.dart';
 
 class BugHuntRoomGame extends BaseMiniGame {
-  BugHuntRoomGame({int? seed}) : super(definition: gameDefinition);
+  factory BugHuntRoomGame({
+    int? seed,
+    DeveloperSessionPlan? sessionPlan,
+  }) {
+    final plan = sessionPlan ??
+        DeveloperSessionDirectorService.instance.nextPlan(
+          history: ProgressService.instance.flameMiniGameHistory.value,
+          seed: seed,
+        );
+    return BugHuntRoomGame._(plan);
+  }
+
+  BugHuntRoomGame._(this.sessionPlan)
+      : incident = DeveloperIncidentEngine(modifier: sessionPlan.modifier),
+        super(definition: _definitionFor(sessionPlan));
 
   static const FlameMiniGameDefinitionModel gameDefinition =
       FlameMiniGameDefinitionModel(
@@ -92,7 +109,29 @@ class BugHuntRoomGame extends BaseMiniGame {
     ],
   );
 
-  final DeveloperIncidentEngine incident = DeveloperIncidentEngine();
+  static FlameMiniGameDefinitionModel _definitionFor(
+    DeveloperSessionPlan plan,
+  ) {
+    return FlameMiniGameDefinitionModel(
+      id: plan.runId,
+      kind: gameDefinition.kind,
+      title: gameDefinition.title,
+      subtitle: '${plan.modifier.label}: ${plan.modifier.briefing}',
+      instructions: gameDefinition.instructions,
+      timeLimitSeconds: gameDefinition.timeLimitSeconds,
+      successThreshold: gameDefinition.successThreshold,
+      successScoreImpact: gameDefinition.successScoreImpact,
+      failureScoreImpact: gameDefinition.failureScoreImpact,
+      successXp: gameDefinition.successXp,
+      failureXp: gameDefinition.failureXp,
+      successMessage: gameDefinition.successMessage,
+      failureMessage: gameDefinition.failureMessage,
+      targets: gameDefinition.targets,
+    );
+  }
+
+  final DeveloperSessionPlan sessionPlan;
+  final DeveloperIncidentEngine incident;
 
   DeveloperIncidentAction? _processingAction;
   double _processingRemaining = 0;
@@ -174,10 +213,7 @@ class BugHuntRoomGame extends BaseMiniGame {
       return;
     }
 
-    final tap = Offset(
-      event.localPosition.x,
-      event.localPosition.y,
-    );
+    final tap = Offset(event.localPosition.x, event.localPosition.y);
     final actions = DeveloperIncidentAction.values;
     for (var index = 0; index < actions.length; index += 1) {
       if (!_actionRect(index).inflate(5).contains(tap)) {
@@ -197,7 +233,8 @@ class BugHuntRoomGame extends BaseMiniGame {
     }
 
     _processingAction = action;
-    _processingDuration = action.processingSeconds;
+    _processingDuration =
+        action.processingSeconds * incident.processingMultiplier;
     _processingRemaining = _processingDuration;
     feedbackMessage.value = '${action.label} processing…';
     unawaited(AudioService.instance.playSoundEffect('choice_select'));
@@ -215,8 +252,8 @@ class BugHuntRoomGame extends BaseMiniGame {
         'Completed workflow tasks stay completed. Continue with: ${incident.currentTask}';
   }
 
-  // The live incident workstation replaces BaseMiniGame's selectable-card
-  // renderer while reusing its timer/result contract.
+  // The live incident workstation intentionally replaces BaseMiniGame's
+  // selectable-card renderer while preserving its timer/result contract.
   // ignore: must_call_super
   @override
   void render(Canvas canvas) {
@@ -267,12 +304,12 @@ class BugHuntRoomGame extends BaseMiniGame {
 
     _drawText(
       canvas,
-      'LIVE INCIDENT • LOGIN STATE',
+      'LIVE INCIDENT • ${sessionPlan.modifier.label.toUpperCase()}',
       const Offset(18, 14),
-      fontSize: 10,
+      fontSize: 9.5,
       color: const Color(0xFFFF80AD),
       fontWeight: FontWeight.w900,
-      maxWidth: size.x - 36,
+      maxWidth: math.max(100, size.x - 150),
     );
     _drawText(
       canvas,
@@ -312,7 +349,9 @@ class BugHuntRoomGame extends BaseMiniGame {
       'CHAOS $chaosLevel',
       Offset(chaosRect.left + 10, chaosRect.top + 8),
       fontSize: 10,
-      color: chaosLevel == 0 ? const Color(0xFF56F2C3) : const Color(0xFFFF7A8E),
+      color: chaosLevel == 0
+          ? const Color(0xFF56F2C3)
+          : const Color(0xFFFF7A8E),
       fontWeight: FontWeight.w900,
       maxWidth: chaosRect.width - 20,
       textAlign: TextAlign.center,
@@ -345,7 +384,9 @@ class BugHuntRoomGame extends BaseMiniGame {
     );
     _drawText(
       canvas,
-      incident.isComplete ? 'INCIDENT CONTAINED' : 'AUTO TASK • ${recommended.shortLabel}',
+      incident.isComplete
+          ? 'INCIDENT CONTAINED'
+          : 'AUTO TASK • ${recommended.shortLabel}',
       Offset(rect.left + 12, rect.top + 8),
       fontSize: 8.5,
       color: incident.isComplete
@@ -526,7 +567,12 @@ class BugHuntRoomGame extends BaseMiniGame {
     final progress = _processingDuration <= 0
         ? 1.0
         : (1 - _processingRemaining / _processingDuration).clamp(0.0, 1.0);
-    final rect = Rect.fromLTWH(18, math.max(420, size.y - 34), size.x - 36, 18);
+    final rect = Rect.fromLTWH(
+      18,
+      math.max(420, size.y - 34),
+      size.x - 36,
+      18,
+    );
     canvas.drawRRect(
       RRect.fromRectAndRadius(rect, const Radius.circular(9)),
       Paint()..color = Colors.black.withValues(alpha: 0.62),
@@ -555,7 +601,8 @@ class BugHuntRoomGame extends BaseMiniGame {
     if (!critical) {
       return;
     }
-    final pulse = _reducedMotion ? 0.45 : (math.sin(_visualTime * 10) + 1) / 2;
+    final pulse =
+        _reducedMotion ? 0.45 : (math.sin(_visualTime * 10) + 1) / 2;
     canvas.drawRect(
       bounds,
       Paint()
