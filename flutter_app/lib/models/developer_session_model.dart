@@ -35,8 +35,8 @@ extension DeveloperTaskFamilyX on DeveloperTaskFamily {
   bool get isPlayable {
     switch (this) {
       case DeveloperTaskFamily.liveIncident:
-        return true;
       case DeveloperTaskFamily.releasePipeline:
+        return true;
       case DeveloperTaskFamily.supportEscalation:
       case DeveloperTaskFamily.performanceProfiling:
         return false;
