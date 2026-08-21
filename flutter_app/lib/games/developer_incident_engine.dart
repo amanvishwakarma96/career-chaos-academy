@@ -1,3 +1,5 @@
+import '../models/developer_session_model.dart';
+
 enum DeveloperIncidentAction {
   inspectLogs,
   reproduceBug,
@@ -90,10 +92,13 @@ class DeveloperIncidentActionOutcome {
 }
 
 class DeveloperIncidentEngine {
-  DeveloperIncidentEngine()
-      : _feed = <String>[
+  DeveloperIncidentEngine({this.modifier})
+      : health = modifier?.startingHealth ?? 86,
+        _feed = <String>[
           'MONITOR • Login success rate falling. UI sessions remain stuck.',
           'CLIENT • “Spinner is still spinning. Any update?”',
+          if (modifier != null)
+            'SESSION MODIFIER • ${modifier.label}: ${modifier.briefing}',
         ];
 
   static const List<String> _ambientEvents = <String>[
@@ -104,21 +109,31 @@ class DeveloperIncidentEngine {
     'MONITOR • Auth endpoint still returns 200. UI state remains suspicious.',
   ];
 
+  static const List<String> _noiseEvents = <String>[
+    'NOISE • Analytics alert fired for an unrelated dashboard refresh.',
+    'NOISE • Staging CPU warning cleared itself. Production login is still the real incident.',
+    'NOISE • Support channel reports a typo in an email template.',
+    'MONITOR • Real signal: login completion is still below baseline.',
+  ];
+
+  final DeveloperIncidentModifier? modifier;
   final Set<DeveloperIncidentAction> completedActions =
       <DeveloperIncidentAction>{};
   final List<String> _feed;
 
-  int health = 86;
+  int health;
   int chaos = 0;
   int elapsedSeconds = 0;
   bool stabilized = false;
   bool outage = false;
   int _ambientCursor = 0;
+  int _validTestRuns = 0;
 
   List<String> get feed => List<String>.unmodifiable(_feed);
 
   bool get isComplete => stabilized;
   bool get isFailed => outage;
+  double get processingMultiplier => modifier?.processingMultiplier ?? 1.0;
 
   DeveloperIncidentAction get recommendedAction {
     if (!completedActions.contains(DeveloperIncidentAction.inspectLogs)) {
@@ -154,7 +169,9 @@ class DeveloperIncidentEngine {
       case DeveloperIncidentAction.patchState:
         return 'New task: patch the broken loading-state transition.';
       case DeveloperIncidentAction.runTests:
-        return 'New task: run regression tests before release.';
+        return _validTestRuns > 0 && modifier?.failsFirstValidTest == true
+            ? 'New task: retry the flaky regression suite and confirm the patch.'
+            : 'New task: run regression tests before release.';
       case DeveloperIncidentAction.openPullRequest:
         return 'New task: open a reviewed pull request.';
       case DeveloperIncidentAction.deployFix:
@@ -169,14 +186,28 @@ class DeveloperIncidentEngine {
 
     elapsedSeconds += 1;
 
-    if (elapsedSeconds % 3 == 0) {
-      health -= 1;
+    final decayEvery = modifier?.healthDecayEverySeconds ?? 3;
+    final decayAmount = modifier?.healthDecayAmount ?? 1;
+    if (elapsedSeconds % decayEvery == 0) {
+      health -= decayAmount;
       _clampHealth();
     }
 
-    if (elapsedSeconds % 5 == 0) {
-      _feed.add(_ambientEvents[_ambientCursor % _ambientEvents.length]);
+    final eventEvery = modifier?.eventEverySeconds ?? 5;
+    if (elapsedSeconds % eventEvery == 0) {
+      final events = modifier?.addsNoisyAlerts == true
+          ? _noiseEvents
+          : _ambientEvents;
+      _feed.add(events[_ambientCursor % events.length]);
       _ambientCursor += 1;
+      _trimFeed();
+    }
+
+    if (modifier?.addsEscalationChaos == true && elapsedSeconds % 6 == 0) {
+      chaos += 1;
+      _feed.add(
+        'ESCALATION • Client asks for another update. Delay adds +1 chaos.',
+      );
       _trimFeed();
     }
 
@@ -203,7 +234,8 @@ class DeveloperIncidentEngine {
       );
     }
     if (completedActions.contains(action)) {
-      final message = '${action.label} is already complete. Move to the next task.';
+      final message =
+          '${action.label} is already complete. Move to the next task.';
       _feed.add('WORKFLOW • $message');
       _trimFeed();
       return DeveloperIncidentActionOutcome(
@@ -263,6 +295,22 @@ class DeveloperIncidentEngine {
                 'Tests fail because there is no valid patch yet. Production pressure increases.',
           );
         }
+        if (modifier?.failsFirstValidTest == true && _validTestRuns == 0) {
+          _validTestRuns += 1;
+          health -= 3;
+          chaos += 1;
+          _clampHealth();
+          const message =
+              'Regression suite flakes on network retry. No deploy evidence yet — rerun the suite.';
+          _feed.add('FLAKY TEST • $message');
+          _trimFeed();
+          return const DeveloperIncidentActionOutcome(
+            message: message,
+            completed: false,
+            disciplined: true,
+          );
+        }
+        _validTestRuns += 1;
         return _complete(
           action,
           healthDelta: 5,
@@ -286,7 +334,9 @@ class DeveloperIncidentEngine {
               'PR opened with reproduction notes, test evidence and rollback instructions.',
         );
       case DeveloperIncidentAction.deployFix:
-        final ready = completedActions.contains(DeveloperIncidentAction.patchState) &&
+        final ready = completedActions.contains(
+              DeveloperIncidentAction.patchState,
+            ) &&
             completedActions.contains(DeveloperIncidentAction.runTests) &&
             completedActions.contains(DeveloperIncidentAction.openPullRequest);
         if (!ready) {
@@ -301,8 +351,12 @@ class DeveloperIncidentEngine {
         completedActions.add(action);
         stabilized = true;
         health = 100;
-        _feed.add('DEPLOY • Verified fix released. Login health recovered to 100%.');
-        _feed.add('MONITOR • Incident contained. No manual submit required inside the arena.');
+        _feed.add(
+          'DEPLOY • Verified fix released. Login health recovered to 100%.',
+        );
+        _feed.add(
+          'MONITOR • Incident contained. No manual submit required inside the arena.',
+        );
         _trimFeed();
         return const DeveloperIncidentActionOutcome(
           message: 'Deploy complete. Production stabilized automatically.',
