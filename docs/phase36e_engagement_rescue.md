@@ -19,6 +19,10 @@ This is now the highest-priority product blocker. Visual polish is secondary unt
 | ENG-08 | Post-chapter Result screen is report-heavy. | Breaks pacing and delays return to play. | OPEN — next slice |
 | ENG-09 | Developer hub still has limited activity variety and no short-session objective. | Weak “one more task / one more run” motivation. | OPEN |
 | ENG-10 | Production art placeholders remain unresolved. | Important, but secondary to retention. | DEFERRED until engagement improves |
+| ENG-11 | The same mechanic can be scheduled again because there is no session-level variety director. | A longer session can repeat the same interaction family even when content text changes. | OPEN — high priority |
+| ENG-12 | Most roles still inherit generic form-like mini-game rendering. | Developer can improve while the rest of the app continues to feel like MCQ/FAQ training. | OPEN — rollout only after Developer proof |
+| ENG-13 | No escalation/event scheduler chooses interruptions based on player state. | Work feels scripted instead of alive; no surprise phone call, failing build, urgent message, or dependency blocker appears mid-task. | OPEN — high priority |
+| ENG-14 | No mechanic-memory / anti-repeat rule in session selection. | Recently played activities are not excluded or down-weighted. | OPEN — high priority |
 
 ## Slice B — Live Production Incident
 
@@ -54,14 +58,32 @@ Developer Bug Hunt is converted from target selection into a workflow simulation
 - No instant tap → correctness result as the primary loop.
 - No requirement that every mistake ends the run; recovery is part of the gameplay.
 
-## Next engagement slices
+## Engagement roadmap after this slice
 
-1. **Interactive dialogue pacing** — insert actions/interruptions inside scenes; target meaningful input every 20–40 seconds.
-2. **Result pacing rescue** — show punchy consequence/reward first; move coaching/safety/debrief into expandable details.
-3. **Developer task variety** — add distinct simulation families: incident triage, release pipeline, code-review conflict, support escalation, performance debugging, and outage recovery.
-4. **Session director** — automatically choose the next task based on recent mechanic/history so the player does not receive the same game repeatedly.
-5. **Short-session objective** — 5-minute shift, incident quota, streak, rotating modifier, or changing daily objective.
-6. Roll the validated loop system to other roles only after Developer playtests stop feeling repetitive.
+### Phase 36F — Session Director + anti-repeat
+- Track the last mechanics/tasks played in the current session.
+- Do not offer the same mechanic back-to-back unless the story explicitly requires it.
+- Weight unseen/recently-unseen task families higher.
+- Pick escalation events from current health/chaos/progress rather than fixed order.
+- Add 5-minute shift objectives and changing run modifiers.
+
+### Phase 36G — Developer task-family expansion
+Build genuinely different interaction families, not reskinned questions:
+- incident triage / live monitoring,
+- release pipeline with asynchronous jobs,
+- code-review conflict with comment threads and patch iterations,
+- support escalation with inbox/chat/task switching,
+- performance debugging with profiler/resource trade-offs,
+- outage recovery with service dependency map,
+- sprint planning with draggable capacity/dependency board.
+
+### Phase 36H — Pacing rescue
+- Insert interactive interruptions inside dialogue; target meaningful player action every 20–40 seconds.
+- Replace result-wall pacing with consequence/reward first and optional coaching details.
+- Keep safety/learning explanations available on demand instead of automatically blocking the flow.
+
+### Phase 36I — Cross-role gameplay conversion
+Only after Developer playtesting proves the new loops are enjoyable, replace generic quiz-form mini-games role-by-role with profession-specific simulations.
 
 ## Acceptance criteria for this slice
 
