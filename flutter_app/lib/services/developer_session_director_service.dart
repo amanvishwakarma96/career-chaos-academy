@@ -19,7 +19,7 @@ class DeveloperSessionDirectorService {
         .toList(growable: false);
 
     final recentPlans = history
-        .map(planFromGameId)
+        .map((result) => planFromGameId(result.gameId))
         .whereType<DeveloperSessionPlan>()
         .take(8)
         .toList(growable: false);
