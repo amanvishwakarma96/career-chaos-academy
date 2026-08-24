@@ -57,6 +57,10 @@ class AssetRegistry {
     'anim_developer_idle': '$gameAssetRoot/lottie/developer_idle.json',
     'anim_developer_walk': '$gameAssetRoot/lottie/developer_walk.json',
     'anim_developer_worried': '$gameAssetRoot/lottie/developer_worried.json',
+    'anim_developer_office_environment':
+        '$gameAssetRoot/lottie/developer_office_environment.json',
+    'anim_developer_lab_environment':
+        '$gameAssetRoot/lottie/developer_lab_environment.json',
   };
   static const Map<String, String> rive = <String, String>{};
   static const Map<String, String> audio = <String, String>{};
@@ -72,6 +76,8 @@ class AssetRegistry {
     'anim_developer_idle': developerArtVersion,
     'anim_developer_walk': developerArtVersion,
     'anim_developer_worried': developerArtVersion,
+    'anim_developer_office_environment': developerArtVersion,
+    'anim_developer_lab_environment': developerArtVersion,
   };
 
   static const Map<String, String> _legacyAliases = <String, String>{
