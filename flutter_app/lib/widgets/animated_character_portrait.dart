@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../core/asset_registry.dart';
 import '../services/animation_service.dart';
+import 'developer_character_animation.dart';
 import 'game_asset_image.dart';
 
 class AnimatedCharacterPortrait extends StatefulWidget {
@@ -170,6 +171,9 @@ class _PortraitFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final usesAuthoredDeveloperRig =
+        DeveloperCharacterAnimation.isDeveloperReference(imageReference);
+
     return AnimatedContainer(
       duration: AnimationService.instance.duration(
         const Duration(milliseconds: 260),
@@ -178,17 +182,17 @@ class _PortraitFrame extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: color.withOpacity(0.92), width: 2.5),
-        color: Colors.black.withOpacity(0.38),
+        border: Border.all(color: color.withValues(alpha: 0.92), width: 2.5),
+        color: Colors.black.withValues(alpha: 0.38),
         boxShadow: [
           BoxShadow(
-            color: color.withOpacity(glowStrength),
+            color: color.withValues(alpha: glowStrength),
             blurRadius: 32,
             spreadRadius: 2,
             offset: const Offset(0, 12),
           ),
           BoxShadow(
-            color: Colors.black.withOpacity(0.42),
+            color: Colors.black.withValues(alpha: 0.42),
             blurRadius: 20,
             offset: const Offset(0, 12),
           ),
@@ -198,17 +202,38 @@ class _PortraitFrame extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          GameAssetImage(
-            reference: imageReference,
-            type: GameAssetType.character,
-            fit: BoxFit.cover,
-            semanticLabel: '$speaker $emotion portrait',
-            fallbackBuilder: (_, __) => _PortraitFallback(
-              speaker: speaker,
-              emotion: emotion,
-              color: color,
+          if (usesAuthoredDeveloperRig)
+            DecoratedBox(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[
+                    Color(0xFF102234),
+                    Color(0xFF07101A),
+                  ],
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(2, 4, 2, 16),
+                child: DeveloperCharacterAnimation(
+                  mode: DeveloperCharacterAnimation.modeForEmotion(emotion),
+                  semanticLabel: '$speaker $emotion animated portrait',
+                ),
+              ),
+            )
+          else
+            GameAssetImage(
+              reference: imageReference,
+              type: GameAssetType.character,
+              fit: BoxFit.cover,
+              semanticLabel: '$speaker $emotion portrait',
+              fallbackBuilder: (_, __) => _PortraitFallback(
+                speaker: speaker,
+                emotion: emotion,
+                color: color,
+              ),
             ),
-          ),
           DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -217,12 +242,36 @@ class _PortraitFrame extends StatelessWidget {
                 colors: <Color>[
                   Colors.transparent,
                   Colors.transparent,
-                  Colors.black.withOpacity(0.78),
+                  Colors.black.withValues(alpha: 0.78),
                 ],
                 stops: const <double>[0, 0.58, 1],
               ),
             ),
           ),
+          if (usesAuthoredDeveloperRig)
+            Positioned(
+              top: 8,
+              right: 8,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF061019).withValues(alpha: 0.76),
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: const Color(0xFF56F2C3).withValues(alpha: 0.42),
+                  ),
+                ),
+                child: const Text(
+                  'LIVE RIG',
+                  style: TextStyle(
+                    color: Color(0xFF56F2C3),
+                    fontSize: 7,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.6,
+                  ),
+                ),
+              ),
+            ),
           Positioned(
             left: 10,
             right: 10,
