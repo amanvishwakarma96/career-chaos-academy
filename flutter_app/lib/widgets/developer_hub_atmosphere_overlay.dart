@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../services/animation_service.dart';
+import 'developer_character_animation.dart';
 
 /// Presentation-only atmospheric layer for the persistent Developer district.
 class DeveloperHubAtmosphereOverlay extends StatefulWidget {
@@ -79,6 +80,84 @@ class _DeveloperHubAtmosphereOverlayState
                 ),
               );
             },
+          ),
+        ),
+        Positioned(
+          left: 12,
+          bottom: 68,
+          child: IgnorePointer(
+            child: ValueListenableBuilder<String>(
+              valueListenable: widget.status,
+              builder: (context, status, _) {
+                final moving = status.toLowerCase().contains('walking');
+                return AnimatedContainer(
+                  duration: AnimationService.instance.duration(
+                    const Duration(milliseconds: 220),
+                  ),
+                  width: 92,
+                  height: 128,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    color: const Color(0xFF07101A).withValues(alpha: 0.86),
+                    border: Border.all(
+                      color: (moving
+                              ? const Color(0xFFFFC857)
+                              : const Color(0xFF56F2C3))
+                          .withValues(alpha: 0.54),
+                      width: 1.4,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: (moving
+                                ? const Color(0xFFFFC857)
+                                : const Color(0xFF56F2C3))
+                            .withValues(alpha: 0.18),
+                        blurRadius: 24,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(3, 4, 3, 17),
+                        child: DeveloperCharacterAnimation(
+                          mode: moving
+                              ? DeveloperCharacterMode.walk
+                              : DeveloperCharacterMode.idle,
+                          semanticLabel: moving
+                              ? 'Developer walking through district'
+                              : 'Developer standing in district',
+                        ),
+                      ),
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          color: const Color(0xFF040912).withValues(alpha: 0.84),
+                          child: Text(
+                            moving ? 'OPERATOR // MOVING' : 'OPERATOR // READY',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: moving
+                                  ? const Color(0xFFFFC857)
+                                  : const Color(0xFF56F2C3),
+                              fontSize: 6.8,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 0.45,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ),
         Positioned(
