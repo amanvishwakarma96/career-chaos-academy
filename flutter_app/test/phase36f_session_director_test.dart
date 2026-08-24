@@ -10,7 +10,7 @@ void main() {
   const director = DeveloperSessionDirectorService();
 
   group('Phase 36F Developer session director', () {
-    test('does not repeat either of the two most recent modifiers', () {
+    test('does not repeat either of the two most recent family modifiers', () {
       const traffic = DeveloperSessionPlan(
         family: DeveloperTaskFamily.liveIncident,
         modifier: DeveloperIncidentModifier.trafficSpike,
@@ -24,7 +24,11 @@ void main() {
         _resultFor(traffic),
       ];
 
-      final next = director.nextPlan(history: history, seed: 41);
+      final next = director.nextPlanForFamily(
+        family: DeveloperTaskFamily.liveIncident,
+        history: history,
+        seed: 41,
+      );
 
       expect(next.family, DeveloperTaskFamily.liveIncident);
       expect(
@@ -36,15 +40,23 @@ void main() {
       );
     });
 
-    test('same seed and history produce the same next plan', () {
+    test('same seed and history produce the same family-scoped plan', () {
       const previous = DeveloperSessionPlan(
         family: DeveloperTaskFamily.liveIncident,
         modifier: DeveloperIncidentModifier.noisyAlerts,
       );
       final history = <FlameMiniGameResultModel>[_resultFor(previous)];
 
-      final first = director.nextPlan(history: history, seed: 2026);
-      final second = director.nextPlan(history: history, seed: 2026);
+      final first = director.nextPlanForFamily(
+        family: DeveloperTaskFamily.liveIncident,
+        history: history,
+        seed: 2026,
+      );
+      final second = director.nextPlanForFamily(
+        family: DeveloperTaskFamily.liveIncident,
+        history: history,
+        seed: 2026,
+      );
 
       expect(first.family, second.family);
       expect(first.modifier, second.modifier);
@@ -68,15 +80,19 @@ void main() {
       expect(director.planFromGameId('flame_bug_hunt_room'), isNull);
     });
 
-    test('unimplemented task families are never selected as playable', () {
-      for (var seed = 0; seed < 25; seed += 1) {
+    test('first directed Developer session stays the Live Incident', () {
+      for (var seed = 0; seed < 12; seed += 1) {
         final plan = director.nextPlan(
           history: const <FlameMiniGameResultModel>[],
           seed: seed,
         );
-        expect(plan.family.isPlayable, isTrue);
         expect(plan.family, DeveloperTaskFamily.liveIncident);
       }
+    });
+
+    test('unfinished Developer task families remain non-playable', () {
+      expect(DeveloperTaskFamily.supportEscalation.isPlayable, isFalse);
+      expect(DeveloperTaskFamily.performanceProfiling.isPlayable, isFalse);
     });
   });
 

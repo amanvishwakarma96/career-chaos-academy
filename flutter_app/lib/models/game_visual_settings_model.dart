@@ -1,7 +1,10 @@
 enum GameVisualQuality {
   performance,
   balanced,
-  cinematic,
+  cinematic;
+
+  static const GameVisualQuality low = GameVisualQuality.performance;
+  static const GameVisualQuality high = GameVisualQuality.cinematic;
 }
 
 extension GameVisualQualityX on GameVisualQuality {

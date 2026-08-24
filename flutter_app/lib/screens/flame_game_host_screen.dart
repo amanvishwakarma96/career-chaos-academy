@@ -188,9 +188,7 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                 : MotionFeedbackType.failure,
             size: 104,
           ),
-          title: Text(
-            result.isSuccess ? 'Incident contained!' : 'Chaos report generated',
-          ),
+          title: Text(game.resultDialogTitle(result)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,12 +198,10 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: [
-                  _ResultChip(label: 'XP +${result.xpEarned}'),
-                  _ResultChip(label: 'Correct ${result.correctCount}'),
-                  _ResultChip(label: 'Wrong ${result.wrongCount}'),
-                  _ResultChip(label: '${result.elapsedSeconds}s'),
-                ],
+                children: game
+                    .resultSummaryLabels(result)
+                    .map((label) => _ResultChip(label: label))
+                    .toList(growable: false),
               ),
             ],
           ),
@@ -215,7 +211,7 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                 Navigator.of(context).pop();
                 _startGame(result.kind);
               },
-              child: const Text('Retry'),
+              child: Text(game.retryActionLabel),
             ),
             FilledButton.icon(
               onPressed: () {
@@ -366,7 +362,7 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Tap targets directly inside the Flame arena. Every challenge saves XP and score impact.',
+            'Run interactive Flame challenges. Developer sessions can now rotate between different live gameplay systems, while every result still saves XP and score impact.',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),
@@ -503,18 +499,19 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                 children: [
                   Expanded(
                     child: Text(
-                      '${selected.length} selected • ${definition.successThreshold} correct targets required',
+                      game.progressSummary(selected),
                       style: const TextStyle(
                         color: Colors.white70,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
-                  TextButton.icon(
-                    onPressed: selected.isEmpty ? null : game.clearSelection,
-                    icon: const Icon(Icons.clear_all),
-                    label: const Text('Clear'),
-                  ),
+                  if (game.allowClearSelection)
+                    TextButton.icon(
+                      onPressed: selected.isEmpty ? null : game.clearSelection,
+                      icon: const Icon(Icons.clear_all),
+                      label: const Text('Clear'),
+                    ),
                 ],
               );
             },
@@ -541,7 +538,7 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                 child: FilledButton.icon(
                   onPressed: _finishGame,
                   icon: const Icon(Icons.shield),
-                  label: const Text('Submit Investigation'),
+                  label: Text(game.submitActionLabel),
                   style: FilledButton.styleFrom(
                     backgroundColor: const Color(0xFFFF4D8D),
                     foregroundColor: Colors.white,

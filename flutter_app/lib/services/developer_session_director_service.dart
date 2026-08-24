@@ -13,23 +13,57 @@ class DeveloperSessionDirectorService {
     required List<FlameMiniGameResultModel> history,
     int? seed,
   }) {
+    final recentPlans = _recentPlans(history);
+    if (recentPlans.isEmpty) {
+      return nextPlanForFamily(
+        family: DeveloperTaskFamily.liveIncident,
+        history: history,
+        seed: seed,
+      );
+    }
+
     final random = math.Random(seed ?? DateTime.now().microsecondsSinceEpoch);
     final playableFamilies = DeveloperTaskFamily.values
         .where((family) => family.isPlayable)
         .toList(growable: false);
-
-    final recentPlans = history
-        .map((result) => planFromGameId(result.gameId))
-        .whereType<DeveloperSessionPlan>()
-        .take(8)
-        .toList(growable: false);
-
-    final lastFamily = recentPlans.isEmpty ? null : recentPlans.first.family;
+    final lastFamily = recentPlans.first.family;
     final familyCandidates = playableFamilies.length <= 1
         ? playableFamilies
         : playableFamilies.where((family) => family != lastFamily).toList();
     final family = familyCandidates[random.nextInt(familyCandidates.length)];
 
+    return _planForFamily(
+      family: family,
+      recentPlans: recentPlans,
+      random: random,
+    );
+  }
+
+  DeveloperSessionPlan nextPlanForFamily({
+    required DeveloperTaskFamily family,
+    required List<FlameMiniGameResultModel> history,
+    int? seed,
+  }) {
+    if (!family.isPlayable) {
+      throw ArgumentError.value(
+        family,
+        'family',
+        'Developer task family is not playable yet.',
+      );
+    }
+    final random = math.Random(seed ?? DateTime.now().microsecondsSinceEpoch);
+    return _planForFamily(
+      family: family,
+      recentPlans: _recentPlans(history),
+      random: random,
+    );
+  }
+
+  DeveloperSessionPlan _planForFamily({
+    required DeveloperTaskFamily family,
+    required List<DeveloperSessionPlan> recentPlans,
+    required math.Random random,
+  }) {
     final recentModifierIds = recentPlans
         .where((plan) => plan.family == family)
         .take(2)
@@ -43,8 +77,17 @@ class DeveloperSessionDirectorService {
     }
     final modifier =
         modifierCandidates[random.nextInt(modifierCandidates.length)];
-
     return DeveloperSessionPlan(family: family, modifier: modifier);
+  }
+
+  List<DeveloperSessionPlan> _recentPlans(
+    List<FlameMiniGameResultModel> history,
+  ) {
+    return history
+        .map((result) => planFromGameId(result.gameId))
+        .whereType<DeveloperSessionPlan>()
+        .take(8)
+        .toList(growable: false);
   }
 
   DeveloperSessionPlan? planFromGameId(String gameId) {
