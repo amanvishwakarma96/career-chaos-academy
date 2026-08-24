@@ -12,6 +12,7 @@ import '../services/animation_service.dart';
 import '../services/audio_service.dart';
 import '../services/progress_service.dart';
 import '../widgets/developer_game_feel_frame.dart';
+import '../widgets/developer_hub_atmosphere_overlay.dart';
 import '../widgets/info_panel.dart';
 import '../widgets/motion_feedback_animation.dart';
 
@@ -295,7 +296,10 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
             Positioned.fill(
               child: Listener(
                 onPointerDown: (_) => unawaited(_startHubAudio()),
-                child: GameWidget<HubWorldGame>(game: game),
+                child: DeveloperHubAtmosphereOverlay(
+                  status: game.statusMessage,
+                  child: GameWidget<HubWorldGame>(game: game),
+                ),
               ),
             ),
             Positioned(
