@@ -11,6 +11,8 @@ import '../models/flame_mini_game_model.dart';
 import '../services/animation_service.dart';
 import '../services/audio_service.dart';
 import '../services/progress_service.dart';
+import '../widgets/developer_game_feel_frame.dart';
+import '../widgets/developer_hub_atmosphere_overlay.dart';
 import '../widgets/info_panel.dart';
 import '../widgets/motion_feedback_animation.dart';
 
@@ -235,11 +237,15 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
 
     final game = _game;
     return Scaffold(
-      backgroundColor: const Color(0xFF070913),
+      backgroundColor: const Color(0xFF05070D),
       appBar: AppBar(
-        title: Text(widget.chapterMode ? 'Chapter Challenge' : 'Flame Game Lab'),
-        backgroundColor: const Color(0xFF070913),
+        title: Text(
+          game?.definition.title ??
+              (widget.chapterMode ? 'Chapter Challenge' : 'Flame Game Lab'),
+        ),
+        backgroundColor: const Color(0xFF05070D),
         foregroundColor: Colors.white,
+        elevation: 0,
       ),
       body: SafeArea(
         child: game == null ? _buildGamePicker(context) : _buildGame(context, game),
@@ -290,7 +296,10 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
             Positioned.fill(
               child: Listener(
                 onPointerDown: (_) => unawaited(_startHubAudio()),
-                child: GameWidget<HubWorldGame>(game: game),
+                child: DeveloperHubAtmosphereOverlay(
+                  status: game.statusMessage,
+                  child: GameWidget<HubWorldGame>(game: game),
+                ),
               ),
             ),
             Positioned(
@@ -385,28 +394,35 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
 
   Widget _buildGame(BuildContext context, BaseMiniGame game) {
     final definition = game.definition;
-    final arenaHeight = MediaQuery.sizeOf(context).height < 720 ? 380.0 : 480.0;
+    final arenaHeight = MediaQuery.sizeOf(context).height < 720 ? 390.0 : 500.0;
 
     return ResponsiveContent(
-      maxWidth: 920,
+      maxWidth: 940,
       child: ListView(
-        padding: ResponsiveLayout.pagePadding(context).copyWith(top: 10),
+        padding: ResponsiveLayout.pagePadding(context).copyWith(top: 8),
         children: [
           Row(
             children: [
               Container(
-                width: 48,
-                height: 48,
+                width: 50,
+                height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: const Color(0xFFFF4D8D).withValues(alpha: 0.16),
-                  border: Border.all(
-                    color: const Color(0xFFFF4D8D).withValues(alpha: 0.44),
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[Color(0xFFFF4D8D), Color(0xFF7C4DFF)],
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFFFF4D8D).withValues(alpha: 0.24),
+                      blurRadius: 22,
+                    ),
+                  ],
                 ),
                 child: Icon(
                   _iconFor(definition.kind),
-                  color: const Color(0xFFFF7AAA),
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(width: 12),
@@ -421,6 +437,7 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                             fontWeight: FontWeight.w900,
                           ),
                     ),
+                    const SizedBox(height: 3),
                     Text(
                       definition.subtitle,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -433,40 +450,52 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
             ],
           ),
           const SizedBox(height: 14),
-          Container(
+          SizedBox(
             height: arenaHeight,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(28),
-              border: Border.all(
-                color: Colors.white.withValues(alpha: 0.14),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFFFF4D8D).withValues(alpha: 0.18),
-                  blurRadius: 32,
-                  spreadRadius: 2,
-                ),
-              ],
+            child: DeveloperGameFeelFrame(
+              game: game,
+              child: GameWidget<BaseMiniGame>(game: game),
             ),
-            clipBehavior: Clip.antiAlias,
-            child: GameWidget<BaseMiniGame>(game: game),
           ),
           const SizedBox(height: 12),
           ValueListenableBuilder<String>(
             valueListenable: game.feedbackMessage,
             builder: (context, feedback, _) {
-              return Container(
+              final lower = feedback.toLowerCase();
+              final dangerous = lower.contains('failed') ||
+                  lower.contains('blocked') ||
+                  lower.contains('unsafe') ||
+                  lower.contains('rollback');
+              final positive = lower.contains('passed') ||
+                  lower.contains('green') ||
+                  lower.contains('stable') ||
+                  lower.contains('complete') ||
+                  lower.contains('healthy');
+              final accent = dangerous
+                  ? const Color(0xFFFF6077)
+                  : positive
+                      ? const Color(0xFF58F0C2)
+                      : const Color(0xFF70D6FF);
+              return AnimatedContainer(
+                duration: AnimationService.instance.duration(
+                  const Duration(milliseconds: 220),
+                ),
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  color: Colors.white.withValues(alpha: 0.07),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.12),
-                  ),
+                  color: accent.withValues(alpha: 0.08),
+                  border: Border.all(color: accent.withValues(alpha: 0.28)),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.radar, color: Color(0xFF70D6FF)),
+                    Icon(
+                      dangerous
+                          ? Icons.warning_amber_rounded
+                          : positive
+                              ? Icons.check_circle_outline_rounded
+                              : Icons.radar,
+                      color: accent,
+                    ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
@@ -483,7 +512,27 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                         if (combo < 2) {
                           return const SizedBox.shrink();
                         }
-                        return Chip(label: Text('${combo}x COMBO'));
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 9,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(999),
+                            color: accent.withValues(alpha: 0.13),
+                            border: Border.all(
+                              color: accent.withValues(alpha: 0.32),
+                            ),
+                          ),
+                          child: Text(
+                            '${combo}x MOMENTUM',
+                            style: TextStyle(
+                              color: accent,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ],
@@ -530,6 +579,7 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                     side: BorderSide(
                       color: Colors.white.withValues(alpha: 0.24),
                     ),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                 ),
               ),
@@ -542,6 +592,7 @@ class _FlameGameHostScreenState extends State<FlameGameHostScreen> {
                   style: FilledButton.styleFrom(
                     backgroundColor: const Color(0xFFFF4D8D),
                     foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                 ),
               ),
