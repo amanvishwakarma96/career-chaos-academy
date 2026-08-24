@@ -14,6 +14,8 @@ class AssetRegistry {
   static const String gameAssetRoot = 'assets/game';
   static const String baseAssetPackId = 'base_visuals_v23';
   static const String baseAssetVersion = '23.0.0';
+  static const String developerArtAssetPackId = 'developer_visuals_v36i';
+  static const String developerArtVersion = '36.9.0';
   static const String missingImagePlaceholder =
       '$gameAssetRoot/props/missing_asset_placeholder.png';
 
@@ -51,7 +53,11 @@ class AssetRegistry {
     'badge_placeholder': '$gameAssetRoot/badges/badge_placeholder.png',
   };
 
-  static const Map<String, String> lottie = <String, String>{};
+  static const Map<String, String> lottie = <String, String>{
+    'anim_developer_idle': '$gameAssetRoot/lottie/developer_idle.json',
+    'anim_developer_walk': '$gameAssetRoot/lottie/developer_walk.json',
+    'anim_developer_worried': '$gameAssetRoot/lottie/developer_worried.json',
+  };
   static const Map<String, String> rive = <String, String>{};
   static const Map<String, String> audio = <String, String>{};
 
@@ -63,6 +69,9 @@ class AssetRegistry {
     'char_developer_worried': baseAssetVersion,
     'char_senior_serious': baseAssetVersion,
     'char_doctor_calm': baseAssetVersion,
+    'anim_developer_idle': developerArtVersion,
+    'anim_developer_walk': developerArtVersion,
+    'anim_developer_worried': developerArtVersion,
   };
 
   static const Map<String, String> _legacyAliases = <String, String>{
