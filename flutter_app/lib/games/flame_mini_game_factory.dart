@@ -11,9 +11,31 @@ import 'developer_release_pipeline_game.dart';
 class FlameMiniGameFactory {
   const FlameMiniGameFactory._();
 
+  static FlameMiniGameDefinitionModel get developerChallengeDefinition {
+    final baseline = BugHuntRoomGame.gameDefinition;
+    return FlameMiniGameDefinitionModel(
+      id: 'developer_directed_challenge',
+      kind: FlameMiniGameKind.bugHuntRoom,
+      title: 'Developer Live Challenge',
+      subtitle:
+          'Session Director rotates Live Production Incident and Release Pipeline based on recent play.',
+      instructions:
+          'Enter the next Developer simulation. The mechanic changes between incident response and CI/CD release operations while preserving the same reward contract.',
+      timeLimitSeconds: baseline.timeLimitSeconds,
+      successThreshold: baseline.successThreshold,
+      successScoreImpact: baseline.successScoreImpact,
+      failureScoreImpact: baseline.failureScoreImpact,
+      successXp: baseline.successXp,
+      failureXp: baseline.failureXp,
+      successMessage: baseline.successMessage,
+      failureMessage: baseline.failureMessage,
+      targets: baseline.targets,
+    );
+  }
+
   static List<FlameMiniGameDefinitionModel> get definitions =>
-      const <FlameMiniGameDefinitionModel>[
-        BugHuntRoomGame.gameDefinition,
+      <FlameMiniGameDefinitionModel>[
+        developerChallengeDefinition,
         DataCleanupRaceGame.gameDefinition,
         BlueprintSafetyPuzzleGame.gameDefinition,
       ];
