@@ -1,7 +1,9 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
+import '../core/asset_registry.dart';
 import '../games/base_mini_game.dart';
 import '../services/animation_service.dart';
 
@@ -35,6 +37,13 @@ class DeveloperGameFeelPolicy {
   }
 
   static bool isCriticalWindow(int seconds) => seconds > 0 && seconds <= 15;
+
+  static String environmentAssetKeyForTitle(String title) {
+    final value = title.toLowerCase();
+    return value.contains('release') || value.contains('pipeline')
+        ? 'anim_developer_office_environment'
+        : 'anim_developer_lab_environment';
+  }
 }
 
 /// Presentation-only frame for live Developer simulations.
@@ -172,6 +181,14 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
             : 0.34 +
                 ((math.sin(_ambientController.value * math.pi * 2) + 1) / 2) *
                     0.22;
+        final environmentKey = DeveloperGameFeelPolicy.environmentAssetKeyForTitle(
+          widget.game.definition.title,
+        );
+        final environmentPath = AssetRegistry.resolve(
+          environmentKey,
+          type: GameAssetType.lottie,
+          allowUnknownAssetPath: false,
+        );
 
         return Transform.translate(
           offset: Offset(shake, 0),
@@ -202,6 +219,22 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
                   child: widget.child,
                 ),
               ),
+              if (environmentPath != null)
+                IgnorePointer(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(27),
+                    child: Opacity(
+                      opacity: 0.14,
+                      child: Lottie.asset(
+                        environmentPath,
+                        fit: BoxFit.cover,
+                        animate: !_reducedMotion,
+                        repeat: !_reducedMotion,
+                        frameRate: FrameRate.max,
+                      ),
+                    ),
+                  ),
+                ),
               IgnorePointer(
                 child: CustomPaint(
                   painter: _GameFeelPainter(
