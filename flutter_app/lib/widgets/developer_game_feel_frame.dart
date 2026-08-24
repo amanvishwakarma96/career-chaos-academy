@@ -5,6 +5,38 @@ import 'package:flutter/material.dart';
 import '../games/base_mini_game.dart';
 import '../services/animation_service.dart';
 
+enum DeveloperGameFeedbackTone { neutral, success, danger }
+
+class DeveloperGameFeelPolicy {
+  const DeveloperGameFeelPolicy._();
+
+  static DeveloperGameFeedbackTone toneFor(String message) {
+    final value = message.toLowerCase();
+    if (value.contains('failed') ||
+        value.contains('blocked') ||
+        value.contains('unsafe') ||
+        value.contains('chaos') ||
+        value.contains('rollback') ||
+        value.contains('warning') ||
+        value.contains('health reached zero') ||
+        value.contains('time is up')) {
+      return DeveloperGameFeedbackTone.danger;
+    }
+    if (value.contains('passed') ||
+        value.contains('green') ||
+        value.contains('stable') ||
+        value.contains('complete') ||
+        value.contains('deployed') ||
+        value.contains('healthy') ||
+        value.contains('contained')) {
+      return DeveloperGameFeedbackTone.success;
+    }
+    return DeveloperGameFeedbackTone.neutral;
+  }
+
+  static bool isCriticalWindow(int seconds) => seconds > 0 && seconds <= 15;
+}
+
 /// Presentation-only frame for live Developer simulations.
 ///
 /// It reacts to the existing game notifiers, so it does not own gameplay,
@@ -30,7 +62,7 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
   late final AnimationController _ambientController;
   late final AnimationController _impactController;
   String _lastFeedback = '';
-  _FeedbackTone _impactTone = _FeedbackTone.neutral;
+  DeveloperGameFeedbackTone _impactTone = DeveloperGameFeedbackTone.neutral;
 
   bool get _reducedMotion => AnimationService.instance.isReducedMotion;
 
@@ -59,7 +91,7 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
     oldWidget.game.feedbackMessage.removeListener(_handleFeedback);
     widget.game.feedbackMessage.addListener(_handleFeedback);
     _lastFeedback = '';
-    _impactTone = _FeedbackTone.neutral;
+    _impactTone = DeveloperGameFeedbackTone.neutral;
     _impactController.reset();
   }
 
@@ -98,38 +130,17 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
       return;
     }
     _lastFeedback = feedback;
-    final tone = _toneFor(feedback);
-    if (tone == _FeedbackTone.neutral || _reducedMotion) {
+    final tone = DeveloperGameFeelPolicy.toneFor(feedback);
+    if (tone == DeveloperGameFeedbackTone.neutral || _reducedMotion) {
       if (mounted) {
         setState(() => _impactTone = tone);
       }
       return;
     }
-    setState(() => _impactTone = tone);
-    _impactController.forward(from: 0);
-  }
-
-  _FeedbackTone _toneFor(String message) {
-    final value = message.toLowerCase();
-    if (value.contains('failed') ||
-        value.contains('blocked') ||
-        value.contains('unsafe') ||
-        value.contains('chaos') ||
-        value.contains('rollback') ||
-        value.contains('warning') ||
-        value.contains('health reached zero')) {
-      return _FeedbackTone.danger;
+    if (mounted) {
+      setState(() => _impactTone = tone);
+      _impactController.forward(from: 0);
     }
-    if (value.contains('passed') ||
-        value.contains('green') ||
-        value.contains('stable') ||
-        value.contains('complete') ||
-        value.contains('deployed') ||
-        value.contains('healthy') ||
-        value.contains('contained')) {
-      return _FeedbackTone.success;
-    }
-    return _FeedbackTone.neutral;
   }
 
   @override
@@ -141,16 +152,19 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
         widget.game.remainingSeconds,
       ]),
       builder: (context, _) {
-        final impact = Curves.easeOut.transform(_impactController.value);
-        final inverseImpact = 1 - impact;
-        final shake = _reducedMotion || _impactTone != _FeedbackTone.danger
+        final impactProgress = Curves.easeOut.transform(_impactController.value);
+        final impactStrength = _impactController.isAnimating
+            ? 1 - impactProgress
+            : 0.0;
+        final shake = _reducedMotion ||
+                _impactTone != DeveloperGameFeedbackTone.danger
             ? 0.0
-            : math.sin(impact * math.pi * 7) * inverseImpact * 7;
+            : math.sin(impactProgress * math.pi * 7) * impactStrength * 7;
         final seconds = widget.game.remainingSeconds.value;
-        final urgency = seconds <= 15;
+        final urgency = DeveloperGameFeelPolicy.isCriticalWindow(seconds);
         final accent = urgency
             ? const Color(0xFFFF6077)
-            : _impactTone == _FeedbackTone.success
+            : _impactTone == DeveloperGameFeedbackTone.success
                 ? const Color(0xFF58F0C2)
                 : const Color(0xFF70D6FF);
         final ambientPulse = _reducedMotion
@@ -169,7 +183,7 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
                   borderRadius: BorderRadius.circular(28),
                   border: Border.all(
                     color: accent.withValues(
-                      alpha: 0.40 + inverseImpact * 0.34,
+                      alpha: 0.40 + impactStrength * 0.34,
                     ),
                     width: urgency ? 1.8 : 1.2,
                   ),
@@ -179,7 +193,7 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
                         alpha: 0.10 + ambientPulse * 0.18,
                       ),
                       blurRadius: 30 + ambientPulse * 18,
-                      spreadRadius: inverseImpact * 2,
+                      spreadRadius: impactStrength * 2,
                     ),
                   ],
                 ),
@@ -193,7 +207,7 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
                   painter: _GameFeelPainter(
                     accent: accent,
                     phase: _ambientController.value,
-                    impact: inverseImpact,
+                    impact: impactStrength,
                     reducedMotion: _reducedMotion,
                   ),
                 ),
@@ -203,7 +217,7 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
                 top: 12,
                 child: _StatusPill(
                   icon: Icons.sensors_rounded,
-                  label: 'LIVE // ${seconds}s',
+                  label: seconds > 0 ? 'LIVE // ${seconds}s' : 'LIVE // READY',
                   accent: accent,
                 ),
               ),
@@ -225,8 +239,6 @@ class _DeveloperGameFeelFrameState extends State<DeveloperGameFeelFrame>
     );
   }
 }
-
-enum _FeedbackTone { neutral, success, danger }
 
 class _StatusPill extends StatelessWidget {
   const _StatusPill({
